@@ -1,15 +1,6 @@
 <?php
 
-/* Database Configuration. Add your details below */
-
-$dbOptions = array(
-	'db_host' => 'localhost',
-	'db_user' => 'root',
-	'db_pass' => 'jasper',
-	'db_name' => 'RVDlog'
-);
-
-/* Database Config End */
+require_once "config.include.php";
 
 
 error_reporting(E_ALL ^ E_NOTICE);
