@@ -1,57 +1,79 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>RVD log - chat</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>RVD log - chat</title>
 
-<!--<link rel="stylesheet" type="text/css" href="js/jScrollPane/jScrollPane.css" />
-<link rel="stylesheet" type="text/css" href="css/page.css" />
-<link rel="stylesheet" type="text/css" href="css/chat.css" />
--->
-<link rel="stylesheet" type="text/css" href="css/logging.css" />
-</head>
+        <!-- jQuery css first, so we can override later -->
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="js/jScrollPane/jScrollPane.css" />
 
-<body>
-<div id="LoggingTopContainer"></div>
-<div id="LoggingMainContainer">
-	<div id="LoggingMeldingenContainer">
-		<div id="SearchMeldingen"></div>
+        <!-- second the general css -->
+        <!--
+        <link rel="stylesheet" type="text/css" href="css/rvdlog.css" />
+        -->
 
-		<div id="Meldingen">
-			<div id="MeldingenHeader"><p>Meldingen</p></div>
-			<div id="MeldingenList"></div>
-		</div>
-		<div id="Users">
-			<div id="UsersHeader"><p>Users</p></div>
-			<div id="UsersList"></div>
-		</div>
-		<div id="TextEntry">
-		        <form id="submitForm" method="post" action="">
-            		<input id="chatText" name="chatText" class="rounded" maxlength="255" />
-            		<input type="submit" class="blueButton" value="Submit" />
-        		</form>
-		</div>
-	</div>
-	<div id="LoggingTicketsContainer">
-		<div id="TicketsHeader"><p>Tickets</p></div>
-		<div id="TicketsList"></div>
-	</div>
-	<div id="LoggingFeedbackContainer">
-		<div id="FeedbackHeader"><p>Feedback</p></div>
-		<div id="FeedbackList"></div>
-	</div>
-</div>
-        
-<!--        <form id="loginForm" method="post" action="">
+        <!-- last the page specific css -->
+        <!--
+        <link rel="stylesheet" type="text/css" href="css/chat.css" />
+        -->
+        <link rel="stylesheet" type="text/css" href="css/logging.css" />
+
+        <!-- first all the libraries, jquery first is needed for the rest -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/jScrollPane/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="js/jScrollPane/jScrollPane.min.js"></script>
+
+        <!-- general javascript -->
+        <!--
+        <script type="text/javascript" src="js/rvdlog.js"></script>
+        -->
+
+    <!-- page specific javascript -->
+    <!--
+    <script type="text/javascript" src="js/logging.js"></script>
+    -->
+    </head>
+
+    <body>
+        <div id="LoggingTopContainer"></div>
+        <div id="LoggingMainContainer">
+            <div id="LoggingMeldingenContainer">
+                <div id="SearchMeldingen"></div>
+
+                <div id="Meldingen">
+                    <div id="MeldingenHeader"><p>Meldingen</p></div>
+                    <div id="MeldingenList"></div>
+                </div>
+                <div id="Users">
+                    <div id="UsersHeader"><p>Users</p></div>
+                    <div id="UsersList"></div>
+                </div>
+                <div id="TextEntry">
+                        <form id="submitForm" method="post" action="">
+                            <input id="chatText" name="chatText" class="rounded" maxlength="255" />
+                            <input type="submit" class="blueButton" value="Submit" />
+                        </form>
+                </div>
+            </div>
+            <div id="LoggingTicketsContainer">
+                <div id="TicketsHeader"><p>Tickets</p></div>
+                <div id="TicketsList"></div>
+            </div>
+            <div id="LoggingFeedbackContainer">
+                <div id="FeedbackHeader"><p>Feedback</p></div>
+                <div id="FeedbackList"></div>
+            </div>
+        </div>
+                
+        <!--
+        <form id="loginForm" method="post" action="">
             <input id="name" name="name" class="rounded" maxlength="16" />
-	    <input id="password" name="password" class="rounded" maxlength="16" />
+            <input id="password" name="password" class="rounded" maxlength="16" />
             <input type="submit" class="blueButton" value="Login" />
         </form>
--->
+        -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="js/jScrollPane/jquery.mousewheel.js"></script>
-<script src="js/jScrollPane/jScrollPane.min.js"></script>
-<!--<script src="js/script-chat.js"></script>
--->
-</body>
+    </body>
 </html>

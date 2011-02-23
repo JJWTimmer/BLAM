@@ -1,14 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>RVD log - WL Overzicht</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>RVD log - WL Overzicht</title>
 
-<link rel="stylesheet" type="text/css" href="js/jScrollPane/jScrollPane.css" />
-<link rel="stylesheet" type="text/css" href="css/page.css" />
-<link rel="stylesheet" type="text/css" href="css/overview.css" />
+        <!-- Load stylesheets before javascript -->
 
-</head>
+        <!-- jQuery css first, so we can override later -->
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="js/jScrollPane/jScrollPane.css" />
+
+        <!-- second the general css -->
+        <link rel="stylesheet" type="text/css" href="css/rvdlog.css" />
+
+        <!-- last the page specific css -->
+        <link rel="stylesheet" type="text/css" href="css/ticketing.css" />
+
+        <!-- first all the libraries, jquery first is needed for the rest -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/jScrollPane/jScrollPane.min.js"></script>
+        <script type="text/javascript" src="js/jScrollPane/jquery.mousewheel.js"></script>
+
+        <!-- general javascript -->
+        <script type="text/javascript" src="js/rvdlog.js"></script>
+
+        <!-- page specific javascript -->
+        <script type="text/javascript" src="js/ticketing.js"></script>
+
+    </head>
 
 <body>
 
@@ -28,10 +48,10 @@
             <input type="submit" class="blueButton" value="Login" />
         </form>
 	<form id="searchForm" method="post" action="">
-		<input type="button" id="Allchats" class="timeButton" value="All chats" />
-		<input type="button" id="12hour" class="timeButton" value="last 12 hours" />
-		<input type="button" id="6hour" class="timeButton" value="last 6 hours" />
-		<input type="button" id="1hour" class="timeButton" value="last hour" />
+		<input type="button" id="all-chats" class="timeButton" value="All chats" />
+		<input type="button" id="twelve-hour" class="timeButton" value="last 12 hours" />
+		<input type="button" id="six-hour" class="timeButton" value="last 6 hours" />
+		<input type="button" id="one-hour" class="timeButton" value="last hour" />
 		<input id="search" name="name" class="rounded" maxlength="16" />
 		<input type="submit" class="blueButton" value="Search" />
         </form>
@@ -42,11 +62,5 @@
     <div id="chatBottomBar" class="rounded"></div>
     
 </div>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="js/jScrollPane/jquery.mousewheel.js"></script>
-<script src="js/jScrollPane/jScrollPane.min.js"></script>
-<script src="js/script_overview.js"></script>
 </body>
 </html>
