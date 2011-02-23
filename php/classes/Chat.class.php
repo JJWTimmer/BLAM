@@ -2,7 +2,7 @@
 
 /* The Chat class exploses public static methods, used by ajax.php */
 
-class Chat{
+class RVDLog {
 	
 	public static function login($name,$password){
 		if($password=="batavier"||$_SESSION['user'])

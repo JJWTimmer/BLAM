@@ -2,7 +2,7 @@
 
 /* Chat line is used for the chat entries */
 
-class ChatLine extends ChatBase{
+class ChatLine extends RVDLogBase {
 	
 	protected $text = '', $author = '', $avatar = '';
 	

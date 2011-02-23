@@ -28,14 +28,17 @@ class DB {
 		//if doesn't exist, create new instance
 		self::$instance = new self($dbOptions);
 	}
+    
 	//retrieve mysql object to?
 	public static function getMySQLiObject(){
 		return self::$instance->MySQLi;
 	}
+    
 	//perform query, return result
 	public static function query($q){
 		return self::$instance->MySQLi->query($q);
 	}
+    
 	//add escape characters string
 	public static function esc($str){
 		return self::$instance->MySQLi->real_escape_string(htmlspecialchars($str));

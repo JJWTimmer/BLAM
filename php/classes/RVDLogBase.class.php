@@ -2,7 +2,7 @@
 
 /* This is the base class, used by both ChatLine and ChatUser */
 
-class ChatBase{
+class RVDLogBase {
 
 	// This constructor is used by all the chat classes:
 
