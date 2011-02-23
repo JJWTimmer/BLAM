@@ -10,7 +10,7 @@ class Message extends RVDLogBase {
     protected $created = '';
 	
 	public function create() {
-		
+
 		DB::query("
 			INSERT INTO messages (user_id, text, created)
 			VALUES (
@@ -19,9 +19,10 @@ class Message extends RVDLogBase {
                 '" . DB::esc($this->created) . "'
             )
             ");
-		
-		return DB::getMySQLiObject();
-	
+        
+		$this->id = DB::getMySQLiObject()->insert_id;
+        
+		return $this->id;
 	}
 
 }

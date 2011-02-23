@@ -13,17 +13,16 @@ class RVDLog {
 				));
 		
 			// The login method returns a user array or false
-			if($user->login() !== false){
+            $result = $user->login();
+			if(result !== false){
 				// user is logged in succesfully
-				$user = $result->fetch_array();
 				$_SESSION['user']	= array(
-                    'id'        => $user['id'],
-                    'name'		=> $user['username'],
-                    'role'      => $user['role'],
-                    'avatar'	=> $user['avatar']
+                    'id'        => $result['id'],
+                    'username'	=> $result['username'],
+                    'role'      => $result['role'],
+                    'avatar'	=> $result['avatar']
                 );
-			}
-			else{
+			} else {
 				//user is not logged in, destroy existing session and logout
                 $user->logout();
 				session_destroy();
@@ -38,7 +37,7 @@ class RVDLog {
 	}
 
     // returns string Username, string Avatar, String Role or exception
-	public static function checkLogged(){
+	public static function checkLogged() {
         // check if user is already logged in earlier?	
 		if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
@@ -50,8 +49,8 @@ class RVDLog {
 		
 	}
 	
-	public static function logout(){
-        $user = new User($_SESSION['user']);
+	public static function logout() {
+        $user = new User( isset($_SESSION['user']) ? $_SESSION['user'] : array() );
 		$user->Logout();
         
 		session_destroy();
@@ -59,27 +58,24 @@ class RVDLog {
 	
     // returns MessageId or exception
 	public static function addMessage($text, $ticket = false){
-		if(!$_SESSION['user']){
+		if(!isset($_SESSION['user'])){
 			throw new Exception('You are not logged in');
 		}
 		
-		if(!$text){
+		if(empty($text)){
 			throw new Exception('You haven\'t entered a message.');
 		}
 	
-		$chat = new ChatLine(array(
-			'author'	=> $_SESSION['user']['name'],
-			'avatar'	=> $_SESSION['user']['avatar'],
-			'text'		=> $chatText
+		$msg = new Message(array(
+			'user_id'	=> $_SESSION['user']['id'],
+			'text'	    => $text,
+			'created'	=> now()
 		));
 	
 		// The save method returns a MySQLi object
-		$insertID = $chat->save()->insert_id;
-	
-		return array(
-			'status'	=> 1,
-			'insertID'	=> $insertID
-		);
+		$insertID = $msg->create()->insert_id;
+        
+		return $insertID;
 	}
 
     public static function getMessages($msg_id, $date_and_time) {
@@ -91,7 +87,7 @@ class RVDLog {
     }
 
     public static function getUsers() {
-    
+        return array();
     }
 
     public static function getHandles() {
@@ -114,7 +110,8 @@ class RVDLog {
     
     }
 
-    public static function getChats($lastid, $date_and_time){
+    public static function getChats($last_id, $date_and_time){
+        return array();
     
     }
 
@@ -166,6 +163,3 @@ class RVDLog {
     
     }
 }
-
-
-?>

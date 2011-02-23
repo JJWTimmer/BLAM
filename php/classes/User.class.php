@@ -19,9 +19,10 @@ class User extends RVDLogBase {
                 '" . DB::esc($this->avatar) . "'
             )
             ");
+            
+        $this->id = DB::getMySQLiObject()->insert_id;
 		
-		return DB::getMySQLiObject();
-	
+		return $this->id;
 	}
 	
 	public function update() {

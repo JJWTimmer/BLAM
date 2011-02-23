@@ -19,7 +19,7 @@ var chat = {
 	init : function(){
 		
 		// Using the defaultText jQuery plugin, included at the bottom:
-		$('#name').defaultText('Nickname');
+		$('#username').defaultText('Username');
 		$('#password').defaultText('Password');
 				
 		// Converting the #chatLineHolder div into a jScrollPane,
@@ -37,7 +37,7 @@ var chat = {
 		var working = false;
 		
 		//set the default history used by getChats
-		chat.data.date='2:0:0';
+		chat.data.date='01-01-2010 00:00:00';
 		chat.data.search= false;
 
 		// Logging a person in the chat:
@@ -56,11 +56,12 @@ var chat = {
 				if(r.error){
 					chat.displayError(r.error);
 				}
-				else 	{
-					chat.login(r.name,r.avatar);
+				else
+                {
+					chat.login(r.username,r.avatar);
 					chat.getChats();
 					chat.getUsers();
-					}
+				}
 			});
 			
 			return false;
@@ -79,7 +80,7 @@ var chat = {
 		});
 
 				
-		$('#Allchats').click(function(){
+		$('#all-chats').click(function(){
 			//show all the chats
 			chat.data.search= false;
 			chat.data.date='all';
@@ -89,7 +90,7 @@ var chat = {
 			return false;
 		});
 
-		$('#12hour').click(function(){
+		$('#twelve-hour').click(function(){
 			chat.data.search= false;
 			chat.data.date='12:0:0';
 			chat.data.lastID=0;
@@ -98,7 +99,7 @@ var chat = {
 			return false;
 		});
 
-		$('#6hour').click(function(){
+		$('#six-hour').click(function(){
 			chat.data.search= false;
 			chat.data.date='6:0:0';
 			chat.data.lastID=0;
@@ -107,7 +108,7 @@ var chat = {
 			return false;
 		});
 
-		$('#1hour').click(function(){
+		$('#one-hour').click(function(){
 			chat.data.search= false;
 			chat.data.date='1:0:0';
 			chat.data.lastID=0;
@@ -139,7 +140,7 @@ var chat = {
 		
 		$.tzGET('checkLogged',function(r){
 			if(r.logged){
-				chat.login(r.loggedAs.name,r.loggedAs.avatar);
+				chat.login(r.loggedAs.username,r.loggedAs.avatar);
 			}
 		});
 		
@@ -161,9 +162,9 @@ var chat = {
 	// The login method hides displays the
 	// user's login data and shows the submit form
 	
-	login : function(name,avatar){
+	login : function(username,avatar){
 		
-		chat.data.name = name;
+		chat.data.username = username;
 		chat.data.avatar = avatar;
 		$('#chatTopBar').html(chat.render('loginTopBar',chat.data));
 		$('#loginForm').fadeOut();
@@ -176,14 +177,14 @@ var chat = {
 	// The render method generates the HTML markup 
 	// that is needed by the other methods:
 	
-	render : function(template,params){
+	render : function(template, params){
 		
 		var arr = [];
 		switch(template){
 			case 'loginTopBar':
 				arr = [
 				'<span><img src="',params.avatar,'" width="23" height="23" />',
-				'<span class="name">',params.name,
+				'<span class="username">',params.username,
 				'</span><a href="" class="logoutButton rounded">Logout</a></span>'];
 			break;
 	
@@ -196,7 +197,7 @@ var chat = {
 							
 			case 'user':
 				arr = [
-					'<div class="user" title="',params.name,'"><img src="',
+					'<div class="user" title="',params.username,'"><img src="',
 					params.avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
 				];
 			break;
@@ -265,50 +266,50 @@ var chat = {
 	// (since lastID), and adds them to the page.
 	getChats : function(callback){
 		if(!chat.data.search)
-		{
-		$.tzGET('getChats',{lastID: chat.data.lastID,date: chat.data.date},function(r){
-			//update chats from mysql db
-			
-			for(var i=0;i<r.chats.length;i++){
-				chat.addChatLine(r.chats[i]);
-			}
-			//if new chats, update to lastid
-			//chat.data.noActivity is reset, so next update in 1 second
-			
-			if(r.chats.length){
-				chat.data.noActivity = 0;
-				chat.data.lastID = r.chats[i-1].id;
-			}
-			else{
-				// If no chats were received, increment
-				// the noActivity counter.
-				
-				chat.data.noActivity++;
-			}
-			//if no chats exist yet
-			if(!chat.data.lastID){
-				chat.data.jspAPI.getContentPane().html('<p class="noChats">No chats yet</p>');
-			}
-			
-			// Setting a timeout for the next request,
-			// depending on the chat activity:
-			
-			var nextRequest = 1000;
-			// 2 seconds
-			if(chat.data.noActivity > 3){
-				nextRequest = 2000;
-			}
-			//5 seconds
-			if(chat.data.noActivity > 10){
-				nextRequest = 5000;
-			}
-			
-			// 15 seconds
-			if(chat.data.noActivity > 20){
-				nextRequest = 15000;
-			}
-			setTimeout(callback,nextRequest);		
-		});
+        {
+            $.tzGET('getChats',{last_id: chat.data.lastID, date: chat.data.date},function(r){
+                //update chats from mysql db
+                
+                for(var i=0;i<r.chats.length;i++){
+                    chat.addChatLine(r.chats[i]);
+                }
+                //if new chats, update to lastid
+                //chat.data.noActivity is reset, so next update in 1 second
+                
+                if(r.chats.length){
+                    chat.data.noActivity = 0;
+                    chat.data.lastID = r.chats[i-1].id;
+                }
+                else{
+                    // If no chats were received, increment
+                    // the noActivity counter.
+                    
+                    chat.data.noActivity++;
+                }
+                //if no chats exist yet
+                if(!chat.data.lastID){
+                    chat.data.jspAPI.getContentPane().html('<p class="noChats">No chats yet</p>');
+                }
+                
+                // Setting a timeout for the next request,
+                // depending on the chat activity:
+                
+                var nextRequest = 1000;
+                // 2 seconds
+                if(chat.data.noActivity > 3){
+                    nextRequest = 2000;
+                }
+                //5 seconds
+                if(chat.data.noActivity > 10){
+                    nextRequest = 5000;
+                }
+                
+                // 15 seconds
+                if(chat.data.noActivity > 20){
+                    nextRequest = 15000;
+                }
+                setTimeout(callback,nextRequest);		
+            });
 		}
 		else
 		{
@@ -350,7 +351,7 @@ var chat = {
 			//empty no one is online variable
 			var message = '';
 			
-			if(r.total<1){
+			if ( r.total < 1 ) {
 				message = 'No one is online';
 			}
 			else {

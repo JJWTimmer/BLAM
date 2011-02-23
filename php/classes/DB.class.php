@@ -44,5 +44,3 @@ class DB {
 		return self::$instance->MySQLi->real_escape_string(htmlspecialchars($str));
 	}
 }
-
-?>

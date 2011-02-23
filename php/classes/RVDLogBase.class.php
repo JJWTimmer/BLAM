@@ -1,10 +1,10 @@
 <?php
 
-/* This is the base class, used by both ChatLine and ChatUser */
+/* This is the base class */
 
 class RVDLogBase {
 
-	// This constructor is used by all the chat classes:
+	// This constructor is used by all the RVDLog classes:
 
 	public function __construct(array $options){
 		//This function saves all the parameter from $options that are defined in the class

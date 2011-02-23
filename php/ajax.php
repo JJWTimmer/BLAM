@@ -1,27 +1,25 @@
 <?php
-
-require_once "config.include.php";
-
-
 error_reporting(E_ALL ^ E_NOTICE);
 
-require "classes/DB.class.php";
-require "classes/RVDLog.class.php";
-require "classes/RVDLogBase.class.php";
-require "classes/ChatLine.class.php";
-require "classes/User.class.php";
+require_once "config.include.php";
+require_once "util.include.php";
+require_once "classes/DB.class.php";
+require_once "classes/RVDLog.class.php";
+require_once "classes/RVDLogBase.class.php";
+require_once "classes/ChatLine.class.php";
+require_once "classes/User.class.php";
 
 session_name('RVDLog');
 session_start();
 
-if(get_magic_quotes_gpc()){
+if ( get_magic_quotes_gpc() ) {
 	
 	// If magic quotes is enabled, strip the extra slashes
 	array_walk_recursive($_GET,create_function('&$v,$k','$v = stripslashes($v);'));
 	array_walk_recursive($_POST,create_function('&$v,$k','$v = stripslashes($v);'));
 }
 
-try{
+try {
 	
 	// Connecting to the database
 	DB::init($dbOptions);
@@ -33,18 +31,19 @@ try{
 	switch($_GET['action']){
 		
 		case 'login':
-			$response = RVDLog::login($_POST['name'], $_POST['password']);
+			$response = RVDLog::login($_POST['username'], $_POST['password']);
             // returns int Id, string Username, string Avatar, String Role or exception
             break;
 		
 		case 'checkLogged':
+            print_r($_SESSION['user']);
 			$response = RVDLog::checkLogged();
-            // returns string Username, string Avatar, String Role or exception
+            // returns int Id, string Username, string Avatar, String Role or exception
             break;
 		
 		case 'logout':
 			$response = RVDLog::logout();
-            // return none or exception
+            // return null or exception
             break;
 		
 		case 'addMessage':
@@ -93,7 +92,7 @@ try{
             break;
 		
 		case 'getChats':
-			$response = RVDLog::getChats($_POST['id'], $_POST['date_and_time']);
+			$response = RVDLog::getChats($_POST['last_id'], $_POST['date']);
             // returns array chat(int MessageID, string Text, string Username, string Avatar, array time(hours, minutes)) or exception
             break;
 		
@@ -166,5 +165,3 @@ try{
 catch(Exception $e){
 	die(json_encode(array('error' => $e->getMessage())));
 }
-
-?>
