@@ -2,21 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>RVD log - chat</title>
+        <title>RVD log - Logging</title>
 
         <!-- jQuery css first, so we can override later -->
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" href="js/jScrollPane/jScrollPane.css" />
 
         <!-- second the general css -->
-        <!--
         <link rel="stylesheet" type="text/css" href="css/rvdlog.css" />
-        -->
-
+        
         <!-- last the page specific css -->
-        <!--
-        <link rel="stylesheet" type="text/css" href="css/chat.css" />
-        -->
         <link rel="stylesheet" type="text/css" href="css/logging.css" />
 
         <!-- first all the libraries, jquery first is needed for the rest -->
@@ -41,8 +36,13 @@
         <div id="LoggingMainContainer">
             <div id="LoggingMeldingenContainer">
                 <div id="SearchMeldingen"></div>
+		
+		<div id="Handles">
+                    <div id="HandlesHeader"><p>Roepnamen</p></div>
+                    <div id="HandlesList"></div>
+                </div>
 
-                <div id="Meldingen">
+		<div id="Meldingen">
                     <div id="MeldingenHeader"><p>Meldingen</p></div>
                     <div id="MeldingenList"></div>
                 </div>
@@ -56,6 +56,7 @@
                             <input type="submit" class="blueButton" value="Submit" />
                         </form>
                 </div>
+		
             </div>
             <div id="LoggingTicketsContainer">
                 <div id="TicketsHeader"><p>Tickets</p></div>

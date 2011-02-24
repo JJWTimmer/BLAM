@@ -1,319 +1,391 @@
-#linkContainer{
-	width:800px;
-	height:50px;
-		position:relative;
+body{ background-color: gray;}
+
+#TicketingTopContainer{
+    position:absolute;
+    left:20px;
+    top: 20px;
+    width:95%;
+    height:50px;
+    background: green;
+    border:1px solid #fff;
+}
+/* Main container */
+#TicketingMainContainer{
+position:absolute;  
+    top: 70px;  
+    left:20px;
+    width:95%;
+    height:85%;
+    background: blue;
+    margin-bottom:5px;
+    padding-bottom:1%;
 }
 
-#leftLink{
-	height:50px;
-	position:absolute;
-	left:0;
-	top:0 px;
-	width:400px;
+#TicketingCommunicationContainer{
+    position: relative;
+    
+    width:45%;
+    height:98%;
+    background: red;
+    margin:1%;
 }
 
-#rightLink{
-	height:50px;
-	position:absolute;
-	right:0;
-	top:0 px;
-	width:400px;
+#Handles{
+    position:absolute;
+    top: 0%;
+    left:0%;
+    width:31%;
+    height:98%;
+    background: violet;
+    margin:1%;
 }
 
-/* Main chat container */
-
-#chatContainer{
-	width:800px;
-	margin:100px auto;
-	position:relative;
+#HandlesHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-
-/* Top Bar */
-
-
-#chatTopBar{
-	height:25px;
-	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-	border:1px solid #fff;
-	margin-bottom:10px;
-	position:relative;
-	padding:10px;
-	color:#777;
-	text-shadow:1px 1px 0 #FFFFFF;
+#HandlesList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-#chatTopBar .name{
-	position:absolute;
-	top:10px;
-	left:40px;
+#Meldingen{
+    position:absolute;
+    top: 0%;
+    left:33%;
+    width:65%;
+    height:31%;
+    background: violet;
+    margin:1%;
 }
 
-#chatTopBar img{
-	left:9px;
-	position:absolute;
-	top:8px;
+#MeldingenHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-#chatMiddleBar{
-	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-	position:relative;
-	padding:10px;
-	border:1px solid #fff;
+#MeldingenList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-#chatMiddleBar .timeButton{
-	background:url('../img/button_time.png') no-repeat;
-	border:none !important;
-	color:#516D7F !important;
-	display:inline-block;
-	font-size:13px;
-	height:29px;
-	text-align:center;
-	text-shadow:1px 1px 0 rgba(255, 255, 255, 0.4);
-	width:100px;
-	cursor:pointer;
+#ChatContainer{
+    position:absolute;
+    top: 33%;
+    left:33%;
+    width:65%;
+    height:65%;
+    background: yellow;
+    margin:1%;
 }
 
-#chatMiddleBar .timeButton:hover{
-	background-position:left bottom;
+#WL-Chat{
+    position:absolute;
+    top: 0%;
+    left:0%;
+    width:65%;
+    height:65%;
+    background: violet;
+    margin:1%;
 }
 
-
-/* Chats */
-
-
-#chatLineHolder{
-	height:460px;
-	width:640px;
-	margin-top:10px;
-	margin-bottom:10px;
+#WL-ChatHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-.chat{
-	background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
-	min-height:24px;
-	padding:6px;
-	border:1px solid #FFFFFF;
-	
-	padding:8px 6px 4px 37px;
-	position:relative;
-	margin:0 10px 10px 0;
+#WL-ChatList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-.chat:last-child{
-	margin-bottom:0;
+#Users{
+    position:absolute;
+    top: 0%;
+    left:67%;
+    width:31%;
+    height:65%;
+    background: violet;
+    margin:1%;
 }
 
-.chat span{
-	color:#777777;
-	text-shadow:1px 1px 0 #FFFFFF;
-	font-size:12px;
+#UsersHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-.chat .text{
-	color:#444444;
-	display:inline-block;
-	font-size:15px;
-	overflow:hidden;
-	vertical-align:top;
-	width:250px;
+#UsersList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-.chat .avatar{
-	background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
-	left:7px;
-	position:absolute;
-	top:7px;
-}
-
-.chat img{
-	display:block;
-	visibility:hidden;
-}
-
-.chat .time{
-	position:absolute;
-	right:10px;
-	top:12px;
-	font-size:11px;
-}
-
-.chat .author{
-	margin-right:6px;
-	font-size:11px;
-}
-
-
-/* Chat User Area */
-
-
-#chatUsers{
-	background-color:#202020;
-	border:1px solid #111111;
-	height:460px;
-	position:absolute;
-	right:0;
-	top:166px;
-	width:150px;
-}
-
-#chatUsers .user{
-	background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=30') no-repeat 1px 1px #444444;
-	border:1px solid #111111;
-	float:left;
-	height:32px;
-	margin:10px 0 0 10px;
-	width:32px;
-}
-
-#chatUsers .user img{
-	border:1px solid #444444;
-	display:block;
-	visibility:hidden;
+#TextEntry{
+    position:absolute;
+    top: 67%;
+    left:0%;
+    width:98%;
+    height:31%;
+    background: white;
+    margin:1%;
 }
 
 
-/* Bottom Bar */
-
-
-
-#chatBottomBar{
-	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-	position:relative;
-	padding:10px;
-	border:1px solid #fff;
+#TicketingOverviewContainer{
+    position: relative;
+    top: -100%;
+    left:47%;
+    width:20%;
+    height:98%;
+    background: red;
+    
 }
 
-
-#chatContainer input{
-	background:url('../img/input_bg.jpg') repeat-x #dcdcdc;
-	height:26px;
-	font:13px/26px Calibri,Arial,sans-serif;
-	color:#777;
-	border:1px solid;
-	border-color:#c1c1c1 #eee #eee #c1c1c1;
-	text-shadow:1px 1px 0 #E4E4E4;
-	padding:0 5px;
-	margin-right:5px;
-	width:185px;
-	outline:none;
+#NewTickets{
+    position:absolute;
+    top: 0%;
+    left:0%;
+    width:98%;
+    height:31%;
+    background: violet;
+    margin:1%;
 }
 
-
-#searchForm{
-	display:none;
+#NewTicketsHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-input#chatText{
-	/* The chat submit text field */
-	width:385px;
+#NewTicketsList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-
-/* Overloading the default styles of jScrollPane */
-
-
-.jspVerticalBar{
-	background:none;
-	width:20px;
+#OpenTickets{
+    position:absolute;
+    top: 33%;
+    left:0%;
+    width:98%;
+    height:31%;
+    background: violet;
+    margin:1%;
 }
 
-.jspTrack{
-	background-color:#202020;
-	border:1px solid #111111;
-	width:3px;
-	right:-10px;
+#OpenTicketsHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-.jspDrag {
-	background:url('../img/slider.png') no-repeat;
-	width:20px;
-	left:-9px;
-	height:20px !important;
-	margin-top:-5px;
+#OpenTicketsList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-.jspDrag:hover{
-	background-position:left bottom;
+#ClosedTickets{
+    position:absolute;
+    top: 67%;
+    left:0%;
+    width:98%;
+    height:31%;
+    background: violet;
+    margin:1%;
 }
 
-
-/* Additional styles */
-
-
-a.logoutButton{
-	background-color:#bbb;
-	border:1px solid #eee !important;
-	color:#FFFFFF !important;
-	font-size:12px;
-	padding:5px 9px;
-	position:absolute;
-	right:10px;
-	text-shadow:1px 1px 0 #888;
-	top:7px;
-	
-	-moz-box-shadow:0 0 7px #888 inset;
-	-webkit-box-shadow:0 0 7px #888 inset;
-	box-shadow:0 0 7px #888 inset;
+#ClosedTicketsHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-a.logoutButton:hover{
-	text-shadow:1px 1px 0 #888;
-	
-	-moz-box-shadow:0 0 7px #666 inset;
-	-webkit-box-shadow:0 0 7px #666 inset;
-	box-shadow:0 0 7px #666 inset;
+#ClosedTicketsList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-#chatContainer .blueButton{
-	background:url('../img/button_blue.png') no-repeat;
-	border:none !important;
-	color:#516D7F !important;
-	display:inline-block;
-	font-size:13px;
-	height:29px;
-	text-align:center;
-	text-shadow:1px 1px 0 rgba(255, 255, 255, 0.4);
-	width:75px;
-	margin:0;
-	cursor:pointer;
+#TicketingDetailsContainer{
+    position: relative;
+    top: -200%;
+    left: 67%;
+    width:31%;
+    height:98%;
+    background: red;
+    margin:1%;
 }
 
-#chatContainer .blueButton:hover{
-	background-position:left bottom;
+#TicketDetails{
+    position:absolute;
+    top: 0%;
+    left:0%;
+    width:98%;
+    height:28%;
+    background: violet;
+    margin:1%;
 }
 
-p.noChats,
-#chatUsers .count{
-	clear:both;
-	font-size:12px;
-	padding:10px;
-	text-align:center;
-	text-shadow:1px 1px 0 #111111;
+#TicketDetailsHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
 }
 
-#chatUsers .count{
-	font-size:11px;
+#TicketDetailsList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }
 
-.rounded{
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-	}
+#WL-Actie{
+    position:absolute;
+    top: 30%;
+    left:0%;
+    width:98%;
+    height:18%;
+    background: violet;
+    margin:1%;
+}
 
-#chatErrorMessage{
-	width:100%;
-	top:0;
-	left:0;
-	position:fixed;
-	background-color:#ab0909;
-	border-bottom:1px solid #d32a2a;
-	font-size:23px;
-	padding:16px;
-	text-align:center;
-	color:#fff;
-	
-	text-shadow:1px 1px 0 #940f0f;
+#WL-ActieHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
+}
+
+#WL-ActieList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
+}
+
+#Feedback{
+    position:absolute;
+    top: 50%;
+    left:0%;
+    width:98%;
+    height:18%;
+    background: violet;
+    margin:1%;
+}
+
+#FeedbackHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
+}
+
+#FeedbackList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
+}
+
+#TreeviewTicket{
+    position:absolute;
+    top: 70%;
+    left:0%;
+    width:98%;
+    height:28%;
+    background: violet;
+    margin:1%;
+}
+
+#TreeviewTicketHeader{
+position:absolute;
+    left:0px;
+    top: 0px;
+    width:100%;
+    height:10%;
+    background: aqua;
+    text-align:center;
+}
+
+#TreeviewTicketList{
+position:absolute;
+    left:0%;
+    top: 10%;
+    width:100%;
+    height:90%;
+    background: fuchsia;
 }

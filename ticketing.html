@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>RVD log - WL Overzicht</title>
+        <title>RVD log - Ticketing</title>
 
         <!-- Load stylesheets before javascript -->
 
@@ -30,37 +30,75 @@
 
     </head>
 
-<body>
+    <body>
+	    <div id="TicketingTopContainer"></div>
+        <div id="TicketingMainContainer">
+            <div id="TicketingCommunicationContainer">
+			    <div id="Handles">
+                    <div id="HandlesHeader"><p>Roepnamen</p></div>
+                    <div id="HandlesList"></div>
+                </div>
+		        <div id="Meldingen">
+                    <div id="MeldingenHeader"><p>Meldingen</p></div>
+                    <div id="MeldingenList"></div>
+		        </div>
+		        <div id="ChatContainer">
+                 	<div id="WL-Chat">
+                        <div id="WL-ChatHeader"><p>WL-Chat</p></div>
+                       	<div id="WL-ChatList"></div>
+			        </div>
+		            <div id="Users">
+                        <div id="UsersHeader"><p>Users</p></div>
+                        <div id="UsersList"></div>
+                    </div>    
+			        <div id="TextEntry">
+                        <form id="submitForm" method="post" action="">
+                            <input id="chatText" name="chatText" class="rounded" maxlength="255" />
+                            <input type="submit" class="blueButton" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="TicketingOverviewContainer">
+                <div id="NewTickets">
+                    <div id="NewTicketsHeader"><p>New Tickets</p></div>
+                    <div id="NewTicketsList"></div>
+                </div>
+                <div id="OpenTickets">
+                    <div id="OpenTicketsHeader"><p>Open Tickets</p></div>
+                    <div id="OpenTicketsList"></div>
+                </div>
+                <div id="ClosedTickets">
+                    <div id="ClosedTicketsHeader"><p>Closed Tickets</p></div>
+                    <div id="ClosedTicketsList"></div>
+                </div>
+            </div>
+            <div id="TicketingDetailsContainer">
+                <div id="TicketDetails">
+                    <div id="TicketDetailsHeader"><p>Details Ticket</p></div>
+                    <div id="TicketDetailsList"></div>
+                </div>
+                <div id="WL-Actie">
+                    <div id="WL-ActieHeader"><p>WL-Actie</p></div>
+                    <div id="WL-ActieList"></div>
+                </div>
+                <div id="Feedback">
+                    <div id="FeedbackHeader"><p>Terugmelding</p></div>
+                    <div id="FeedbackList"></div>
+                </div>
+                <div id="TreeviewTicket">
+                    <div id="TreeviewTicketHeader"><p>Treeview Ticket </p></div>
+                    <div id="TreeviewTicketList"></div>
+                </div>
+            </div>
+        </div>
 
-<div id="chatContainer">
-     <div id="linkContainer">
-	<div id="leftLink" style="text-align: center"><a href="logging.html"> RVD</a></div>
-	<div id="rightLink" style="text-align: center"><a href="ticketing.html"> WL</a></div>
-    </div>
-
-    <div id="chatTopBar" class="rounded">
-	
-    </div>
-    <div id="chatMiddleBar" class="rounded">
+<!--
         <form id="loginForm" method="post" action="">
             <input id="username" name="username" class="rounded" maxlength="16" />
 	    <input id="password" name="password" class="rounded" maxlength="16" />
             <input type="submit" class="blueButton" value="Login" />
         </form>
-	<form id="searchForm" method="post" action="">
-		<input type="button" id="all-chats" class="timeButton" value="All chats" />
-		<input type="button" id="twelve-hour" class="timeButton" value="last 12 hours" />
-		<input type="button" id="six-hour" class="timeButton" value="last 6 hours" />
-		<input type="button" id="one-hour" class="timeButton" value="last hour" />
-		<input id="search" name="name" class="rounded" maxlength="16" />
-		<input type="submit" class="blueButton" value="Search" />
-        </form>
-    </div>
-    <div id="chatLineHolder"></div>
-    
-    <div id="chatUsers" class="rounded"></div>
-    <div id="chatBottomBar" class="rounded"></div>
-    
-</div>
-</body>
+-->
+    </body>
 </html>
