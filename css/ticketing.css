@@ -1,4 +1,7 @@
-body{ background-color: gray;}
+body{
+background-color: gray;
+height:100%;
+}
 
 #TicketingTopContainer{
     position:absolute;
@@ -23,7 +26,6 @@ position:absolute;
 
 #TicketingCommunicationContainer{
     position: relative;
-    
     width:45%;
     height:98%;
     background: red;
@@ -32,10 +34,10 @@ position:absolute;
 
 #Handles{
     position:absolute;
-    top: 0%;
+    top: 5%;
     left:0%;
     width:31%;
-    height:98%;
+    height:93%;
     background: violet;
     margin:1%;
 }
@@ -43,9 +45,9 @@ position:absolute;
 #HandlesHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top:-20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -53,18 +55,18 @@ position:absolute;
 #HandlesList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #Meldingen{
     position:absolute;
-    top: 0%;
+    top: 5%;
     left:33%;
     width:65%;
-    height:31%;
+    height:26%;
     background: violet;
     margin:1%;
 }
@@ -72,9 +74,9 @@ position:absolute;
 #MeldingenHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -82,9 +84,9 @@ position:absolute;
 #MeldingenList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
@@ -100,10 +102,10 @@ position:absolute;
 
 #WL-Chat{
     position:absolute;
-    top: 0%;
+    top: 8%;
     left:0%;
     width:65%;
-    height:65%;
+    height:57%;
     background: violet;
     margin:1%;
 }
@@ -111,9 +113,9 @@ position:absolute;
 #WL-ChatHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -121,18 +123,18 @@ position:absolute;
 #WL-ChatList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #Users{
     position:absolute;
-    top: 0%;
+    top: 8%;
     left:67%;
     width:31%;
-    height:65%;
+    height:57%;
     background: violet;
     margin:1%;
 }
@@ -140,9 +142,9 @@ position:absolute;
 #UsersHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -150,9 +152,9 @@ position:absolute;
 #UsersList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
@@ -166,23 +168,21 @@ position:absolute;
     margin:1%;
 }
 
-
 #TicketingOverviewContainer{
     position: relative;
-    top: -100%;
+    top: -99.5%;
     left:47%;
     width:20%;
     height:98%;
     background: red;
-    
 }
 
 #NewTickets{
     position:absolute;
-    top: 0%;
+    top: 5%;
     left:0%;
     width:98%;
-    height:31%;
+    height:26%;
     background: violet;
     margin:1%;
 }
@@ -190,9 +190,9 @@ position:absolute;
 #NewTicketsHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -200,18 +200,18 @@ position:absolute;
 #NewTicketsList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #OpenTickets{
     position:absolute;
-    top: 33%;
+    top: 38%;
     left:0%;
     width:98%;
-    height:31%;
+    height:26%;
     background: violet;
     margin:1%;
 }
@@ -219,9 +219,9 @@ position:absolute;
 #OpenTicketsHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -229,18 +229,18 @@ position:absolute;
 #OpenTicketsList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #ClosedTickets{
     position:absolute;
-    top: 67%;
+    top: 72%;
     left:0%;
     width:98%;
-    height:31%;
+    height:26%;
     background: violet;
     margin:1%;
 }
@@ -248,9 +248,9 @@ position:absolute;
 #ClosedTicketsHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -258,15 +258,15 @@ position:absolute;
 #ClosedTicketsList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #TicketingDetailsContainer{
     position: relative;
-    top: -200%;
+    top: -199%;
     left: 67%;
     width:31%;
     height:98%;
@@ -276,10 +276,10 @@ position:absolute;
 
 #TicketDetails{
     position:absolute;
-    top: 0%;
+    top: 5%;
     left:0%;
     width:98%;
-    height:28%;
+    height:23%;
     background: violet;
     margin:1%;
 }
@@ -287,9 +287,9 @@ position:absolute;
 #TicketDetailsHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -297,18 +297,18 @@ position:absolute;
 #TicketDetailsList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #WL-Actie{
     position:absolute;
-    top: 30%;
+    top: 35%;
     left:0%;
     width:98%;
-    height:18%;
+    height:13%;
     background: violet;
     margin:1%;
 }
@@ -316,9 +316,9 @@ position:absolute;
 #WL-ActieHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -326,18 +326,18 @@ position:absolute;
 #WL-ActieList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #Feedback{
     position:absolute;
-    top: 50%;
+    top: 55%;
     left:0%;
     width:98%;
-    height:18%;
+    height:13%;
     background: violet;
     margin:1%;
 }
@@ -345,9 +345,9 @@ position:absolute;
 #FeedbackHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -355,18 +355,18 @@ position:absolute;
 #FeedbackList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
 
 #TreeviewTicket{
     position:absolute;
-    top: 70%;
+    top: 75%;
     left:0%;
     width:98%;
-    height:28%;
+    height:23%;
     background: violet;
     margin:1%;
 }
@@ -374,9 +374,9 @@ position:absolute;
 #TreeviewTicketHeader{
 position:absolute;
     left:0px;
-    top: 0px;
+    top: -20px;
     width:100%;
-    height:10%;
+    height:20px;
     background: aqua;
     text-align:center;
 }
@@ -384,8 +384,8 @@ position:absolute;
 #TreeviewTicketList{
 position:absolute;
     left:0%;
-    top: 10%;
+    top: 0%;
     width:100%;
-    height:90%;
+    height:100%;
     background: fuchsia;
 }
