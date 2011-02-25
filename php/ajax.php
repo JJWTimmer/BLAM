@@ -1,11 +1,17 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
 
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', dirname(dirname(__FILE__)));
+
 require_once "config.include.php";
 require_once "util.include.php";
+
 require_once "classes/DB.class.php";
 require_once "classes/RVDLog.class.php";
 require_once "classes/RVDLogBase.class.php";
+require_once "classes/Message.class.php";
+require_once "classes/Ticket.class.php";
 require_once "classes/ChatLine.class.php";
 require_once "classes/User.class.php";
 
@@ -36,7 +42,6 @@ try {
             break;
 		
 		case 'checkLogged':
-            print_r($_SESSION['user']);
 			$response = RVDLog::checkLogged();
             // returns int Id, string Username, string Avatar, String Role or exception
             break;
@@ -52,13 +57,13 @@ try {
             break;
 		
 		case 'getMessages':
-			$response = RVDLog::getMessages($_POST['message_id'], $_POST['date_and_time']);
-            //returns array chat(int MessageID, string Text, string Username, string Avatar, array time(hours, minutes)) or exception
+			$response = RVDLog::getMessages($_POST['last_id'], $_POST['date_and_time']);
+            //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
 		
 		case 'searchMessages':
 			$response = RVDLog::searchMessages($_POST['keyword']);
-            // returns array chat(int MessageID, string Text, string Username, string Avatar, array time(hours, minutes))or exception
+            //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
 		
 		case 'getUsers':

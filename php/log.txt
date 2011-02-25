@@ -1,0 +1,35 @@
+:\RVD\RVDLog\php\ajax.php[18]: E:\RVD\RVDLog\php
+:\RVD\RVDLog\php\classes\User.class.php[84]: 1
+:\RVD\RVDLog\php\ajax.php[18]: .
+:\RVD\RVDLog\php\classes\User.class.php[84]: 1
+:\RVD\RVDLog\php\ajax.php[18]: E:\RVD\RVDLog
+:\RVD\RVDLog\php\classes\User.class.php[84]: 1
+:\RVD\RVDLog\php\classes\User.class.php[89]: 
+:\RVD\RVDLog\php\classes\User.class.php[89]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1' at line 3
+:\RVD\RVDLog\php\classes\User.class.php[89]: 
+:\RVD\RVDLog\php\classes\User.class.php[94]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '30 MINUTES)' at line 3
+:\RVD\RVDLog\php\classes\User.class.php[94]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '30)' at line 3
+:\RVD\RVDLog\php\classes\User.class.php[94]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '30)' at line 3
+:\RVD\RVDLog\php\classes\User.class.php[94]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MINUTES)' at line 3
+:\RVD\RVDLog\php\classes\User.class.php[94]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: bata
+:\RVD\RVDLog\php\classes\Message.class.php[53]: bata
+:\RVD\RVDLog\php\classes\Message.class.php[60]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: bata
+:\RVD\RVDLog\php\classes\Message.class.php[59]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MATCH(msg.text) AGAINST('bata' IN BOOLEAN MODE)' at line 3
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: bata
+:\RVD\RVDLog\php\classes\Message.class.php[59]: Unknown column 'messages.text' in 'where clause'
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: bata
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: test
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: 5
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: bat
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: bata
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[114]: checkpoint
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\Message.class.php[59]: 

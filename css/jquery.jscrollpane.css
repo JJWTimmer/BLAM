@@ -5,16 +5,19 @@
  * may not operate correctly without them.
  */
 
-.jspContainer{
+.jspContainer
+{
 	overflow: hidden;
 	position: relative;
 }
 
-.jspPane{
+.jspPane
+{
 	position: absolute;
 }
 
-.jspVerticalBar{
+.jspVerticalBar
+{
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -23,7 +26,8 @@
 	background: red;
 }
 
-.jspHorizontalBar{
+.jspHorizontalBar
+{
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -33,25 +37,30 @@
 }
 
 .jspVerticalBar *,
-.jspHorizontalBar *{
+.jspHorizontalBar *
+{
 	margin: 0;
 	padding: 0;
 }
 
-.jspCap{
+.jspCap
+{
 	display: none;
 }
 
-.jspHorizontalBar .jspCap{
+.jspHorizontalBar .jspCap
+{
 	float: left;
 }
 
-.jspTrack{
+.jspTrack
+{
 	background: #dde;
 	position: relative;
 }
 
-.jspDrag{
+.jspDrag
+{
 	background: #bbd;
 	position: relative;
 	top: 0;
@@ -60,44 +69,52 @@
 }
 
 .jspHorizontalBar .jspTrack,
-.jspHorizontalBar .jspDrag{
+.jspHorizontalBar .jspDrag
+{
 	float: left;
 	height: 100%;
 }
 
-.jspArrow{
+.jspArrow
+{
 	background: #50506d;
 	text-indent: -20000px;
 	display: block;
 	cursor: pointer;
 }
 
-.jspArrow.jspDisabled{
+.jspArrow.jspDisabled
+{
 	cursor: default;
 	background: #80808d;
 }
 
-.jspVerticalBar .jspArrow{
+.jspVerticalBar .jspArrow
+{
 	height: 16px;
 }
 
-.jspHorizontalBar .jspArrow{
+.jspHorizontalBar .jspArrow
+{
 	width: 16px;
 	float: left;
 	height: 100%;
 }
 
-.jspVerticalBar .jspArrow:focus{
+.jspVerticalBar .jspArrow:focus
+{
 	outline: none;
 }
 
-.jspCorner{
+.jspCorner
+{
 	background: #eeeef4;
 	float: left;
 	height: 100%;
 }
 
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
-* html .jspCorner{
+* html .jspCorner
+{
 	margin: 0 -3px 0 0;
 }

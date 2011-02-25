@@ -16,3 +16,12 @@
 		echo $var . "\n</pre>\n";
 		echo '</div>';
 	}
+    
+    //gebruik: logmsg($var);
+    function logmsg($msg) {
+        $myFile = "log.txt";
+        $fh = fopen($myFile, 'a') or die("can't open file");
+        $calledFrom = debug_backtrace();
+        fwrite($fh, substr(str_replace(MY_PATH, '', $calledFrom[0]['file']), 1) . '[' . $calledFrom[0]['line'] . ']: ' . $msg . "\n");
+        fclose($fh);
+    }

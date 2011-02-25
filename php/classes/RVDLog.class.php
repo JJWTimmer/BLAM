@@ -14,7 +14,8 @@ class RVDLog {
 		
 			// The login method returns a user array or false
             $result = $user->login();
-			if(result !== false){
+            
+			if($result !== false){
 				// user is logged in succesfully
 				$_SESSION['user']	= array(
                     'id'        => $result['id'],
@@ -40,12 +41,13 @@ class RVDLog {
 	public static function checkLogged() {
         // check if user is already logged in earlier?	
 		if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
+            $user = new user($_SESSION['user']);
+            $user->activity();
         } else {
             throw new Exception('User not logged in.');
         }
 		
-		return $user;
+		return $_SESSION['user'];
 		
 	}
 	
@@ -69,21 +71,49 @@ class RVDLog {
 		$msg = new Message(array(
 			'user_id'	=> $_SESSION['user']['id'],
 			'text'	    => $text,
-			'created'	=> now()
+			'created'	=> date('Y-m-d G:i:s')
 		));
 	
-		// The save method returns a MySQLi object
-		$insertID = $msg->create()->insert_id;
+		// The create method returns the new id
+		$insertID = $msg->create();
         
-		return $insertID;
+        if ($ticket) {
+            $wlticket = new Ticket();
+            $wlticket->create();
+        }
+        
+		return array('id' => $insertID);
 	}
 
-    public static function getMessages($msg_id, $date_and_time) {
-    
+    public static function getMessages($msg_id, $date_and_time = false) {
+        if (empty($msg_id)) {
+            throw new Exception('No parameters given to getMessages');
+        }
+        
+        if (is_string($msg_id) && $msg_id == 'all') {
+            $msg = new Message(array());
+            $messages = $msg->get('all');
+        } else {
+            $options = array(
+                'last_id'   => $msg_id,
+                'since'     => $date_and_time
+            );
+       
+            $messages = $msg->get($options);
+        }
+        
+        return $messages;
     }
 
     public static function searchMessages($keyword) {
-    
+        if (empty($keyword)) {
+            throw new Exception('No keyword given to searchMessages');
+        }
+        
+        $msg = new Message(array());
+        $messages = $msg->search($keyword);
+        
+        return $messages;
     }
 
     public static function getUsers() {
