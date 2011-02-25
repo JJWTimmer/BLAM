@@ -10,6 +10,53 @@ body{
 	border-top:5px solid #212121;
 }
 
+.rounded{
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+}
+
+/* Additional styles */
+
+a.logoutButton{
+    background-color:#bbb;
+    border:1px solid #eee !important;
+    color:#FFFFFF !important;
+    font-size:12px;
+    padding:5px 9px;
+    position:absolute;
+    right:10px;
+    text-shadow:1px 1px 0 #888;
+    top:7px;
+    
+    -moz-box-shadow:0 0 7px #888 inset;
+    -webkit-box-shadow:0 0 7px #888 inset;
+    box-shadow:0 0 7px #888 inset;
+}
+
+a.logoutButton:hover{
+    text-shadow:1px 1px 0 #888;
+    
+    -moz-box-shadow:0 0 7px #666 inset;
+    -webkit-box-shadow:0 0 7px #666 inset;
+    box-shadow:0 0 7px #666 inset;
+}
+
+#chatErrorMessage{
+    width:100%;
+    top:0;
+    left:0;
+    position:fixed;
+    background-color:#ab0909;
+    border-bottom:1px solid #d32a2a;
+    font-size:23px;
+    padding:16px;
+    text-align:center;
+    color:#fff;
+    
+    text-shadow:1px 1px 0 #940f0f;
+}
+/*
 #footer{
 	background-color:#212121;
 	position:fixed;
@@ -70,3 +117,4 @@ a:hover{
 .clear{
 	clear:both;
 }
+*/

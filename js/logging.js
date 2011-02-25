@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	
 	// Run the init method on document ready:
-	chat.init();
+	logging.init();
 	
 });
 
-var chat = {
+var logging = {
 	
 	// data holds variables for use in the class:
 	
@@ -17,11 +17,146 @@ var chat = {
 	// Init binds event listeners and sets up timers:
 	
 	init : function(){
+        //$('#LoggingMainContainer').fadeIn('slow');
 		
 		// Using the defaultText jQuery plugin, included at the bottom:
 		$('#name').defaultText('Nickname');
 		$('#password').defaultText('Password');
-				
+		
+        // We use the working variable to prevent multiple form submissions:
+        var working = false;
+
+        // Logging a person in the chat:
+        $('#loginForm').submit(function(){
+            if(working) return false;
+            working = true;
+            
+            // Using our tzPOST wrapper function (defined in the bottom):
+            //$(this).serialize encodes all the name form elements to be used by php
+            $.tzPOST('login',$(this).serialize(),function(r){
+                working = false;
+                
+                if(r.error){
+                    logging.displayError(r.error);
+                }
+                else    {
+                    logging.displayError(r.username);
+                    logging.login(r.username,r.avatar);
+                    //chat.getChats();
+                    //chat.getUsers();
+                    }
+            });
+            
+            return false;
+        });
+
+        // Checking whether the user is already logged (browser refresh)
+        
+        $.tzPOST('checkLogged',function(r){
+            if(r.error){
+                logging.displayError(r.error);    
+                }
+            else    
+                {
+                logging.displayError(r.username);    
+                logging.login(r.username,r.avatar);
+                }
+        });
+
+        // Logging the user out:
+
+        $('a.logoutButton').live('click',function(){
+            $('#LoggingTopContainer > span').fadeOut(function(){
+                $(this).remove();
+            });
+            
+            $('#LoggingMainContainer').fadeOut(function(){
+                $('#LoggingLogin').fadeIn();
+            });
+            
+            $.tzPOST('logout');
+            
+            return false;
+        });
+
+
+    },
+    //end of init function
+
+    // The login method hides displays the
+    // user's login data and shows the submit form
+    login : function(username,avatar){
+ 
+        logging.data.username = username;
+        logging.data.avatar = avatar;
+        $('#LoggingTopContainer').html(logging.render('loginTopBar',logging.data));
+        $('#LoggingLogin').fadeOut(function(){
+        $('#LoggingMainContainer').fadeIn();
+        });
+    },
+
+
+
+    // The render method generates the HTML markup 
+    // that is needed by the other methods:
+    render : function(template,params){
+        
+        var arr = [];
+        switch(template){
+            case 'loginTopBar':
+                arr = [
+                '<span><img src="',params.avatar,'" width="23" height="23" />',
+                '<span class="name">',params.username,
+                '</span><a href="" class="logoutButton rounded">Logout</a></span>'];
+            break;
+    
+            case 'chatLine':
+                arr = [
+                    '<div class="chat chat-',params.id,' rounded"><span class="avatar"><img src="',params.avatar,
+                    '" width="23" height="23" onload="this.style.visibility=\'visible\'" />','</span><span class="author">',params.author,
+                    ':</span><span class="text">',params.text,'</span><span class="time">',params.time,'</span></div>'];
+            break;
+                            
+            case 'user':
+                arr = [
+                    '<div class="user" title="',params.name,'"><img src="',
+                    params.avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
+                ];
+            break;
+            
+        }
+        
+        // A single array join is faster than
+        // multiple concatenations
+        
+        return arr.join('');
+    
+    },
+    
+
+
+    // This method displays an error message on the top of the page:
+    displayError : function(msg){
+    
+        var elem = $('<div>',{
+            id      : 'chatErrorMessage',
+            html    : msg
+        });
+        
+        elem.click(function(){
+            $(this).fadeOut(function(){
+                $(this).remove();
+            });
+        });
+        
+        setTimeout(function(){
+            elem.click();
+        },5000);
+        
+        elem.hide().appendTo('body').slideDown();
+    }
+
+        /*		
 		// Converting the #chatLineHolder div into a jScrollPane,
 		// and saving the plugin's API in chat.data:
 		
@@ -29,39 +164,9 @@ var chat = {
 			verticalDragMinHeight: 12,
 			verticalDragMaxHeight: 12
 		}).data('jsp');
+			
+		
 				
-
-		// We use the working variable to prevent
-		// multiple form submissions:
-		
-		var working = false;
-		
-		// Logging a person in the chat:
-		
-		$('#loginForm').submit(function(){
-			
-			if(working) return false;
-			working = true;
-			
-			// Using our tzPOST wrapper function
-			// (defined in the bottom):
-			//$(this).serialize encodes all the name form elements to be used by php
-			$.tzPOST('login',$(this).serialize(),function(r){
-				working = false;
-				
-				if(r.error){
-					chat.displayError(r.error);
-				}
-				else 	{
-					chat.login(r.name,r.avatar);
-					chat.getChats();
-					chat.getUsers();
-					}
-			});
-			
-			return false;
-		});
-		
 		// Submitting a new chat entry:
 		
 		$('#submitForm').submit(function(){
@@ -106,32 +211,7 @@ var chat = {
 			return false;
 		});
 		
-		// Logging the user out:
-		
-		$('a.logoutButton').live('click',function(){
-			
-			$('#chatTopBar > span').fadeOut(function(){
-				$(this).remove();
-			});
-			
-			$('#submitForm').fadeOut(function(){
-				$('#loginForm').fadeIn();
-			});
-			
-			$.tzPOST('logout');
-			
-			return false;
-		});
-		
-		// Checking whether the user is already logged (browser refresh)
-		
-		$.tzGET('checkLogged',function(r){
-			if(r.logged){
-				chat.login(r.loggedAs.name,r.loggedAs.avatar);
-			}
-		});
-		
-		
+					
 		// Self executing timeout functions
 
 
@@ -147,59 +227,7 @@ var chat = {
 		
 	},
 	
-	// The login method hides displays the
-	// user's login data and shows the submit form
-	
-	login : function(name,avatar){
 		
-		chat.data.name = name;
-		chat.data.avatar = avatar;
-		$('#chatTopBar').html(chat.render('loginTopBar',chat.data));
-		
-		$('#loginForm').fadeOut(function(){
-			$('#submitForm').fadeIn();
-			$('#chatText').focus();
-		});
-		
-	},
-	
-	// The render method generates the HTML markup 
-	// that is needed by the other methods:
-	
-	render : function(template,params){
-		
-		var arr = [];
-		switch(template){
-			case 'loginTopBar':
-				arr = [
-				'<span><img src="',params.avatar,'" width="23" height="23" />',
-				'<span class="name">',params.name,
-				'</span><a href="" class="logoutButton rounded">Logout</a></span>'];
-			break;
-	
-			case 'chatLine':
-				arr = [
-					'<div class="chat chat-',params.id,' rounded"><span class="avatar"><img src="',params.avatar,
-					'" width="23" height="23" onload="this.style.visibility=\'visible\'" />','</span><span class="author">',params.author,
-					':</span><span class="text">',params.text,'</span><span class="time">',params.time,'</span></div>'];
-			break;
-							
-			case 'user':
-				arr = [
-					'<div class="user" title="',params.name,'"><img src="',
-					params.avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
-				];
-			break;
-			
-		}
-		
-		// A single array join is faster than
-		// multiple concatenations
-		
-		return arr.join('');
-	
-	},
-	
 	// The addChatLine method ads a chat entry to the page
 	
 	addChatLine : function(params){
@@ -331,31 +359,9 @@ var chat = {
 			
 			setTimeout(callback,15000);
 		});
-	},
-	
-	// This method displays an error message on the top of the page:
-	
-	displayError : function(msg){
-	
-		var elem = $('<div>',{
-			id		: 'chatErrorMessage',
-			html	: msg
-		});
-		
-		elem.click(function(){
-			$(this).fadeOut(function(){
-				$(this).remove();
-			});
-		});
-		
-		setTimeout(function(){
-			elem.click();
-		},5000);
-		
-		elem.hide().appendTo('body').slideDown();
-	
-	}
+	*/
 };
+//end of logging var
 
 // Custom GET & POST wrappers:
 //POST also uses some GET functionality with action, rest is transferred invisibly

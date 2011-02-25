@@ -1,4 +1,7 @@
-body{ background-color: gray;}
+body{
+background-color: gray;
+height:100%;
+}
 
 #LoggingTopContainer{
 	position:absolute;
@@ -19,6 +22,43 @@ position:absolute;
 	background: blue;
 	margin-bottom:10px;
     padding-bottom:1%;
+    display:none;
+}
+
+#LoggingLogin{
+position:absolute;  
+    top: 70px;  
+    left:20px;
+    width:95%;
+    height:85%;
+    background: grey;
+    margin-bottom:10px;
+    padding-bottom:1%;
+}
+
+#LoggingLoginWindow{
+position:relative;  
+    top:30%;
+    width:300px;
+    height:180px;
+    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+    padding:10px;
+    border:1px solid #fff;
+}
+
+#LoggingLoginWindow input{
+    background:url('../img/input_bg.jpg') repeat-x #dcdcdc;
+    height:26px;
+    text_align:center;
+    font:13px/26px Calibri,Arial,sans-serif;
+    color:#777;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:0 5px;
+    margin-right:5px;
+    margin-top:5px;
+    width:185px;
 }
 
 #LoggingMeldingenContainer{
@@ -29,6 +69,7 @@ position:absolute;
 	height:98%;
 	background: red;
 	margin:1%;
+
 }
 
 #SearchMeldingen{

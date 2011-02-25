@@ -26,9 +26,8 @@
         -->
 
     <!-- page specific javascript -->
-    <!--
     <script type="text/javascript" src="js/logging.js"></script>
-    -->
+    
     </head>
 
     <body>
@@ -65,14 +64,24 @@
                     <div id="FeedbackList"></div>
                 </div>
             </div>
-        </div>        
-        <!--
-        <form id="loginForm" method="post" action="">
-            <input id="name" name="name" class="rounded" maxlength="16" />
-            <input id="password" name="password" class="rounded" maxlength="16" />
-            <input type="submit" class="blueButton" value="Login" />
-        </form>
-        -->
-
+        </div>
+        <div id="LoggingLogin" align="center">
+            <div id="LoggingLoginWindow">
+                <h1 align="center">Login RVDLog</h1>
+                <BR>
+                <form id="loginForm" method="post" action="">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr><td align="center">
+                <input id="name" name="username" class="rounded" maxlength="16" />
+                </td></tr><tr><td align="center">
+                <input id="password" name="password" class="rounded" maxlength="16" />
+                </td></tr><tr><td align="center">
+                <input type="submit" class="blueButton" value="Login" />
+                </td></tr>
+                </table>
+                </form>
+            <div>
+        </div>
+        
     </body>
 </html>
