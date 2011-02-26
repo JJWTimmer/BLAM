@@ -253,60 +253,65 @@ position:absolute;
 }
 
 /* Chats */
-
-.chat{
-    background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
-    min-height:24px;
-    padding:6px;
+/* overflow: hidden enables the resizing of each div*/
+.message{
+    position:relative;    
+    overflow: hidden;
+    width: 95%;
     border:1px solid #FFFFFF;
-    
-    padding:8px 6px 4px 37px;
-    position:relative;
-    margin:0 10px 10px 0;
+    padding:2px 2px 2px 2px;
+    margin: 0.5% 5% 0.5% 0;
+    background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
 }
 
-.chat:last-child{
+.message:last-child{
     margin-bottom:0;
 }
 
-.chat span{
+/*using floats here allows resizing of the parent div (message)
+overflow: hiddden ensures that low resolution version doesnt 
+overflow over text, could also use min-width (either way screwed;-))*/
+.message .avatar-info-div{
+width:20%;
+/*min-width:70px;*/
+overflow: hidden;
+float:left;
+}
+
+.message .text-div{
+width:80%;
+float:right;
+}
+
+.message span{
     color:#777777;
     text-shadow:1px 1px 0 #FFFFFF;
     font-size:12px;
 }
 
-.chat .text{
+.message .text-span{
     color:#444444;
-    display:inline-block;
     font-size:15px;
-    overflow:hidden;
-    vertical-align:top;
-    width:80%;
+    /*display:inline-block;*/
 }
 
-.chat .avatar{
-    background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
-    left:7px;
-    position:absolute;
-    top:7px;
+.message .avatar-td{
+    
+    padding-right:4px;
+    background:url('../img/unknown.png') no-repeat;
 }
 
-.chat img{
-    display:block;
+.message img{
+    /*hides picture when no avatar is present*/
     visibility:hidden;
 }
 
-.chat .time{
-    position:absolute;
-    right:10px;
-    top:12px;
-    font-size:11px;
+.message .info-td{
+    /*added line-height to decrease the space that was used as margin*/
+    font-size:12px;
+    line-height:12px;
 }
 
-.chat .author{
-    margin-right:6px;
-    font-size:11px;
-}
 
 /* Overloading the default styles of jScrollPane */
 

@@ -16,9 +16,9 @@ var general = {
     
             case 'chatLine':
                 arr = [
-                    '<div class="chat chat-',params.messageid,' rounded"><span class="avatar"><img src="',params.avatar,
-                    '" width="23" height="23" onload="this.style.visibility=\'visible\'" />','</span><span class="author">',params.username,
-                    ':</span><span class="text">',params.text,'</span><span class="time">',params.time,'</span></div>'];
+/*'<div class="message message-',params.messageid,' rounded">','<div class="avatar-info-div"><span class="avatar-span"> <img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </span><span class="info-span"> ',params.username,':<BR>',params.time,'</span></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];*/
+'<div class="message message-',params.messageid,' rounded">','<div class="avatar-info-div"><table  style="padding-top:0; padding-bottom:0;"><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
+
             break;
                             
             case 'user':
