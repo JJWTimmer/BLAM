@@ -37,12 +37,11 @@ var logging = {
                 working = false;
                 
                 if(r.error){
-                    logging.displayError(r.error);
+                    general.displayError(r.error);
                 }
                 else    {
-                    logging.displayError(r.username);
-                    logging.login(r.username,r.avatar);
-                    //chat.getChats();
+                    logging.login(r.username,r.avatar,r.role);
+                    logging.getMessages();
                     //chat.getUsers();
                     }
             });
@@ -53,14 +52,10 @@ var logging = {
         // Checking whether the user is already logged (browser refresh)
         
         $.tzPOST('checkLogged',function(r){
-            if(r.error){
-                logging.displayError(r.error);    
-                }
-            else    
-                {
-                logging.displayError(r.username);    
-                logging.login(r.username,r.avatar);
-                }
+            if(!r.error)
+            {
+                logging.login(r.username,r.avatar,r.role);
+            }
         });
 
         // Logging the user out:
@@ -78,94 +73,151 @@ var logging = {
             
             return false;
         });
-
+        
+        // Converting the #chatLineHolder div into a jScrollPane,
+        // and saving the plugin's API in chat.data:
+        
+        logging.data.jspAPI = $('#MeldingenList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+        
+        (function getMessagesTimeoutFunction(){
+            logging.getMessages(getMessagesTimeoutFunction);
+        })();
 
     },
     //end of init function
 
     // The login method hides displays the
     // user's login data and shows the submit form
-    login : function(username,avatar){
+    login : function(username,avatar,role){
  
         logging.data.username = username;
         logging.data.avatar = avatar;
-        $('#LoggingTopContainer').html(logging.render('loginTopBar',logging.data));
+        logging.data.role = role;
+        $('#LoggingTopContainer').html(general.render('loginTopBar',logging.data));
         $('#LoggingLogin').fadeOut(function(){
         $('#LoggingMainContainer').fadeIn();
         });
     },
 
 
-
-    // The render method generates the HTML markup 
-    // that is needed by the other methods:
-    render : function(template,params){
-        
-        var arr = [];
-        switch(template){
-            case 'loginTopBar':
-                arr = [
-                '<span><img src="',params.avatar,'" width="23" height="23" />',
-                '<span class="name">',params.username,
-                '</span><a href="" class="logoutButton rounded">Logout</a></span>'];
-            break;
+// This method requests the latest chats
+    // (since lastID), and adds them to the page.
     
-            case 'chatLine':
-                arr = [
-                    '<div class="chat chat-',params.id,' rounded"><span class="avatar"><img src="',params.avatar,
-                    '" width="23" height="23" onload="this.style.visibility=\'visible\'" />','</span><span class="author">',params.author,
-                    ':</span><span class="text">',params.text,'</span><span class="time">',params.time,'</span></div>'];
-            break;
-                            
-            case 'user':
-                arr = [
-                    '<div class="user" title="',params.name,'"><img src="',
-                    params.avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
-                ];
-            break;
+    getMessages : function(callback){
+            /*
+            var arr;
+            arr=['id=',r.messages.messageid,' name=',r.messages.username,' text=',r.messages.text,' created=',r.messages.created];
+            var messagestring=arr.join('');
+            general.displayError(messagestring);        
+            */
+        $.tzTESTPOST('getMessages',{last_id: logging.data.lastID,date_and_time: '2:0:0'},function(r){
+            //update chats from mysql db
+            for(var i=0;i<r.messages.length;i++){
+                
+                logging.addMessageLine(r.messages[i]);
+                        
+            }
+            //if new chats, update to lastid
+            //chat.data.noActivity is reset, so next update in 1 second
             
+            if(r.messages.length){
+                logging.data.noActivity = 0;
+                logging.data.lastID = r.messages[i-1].messageid;
+                }
+            else{
+                // If no chats were received, increment
+                // the noActivity counter.
+                
+                logging.data.noActivity++;
+            }
+            //if no chats exist yet
+            if(!logging.data.lastID){
+                logging.data.jspAPI.getContentPane().html('<p class="noMessages">No messages yet</p>');
+            }
+            
+            // Setting a timeout for the next request,
+            // depending on the message activity:
+            
+            var nextRequest = 1000;
+            
+            // 2 seconds
+            //if(logging.data.noActivity > 3){
+            //    nextRequest = 2000;
+            //}
+            
+            //if(logging.data.noActivity > 10){
+            //    nextRequest = 5000;
+            //}
+            
+            // 15 seconds
+            //if(logging.data.noActivity > 20){
+            //    nextRequest = 15000;
+            //}
+        
+            setTimeout(callback,nextRequest);
+        });
+    },
+
+
+// The addMessageLine method ads a chat entry to the page
+    
+    addMessageLine : function(params){
+        var arr;
+            arr=['id=',params.messageid,' name=',params.username,' text=',params.text,' created=',params.created];
+            var messagestring=arr.join('');
+            //general.displayError(messagestring);        
+        // All times are displayed in the user's timezone
+        
+        var d = new Date();
+        if(params.time) {
+            
+            // PHP returns the time in UTC (GMT). We use it to feed the date
+            // object and later output it in the user's timezone. JavaScript
+            // internally converts it for us.
+            
+            d.setUTCHours(params.time.hours,params.time.minutes);
         }
         
-        // A single array join is faster than
-        // multiple concatenations
+        params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
+                      (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
         
-        return arr.join('');
-    
+        var markup = general.render('chatLine',params),
+            exists = $('#MeldingenList .chat-'+params.messageid);
+
+        if(exists.length){
+            exists.remove();
+        }
+        
+        if(!logging.data.lastID){
+            // If this is the first chat, remove the
+            // paragraph saying there aren't any:
+            
+            $('#MeldingenList p').remove();
+        }
+        
+        // If this isn't a temporary chat:
+        if(params.messageid.toString().charAt(0) != 't'){
+            var previous = $('#MeldingenList .chat-'+(+params.messageid - 1));
+            if(previous.length){
+                previous.after(markup);
+            }
+            else logging.data.jspAPI.getContentPane().append(markup);
+        }
+        else logging.data.jspAPI.getContentPane().append(markup);
+        
+        // As we added new content, we need to
+        // reinitialise the jScrollPane plugin:
+        
+        logging.data.jspAPI.reinitialise();
+        logging.data.jspAPI.scrollToBottom(true);
+        
     },
-    
-
-
-    // This method displays an error message on the top of the page:
-    displayError : function(msg){
-    
-        var elem = $('<div>',{
-            id      : 'chatErrorMessage',
-            html    : msg
-        });
-        
-        elem.click(function(){
-            $(this).fadeOut(function(){
-                $(this).remove();
-            });
-        });
-        
-        setTimeout(function(){
-            elem.click();
-        },5000);
-        
-        elem.hide().appendTo('body').slideDown();
-    }
 
         /*		
-		// Converting the #chatLineHolder div into a jScrollPane,
-		// and saving the plugin's API in chat.data:
-		
-		chat.data.jspAPI = $('#chatLineHolder').jScrollPane({
-			verticalDragMinHeight: 12,
-			verticalDragMaxHeight: 12
-		}).data('jsp');
-			
-		
+				
 				
 		// Submitting a new chat entry:
 		
@@ -215,9 +267,7 @@ var logging = {
 		// Self executing timeout functions
 
 
-		(function getChatsTimeoutFunction(){
-			chat.getChats(getChatsTimeoutFunction);
-		})();
+		
 		
 		
 		(function getUsersTimeoutFunction(){
@@ -228,107 +278,8 @@ var logging = {
 	},
 	
 		
-	// The addChatLine method ads a chat entry to the page
 	
-	addChatLine : function(params){
-		
-		// All times are displayed in the user's timezone
-		
-		var d = new Date();
-		if(params.time) {
-			
-			// PHP returns the time in UTC (GMT). We use it to feed the date
-			// object and later output it in the user's timezone. JavaScript
-			// internally converts it for us.
-			
-			d.setUTCHours(params.time.hours,params.time.minutes);
-		}
-		
-		params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
-					  (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-		
-		var markup = chat.render('chatLine',params),
-			exists = $('#chatLineHolder .chat-'+params.id);
-
-		if(exists.length){
-			exists.remove();
-		}
-		
-		if(!chat.data.lastID){
-			// If this is the first chat, remove the
-			// paragraph saying there aren't any:
-			
-			$('#chatLineHolder p').remove();
-		}
-		
-		// If this isn't a temporary chat:
-		if(params.id.toString().charAt(0) != 't'){
-			var previous = $('#chatLineHolder .chat-'+(+params.id - 1));
-			if(previous.length){
-				previous.after(markup);
-			}
-			else chat.data.jspAPI.getContentPane().append(markup);
-		}
-		else chat.data.jspAPI.getContentPane().append(markup);
-		
-		// As we added new content, we need to
-		// reinitialise the jScrollPane plugin:
-		
-		chat.data.jspAPI.reinitialise();
-		chat.data.jspAPI.scrollToBottom(true);
-		
-	},
 	
-	// This method requests the latest chats
-	// (since lastID), and adds them to the page.
-	
-	getChats : function(callback){
-	
-		$.tzGET('getChats',{lastID: chat.data.lastID,date: '2:0:0'},function(r){
-			//update chats from mysql db
-			for(var i=0;i<r.chats.length;i++){
-				chat.addChatLine(r.chats[i]);
-			}
-			//if new chats, update to lastid
-			//chat.data.noActivity is reset, so next update in 1 second
-			
-			if(r.chats.length){
-				chat.data.noActivity = 0;
-				chat.data.lastID = r.chats[i-1].id;
-			}
-			else{
-				// If no chats were received, increment
-				// the noActivity counter.
-				
-				chat.data.noActivity++;
-			}
-			//if no chats exist yet
-			if(!chat.data.lastID){
-				chat.data.jspAPI.getContentPane().html('<p class="noChats">No chats yet</p>');
-			}
-			
-			// Setting a timeout for the next request,
-			// depending on the chat activity:
-			
-			var nextRequest = 1000;
-			
-			// 2 seconds
-			if(chat.data.noActivity > 3){
-				nextRequest = 2000;
-			}
-			
-			if(chat.data.noActivity > 10){
-				nextRequest = 5000;
-			}
-			
-			// 15 seconds
-			if(chat.data.noActivity > 20){
-				nextRequest = 15000;
-			}
-		
-			setTimeout(callback,nextRequest);
-		});
-	},
 	
 	// Requesting a list with all the users.
 	
@@ -363,32 +314,3 @@ var logging = {
 };
 //end of logging var
 
-// Custom GET & POST wrappers:
-//POST also uses some GET functionality with action, rest is transferred invisibly
-$.tzPOST = function(action,data,callback){
-	$.post('php/ajax.php?action='+action,data,callback,'json');
-}
-
-$.tzGET = function(action,data,callback){
-	$.get('php/ajax.php?action='+action,data,callback,'json');
-}
-
-// A custom jQuery method for placeholder text:
-// Can be applied to any textbox
-$.fn.defaultText = function(value){
-	
-	var element = this.eq(0);
-	element.data('defaultText',value);
-	
-	element.focus(function(){
-		if(element.val() == value){
-			element.val('').removeClass('defaultText');
-		}
-	}).blur(function(){
-		if(element.val() == '' || element.val() == value){
-			element.addClass('defaultText').val(value);
-		}
-	});
-	
-	return element.blur();
-}
