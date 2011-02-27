@@ -31,42 +31,43 @@
     </head>
 
     <body>
-        <div id="LoggingTopContainer"></div>
+        <div id="LoggingTopContainer" class=rounded></div>
         <div id="LoggingMainContainer">
             <div id="LoggingMeldingenContainer">
-                <div id="SearchMeldingen"></div>
+                <div id="SearchMeldingen" class=rounded></div>
 			    <div id="Handles">
-                    <div id="HandlesHeader"><p>Roepnamen</p></div>
-                    <div id="HandlesList"></div>
+                    <div id="HandlesHeader" class=rounded><p>Roepnamen</p></div>
+                    <div id="HandlesList" class=rounded></div>
                 </div>
 		        <div id="Meldingen">
-                    <div id="MeldingenHeader"><p>Meldingen</p></div>
-                    <div id="MeldingenList"></div>
+                    <div id="MeldingenHeader" class=rounded><p>Meldingen</p></div>
+                    <div id="MeldingenList" class=rounded></div>
                 </div>
                 <div id="Users">
-                    <div id="UsersHeader"><p>Users</p></div>
-                    <div id="UsersList"></div>
+                    <div id="UsersHeader" class=rounded><p>Users</p></div>
+                    <div id="UsersList" class=rounded>
+                    </div>
                 </div>
-                <div id="TextEntry">
+                <div id="TextEntry" class=rounded>
                         <form id="submitForm" method="post" action="">
-                            <input id="chatText" name="chatText" class="rounded" maxlength="255" />
-                            <input type="submit" class="blueButton" value="Submit" />
+                            <textarea rows="1" cols="1" id="messageText" name="MessageText" class="rounded" maxlength="700"></textarea>
+                            <input type="button" id="submitbutton" class="blueButton" value="submit"/>
                         </form>
                 </div>
             </div>
             <div id="LoggingExtraContainer">
                 <div id="Tickets">
-                    <div id="TicketsHeader"><p>Tickets</p></div>
-                    <div id="TicketsList"></div>
+                    <div id="TicketsHeader" class=rounded><p>Tickets</p></div>
+                    <div id="TicketsList" class=rounded></div>
                 </div>
                 <div id="Feedback">
-                    <div id="FeedbackHeader"><p>Feedback</p></div>
-                    <div id="FeedbackList"></div>
+                    <div id="FeedbackHeader" class=rounded><p>Feedback</p></div>
+                    <div id="FeedbackList" class=rounded></div>
                 </div>
             </div>
         </div>
         <div id="LoggingLogin" align="center">
-            <div id="LoggingLoginWindow">
+            <div id="LoggingLoginWindow" class=rounded>
                 <h1 align="center">Login RVDLog</h1>
                 <BR>
                 <form id="loginForm" method="post" action="">
