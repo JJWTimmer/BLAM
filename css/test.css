@@ -50,3 +50,30 @@
     height: 250px;
     margin-left: 10px;
 }
+
+#users-list {
+    float: left;
+    width: 200px;
+    height: 250px;
+    border: solid gray 1px;
+    margin-left: 10px;
+
+}
+
+#handle-list {
+    float: left;
+    width: 200px;
+    height: 250px;
+    border: solid gray 1px;
+    margin-left: 10px;
+
+}
+
+#ticket-list {
+    float: left;
+    width: 200px;
+    height: 250px;
+    border: solid gray 1px;
+    margin-left: 10px;
+
+}

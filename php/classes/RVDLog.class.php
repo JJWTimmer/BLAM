@@ -85,7 +85,7 @@ class RVDLog {
 		return array('id' => $insertID);
 	}
 
-    public static function getMessages($msg_id, $date_and_time = false) {
+    public static function getMessages($msg_id, $date_and_time = null) {
         if (empty($msg_id)) {
             throw new Exception('No parameters given to getMessages');
         }
@@ -116,16 +116,31 @@ class RVDLog {
         return $messages;
     }
 
-    public static function getUsers() {
-        return array();
+    // returns array (integer Id, string Role, string Username, string Avatar) users or exception
+    public static function getUsers($options) {
+        $user = new User(array());
+        $users = $user->get($options);
+        return $users;
     }
 
-    public static function getHandles() {
+    // returns array(int groupid, string groupname, array(integer Id, integer HandleNumber, string HandleName, string description) handles) groups or exception
+    public static function getGroups($recursive) {
+        $group = new Group(array());
+        $group_handles = $group->get($recursive); // true returns also handles;
+        return $group_handles;
+    }
     
+    // returns array(integer Id, integer HandleNumber, string HandleName, string description) handles or exception
+    public static function getHandles($group_id) {
+        $handle = new Handle(array());
+        $handles = $handle->get($group_id); // true returns also handles;
+        return $handles;
     }
 
-    public static function getTicketList() {
-    
+    public static function getTicketList($recursive, $last_id, $modified, $status) {
+        $ticket = new Ticket(array());
+        $tickets = $ticket->get($recursive, $last_id, $modified, $status);
+        return $tickets;
     }
 
     public static function getFeedback() {

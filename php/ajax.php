@@ -14,6 +14,8 @@ require_once "classes/Message.class.php";
 require_once "classes/Ticket.class.php";
 require_once "classes/ChatLine.class.php";
 require_once "classes/User.class.php";
+require_once "classes/Handle.class.php";
+require_once "classes/Group.class.php";
 
 session_name('RVDLog');
 session_start();
@@ -52,111 +54,139 @@ try {
             break;
 		
 		case 'addMessage':
+            RVDLog::checkLogged();
 			$response = RVDLog::addMessage($_POST['text'], $_POST['ticket']);
             // returns MessageId or exception
             break;
 		
 		case 'getMessages':
+            RVDLog::checkLogged();
 			$response = RVDLog::getMessages($_POST['last_id'], $_POST['date_and_time']);
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
 		
 		case 'searchMessages':
+            RVDLog::checkLogged();
 			$response = RVDLog::searchMessages($_POST['keyword']);
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
 		
 		case 'getUsers':
-			$response = RVDLog::getUsers();
+            RVDLog::checkLogged();
+			$response = RVDLog::getUsers($_POST['options']); // accepts 'all' or 'logged'
             // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
             break;
 		
+		case 'getGroups':
+            RVDLog::checkLogged();
+			$response = RVDLog::getGroups($_POST['recursive']);//true or false: true gives all handles also
+            // returns array(int groupid, string groupname, array(integer Id, integer HandleNumber, string HandleName, string Description) handles) groups or exception
+            break;
+		
 		case 'getHandles':
-			$response = RVDLog::getHandles();
-            // returns array(int groupid, string groupname, array(integer Id, integer HandleNumber, string HandleName) handles) groups or exception
+            RVDLog::checkLogged();
+			$response = RVDLog::getHandles($_POST['group_id']); // null for all or int group_id
+            // returns array(integer Id, integer HandleNumber, string HandleName, string Description) handles or exception
             break;
 		
 		case 'getTicketList':
-			$response = RVDLog::getTicketList();
-            // returns array tickets(integer Id, string Text, string Status, string userWL, array time(Hours,Minutes)) or exception
+            RVDLog::checkLogged();
+			$response = RVDLog::getTicketList($_POST['recursive'], $_POST['last_id'], $_POST['last_modified'], $_POST['status']);//boolean recursive: false for only parents, int $last_id, date-string $last_modified, array of string $status for filtering ($status only for parent!).
+            // returns array(integer Id, string Title, string Text, string Status, string user, datetime created, datetime modified) tickets or exception
             break;
 		
 		case 'getFeedback':
+            RVDLog::checkLogged();
 			$response = RVDLog::getFeedback();
             // returns array feedback (integer Id, string Titel, string HandleName, string Message, string userWL, array time (Hours, Minutes)) or exception
             break;
 		
 		case 'closeFeedback':
+            RVDLog::checkLogged();
 			$response = RVDLog::closeFeedback($_POST['id']);
             // returns null or exception
             break;
 		
 		case 'addChat':
+            RVDLog::checkLogged();
 			$response = RVDLog::addChat($_POST['text']);
             // returns ChatId or exception
             break;
 		
 		case 'getChats':
+            RVDLog::checkLogged();
 			$response = RVDLog::getChats($_POST['last_id'], $_POST['date']);
             // returns array chat(int MessageID, string Text, string Username, string Avatar, array time(hours, minutes)) or exception
             break;
 		
 		case 'getTicketTreeNew':
+            RVDLog::checkLogged();
 			$response = RVDLog::getTicketTreeNew();
             // returns array tickets(integer Id, string Titel,array time(Hours,Minutes)) or exception
             break;
 		
 		case 'getTicketTreeOpen':
+            RVDLog::checkLogged();
 			$response = RVDLog::getTicketTreeOpen();
             // returns array tickets(integer Id, string Titel, string UserId,,array time(Hours,Minutes)) or exception
             break;
 		
 		case 'getTicketTreeClosed':
+            RVDLog::checkLogged();
 			$response = RVDLog::getTicketTreeClosed();
             // returns array tickets(integer Id, string Titel, string UserId,,array time(Hours,Minutes)) or exception
             break;
 		
 		case 'getTicketDetail':
+            RVDLog::checkLogged();
 			$response = RVDLog::getTicketDetail($_POST['id']);
             // returns integer Id, string Status, string Titel, string UserId, string Text, string Locatie, array time(Hours,Minutes), integer MessageId, string MessageUserId, string MessageText or exception
             break;
 		
 		case 'closeTicket':
+            RVDLog::checkLogged();
 			$response = RVDLog::closeTicket($_POST['id']);
             // returns null or exception
             break;
 		
 		case 'setTicketOwner':
+            RVDLog::checkLogged();
 			$response = RVDLog::setTicketOwner($_POST['id']);
             // returns null or exception
             break;
 		
 		case 'changeTicketOwner':
+            RVDLog::checkLogged();
 			$response = RVDLog::changeTicketOwner($_POST['id'], $_POST['user_id']);
             // returns null or exception
             break;
 		
 		case 'changeTicketDetails':
+            RVDLog::checkLogged();
 			$response = RVDLog::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['handle_id']);
             // returns null or exception
             break;
 		
 		case 'createSubTicket':
+            RVDLog::checkLogged();
 			$response = RVDLog::createSubTicket($_POST['parent_id'], $_POST['text'], $_POST['location'], $_POST['handle_id'] );
             // returns integer SubTicketId or exception
             break;
 		
 		case 'becomeChildTicket':
+            RVDLog::checkLogged();
 			$response = RVDLog::becomeChildTicket($_POST['id'], $_POST['parent_id']);
             // returns null or exception
             break;
 		
 		case 'becomeParentTicket':
+            RVDLog::checkLogged();
 			$response = RVDLog::becomeParentTicket($_POST['id']);
             // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
             break;
 		
 		case 'createFeedback':
+            RVDLog::checkLogged();
 			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['text'], $_POST['handle_id']);
             // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
             break;

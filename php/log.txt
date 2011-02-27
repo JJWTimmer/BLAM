@@ -33,3 +33,1570 @@
 :\RVD\RVDLog\php\classes\Message.class.php[59]: 
 :\RVD\RVDLog\php\classes\Message.class.php[59]: 
 :\RVD\RVDLog\php\classes\Message.class.php[59]: 
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\RVDLog.class.php[129]: true
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.idWHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id = null 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[63]: SELECT t.id AS id, title, text, status, u.username AS user, created, modified
+                FROM tickets AS t INNER JOIN users AS u ON t.user_id = u.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN status AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name, u.username AS user, created, modified
+                FROM tickets AS t
+                INNER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[65]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[67]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                FROM tickets AS t
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                INNER JOIN statuses AS s ON t.status_id = s.id WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[79]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[74]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+                    FROM tickets AS t
+                    LEFT OUTER JOIN users AS u ON t.user_id = u.id
+                    INNER JOIN statuses AS s ON t.status_id = s.id
+                    WHERE  t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: Array
+:\RVD\RVDLog\php\classes\Ticket.class.php[61]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: Array
+:\RVD\RVDLog\php\classes\Ticket.class.php[61]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: Array
+:\RVD\RVDLog\php\classes\Ticket.class.php[61]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: Array
+:\RVD\RVDLog\php\classes\Ticket.class.php[61]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: Array
+:\RVD\RVDLog\php\classes\Ticket.class.php[61]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: Array
+:\RVD\RVDLog\php\classes\Ticket.class.php[61]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 
+:\RVD\RVDLog\php\classes\Ticket.class.php[58]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[59]: 1
+:\RVD\RVDLog\php\classes\Ticket.class.php[60]: Array
+:\RVD\RVDLog\php\classes\Ticket.class.php[61]: SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            WHERE t.parent_id IS NULL 

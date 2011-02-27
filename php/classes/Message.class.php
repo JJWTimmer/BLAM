@@ -33,19 +33,20 @@ class Message extends RVDLogBase {
                 ");
         } elseif (is_array($options)) {
             $last_id = DB::esc($options['last_id']);
-            $since = DB::esc($options['since']);
+            $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
             
-            $results = DB::query("
+            $q = "
                 SELECT msg.id, msg.text, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                WHERE msg.id > $last_id AND msg.created > $since
-                ");
+                WHERE msg.id > $last_id";
+            $q .= ($since ? " AND msg.created > '$since'" : "");
+            $results = DB::query($q);
         } else {
             return false;
         }
             
 		while ($data[] = mysqli_fetch_assoc($results));
-        if ($data[-1] == null) array_pop($data);
+        if (!is_null($data) && end($data) == null) array_pop($data);
 		return $data;
 	}
     
@@ -56,13 +57,12 @@ class Message extends RVDLogBase {
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 WHERE MATCH(text) AGAINST('" . DB::esc($keyword) . "' IN BOOLEAN MODE)
                 ");
-            logmsg(DB::getMySQLiObject()->error);
         } else {
             return false;
         }
             
 		while ($data[] = mysqli_fetch_assoc($results));
-        if ($data[-1] == null) array_pop($data);
+        if (!is_null($data) && end($data) == null) array_pop($data);
 		return $data;
 	}
 

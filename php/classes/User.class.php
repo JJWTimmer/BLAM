@@ -76,7 +76,7 @@ class User extends RVDLogBase {
         DB::query("
             UPDATE users
             SET logged_in = 0
-            WHERE id = '" . DB::esc($this->id)
+            WHERE id = " . DB::esc($this->id)
             );
     }
     
@@ -92,6 +92,28 @@ class User extends RVDLogBase {
             WHERE last_activity < DATE_SUB(NOW(), INTERVAL 30 MINUTE)
         ");
     }
+    
+    public function get($options = 'all') {
+        if (is_string($options) && $options == 'all') {
+            $results = DB::query("
+                SELECT users.id AS id, roles.name AS role, username, avatar
+                    FROM users INNER JOIN roles ON users.role_id = roles.id
+                ");
+        } elseif (is_string($options) && $options == 'logged') {
+            $results = DB::query("
+                SELECT users.id AS id, roles.name AS role, username, avatar
+                    FROM users INNER JOIN roles ON users.role_id = roles.id
+                    WHERE logged_in = 1
+                ");
+        } else {
+            throw new Exception('unknown option');
+        }
+        
+		while ($data[] = mysqli_fetch_assoc($results));
+        if (!is_null($data) && end($data) == null) array_pop($data);
+		return $data;
+	}
+    
 }
 
 ?>

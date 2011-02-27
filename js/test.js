@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	// Run the init method on document ready:
-	chat.init();
+	chat.init(5000);
 	
 });
 
@@ -16,7 +16,7 @@ var chat = {
 	
 	// Init binds event listeners and sets up timers:
 	
-	init : function(){
+	init : function(interval){
 		
 		// Using the defaultText jQuery plugin, included at the bottom:
 		$('#username').defaultText('Username');
@@ -25,6 +25,9 @@ var chat = {
         var api = $('#msgscroll').jScrollPane().data('jsp');  
         var api2 = $('#messages-list').jScrollPane().data('jsp');
         var api3 = $('#msgsearchscroll').jScrollPane().data('jsp');
+        var api4 = $('#users-list').jScrollPane().data('jsp');
+        var api5 = $('#handle-list').jScrollPane().data('jsp');
+        var api6 = $('#ticket-list').jScrollPane().data('jsp');
         
 		// We use the working variable to prevent
 		// multiple form submissions:
@@ -134,8 +137,9 @@ var chat = {
 			}
 		});
 
+        // get all logged messages
         setInterval(function(){
-            $.tzPOST('getMessages',{last_id: 'all'},function(r){
+            $.tzPOST('getMessages', {last_id: 'all'}, function(r) {
             api2.getContentPane().html('');
 			for (var i = 0; i < r.length ; i++) {
 				api2.getContentPane().prepend($('<p />').text(r[i].text));
@@ -148,7 +152,69 @@ var chat = {
             
             api2.reinitialise();
 		});
-        }, 5000);
+        }, interval);
+        
+        // get all logged in users
+        setInterval(function(){
+            $.tzPOST('getUsers', {options: 'logged'}, function(r) {
+            api4.getContentPane().html('');
+			for (var i = 0; i < r.length ; i++) {
+				api4.getContentPane().prepend($('<p />').text(r[i].username));
+			}
+								
+			//if no users are logged in yet
+			if(!r.length){
+				api4.getContentPane().html('<p class="no-users">No users found</p>');
+			}
+            
+            api4.reinitialise();
+		});
+        }, interval);
+        
+        // get all groups and handles
+        setInterval(function(){
+            $.tzPOST('getGroups', {recursive : true}, function(r) {
+            api5.getContentPane().html('');
+			for (var i = 0; i < r.length ; i++) {
+				api5.getContentPane().append($('<p />').text(r[i].name));
+                if (!(typeof r[i]['handles'] === 'undefined')) {
+                    for (var j = 0; j < r[i]['handles'].length; j++) {
+                        api5.getContentPane().append($('<p />').text('-->' + r[i]['handles'][j].handle_name));
+                    }
+                }
+			}
+								
+			//if no users are logged in yet
+			if(!r.length){
+				api5.getContentPane().html('<p class="no-users">No users found</p>');
+			}
+            
+            api5.reinitialise();
+		});
+        }, interval);
+        
+        // get all tickets
+        setInterval(function(){
+            $.tzPOST('getTicketList', {recursive : true, status : [{1: 'Open', 2: 'Nieuw'}]}, function(r) {
+            api6.getContentPane().html('');
+			for (var i = 0; i < r.length ; i++) {
+				api6.getContentPane().append($('<p />').text(r[i].title));
+                if (!(typeof r[i]['children'] === 'undefined')) {
+                    for (var j = 0; j < r[i]['children'].length ; j++) {
+                        api6.getContentPane().append( $('<p />').text('-->' + r[i]['children'][j].title));
+                    }
+                }
+			}
+								
+			//if no users are logged in yet
+			if(!r.length){
+				api6.getContentPane().html('<p class="no-tickets">No tickets found</p>');
+			}
+            
+            api6.reinitialise();
+		});
+        }, interval);
+        
 	},
 	
 	// The login method hides displays the
