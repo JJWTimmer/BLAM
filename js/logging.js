@@ -17,8 +17,12 @@ var logging = {
 	// Init binds event listeners and sets up timers:
 	
 	init : function(){
-        //$('#LoggingMainContainer').fadeIn('slow');
-		
+        
+        // add listener for this button
+        $('#submitbutton').bind('click',function(){
+        $('#submitForm').submit();
+        });
+        	
 		// Using the defaultText jQuery plugin, included at the bottom:
 		$('#name').defaultText('Nickname');
 		$('#password').defaultText('Password');
@@ -59,12 +63,12 @@ var logging = {
         });
 
         // Logging the user out:
-
+        
         $('a.logoutButton').live('click',function(){
             $('#LoggingTopContainer > span').fadeOut(function(){
                 $(this).remove();
             });
-            
+            $('#LoggingTopContainer').fadeOut();
             $('#LoggingMainContainer').fadeOut(function(){
                 $('#LoggingLogin').fadeIn();
             });
@@ -73,6 +77,7 @@ var logging = {
             
             return false;
         });
+        
         
         // Converting the #chatLineHolder div into a jScrollPane,
         // and saving the plugin's API in chat.data:
@@ -85,7 +90,73 @@ var logging = {
         (function getMessagesTimeoutFunction(){
             logging.getMessages(getMessagesTimeoutFunction);
         })();
+        
+        // catching when user presses enter
+        $('#messageText').keydown(function(e){
+            if(e.which == 13) {
+                e.preventDefault();
+                //$('submitForm.#submit').trigger('click');
+                //$('submitForm').submit();
+                //document.getElementById('bla').click();
+                $('#submitbutton').trigger('click');
+                //
+                return false
+            }
+        })
 
+
+        // Submitting a new message entry:
+        
+        $('#submitForm').submit(function(){
+            
+            var text = $('#messageText').val();
+            
+            if(text.length == 0){
+                return false;
+            }
+            
+            if(working) return false;
+            working = true;
+            
+            
+            // Assigning a temporary ID to the chat:
+            var tempID = 't'+Math.round(Math.random()*1000000),
+                params = {
+                    messageid  : tempID,
+                    username  : logging.data.username,
+                    avatar  : logging.data.avatar,
+                    text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                };
+            
+            // Using our addChatLine method to add the chat
+            // to the screen immediately, without waiting for
+            // the AJAX request to complete:
+            
+            //logging.addMessageLine($.extend({},params));
+            logging.addMessageLine($.extend({},params));
+            
+            // Using our tzPOST wrapper method to send the chat
+            // via a POST AJAX request:
+            
+            //$.tztestPOST('addMessage',$(this).serialize(),function(r){
+                
+                working = false;
+                
+                //empty input form textbox
+                $('#messageText').val('');
+                //remove old temporary message
+                $('div.message-'+tempID).remove();
+                
+                //insert newly received ID
+                //params['id'] = r.insertID;
+                //temporary fix to avoid php
+                var insertID=100;
+                params['id'] = insertID;
+                logging.addMessageLine($.extend({},params));
+            //});
+            
+            return false;
+        });
     },
     //end of init function
 
@@ -99,6 +170,7 @@ var logging = {
         $('#LoggingTopContainer').html(general.render('loginTopBar',logging.data));
         $('#LoggingLogin').fadeOut(function(){
         $('#LoggingMainContainer').fadeIn();
+        $('#LoggingTopContainer').fadeIn();
         });
     },
 
@@ -107,12 +179,7 @@ var logging = {
     // (since lastID), and adds them to the page.
     
     getMessages : function(callback){
-            /*
-            var arr;
-            arr=['id=',r.messages.messageid,' name=',r.messages.username,' text=',r.messages.text,' created=',r.messages.created];
-            var messagestring=arr.join('');
-            general.displayError(messagestring);        
-            */
+            
         $.tzTESTPOST('getMessages',{last_id: logging.data.lastID,date_and_time: '2:0:0'},function(r){
             //update chats from mysql db
             for(var i=0;i<r.messages.length;i++){
@@ -165,13 +232,15 @@ var logging = {
 // The addMessageLine method ads a chat entry to the page
     
     addMessageLine : function(params){
+               
         var arr;
             arr=['id=',params.messageid,' name=',params.username,' text=',params.text,' created=',params.created];
             var messagestring=arr.join('');
             //general.displayError(messagestring);        
-        // All times are displayed in the user's timezone
+            // All times are displayed in the user's timezone
         
         var d = new Date();
+       
         if(params.time) {
             
             // PHP returns the time in UTC (GMT). We use it to feed the date
@@ -183,10 +252,10 @@ var logging = {
         
         params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
                       (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
+         
+        var markup = general.render('messageLine',params),
+            exists = $('#MeldingenList .message-'+params.messageid);
         
-        var markup = general.render('chatLine',params),
-            exists = $('#MeldingenList .chat-'+params.messageid);
-
         if(exists.length){
             exists.remove();
         }
@@ -198,9 +267,9 @@ var logging = {
             $('#MeldingenList p').remove();
         }
         
-        // If this isn't a temporary chat:
+        //If this isn't a temporary chat:
         if(params.messageid.toString().charAt(0) != 't'){
-            var previous = $('#MeldingenList .chat-'+(+params.messageid - 1));
+            var previous = $('#MeldingenList .message-'+(+params.messageid - 1));
             if(previous.length){
                 previous.after(markup);
             }
@@ -210,59 +279,17 @@ var logging = {
         
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
-        
         logging.data.jspAPI.reinitialise();
         logging.data.jspAPI.scrollToBottom(true);
-        
+
     },
+    
+    
 
         /*		
 				
 				
-		// Submitting a new chat entry:
-		
-		$('#submitForm').submit(function(){
-			
-			var text = $('#chatText').val();
-			
-			if(text.length == 0){
-				return false;
-			}
-			
-			if(working) return false;
-			working = true;
-			
-			// Assigning a temporary ID to the chat:
-			var tempID = 't'+Math.round(Math.random()*1000000),
-				params = {
-					id	: tempID,
-					author	: chat.data.name,
-					avatar	: chat.data.avatar,
-					text	: text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
-				};
-
-			// Using our addChatLine method to add the chat
-			// to the screen immediately, without waiting for
-			// the AJAX request to complete:
-			
-			chat.addChatLine($.extend({},params));
-			
-			// Using our tzPOST wrapper method to send the chat
-			// via a POST AJAX request:
-			
-			$.tzPOST('submitChat',$(this).serialize(),function(r){
-				working = false;
 				
-				$('#chatText').val('');
-				$('div.chat-'+tempID).remove();
-				
-				params['id'] = r.insertID;
-				chat.addChatLine($.extend({},params));
-			});
-			
-			return false;
-		});
-		
 					
 		// Self executing timeout functions
 
@@ -313,4 +340,3 @@ var logging = {
 	*/
 };
 //end of logging var
-

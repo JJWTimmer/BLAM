@@ -9,8 +9,9 @@ height:100%;
 	top: 20px;
 	width:95%;
 	height:50px;
-	background: green;
-	border:1px solid #fff;
+    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+    border:1px solid #fff;
+    display:none;
 }
 /* Main container */
 #LoggingMainContainer{
@@ -19,7 +20,7 @@ position:absolute;
 	left:20px;
 	width:95%;
 	height:85%;
-	background: blue;
+	
 	margin-bottom:10px;
     padding-bottom:1%;
     display:none;
@@ -31,7 +32,6 @@ position:absolute;
     left:20px;
     width:95%;
     height:85%;
-    background: grey;
     margin-bottom:10px;
     padding-bottom:1%;
 }
@@ -67,7 +67,7 @@ position:relative;
 	left: 0%;
 	width:75%;
 	height:98%;
-	background: red;
+	background:url('../img/page_bg.jpg') repeat-x #323232;
 	margin:1%;
 
 }
@@ -78,7 +78,7 @@ position:absolute;
 	top: 0%;
 	width:74%;
 	height:10%;
-	background: turquoise;
+	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
 	margin-top:1%;
 	margin-left:1%;
 }
@@ -89,17 +89,16 @@ position:absolute;
 	left:0%;
 	width:22%;
 	height:93%;
-	background: yellow;
 	margin:1%;
 }
 
 #HandlesHeader{
 position:absolute;
 	left:0px;
-	top: -20px;
+	top: -25px;
 	width:100%;
 	height:20px;
-	background: aqua;
+	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
 	text-align:center;
 }
 
@@ -109,7 +108,8 @@ position:absolute;
 	top: 0%;
 	width:100%;
 	height:100%;
-	background: fuchsia;
+	background: #202020;
+    border:1px solid #111111;
 }
 
 #Meldingen{
@@ -119,17 +119,15 @@ position:absolute;
 	width:50%;
 	height:55%;
 	margin:1%;
-    background:url('../img/page_bg.jpg') repeat-x #323232;
-    
 }
 
 #MeldingenHeader{
 position:absolute;
 	left:0%;
-	top: -20px;
+	top: -25px;
 	width:100%;
 	height:20px;
-	background: aqua;
+	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
 	text-align:center;
 }
 
@@ -148,17 +146,16 @@ position:absolute;
 	top: 17%;
 	width:22%;
 	height:55%;
-	background: orange;
 	margin:1%;
 }
 
 #UsersHeader{
 position:absolute;
 	left:0px;
-	top:-20px;
+	top:-25px;
 	width:100%;
 	height:20px;
-	background: aqua;
+	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
 	text-align:center;
 }
 
@@ -168,7 +165,8 @@ position:absolute;
 	top: 0%;
 	width:100%;
 	height:100%;
-	background: fuchsia;
+	background: #202020;
+    border:1px solid #111111;
 }
 
 
@@ -178,7 +176,7 @@ position:absolute;
 	bottom: 0%;
 	width:74%;
 	height:24%;
-	background: white;
+	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
 	margin-left:1%;
 	margin-bottom:1%;
 }
@@ -190,7 +188,6 @@ position:absolute;
     left: 76%;
     width:22%;
     height:98%;
-    background: red;
     margin:1%;
 }
 
@@ -200,27 +197,27 @@ position:absolute;
     left:0%;
     width:98%;
     height:44%;
-    background: violet;
     margin:1%;
 }
 
 #TicketsHeader{
 position:absolute;
     left:0px;
-    top: -20px;
+    top: -25px;
     width:100%;
     height:20px;
-    background: aqua;
+    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
     text-align:center;
 }
 
 #TicketsList{
-position:absolute;
+    position:absolute;
     left:0%;
     top: 0%;
     width:100%;
     height:100%;
-    background: fuchsia;
+    background: #202020;
+    border:1px solid #111111;
 }
 
 #Feedback{
@@ -229,17 +226,16 @@ position:absolute;
     left:0%;
     width:98%;
     height:43%;
-    background: purple;
     margin:1%;
 }
 
 #FeedbackHeader{
 position:absolute;
     left:0px;
-    top: -20px;
+    top: -25px;
     width:100%;
     height:20px;
-    background: aqua;
+    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
     text-align:center;
 }
 
@@ -249,86 +245,159 @@ position:absolute;
     top: 0%;
     width:100%;
     height:100%;
-    background: fuchsia;
+    background: #202020;
+    border:1px solid #111111;
 }
 
-/* Chats */
+#LoggingTopContainer .Topbar_img {
+    margin-top:8px;
+    margin-left:10px;
+    width:32px;
+    background:url('../img/unknown32x32.png') no-repeat;
+}
 
-.chat{
-    background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
-    min-height:24px;
-    padding:6px;
+/* TopBar */
+
+#LoggingTopContainer .Topbar_headers {
+padding-right:10px; 
+}
+
+#LoggingTopContainer .Topbar_username {
+padding-right:10px; 
+}
+
+#LoggingTopContainer .Topbar_role {
+padding-right:10px; 
+}
+
+#LoggingTopContainer img {
+/*hides picture when no avatar is present*/
+    visibility:hidden;
+}
+
+#LoggingTopContainer .Topbar_table {
+position: absolute;
+top: 0px;
+left: 50px;
+}
+
+/* Messages */
+/* overflow: hidden enables the resizing of each div*/
+.message{
+    position:relative;    
+    overflow: hidden;
+    width: 95%;
     border:1px solid #FFFFFF;
-    
-    padding:8px 6px 4px 37px;
-    position:relative;
-    margin:0 10px 10px 0;
+    padding:2px 2px 2px 2px;
+    margin: 0.5% 5% 0.5% 0;
+    background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
 }
 
-.chat:last-child{
+.message:last-child{
     margin-bottom:0;
 }
 
-.chat span{
+/*using floats here allows resizing of the parent div (message)
+overflow: hiddden ensures that low resolution version doesnt 
+overflow over text, could also use min-width (either way screwed;-))*/
+.message .avatar-info-div{
+width:20%;
+/*min-width:70px;*/
+overflow: hidden;
+float:left;
+}
+
+.message .text-div{
+width:80%;
+float:right;
+}
+
+.message span{
     color:#777777;
     text-shadow:1px 1px 0 #FFFFFF;
     font-size:12px;
 }
 
-.chat .text{
+.message .text-span{
     color:#444444;
-    display:inline-block;
     font-size:15px;
-    overflow:hidden;
-    vertical-align:top;
-    width:80%;
+    /*display:inline-block;*/
 }
 
-.chat .avatar{
-    background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
-    left:7px;
-    position:absolute;
-    top:7px;
+.message .avatar-td{
+    
+    padding-right:4px;
+    background:url('../img/unknown24x24.png') no-repeat;
 }
 
-.chat img{
-    display:block;
+.message img{
+    /*hides picture when no avatar is present*/
     visibility:hidden;
 }
 
-.chat .time{
-    position:absolute;
-    right:10px;
-    top:12px;
-    font-size:11px;
+.message .info-td{
+    /*added line-height to decrease the space that was used as margin*/
+    font-size:12px;
+    line-height:12px;
 }
 
-.chat .author{
-    margin-right:6px;
-    font-size:11px;
+/*Submit messages */
+
+textarea#messageText{
+    position: absolute;
+    top:10%;
+    left:2%;
+    height:80%;
+    width:60%;
+    
+    font:13px/14px Calibri,Arial,sans-serif;
+    color:#777;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:0 5px;
+    }
+
+#TextEntry .blueButton{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background:url('../img/button_blue.png') no-repeat;
+    border:none !important;
+    color:#516D7F !important;
+    font-size:13px;
+    height:29px;
+    text-align:center;
+    text-shadow:1px 1px 0 rgba(255, 255, 255, 0.4);
+    width:75px;
+    margin:0;
+    cursor:pointer;
+}
+
+#TextEntry .blueButton:hover{
+    background-position:left bottom;
 }
 
 /* Overloading the default styles of jScrollPane */
 
-
 .jspVerticalBar{
-    background:none;
     width:20px;
+    background:none;
 }
 
 .jspTrack{
-    background-color:#202020;
-    border:1px solid #111111;
     width:3px;
     right:-10px;
+    border:1px solid #111111;
+    background-color:#202020;
 }
 
 .jspDrag {
-    background:url('../img/slider.png') no-repeat;
     width:20px;
     left:-9px;
     height:20px !important;
     margin-top:-5px;
+    background:url('../img/slider.png') no-repeat;
 }
 
 .jspDrag:hover{
