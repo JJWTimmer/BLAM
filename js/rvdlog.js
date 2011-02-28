@@ -8,14 +8,16 @@ var general = {
         var arr = [];
         switch(template){
             case 'loginTopBar':
+                              
                 arr = [
                 '<div class="Topbar_img"><img src="',params.avatar,'" width="32" height="32" /></div><table class="Topbar_table"><tr><th class="Topbar_headers">username</th><th class="Topbar_headers">Role</th></tr><tr>','<td class="Topbar_username">',params.username,'</td><td class="Topbar_role">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+                
             break;
     
             case 'messageLine':
                 arr = [
                 '<div class="message message-',params.messageid,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
-
+                
             break;
                             
             case 'user':

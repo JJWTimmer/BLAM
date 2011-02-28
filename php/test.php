@@ -15,7 +15,7 @@ require_once "classes/Ticket.class.php";
 require_once "classes/ChatLine.class.php";
 require_once "classes/User.class.php";
 
-session_name('RVDLog');
+//session_name('RVDLog');
 session_start();
 
 if ( get_magic_quotes_gpc() ) {
@@ -31,7 +31,11 @@ try {
 	DB::init($dbOptions);
 	//response is an empty array
 	$response = array();
-	
+	if(isset($_SESSION['last_id']))
+    {}
+    else
+    {$_SESSION['last_id']=0;}
+
 	// Handling the supported actions:
 	
 	switch($_GET['action']){
@@ -62,7 +66,13 @@ try {
             break;
 		
 		case 'addMessage':
-			$response = RVDLog::addMessage($_POST['text'], $_POST['ticket']);
+			//$response = RVDLog::addMessage($_POST['text'], $_POST['ticket']);
+            $_SESSION['last_id']=$_SESSION['last_id']+1;
+            $response = array(
+                    'messageid'  => $_SESSION['last_id']
+                    );
+            
+
             // returns MessageId or exception
             break;
 		
@@ -86,9 +96,9 @@ try {
                 default:
                 $text="test";
                 }
-                        
+                $_SESSION['last_id']=(int)$_SESSION['last_id']+1;
                 $messages[] = array(
-                    'messageid'        => (int)$_POST['last_id']+1,
+                    'messageid'        => (int)$_SESSION['last_id'],
                     'text'  => $text,
                     'username'      => "blaataap",
                     'avatar'    => "",

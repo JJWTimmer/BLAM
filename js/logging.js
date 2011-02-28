@@ -86,20 +86,12 @@ var logging = {
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
         }).data('jsp');
-        
-        (function getMessagesTimeoutFunction(){
-            logging.getMessages(getMessagesTimeoutFunction);
-        })();
-        
+                
         // catching when user presses enter
-        $('#messageText').keydown(function(e){
+        $('#messagetext').keydown(function(e){
             if(e.which == 13) {
                 e.preventDefault();
-                //$('submitForm.#submit').trigger('click');
-                //$('submitForm').submit();
-                //document.getElementById('bla').click();
                 $('#submitbutton').trigger('click');
-                //
                 return false
             }
         })
@@ -109,7 +101,7 @@ var logging = {
         
         $('#submitForm').submit(function(){
             
-            var text = $('#messageText').val();
+            var text = $('#messagetext').val();
             
             if(text.length == 0){
                 return false;
@@ -122,7 +114,7 @@ var logging = {
             // Assigning a temporary ID to the chat:
             var tempID = 't'+Math.round(Math.random()*1000000),
                 params = {
-                    messageid  : tempID,
+                    messageid : tempID,
                     username  : logging.data.username,
                     avatar  : logging.data.avatar,
                     text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
@@ -132,41 +124,64 @@ var logging = {
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
             
-            //logging.addMessageLine($.extend({},params));
             logging.addMessageLine($.extend({},params));
+            
             
             // Using our tzPOST wrapper method to send the chat
             // via a POST AJAX request:
+            var inputcheckbox = $('#ticket:checked').val();
             
-            //$.tztestPOST('addMessage',$(this).serialize(),function(r){
-                
+            if(inputcheckbox!=undefined)
+            {
+                var strformData = $('#submitForm').serialize()+"&ticket=True";
+                var blnticket = true;
+            }
+            else 
+            {
+                var strformData = $('#submitForm').serialize()+"&ticket=False";
+                var blnticket = false;
+            }
+            $.tzTESTPOST('addMessage',{text: text,ticket: blnticket},function(r){
+            //$.tzTESTPOST('addMessage',strformData,function(r){
+            
                 working = false;
-                
                 //empty input form textbox
-                $('#messageText').val('');
+                $('#messagetext').val('');
+                if(inputcheckbox!=undefined)
+                {
+                $('#ticket').attr('checked',false);
+                }
                 //remove old temporary message
                 $('div.message-'+tempID).remove();
                 
                 //insert newly received ID
-                //params['id'] = r.insertID;
-                //temporary fix to avoid php
-                var insertID=100;
-                params['id'] = insertID;
+                params['messageid'] = r.messageid;
                 logging.addMessageLine($.extend({},params));
-            //});
+            });
             
             return false;
         });
+
+        (function getMessagesTimeoutFunction(){
+            logging.getMessages(getMessagesTimeoutFunction);
+        })();
     },
     //end of init function
 
     // The login method hides displays the
     // user's login data and shows the submit form
     login : function(username,avatar,role){
- 
+        //replace empty avatar filed
+       var new_avatar=avatar;
+        if(avatar=="")
+        {
+        var new_avatar="img/unknown32x32.png";
+        }
+
         logging.data.username = username;
-        logging.data.avatar = avatar;
+        logging.data.avatar = new_avatar;
         logging.data.role = role;
+
         $('#LoggingTopContainer').html(general.render('loginTopBar',logging.data));
         $('#LoggingLogin').fadeOut(function(){
         $('#LoggingMainContainer').fadeIn();
@@ -174,28 +189,27 @@ var logging = {
         });
     },
 
-
-// This method requests the latest chats
+    // This method requests the latest messages
     // (since lastID), and adds them to the page.
     
     getMessages : function(callback){
             
         $.tzTESTPOST('getMessages',{last_id: logging.data.lastID,date_and_time: '2:0:0'},function(r){
-            //update chats from mysql db
+            //update messages from mysql db
             for(var i=0;i<r.messages.length;i++){
                 
                 logging.addMessageLine(r.messages[i]);
                         
             }
-            //if new chats, update to lastid
-            //chat.data.noActivity is reset, so next update in 1 second
+            //if new messages, update to lastid
+            //message.data.noActivity is reset, so next update in 1 second
             
             if(r.messages.length){
                 logging.data.noActivity = 0;
                 logging.data.lastID = r.messages[i-1].messageid;
                 }
             else{
-                // If no chats were received, increment
+                // If no messages were received, increment
                 // the noActivity counter.
                 
                 logging.data.noActivity++;
@@ -223,7 +237,6 @@ var logging = {
             //if(logging.data.noActivity > 20){
             //    nextRequest = 15000;
             //}
-        
             setTimeout(callback,nextRequest);
         });
     },
@@ -233,14 +246,13 @@ var logging = {
     
     addMessageLine : function(params){
                
-        var arr;
-            arr=['id=',params.messageid,' name=',params.username,' text=',params.text,' created=',params.created];
-            var messagestring=arr.join('');
-            //general.displayError(messagestring);        
-            // All times are displayed in the user's timezone
-        
+        if(params.avatar=="")                   
+        {
+        params.avatar="img/unknown24x24.png"
+        }        
+
         var d = new Date();
-       
+
         if(params.time) {
             
             // PHP returns the time in UTC (GMT). We use it to feed the date

@@ -272,7 +272,7 @@ padding-right:10px;
 
 #LoggingTopContainer img {
 /*hides picture when no avatar is present*/
-    visibility:hidden;
+    /*visibility:hidden;*/
 }
 
 #LoggingTopContainer .Topbar_table {
@@ -301,14 +301,14 @@ left: 50px;
 overflow: hiddden ensures that low resolution version doesnt 
 overflow over text, could also use min-width (either way screwed;-))*/
 .message .avatar-info-div{
-width:20%;
+width:25%;
 /*min-width:70px;*/
 overflow: hidden;
 float:left;
 }
 
 .message .text-div{
-width:80%;
+width:75%;
 float:right;
 }
 
@@ -343,7 +343,7 @@ float:right;
 
 /*Submit messages */
 
-textarea#messageText{
+textarea#messagetext{
     position: absolute;
     top:10%;
     left:2%;
@@ -358,10 +358,31 @@ textarea#messageText{
     padding:0 5px;
     }
 
+p.label_checkbox_pair{
+    position:absolute;    
+    top: 10%;
+    left: 70%;
+    width: 30%;    
+    clear: both;
+    float: none;
+    
+}
+p.label_checkbox_pair input{
+    overflow: hidden;
+    float:left;
+    margin-top:3px;
+    width:15%;
+}
+
+p.label_checkbox_pair label{
+    overflow: hidden;
+    float: right;
+    width:85%;
+}
 #TextEntry .blueButton{
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom:10%;
+    left:70%;
     background:url('../img/button_blue.png') no-repeat;
     border:none !important;
     color:#516D7F !important;
