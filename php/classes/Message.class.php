@@ -42,7 +42,7 @@ class Message extends RVDLogBase {
             $q .= ($since ? " AND msg.created > '$since'" : "");
             $results = DB::query($q);
         } else {
-            return false;
+            throw new Exception('Invalid arguments for getMessages');
         }
             
 		while ($data[] = mysqli_fetch_assoc($results));
