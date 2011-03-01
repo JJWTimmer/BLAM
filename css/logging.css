@@ -163,8 +163,10 @@ position:absolute;
 position:absolute;
 	left:0%;
 	top: 0%;
-	width:100%;
-	height:100%;
+	width:96%;
+	height:98%;
+    /*padding is to solve JSPbar problem in combo with user margin*/
+    padding: 1% 0 1% 4%;
 	background: #202020;
     border:1px solid #111111;
 }
@@ -272,7 +274,7 @@ padding-right:10px;
 
 #LoggingTopContainer img {
 /*hides picture when no avatar is present*/
-    visibility:hidden;
+    /*visibility:hidden;*/
 }
 
 #LoggingTopContainer .Topbar_table {
@@ -301,14 +303,14 @@ left: 50px;
 overflow: hiddden ensures that low resolution version doesnt 
 overflow over text, could also use min-width (either way screwed;-))*/
 .message .avatar-info-div{
-width:20%;
+width:25%;
 /*min-width:70px;*/
 overflow: hidden;
 float:left;
 }
 
 .message .text-div{
-width:80%;
+width:75%;
 float:right;
 }
 
@@ -343,7 +345,7 @@ float:right;
 
 /*Submit messages */
 
-textarea#messageText{
+textarea#messagetext{
     position: absolute;
     top:10%;
     left:2%;
@@ -358,10 +360,31 @@ textarea#messageText{
     padding:0 5px;
     }
 
+p.label_checkbox_pair{
+    position:absolute;    
+    top: 10%;
+    left: 70%;
+    width: 30%;    
+    clear: both;
+    float: none;
+    
+}
+p.label_checkbox_pair input{
+    overflow: hidden;
+    float:left;
+    margin-top:3px;
+    width:15%;
+}
+
+p.label_checkbox_pair label{
+    overflow: hidden;
+    float: right;
+    width:85%;
+}
 #TextEntry .blueButton{
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom:10%;
+    left:70%;
     background:url('../img/button_blue.png') no-repeat;
     border:none !important;
     color:#516D7F !important;
@@ -378,9 +401,47 @@ textarea#messageText{
     background-position:left bottom;
 }
 
+/* users */
+
+#UsersList .user{
+    background:url('img/unknown30x30.png') no-repeat 1px 1px #444444;
+    border:1px solid #111111;
+    float:left;
+    height:32px;
+    margin:10px 10px 0 0px;
+    width:32px;
+}
+
+#UsersList .user img{
+    border:1px solid #444444;
+    display:block;
+    visibility:hidden;
+}
+
+p.noMessages,
+#UsersList .count{
+    clear:both;
+    font-size:12px;
+    
+    padding:10px;
+    text-align:center;
+    text-shadow:1px 1px 0 #111111;
+    color:#ffffff;
+}
+
+#UsersList .count{
+    font-size:11px;
+}
+
+
 /* Overloading the default styles of jScrollPane */
+#UsersList div:first-child[class="jspContainer"]{
+    background: #202020;
+    width:100%;
+}
 
 .jspVerticalBar{
+    float right;
     width:20px;
     background:none;
 }

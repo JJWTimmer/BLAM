@@ -15,7 +15,7 @@ require_once "classes/Ticket.class.php";
 require_once "classes/ChatLine.class.php";
 require_once "classes/User.class.php";
 
-session_name('RVDLog');
+//session_name('RVDLog');
 session_start();
 
 if ( get_magic_quotes_gpc() ) {
@@ -31,7 +31,11 @@ try {
 	DB::init($dbOptions);
 	//response is an empty array
 	$response = array();
-	
+	if(isset($_SESSION['last_id']))
+    {}
+    else
+    {$_SESSION['last_id']=0;}
+
 	// Handling the supported actions:
 	
 	switch($_GET['action']){
@@ -62,7 +66,13 @@ try {
             break;
 		
 		case 'addMessage':
-			$response = RVDLog::addMessage($_POST['text'], $_POST['ticket']);
+			//$response = RVDLog::addMessage($_POST['text'], $_POST['ticket']);
+            $_SESSION['last_id']=$_SESSION['last_id']+1;
+            $response = array(
+                    'messageid'  => $_SESSION['last_id']
+                    );
+            
+
             // returns MessageId or exception
             break;
 		
@@ -72,7 +82,7 @@ try {
                 {
                 switch($rand){
                 case 1:
-                $text="Hello neo!";
+                $text="Knock, knock, Neo";
                 break;
                 
                 case 2:
@@ -80,15 +90,27 @@ try {
                 break;
                 
                 case 3:
-                $text="The Matrix is the world that has been pulled over your eyes to blind you from the truth.";
+                $text="Don't think you are, know you are";
                 break;
                 
+                case 4:
+                $text="Come on. Stop trying to hit me and hit me.";
+                break;                
+
+                case 5:
+                $text="There is no spoon";
+                break;
+
+                case 5:
+                $text="Do you hear that, Mr. Anderson? That is the sound of inevitability.";
+                break;
+
                 default:
                 $text="test";
                 }
-                        
+                $_SESSION['last_id']=(int)$_SESSION['last_id']+1;
                 $messages[] = array(
-                    'messageid'        => (int)$_POST['last_id']+1,
+                    'messageid'        => (int)$_SESSION['last_id'],
                     'text'  => $text,
                     'username'      => "blaataap",
                     'avatar'    => "",
@@ -111,6 +133,28 @@ try {
 		
 		case 'getUsers':
 			$response = RVDLog::getUsers();
+            $users[] = array(
+                    'id'        => 1,
+                    'role'  => "RVD",
+                    'username'  => "Femke",
+                    'avatar' => ""
+                    );
+            $users[] = array(
+                    'id'        => 2,
+                    'role'  => "RVD",
+                    'username'  => "Anne",
+                    'avatar' => "img/anne.jpg"
+                    );
+            for ($i=1;$i<=30;$i++)
+            {
+            $users[] = array(
+                    'id'        => $i+2,
+                    'role'  => "WL",
+                    'username'  => "Chinees ".$i,
+                    'avatar' => ""
+                    );
+            }
+            $response = array('users' => $users, 'total' => 2);
             // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
             break;
 		
