@@ -19,9 +19,12 @@ class Ticket extends RVDLogBase {
 	public function create() {
 
 		DB::query("
-			INSERT INTO messages (user_id, text, created)
+			INSERT INTO tickets (user_id, title, message_id, status_id, text, created)
 			VALUES (
-				'" . DB::esc($this->user_id) . "',
+				 " . DB::esc($this->user_id) . ",
+				'" . DB::esc($this->title) . "',
+				 " . DB::esc($this->message_id) . ",
+				 " . DB::esc($this->status_id) . ",
 				'" . DB::esc($this->text) . "',
                 '" . DB::esc($this->created) . "'
             )
@@ -32,7 +35,7 @@ class Ticket extends RVDLogBase {
 		return $this->id;
 	}
     
-    public function get($recursive = false, $last_id = null, $last_modified = null, $status = array()) {
+    public function get($recursive = 'false', $last_id = null, $last_modified = null, $status = array()) {
         if (   !($recursive == 'true'|| $recursive == 'false' || is_null($recurive) )
             || !(is_numeric($last_id) || is_null($last_id))
             || !(strtotime($last_modified) || is_null($last_modified))
@@ -44,7 +47,7 @@ class Ticket extends RVDLogBase {
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
-            WHERE t.parent_id IS NULL ";
+            WHERE t.parent_id IS NULL";
 
         if (is_numeric($last_id)) {
             $q .= "AND t.id > $last_id";
@@ -53,9 +56,9 @@ class Ticket extends RVDLogBase {
             $q .= " AND t.modified > '$last_modified'";
         }
         if (is_array($status) && !empty($status)) {
-            $q .= " AND s.status IN ('" . DB::esc(implode("','", $status[0])) . "') ";
+            $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risc, implode not escaped
         }
-         
+
         if ($recursive == 'false') {
             $results = DB::query($q);
             if ($results) while ($output[] = mysqli_fetch_assoc($results));

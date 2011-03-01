@@ -4,21 +4,25 @@
 
 class ChatLine extends RVDLogBase {
 	
-	protected $text = '', $author = '', $avatar = '';
+	protected $id = '';
+	protected $text = '';
+    protected $user_id = '';
+	protected $created = '';
 	
-	public function save(){
+	public function create(){
 		
 		DB::query("
-			INSERT INTO webchat_lines (author, avatar, text)
+			INSERT INTO chatlines (user_id, text, created)
 			VALUES (
-				'".DB::esc($this->author)."',
-				'".DB::esc($this->avatar)."',
-				'".DB::esc($this->text)."'
+				".DB::esc($this->user_id).",
+				'".DB::esc($this->text)."',
+				NOW()
 		)");
 		
 		// Returns the MySQLi object of the DB class
-		
-		return DB::getMySQLiObject();
+		$this->id = DB::getMySQLiObject()->insert_id;
+        
+		return $this->id;
 		
 	}
 }

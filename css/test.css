@@ -22,11 +22,16 @@
 
 }
 
+#messages:before {
+    content: "Log Messages";
+}
+
 #messages {
     float: left;
     width: 200px;
     height: 250px;
     margin-left: 10px;
+    
 }
 
 #messages-list {
@@ -38,10 +43,19 @@
 
 }
 
+#messages-list:before {
+    content: "All Messages";
+}
+
 #msgsearchscroll {
     border: solid gray 1px;
     height: 250px;
 
+}
+
+
+#message-search:before {
+    content: "Search Messages";
 }
 
 #message-search {
@@ -49,6 +63,10 @@
     width: 200px;
     height: 250px;
     margin-left: 10px;
+}
+
+#users-list:before {
+    content: "Online Users";
 }
 
 #users-list {
@@ -60,6 +78,11 @@
 
 }
 
+
+#handle-list:before {
+    content: "Groups / Handles";
+}
+
 #handle-list {
     float: left;
     width: 200px;
@@ -69,7 +92,23 @@
 
 }
 
+#ticket-list:before {
+    content: "All Tickets";
+}
 #ticket-list {
+    float: left;
+    width: 200px;
+    height: 250px;
+    border: solid gray 1px;
+    margin-left: 10px;
+
+}
+
+#allfeedback-list:before {
+    content: "All Feedback";
+}
+
+#allfeedback-list {
     float: left;
     width: 200px;
     height: 250px;

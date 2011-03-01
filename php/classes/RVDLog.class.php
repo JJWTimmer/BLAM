@@ -78,7 +78,15 @@ class RVDLog {
 		$insertID = $msg->create();
         
         if ($ticket) {
-            $wlticket = new Ticket();
+            $wlticket = new Ticket(array(
+                'user_id' => $_SESSION['user']['id'],
+                'message_id' => $insertID,
+                'title' => 'NIEUW',
+                'text' => $text,
+                'status_id' => 1,
+                'created' => date('Y-m-d G:i:s')                
+            ));
+            
             $wlticket->create();
         }
         
@@ -143,16 +151,25 @@ class RVDLog {
         return $tickets;
     }
 
-    public static function getFeedback() {
-    
+    // returns array (integer Id, string Title, string HandleName, string Message, string userWL, Datetime called, Datetime created)feedback or exception
+    public static function getFeedback($id, $called) {
+        $feedback = new feedback(array());
+        $feedbacks = $feedback->get($id, $called);
+        return $feedbacks;
     }
 
-    public static function closeFeedback($id){
-    
+    public static function closeFeedback($id, $user_id){
+        $feedback = new feedback(array('id' => $id));
+        $feedback->close($user_id);
     }
 
-    public static function addChat($text){
-    
+    public static function addChat($text, $user_id){
+        $chatline = new ChatLine(array(
+                                    'text' => $text,
+                                    'user_id' => $user_id
+                                    ));
+        $id = $chatline->create();
+        return $id;
     }
 
     public static function getChats($last_id, $date_and_time){

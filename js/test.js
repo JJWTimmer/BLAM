@@ -28,6 +28,7 @@ var chat = {
         var api4 = $('#users-list').jScrollPane().data('jsp');
         var api5 = $('#handle-list').jScrollPane().data('jsp');
         var api6 = $('#ticket-list').jScrollPane().data('jsp');
+        var api7 = $('#allfeedback-list').jScrollPane().data('jsp');
         
 		// We use the working variable to prevent
 		// multiple form submissions:
@@ -193,7 +194,7 @@ var chat = {
 		});
         }, interval);
         
-        // get all tickets
+        // get all tickets with children (recursive)
         setInterval(function(){
             $.tzPOST('getTicketList', {recursive : true, status : [{1: 'Open', 2: 'Nieuw'}]}, function(r) {
             api6.getContentPane().html('');
@@ -215,6 +216,34 @@ var chat = {
 		});
         }, interval);
         
+        // get all feedback requests
+        setInterval(function(){
+            $.tzPOST('getFeedback', {}, function(r) {
+            api7.getContentPane().html('');
+            if (r) {
+                for (var i = 0; i < r.length ; i++) {
+                    api7.getContentPane()
+                        .append($('<p />').text(r[i].title)
+                            .append($('<a />')
+                                .text('[Gemeld]')
+                                .attr('href', '')
+                                .click(function() {
+                                    $.tzPOST('closeFeedback', {id : 1}, function(rs) {});
+                                    return false;
+                                })
+                            )
+                        );
+                }
+            }
+			//if no users are logged in yet
+			if(!r.length){
+				api7.getContentPane().html('<p class="no-feedback">No feedback found</p>');
+			}
+            
+            api7.reinitialise();
+		});
+        }, interval);
+        
 	},
 	
 	// The login method hides displays the
@@ -224,7 +253,7 @@ var chat = {
 		chat.data.userid = id;
 		chat.data.username = username;
         if (avatar == '') {
-            avatar = '/img/unknown.png';
+            avatar = '/img/unknown24x24.png';
         }
 		chat.data.avatar = avatar;
         chat.data.role = role;

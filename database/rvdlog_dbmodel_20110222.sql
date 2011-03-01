@@ -59,10 +59,12 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   `handle_id` int(10) NOT NULL,
   `message` text NOT NULL,
   `called` datetime DEFAULT NULL,
+  `called_by` int(10) NULL,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_feedback_ticket` (`ticket_id`),
   KEY `FK_feedback_handle` (`handle_id`),
+  KEY `FK_feedback_operator` (`called_by`),
   FULLTEXT KEY `IXMessage` (`title`,`message`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 

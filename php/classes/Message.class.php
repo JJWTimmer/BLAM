@@ -14,7 +14,7 @@ class Message extends RVDLogBase {
 		DB::query("
 			INSERT INTO messages (user_id, text, created)
 			VALUES (
-				'" . DB::esc($this->user_id) . "',
+				" . DB::esc($this->user_id) . ",
 				'" . DB::esc($this->text) . "',
                 '" . DB::esc($this->created) . "'
             )

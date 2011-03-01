@@ -16,6 +16,7 @@ require_once "classes/ChatLine.class.php";
 require_once "classes/User.class.php";
 require_once "classes/Handle.class.php";
 require_once "classes/Group.class.php";
+require_once "classes/Feedback.class.php";
 
 session_name('RVDLog');
 session_start();
@@ -97,19 +98,19 @@ try {
 		
 		case 'getFeedback':
             RVDLog::checkLogged();
-			$response = RVDLog::getFeedback();
-            // returns array feedback (integer Id, string Titel, string HandleName, string Message, string userWL, array time (Hours, Minutes)) or exception
+			$response = RVDLog::getFeedback($_POST['id'], $_POST['called']);
+            // returns array (integer Id, string Title, string HandleName, string Message, string userWL, Datetime called, Datetime created)feedback or exception
             break;
 		
 		case 'closeFeedback':
             RVDLog::checkLogged();
-			$response = RVDLog::closeFeedback($_POST['id']);
+			$response = RVDLog::closeFeedback($_POST['id'], $_SESSION['user']['id']);
             // returns null or exception
             break;
 		
 		case 'addChat':
             RVDLog::checkLogged();
-			$response = RVDLog::addChat($_POST['text']);
+			$response = RVDLog::addChat($_POST['text'], $_SESSION['user']['id']);
             // returns ChatId or exception
             break;
 		
