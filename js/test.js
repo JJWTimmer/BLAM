@@ -185,7 +185,6 @@ var chat = {
                 }
 			}
 								
-			//if no users are logged in yet
 			if(!r.length){
 				api5.getContentPane().html('<p class="no-users">No users found</p>');
 			}
@@ -207,7 +206,6 @@ var chat = {
                 }
 			}
 								
-			//if no users are logged in yet
 			if(!r.length){
 				api6.getContentPane().html('<p class="no-tickets">No tickets found</p>');
 			}
@@ -235,7 +233,6 @@ var chat = {
                         );
                 }
             }
-			//if no users are logged in yet
 			if(!r.length){
 				api7.getContentPane().html('<p class="no-feedback">No feedback found</p>');
 			}

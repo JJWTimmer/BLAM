@@ -75,7 +75,7 @@ try {
 		case 'getUsers':
             RVDLog::checkLogged();
 			$response = RVDLog::getUsers($_POST['options']); // accepts 'all' or 'logged'
-            // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
+            // returns array users(integer Id, string Role, string Username, string Avatar) or exception
             break;
 		
 		case 'getGroups':
@@ -116,8 +116,8 @@ try {
 		
 		case 'getChats':
             RVDLog::checkLogged();
-			$response = RVDLog::getChats($_POST['last_id'], $_POST['date']);
-            // returns array chat(int MessageID, string Text, string Username, string Avatar, array time(hours, minutes)) or exception
+			$response = RVDLog::getChats($_POST['last_id'], $_POST['since']);
+            // returns array(int MessageID, string Text, string Username, string Avatar, Datetime created) chats or exception
             break;
 		
 		case 'getTicketTreeNew':

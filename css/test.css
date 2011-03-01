@@ -1,3 +1,7 @@
+.clear {
+    clear: both;
+}
+
 #loginForm {
     border: solid black 1px;
     width: 350px;
@@ -29,7 +33,7 @@
 #messages {
     float: left;
     width: 200px;
-    height: 250px;
+    min-height: 250px;
     margin-left: 10px;
     
 }
@@ -61,7 +65,7 @@
 #message-search {
     float: left;
     width: 200px;
-    height: 250px;
+    min-height: 250px;
     margin-left: 10px;
 }
 

@@ -25,6 +25,31 @@ class ChatLine extends RVDLogBase {
 		return $this->id;
 		
 	}
+    
+    public function get($last_id = 'all', $since = null) {
+        if (is_string($last_id) && $last_id == 'all') {
+            $results = DB::query("
+                SELECT t.id, t.text, t.created, users.username, users.avatar
+                FROM chatlines AS t INNER JOIN users ON t.user_id = users.id
+                ");
+        } elseif (is_numeric($last_id) || strtotime($since)) {
+            $last_id = DB::esc($options['last_id']);
+            $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
+
+            $q = "
+                SELECT t.id, t.text, t.created, users.username, users.avatar
+                FROM chatlines AS t INNER JOIN users ON t.user_id = users.id
+                WHERE t.id > $last_id";
+            $q .= ($since ? " AND t.created > '$since'" : "");
+            $results = DB::query($q);
+        } else {
+            return false;
+        }
+            
+		while ($data[] = mysqli_fetch_assoc($results));
+        if (!is_null($data) && end($data) == null) array_pop($data);
+		return $data;
+	}
 }
 
 ?>

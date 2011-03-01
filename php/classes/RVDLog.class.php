@@ -98,8 +98,9 @@ class RVDLog {
             throw new Exception('No parameters given to getMessages');
         }
         
+        $msg = new Message(array());
+        
         if (is_string($msg_id) && $msg_id == 'all') {
-            $msg = new Message(array());
             $messages = $msg->get('all');
         } else {
             $options = array(
@@ -173,7 +174,9 @@ class RVDLog {
     }
 
     public static function getChats($last_id, $date_and_time){
-        return array();
+        $chatline = new ChatLine(array());
+        $chats = $chatline->get($last_id, $date_and_time);
+        return $chats;
     
     }
 
