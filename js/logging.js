@@ -45,8 +45,7 @@ var logging = {
                 }
                 else    {
                     logging.login(r.username,r.avatar,r.role);
-                    logging.getMessages();
-                    //chat.getUsers();
+                    
                     }
             });
             
@@ -59,6 +58,7 @@ var logging = {
             if(!r.error)
             {
                 logging.login(r.username,r.avatar,r.role);
+                
             }
         });
 
@@ -78,15 +78,7 @@ var logging = {
             return false;
         });
         
-        
-        // Converting the #chatLineHolder div into a jScrollPane,
-        // and saving the plugin's API in chat.data:
-        
-        logging.data.jspAPI = $('#MeldingenList').jScrollPane({
-            verticalDragMinHeight: 12,
-            verticalDragMaxHeight: 12
-        }).data('jsp');
-                
+                              
         // catching when user presses enter
         $('#messagetext').keydown(function(e){
             if(e.which == 13) {
@@ -95,7 +87,6 @@ var logging = {
                 return false
             }
         })
-
 
         // Submitting a new message entry:
         
@@ -113,7 +104,8 @@ var logging = {
             
             // Assigning a temporary ID to the chat:
             var tempID = 't'+Math.round(Math.random()*1000000),
-                params = {
+            
+            params = {
                     messageid : tempID,
                     username  : logging.data.username,
                     avatar  : logging.data.avatar,
@@ -161,7 +153,34 @@ var logging = {
             
             return false;
         });
+    
+        
+        //catching window resizes
+        var resizeTimer = null;
+        $(window).bind('resize', function() {
+        if (resizeTimer) clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(logging.reInitJSP,100);
+        });
 
+        // Converting the #MeldingenList div into a jScrollPane,
+        // and saving the plugin's API in logging.data:
+        
+        logging.data.jspAPI = $('#MeldingenList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+      
+        logging.data.jspAPIUsers = $('#UsersList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
+        // Self executing timeout functions
+
+        (function getUsersTimeoutFunction(){
+            logging.getUsers(getUsersTimeoutFunction);
+        })();
+        
         (function getMessagesTimeoutFunction(){
             logging.getMessages(getMessagesTimeoutFunction);
         })();
@@ -173,9 +192,9 @@ var logging = {
     login : function(username,avatar,role){
         //replace empty avatar filed
        var new_avatar=avatar;
-        if(avatar=="")
+        if((avatar=="") || (avatar=="NULL"))
         {
-        var new_avatar="img/unknown32x32.png";
+        var new_avatar="img/unknown30x30.png";
         }
 
         logging.data.username = username;
@@ -186,6 +205,8 @@ var logging = {
         $('#LoggingLogin').fadeOut(function(){
         $('#LoggingMainContainer').fadeIn();
         $('#LoggingTopContainer').fadeIn();
+        logging.getMessages();
+        logging.getUsers();
         });
     },
 
@@ -246,7 +267,7 @@ var logging = {
     
     addMessageLine : function(params){
                
-        if(params.avatar=="")                   
+        if((params.avatar=="") || (params.avatar=="NULL"))
         {
         params.avatar="img/unknown24x24.png"
         }        
@@ -295,60 +316,42 @@ var logging = {
         logging.data.jspAPI.scrollToBottom(true);
 
     },
+
+// Requesting a list with all the users.
     
+    getUsers : function(callback){
     
-
-        /*		
-				
-				
-				
-					
-		// Self executing timeout functions
-
-
-		
-		
-		
-		(function getUsersTimeoutFunction(){
-			chat.getUsers(getUsersTimeoutFunction);
-		})();
-		
-		
-	},
-	
-		
-	
-	
-	
-	// Requesting a list with all the users.
-	
-	getUsers : function(callback){
-	
-		$.tzGET('getUsers',function(r){
-			
-			var users = [];
-			
-			for(var i=0; i< r.users.length;i++){
-				if(r.users[i]){
-					users.push(chat.render('user',r.users[i]));
-				}
-			}
-			//empty no one is online variable
-			var message = '';
-			
-			if(r.total<1){
-				message = 'No one is online';
-			}
-			else {
-				message = r.total+' '+(r.total == 1 ? 'person':'people')+' online';
-			}
-			
-			users.push('<p class="count">'+message+'</p>');
-			
-			$('#chatUsers').html(users.join(''));
-			
-			setTimeout(callback,15000);
-		});
-	*/
+        $.tzTESTPOST('getUsers',function(r){
+            logging.data.jspAPIUsers.getContentPane().empty();
+            var users = [];
+            var markup;
+            for(var i=0; i< r.users.length;i++){
+                if(r.users[i]){
+                    markup=general.render('user',r.users[i]);
+                    logging.data.jspAPIUsers.getContentPane().append(markup);
+                }
+            }
+            
+            //empty no one is online variable
+            var message = '';
+            
+            if(r.users.length<1){
+                message = 'No one is online';
+            }
+            else {
+                message = r.users.length+' '+(r.users.length == 1 ? 'person':'people')+' online';
+            }
+            
+            logging.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
+            
+            logging.data.jspAPIUsers.reinitialise();
+            
+            setTimeout(callback,15000);
+        });     
+    },
+        reInitJSP : function(){
+            logging.data.jspAPI.reinitialise();
+            logging.data.jspAPIUsers.reinitialise();
+        }
 };
 //end of logging var

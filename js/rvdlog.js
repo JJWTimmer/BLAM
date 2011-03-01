@@ -21,9 +21,14 @@ var general = {
             break;
                             
             case 'user':
+                var new_avatar=params.avatar;
+                if((params.avatar=="")||(params.avatar=="NULL"))
+                {
+                var new_avatar="img/unknown30x30.png";
+                }
                 arr = [
                     '<div class="user" title="',params.username,'"><img src="',
-                    params.avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
+                    new_avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
                 ];
             break;
             

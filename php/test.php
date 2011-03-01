@@ -82,7 +82,7 @@ try {
                 {
                 switch($rand){
                 case 1:
-                $text="Hello neo!";
+                $text="Knock, knock, Neo";
                 break;
                 
                 case 2:
@@ -90,9 +90,21 @@ try {
                 break;
                 
                 case 3:
-                $text="The Matrix is the world that has been pulled over your eyes to blind you from the truth.";
+                $text="Don't think you are, know you are";
                 break;
                 
+                case 4:
+                $text="Come on. Stop trying to hit me and hit me.";
+                break;                
+
+                case 5:
+                $text="There is no spoon";
+                break;
+
+                case 5:
+                $text="Do you hear that, Mr. Anderson? That is the sound of inevitability.";
+                break;
+
                 default:
                 $text="test";
                 }
@@ -121,6 +133,28 @@ try {
 		
 		case 'getUsers':
 			$response = RVDLog::getUsers();
+            $users[] = array(
+                    'id'        => 1,
+                    'role'  => "RVD",
+                    'username'  => "Femke",
+                    'avatar' => ""
+                    );
+            $users[] = array(
+                    'id'        => 2,
+                    'role'  => "RVD",
+                    'username'  => "Anne",
+                    'avatar' => "img/anne.jpg"
+                    );
+            for ($i=1;$i<=30;$i++)
+            {
+            $users[] = array(
+                    'id'        => $i+2,
+                    'role'  => "WL",
+                    'username'  => "Chinees ".$i,
+                    'avatar' => ""
+                    );
+            }
+            $response = array('users' => $users, 'total' => 2);
             // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
             break;
 		
