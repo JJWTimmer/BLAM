@@ -166,7 +166,7 @@ position:absolute;
 	width:96%;
 	height:98%;
     /*padding is to solve JSPbar problem in combo with user margin*/
-    padding: 1% 0 1% 4%;
+    padding: 1% 0% 1% 4%;
 	background: #202020;
     border:1px solid #111111;
 }
@@ -255,7 +255,7 @@ position:absolute;
     margin-top:8px;
     margin-left:10px;
     width:32px;
-    background:url('../img/unknown32x32.png') no-repeat;
+    background:url('../img/unknown30x30.png') no-repeat;
 }
 
 /* TopBar */
@@ -404,7 +404,7 @@ p.label_checkbox_pair label{
 /* users */
 
 #UsersList .user{
-    background:url('img/unknown30x30.png') no-repeat 1px 1px #444444;
+    background:url('../img/unknown30x30.png') no-repeat 1px 1px #444444;
     border:1px solid #111111;
     float:left;
     height:32px;

@@ -132,7 +132,7 @@ try {
             break;
 		
 		case 'getUsers':
-			$response = RVDLog::getUsers();
+			
             $users[] = array(
                     'id'        => 1,
                     'role'  => "RVD",

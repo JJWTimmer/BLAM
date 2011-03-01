@@ -10,7 +10,7 @@ var logging = {
 	// data holds variables for use in the class:
 	
 	data : {
-		lastID 		: 0,
+		lastID 		: 1,
 		noActivity	: 0
 	},
 	
@@ -133,7 +133,7 @@ var logging = {
                 var strformData = $('#submitForm').serialize()+"&ticket=False";
                 var blnticket = false;
             }
-            $.tzTESTPOST('addMessage',{text: text,ticket: blnticket},function(r){
+            $.tzPOST('addMessage',{text: text,ticket: blnticket},function(r){
             //$.tzTESTPOST('addMessage',strformData,function(r){
             
                 working = false;
@@ -177,13 +177,13 @@ var logging = {
 
         // Self executing timeout functions
 
-        (function getUsersTimeoutFunction(){
+        /*(function getUsersTimeoutFunction(){
             logging.getUsers(getUsersTimeoutFunction);
         })();
         
         (function getMessagesTimeoutFunction(){
             logging.getMessages(getMessagesTimeoutFunction);
-        })();
+        })();*/
     },
     //end of init function
 
@@ -191,10 +191,10 @@ var logging = {
     // user's login data and shows the submit form
     login : function(username,avatar,role){
         //replace empty avatar filed
-       var new_avatar=avatar;
+        var new_avatar=avatar;
         if((avatar=="") || (avatar=="NULL"))
         {
-        var new_avatar="img/unknown30x30.png";
+        new_avatar="img/unknown30x30.png";
         }
 
         logging.data.username = username;
@@ -213,21 +213,20 @@ var logging = {
     // This method requests the latest messages
     // (since lastID), and adds them to the page.
     
-    getMessages : function(callback){
-            
-        $.tzTESTPOST('getMessages',{last_id: logging.data.lastID,date_and_time: '2:0:0'},function(r){
-            //update messages from mysql db
-            for(var i=0;i<r.messages.length;i++){
-                
-                logging.addMessageLine(r.messages[i]);
-                        
+    getMessages : function(){
+        $.tzPOST('getMessages',{last_id: logging.data.lastID},function(r){
+        //update messages from mysql db            
+            if(!r.error)
+            {
+            for(var i=0;i<r.length;i++){
+                logging.addMessageLine(r[i]);
             }
             //if new messages, update to lastid
             //message.data.noActivity is reset, so next update in 1 second
             
-            if(r.messages.length){
+            if(r.length){
                 logging.data.noActivity = 0;
-                logging.data.lastID = r.messages[i-1].messageid;
+                logging.data.lastID = r[i-1].id;
                 }
             else{
                 // If no messages were received, increment
@@ -258,7 +257,14 @@ var logging = {
             //if(logging.data.noActivity > 20){
             //    nextRequest = 15000;
             //}
-            setTimeout(callback,nextRequest);
+            }
+            else
+            {
+                general.displayError(r.error);
+            }
+            var nextRequest = 1000;
+            setTimeout("logging.getMessages();",nextRequest);
+            
         });
     },
 
@@ -301,7 +307,7 @@ var logging = {
         }
         
         //If this isn't a temporary chat:
-        if(params.messageid.toString().charAt(0) != 't'){
+        if(params.id.toString().charAt(0) != 't'){
             var previous = $('#MeldingenList .message-'+(+params.messageid - 1));
             if(previous.length){
                 previous.after(markup);
@@ -319,35 +325,42 @@ var logging = {
 
 // Requesting a list with all the users.
     
-    getUsers : function(callback){
+    getUsers : function(){
     
-        $.tzTESTPOST('getUsers',function(r){
-            logging.data.jspAPIUsers.getContentPane().empty();
-            var users = [];
-            var markup;
-            for(var i=0; i< r.users.length;i++){
-                if(r.users[i]){
-                    markup=general.render('user',r.users[i]);
-                    logging.data.jspAPIUsers.getContentPane().append(markup);
+        $.tzPOST('getUsers',{options:'logged'},function(r){
+            if(!r.error)
+            {
+                logging.data.jspAPIUsers.getContentPane().empty();
+                var users = [];
+                var markup;
+                for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('user',r[i]);
+                        logging.data.jspAPIUsers.getContentPane().append(markup);
+                    }
                 }
-            }
             
-            //empty no one is online variable
-            var message = '';
+                //empty no one is online variable
+                var message = '';
             
-            if(r.users.length<1){
-                message = 'No one is online';
-            }
-            else {
-                message = r.users.length+' '+(r.users.length == 1 ? 'person':'people')+' online';
-            }
+                if(r.length<1){
+                    message = 'No one is online';
+                }
+                else {
+                    message = r.length+' '+(r.length == 1 ? 'person':'people')+' online';
+                }
             
-            logging.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
+                logging.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
             
-            logging.data.jspAPIUsers.reinitialise();
-            
-            setTimeout(callback,15000);
-        });     
+                logging.data.jspAPIUsers.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+                setTimeout("logging.getUsers();",15000);
+                
+            });     
     },
         reInitJSP : function(){
             logging.data.jspAPI.reinitialise();
