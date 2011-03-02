@@ -112,14 +112,14 @@ var logging = {
                     text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
                 };
             
-            // Using our addChatLine method to add the chat
+            // Using our addMessageLine method to add the chat
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
             
             logging.addMessageLine($.extend({},params));
             
             
-            // Using our tzPOST wrapper method to send the chat
+            // Using our tzPOST wrapper method to send the message
             // via a POST AJAX request:
             var inputcheckbox = $('#ticket:checked').val();
             
@@ -265,7 +265,7 @@ var logging = {
     },
 
 
-// The addMessageLine method ads a chat entry to the page
+// The addMessageLine method ads a message entry to the page
     
     addMessageLine : function(params){
                
