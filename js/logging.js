@@ -275,19 +275,18 @@ var logging = {
         }        
 
         var d = new Date();
+        if(params.created) {
 
-        if(params.time) {
-            
             // PHP returns the time in UTC (GMT). We use it to feed the date
             // object and later output it in the user's timezone. JavaScript
             // internally converts it for us.
-            
-            d.setUTCHours(params.time.hours,params.time.minutes);
+            var date_time=params.created.split(" ");
+            var time=date_time[1].split(":");
+            //d.setUTCHours(time[0],time[1]);
         }
         
-        params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
-                      (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-         
+        //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
+        params.time = time[0]+':'+time[1];
         var markup = general.render('messageLine',params),
             exists = $('#MeldingenList .message-'+params.id);
         
