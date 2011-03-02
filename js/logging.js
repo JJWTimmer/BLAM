@@ -106,20 +106,20 @@ var logging = {
             var tempID = 't'+Math.round(Math.random()*1000000),
             
             params = {
-                    messageid : tempID,
+                    id : tempID,
                     username  : logging.data.username,
                     avatar  : logging.data.avatar,
                     text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
                 };
             
-            // Using our addChatLine method to add the chat
+            // Using our addMessageLine method to add the chat
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
             
             logging.addMessageLine($.extend({},params));
             
             
-            // Using our tzPOST wrapper method to send the chat
+            // Using our tzPOST wrapper method to send the message
             // via a POST AJAX request:
             var inputcheckbox = $('#ticket:checked').val();
             
@@ -134,8 +134,7 @@ var logging = {
                 var blnticket = false;
             }
             $.tzPOST('addMessage',{text: text,ticket: blnticket},function(r){
-            //$.tzTESTPOST('addMessage',strformData,function(r){
-            
+            if(!r.error){
                 working = false;
                 //empty input form textbox
                 $('#messagetext').val('');
@@ -147,8 +146,14 @@ var logging = {
                 $('div.message-'+tempID).remove();
                 
                 //insert newly received ID
-                params['messageid'] = r.messageid;
+                params['id'] = r.id;
                 logging.addMessageLine($.extend({},params));
+                }
+            else
+                {
+                general.displayError(r.error);
+                }
+
             });
             
             return false;
@@ -175,15 +180,6 @@ var logging = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 
-        // Self executing timeout functions
-
-        /*(function getUsersTimeoutFunction(){
-            logging.getUsers(getUsersTimeoutFunction);
-        })();
-        
-        (function getMessagesTimeoutFunction(){
-            logging.getMessages(getMessagesTimeoutFunction);
-        })();*/
     },
     //end of init function
 
@@ -211,10 +207,10 @@ var logging = {
     },
 
     // This method requests the latest messages
-    // (since lastID), and adds them to the page.
+    // (since last_id,timestamp), and adds them to the page. currently 24 hours past messages
     
     getMessages : function(){
-        $.tzPOST('getMessages',{last_id: logging.data.lastID},function(r){
+        $.tzPOST('getMessages',{last_id:logging.data.lastID,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
         //update messages from mysql db            
             if(!r.error)
             {
@@ -245,18 +241,18 @@ var logging = {
             var nextRequest = 1000;
             
             // 2 seconds
-            //if(logging.data.noActivity > 3){
-            //    nextRequest = 2000;
-            //}
+            if(logging.data.noActivity > 3){
+                nextRequest = 2000;
+            }
             
-            //if(logging.data.noActivity > 10){
-            //    nextRequest = 5000;
-            //}
+            if(logging.data.noActivity > 10){
+                nextRequest = 5000;
+            }
             
             // 15 seconds
-            //if(logging.data.noActivity > 20){
-            //    nextRequest = 15000;
-            //}
+            if(logging.data.noActivity > 20){
+                nextRequest = 15000;
+            }
             }
             else
             {
@@ -269,7 +265,7 @@ var logging = {
     },
 
 
-// The addMessageLine method ads a chat entry to the page
+// The addMessageLine method ads a message entry to the page
     
     addMessageLine : function(params){
                
@@ -279,21 +275,20 @@ var logging = {
         }        
 
         var d = new Date();
+        if(params.created) {
 
-        if(params.time) {
-            
             // PHP returns the time in UTC (GMT). We use it to feed the date
             // object and later output it in the user's timezone. JavaScript
             // internally converts it for us.
-            
-            d.setUTCHours(params.time.hours,params.time.minutes);
+            var date_time=params.created.split(" ");
+            var time=date_time[1].split(":");
+            //d.setUTCHours(time[0],time[1]);
         }
         
-        params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
-                      (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-         
+        //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
+        params.time = time[0]+':'+time[1];
         var markup = general.render('messageLine',params),
-            exists = $('#MeldingenList .message-'+params.messageid);
+            exists = $('#MeldingenList .message-'+params.id);
         
         if(exists.length){
             exists.remove();
@@ -308,7 +303,7 @@ var logging = {
         
         //If this isn't a temporary chat:
         if(params.id.toString().charAt(0) != 't'){
-            var previous = $('#MeldingenList .message-'+(+params.messageid - 1));
+            var previous = $('#MeldingenList .message-'+(+params.id - 1));
             if(previous.length){
                 previous.after(markup);
             }
