@@ -116,7 +116,7 @@ try {
 		
 		case 'getChats':
             RVDLog::checkLogged();
-			$response = RVDLog::getChats($_POST['last_id'], $_POST['since']);
+			$response = RVDLog::getChats($_POST['last_id'], $_POST['since']);//last_id is mandatory, id or 'all'
             // returns array(int MessageID, string Text, string Username, string Avatar, Datetime created) chats or exception
             break;
 		
