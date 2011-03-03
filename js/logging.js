@@ -1,69 +1,88 @@
 $(document).ready(function(){
-	
-	// Run the init method on document ready:
-	logging.init();
-	
+
+  // Run the init method on document ready:
+  logging.init();
+
 });
 
 var logging = {
-	
-	// data holds variables for use in the class:
-	
-	data : {
-		lastID 		: 1,
-		noActivity	: 0
-	},
-	
-	// Init binds event listeners and sets up timers:
-	
-	init : function(){
-        
+
+  // data holds variables for use in the class:
+
+  data : {
+    lastID    : 1,
+    noActivity  : 0
+  },
+
+  // Init binds event listeners and sets up timers:
+
+  init : function(){
+
         // add listener for this button
         $('#submitbutton').bind('click',function(){
         $('#submitForm').submit();
         });
-        	
-		// Using the defaultText jQuery plugin, included at the bottom:
-		$('#name').defaultText('Nickname');
-		$('#password').defaultText('Password');
-		
+
+    // Using the defaultText jQuery plugin, included at the bottom:
+    $('#name').defaultText('Nickname');
+    $('#password').defaultText('Password');
+
         // We use the working variable to prevent multiple form submissions:
         var working = false;
+
+        // Converting the #MeldingenList, #UsersList, #HandlesList divs into a jScrollPane,
+        // and saving the plugin's API in logging.data:
+
+        logging.data.jspAPI = $('#MeldingenList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
+        logging.data.jspAPIUsers = $('#UsersList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
+        logging.data.jspAPIHandles = $('#HandlesList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
 
         // Logging a person in the chat:
         $('#loginForm').submit(function(){
             if(working) return false;
             working = true;
-            
+
             // Using our tzPOST wrapper function (defined in the bottom):
             //$(this).serialize encodes all the name form elements to be used by php
             $.tzPOST('login',$(this).serialize(),function(r){
                 working = false;
-                
+
                 if(r.error){
                     general.displayError(r.error);
                 }
                 else    {
                     logging.login(r.username,r.avatar,r.role);
-                    
+
                     }
             });
-            
+
             return false;
         });
 
         // Checking whether the user is already logged (browser refresh)
-        
+
         $.tzPOST('checkLogged',function(r){
             if(!r.error)
             {
                 logging.login(r.username,r.avatar,r.role);
-                
+
             }
         });
 
         // Logging the user out:
-        
+
         $('a.logoutButton').live('click',function(){
             $('#LoggingTopContainer > span').fadeOut(function(){
                 $(this).remove();
@@ -72,13 +91,12 @@ var logging = {
             $('#LoggingMainContainer').fadeOut(function(){
                 $('#LoggingLogin').fadeIn();
             });
-            
+
             $.tzPOST('logout');
-            
+
             return false;
         });
-        
-                              
+
         // catching when user presses enter
         $('#messagetext').keydown(function(e){
             if(e.which == 13) {
@@ -89,46 +107,46 @@ var logging = {
         })
 
         // Submitting a new message entry:
-        
+
         $('#submitForm').submit(function(){
-            
+
             var text = $('#messagetext').val();
-            
+
             if(text.length == 0){
                 return false;
             }
-            
+
             if(working) return false;
             working = true;
-            
-            
+
+
             // Assigning a temporary ID to the chat:
             var tempID = 't'+Math.round(Math.random()*1000000),
-            
+
             params = {
                     id : tempID,
                     username  : logging.data.username,
                     avatar  : logging.data.avatar,
                     text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
                 };
-            
+
             // Using our addMessageLine method to add the chat
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
-            
+
             logging.addMessageLine($.extend({},params));
-            
-            
+
+
             // Using our tzPOST wrapper method to send the message
             // via a POST AJAX request:
             var inputcheckbox = $('#ticket:checked').val();
-            
+
             if(inputcheckbox!=undefined)
             {
                 var strformData = $('#submitForm').serialize()+"&ticket=True";
                 var blnticket = true;
             }
-            else 
+            else
             {
                 var strformData = $('#submitForm').serialize()+"&ticket=False";
                 var blnticket = false;
@@ -144,7 +162,7 @@ var logging = {
                 }
                 //remove old temporary message
                 $('div.message-'+tempID).remove();
-                
+
                 //insert newly received ID
                 params['id'] = r.id;
                 logging.addMessageLine($.extend({},params));
@@ -155,11 +173,11 @@ var logging = {
                 }
 
             });
-            
+
             return false;
         });
-    
-        
+
+
         //catching window resizes
         var resizeTimer = null;
         $(window).bind('resize', function() {
@@ -167,18 +185,6 @@ var logging = {
             resizeTimer = setTimeout(logging.reInitJSP,100);
         });
 
-        // Converting the #MeldingenList div into a jScrollPane,
-        // and saving the plugin's API in logging.data:
-        
-        logging.data.jspAPI = $('#MeldingenList').jScrollPane({
-            verticalDragMinHeight: 12,
-            verticalDragMaxHeight: 12
-        }).data('jsp');
-      
-        logging.data.jspAPIUsers = $('#UsersList').jScrollPane({
-            verticalDragMinHeight: 12,
-            verticalDragMaxHeight: 12
-        }).data('jsp');
 
     },
     //end of init function
@@ -203,15 +209,16 @@ var logging = {
         $('#LoggingTopContainer').fadeIn();
         logging.getMessages();
         logging.getUsers();
+        logging.getHandles();
         });
     },
 
     // This method requests the latest messages
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past messages
-    
+
     getMessages : function(){
         $.tzPOST('getMessages',{last_id:logging.data.lastID,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
-        //update messages from mysql db            
+        //update messages from mysql db
             if(!r.error)
             {
             for(var i=0;i<r.length;i++){
@@ -219,7 +226,7 @@ var logging = {
             }
             //if new messages, update to lastid
             //message.data.noActivity is reset, so next update in 1 second
-            
+
             if(r.length){
                 logging.data.noActivity = 0;
                 logging.data.lastID = r[i-1].id;
@@ -227,28 +234,28 @@ var logging = {
             else{
                 // If no messages were received, increment
                 // the noActivity counter.
-                
+
                 logging.data.noActivity++;
             }
             //if no chats exist yet
             if(!logging.data.lastID){
                 logging.data.jspAPI.getContentPane().html('<p class="noMessages">No messages yet</p>');
             }
-            
+
             // Setting a timeout for the next request,
             // depending on the message activity:
-            
+
             var nextRequest = 1000;
-            
+
             // 2 seconds
             if(logging.data.noActivity > 3){
                 nextRequest = 2000;
             }
-            
+
             if(logging.data.noActivity > 10){
                 nextRequest = 5000;
             }
-            
+
             // 15 seconds
             if(logging.data.noActivity > 20){
                 nextRequest = 15000;
@@ -260,47 +267,49 @@ var logging = {
             }
             var nextRequest = 1000;
             setTimeout("logging.getMessages();",nextRequest);
-            
+
         });
     },
 
 
 // The addMessageLine method ads a message entry to the page
-    
+
     addMessageLine : function(params){
-               
+
         if((params.avatar=="") || (params.avatar=="NULL"))
         {
         params.avatar="img/unknown24x24.png"
-        }        
+        }
 
         var d = new Date();
+        var strTime="";
         if(params.created) {
 
             // PHP returns the time in UTC (GMT). We use it to feed the date
             // object and later output it in the user's timezone. JavaScript
             // internally converts it for us.
             var date_time=params.created.split(" ");
-            var time=date_time[1].split(":");
+            var time = date_time[1].split(":");
+            var strTime=time[0]+':'+time[1];
             //d.setUTCHours(time[0],time[1]);
         }
-        
+
         //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-        params.time = time[0]+':'+time[1];
+        params.time = strTime;
         var markup = general.render('messageLine',params),
             exists = $('#MeldingenList .message-'+params.id);
-        
+
         if(exists.length){
             exists.remove();
         }
-        
+
         if(!logging.data.lastID){
             // If this is the first chat, remove the
             // paragraph saying there aren't any:
-            
+
             $('#MeldingenList p').remove();
         }
-        
+
         //If this isn't a temporary chat:
         if(params.id.toString().charAt(0) != 't'){
             var previous = $('#MeldingenList .message-'+(+params.id - 1));
@@ -310,7 +319,7 @@ var logging = {
             else logging.data.jspAPI.getContentPane().append(markup);
         }
         else logging.data.jspAPI.getContentPane().append(markup);
-        
+
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
         logging.data.jspAPI.reinitialise();
@@ -319,47 +328,88 @@ var logging = {
     },
 
 // Requesting a list with all the users.
-    
+
     getUsers : function(){
-    
+
         $.tzPOST('getUsers',{options:'logged'},function(r){
             if(!r.error)
-            {
-                logging.data.jspAPIUsers.getContentPane().empty();
-                var users = [];
-                var markup;
-                for(var i=0; i< r.length;i++){
+                {
+                  logging.data.jspAPIUsers.getContentPane().empty();
+                  var users = [];
+                  var markup;
+                  for(var i=0; i< r.length;i++){
                     if(r[i]){
                         markup=general.render('user',r[i]);
                         logging.data.jspAPIUsers.getContentPane().append(markup);
                     }
-                }
-            
-                //empty no one is online variable
-                var message = '';
-            
-                if(r.length<1){
+                  }
+
+                  //empty no one is online variable
+                  var message = '';
+
+                  if(r.length<1){
                     message = 'No one is online';
-                }
-                else {
+                  }
+                  else {
                     message = r.length+' '+(r.length == 1 ? 'person':'people')+' online';
-                }
-            
-                logging.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
-            
-                logging.data.jspAPIUsers.reinitialise();
+                  }
+
+                  logging.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
+
+                  logging.data.jspAPIUsers.reinitialise();
                 }
                 else
                 {
                     general.displayError(r.error);
                 }
                 setTimeout("logging.getUsers();",15000);
-                
-            });     
+
+            });
+    },
+            // Requesting a list with all the handles
+
+    getHandles : function(){
+        $.tzPOST('getGroups',{recursive:'true'},function(r){
+            if(!r.error)
+                {
+                logging.data.jspAPIHandles.getContentPane().empty();
+
+                var markup_group;
+                var markup_handle;
+                for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup_group=general.render('groups',r[i]);
+                        logging.data.jspAPIHandles.getContentPane().append(markup_group);
+                        if (!(typeof r[i]['handles'] === 'undefined')) {
+                          for (var j = 0; j < r[i]['handles'].length; j++) {
+                            markup_handle=general.render('handles',r[i]['handles'][j]);
+                            logging.data.jspAPIHandles.getContentPane().append(markup_handle);
+                          }
+                        }
+                    }
+                }
+
+                //empty no groups
+
+                if(r.length<1){
+                    var message = 'No groups exist';
+                    logging.data.jspAPIHandles.getContentPane().append('<p class="count">'+message+'</p>');
+                }
+                logging.data.jspAPIHandles.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+                setTimeout("logging.getHandles();",60000);
+
+            });
+
     },
         reInitJSP : function(){
             logging.data.jspAPI.reinitialise();
             logging.data.jspAPIUsers.reinitialise();
+            logging.data.jspAPIHandles.reinitialise();
         }
 };
 //end of logging var

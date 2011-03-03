@@ -1,25 +1,25 @@
 
 var general = {
 
-    // The render method generates the HTML markup 
+    // The render method generates the HTML markup
     // that is needed by the other methods:
     render : function(template,params){
-        
+
         var arr = [];
         switch(template){
             case 'loginTopBar':
-                              
+
                 arr = [
                 '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_headers">username</th><th class="Topbar_headers">Role</th></tr><tr>','<td class="Topbar_username">',params.username,'</td><td class="Topbar_role">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
-                
+
             break;
-    
+
             case 'messageLine':
                 arr = [
                 '<div class="message message-',params.id,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
-                
+
             break;
-                            
+
             case 'user':
                 var new_avatar=params.avatar;
                 if((params.avatar=="")||(params.avatar=="NULL"))
@@ -31,34 +31,46 @@ var general = {
                     new_avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
                 ];
             break;
-            
+
+            case 'groups':
+                arr = [
+                    '<div class="groups rounded"><p>',params.name,'</p></div>'
+                ];
+						break;
+
+            case 'handles':
+                arr = [
+                    '<div class="handles rounded"><div class=handlename><p>',params.handle_name,'</p></div><div class=handledescription><p>',params.description,'</p></div></div>'
+                ];
+
+            break;
         }
-        
+
         // A single array join is faster than
         // multiple concatenations
-        
+
         return arr.join('');
-    
+
     },
 
 // This method displays an error message on the top of the page:
     displayError : function(msg){
-    
+
         var elem = $('<div>',{
             id      : 'chatErrorMessage',
             html    : msg
         });
-        
+
         elem.click(function(){
             $(this).fadeOut(function(){
                 $(this).remove();
             });
         });
-        
+
         setTimeout(function(){
             elem.click();
         },5000);
-        
+
         elem.hide().appendTo('body').slideDown();
     },
 
@@ -82,10 +94,10 @@ $.tzGET = function(action,data,callback){
 // A custom jQuery method for placeholder text:
 // Can be applied to any textbox
 $.fn.defaultText = function(value){
-    
+
     var element = this.eq(0);
     element.data('defaultText',value);
-    
+
     element.focus(function(){
         if(element.val() == value){
             element.val('').removeClass('defaultText');
@@ -95,6 +107,6 @@ $.fn.defaultText = function(value){
             element.addClass('defaultText').val(value);
         }
     });
-    
+
     return element.blur();
 }
