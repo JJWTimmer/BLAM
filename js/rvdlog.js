@@ -36,7 +36,7 @@ var general = {
                 arr = [
                     '<div class="groups rounded"><p>',params.name,'</p></div>'
                 ];
-						break;
+            break;
 
             case 'handles':
                 arr = [
@@ -44,6 +44,18 @@ var general = {
                 ];
 
             break;
+
+            case 'parentticket':
+                arr = [
+                    '<div class="parentticket rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                ];
+            break;
+            case 'parentticketextra':
+                arr = [
+                    '<div class="parentticketextra rounded"><p>Melding:</p><p>',params.text,'</p><p>Status:</p><p>',params.status,'</p><p>WL contactpersoon:</p><p>',params.user,'</p><p>tijd melding:</p><p>',params.created,'</p><p>laatste wijziging:</p><p>',params.modified,'</p></div>'
+                ];
+            break;
+
         }
 
         // A single array join is faster than

@@ -48,6 +48,23 @@ var logging = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 
+        logging.data.jspAPITickets = $('#TicketsList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
+        $('div.parentticket').live('click', function(){
+          if($(this).attr("id")!=logging.data.selectedticket)
+            {
+            logging.data.selectedticket=$(this).attr("id");
+            }
+          else
+            {
+            logging.data.selectedticket=0;
+            }
+          window.clearTimeout(logging.data.idTicketTimeout);
+          logging.getTickets();
+        });
 
         // Logging a person in the chat:
         $('#loginForm').submit(function(){
@@ -133,25 +150,12 @@ var logging = {
             // Using our addMessageLine method to add the chat
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
-
             logging.addMessageLine($.extend({},params));
-
 
             // Using our tzPOST wrapper method to send the message
             // via a POST AJAX request:
             var inputcheckbox = $('#ticket:checked').val();
-
-            if(inputcheckbox!=undefined)
-            {
-                var strformData = $('#submitForm').serialize()+"&ticket=True";
-                var blnticket = true;
-            }
-            else
-            {
-                var strformData = $('#submitForm').serialize()+"&ticket=False";
-                var blnticket = false;
-            }
-            $.tzPOST('addMessage',{text: text,ticket: blnticket},function(r){
+            $.tzPOST('addMessage',$(this).serialize(),function(r){
             if(!r.error){
                 working = false;
                 //empty input form textbox
@@ -210,6 +214,7 @@ var logging = {
         logging.getMessages();
         logging.getUsers();
         logging.getHandles();
+        logging.getTickets();
         });
     },
 
@@ -264,8 +269,9 @@ var logging = {
             else
             {
                 general.displayError(r.error);
+                var nextRequest = 1000;
             }
-            var nextRequest = 1000;
+
             setTimeout("logging.getMessages();",nextRequest);
 
         });
@@ -402,14 +408,51 @@ var logging = {
                     general.displayError(r.error);
                 }
                 setTimeout("logging.getHandles();",60000);
-
             });
 
     },
+
+    getTickets : function(){
+        $.tzPOST('getTicketList',{recursive : true, status : [{1: 'Open', 2: 'Nieuw'}]},function(r){
+            if(!r.error)
+                {
+                logging.data.jspAPITickets.getContentPane().empty();
+
+                var markup;
+                var markup_extra;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('parentticket',r[i]);
+                        logging.data.jspAPITickets.getContentPane().append(markup);
+                        if (r[i].id == logging.data.selectedticket) {
+                            markup_extra=general.render('parentticketextra',r[i]);
+                            logging.data.jspAPITickets.getContentPane().append(markup_extra);
+                          }
+                    }
+                  }
+                //empty no tickets
+
+                  if(r.length<1){
+                    var message = 'No tickets exist';
+                    logging.data.jspAPITickets.getContentPane().append('<p class="count">'+message+'</p>');
+                    }
+                logging.data.jspAPITickets.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+                logging.data.idTicketTimeout=setTimeout("logging.getTickets();",15000);
+
+        });
+
+    },
+
         reInitJSP : function(){
             logging.data.jspAPI.reinitialise();
             logging.data.jspAPIUsers.reinitialise();
             logging.data.jspAPIHandles.reinitialise();
+            logging.data.jspAPITickets.reinitialise();
         }
 };
 //end of logging var
