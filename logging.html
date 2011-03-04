@@ -10,7 +10,7 @@
 
         <!-- second the general css -->
         <link rel="stylesheet" type="text/css" href="css/rvdlog.css" />
-        
+
         <!-- last the page specific css -->
         <link rel="stylesheet" type="text/css" href="css/logging.css" />
 
@@ -23,11 +23,11 @@
 
         <!-- general javascript -->
         <script type="text/javascript" src="js/rvdlog.js"></script>
-        
+
 
     <!-- page specific javascript -->
     <script type="text/javascript" src="js/logging.js"></script>
-    
+
     </head>
 
     <body>
@@ -50,9 +50,9 @@
                 </div>
                 <div id="TextEntry" class=rounded>
                         <form id="submitForm" method="post" action="">
-                            <textarea rows="1" cols="1" id="messagetext" name="messagetext" class="rounded" maxlength="700"></textarea>
+                            <textarea rows="1" cols="1" id="messagetext" name="text" class="rounded" maxlength="700"></textarea>
                             <p class="label_checkbox_pair">
-                            <input type="checkbox" id="ticket" value="gen_Ticket" /> 
+                            <input type="checkbox" id="ticket" name="ticket" />
                             <label for="ticket">Genereer ticket?</label>
                             </p>
                             <input type="button" id="submitbutton" class="blueButton" value="submit"/>
@@ -87,6 +87,6 @@
                 </form>
             <div>
         </div>
-        
+
     </body>
 </html>
