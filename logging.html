@@ -31,54 +31,52 @@
     </head>
 
     <body>
-        <div id="LoggingTopContainer" class=rounded></div>
-        <div id="LoggingMainContainer">
+        <div id="TopContainer" class=rounded></div>
+        <div id="MainContainer">
             <div id="LoggingMeldingenContainer">
-                <div id="SearchMeldingen" class=rounded>
-                <form id="searchForm" method="post" action="">
-                            <input type="text" id="keyword" name="keyword"/>
-                            <input type="button" id="searchbutton" class="blueButton" value="search"/>
-                </form>
-                <input type="button" id="messageButton" class="blueButton" value="Hervat meldingen"/>
-                </div>
-          <div id="Handles">
-                    <div id="HandlesHeader" class=rounded><p>Roepnamen</p></div>
-                    <div id="HandlesList" class=rounded></div>
-                </div>
-            <div id="Meldingen">
-                    <div id="MeldingenHeader" class=rounded><p>Meldingen</p></div>
-                    <div id="MeldingenList" class=rounded></div>
-                </div>
-                <div id="Users">
-                    <div id="UsersHeader" class=rounded><p>Users</p></div>
-                    <div id="UsersList" class=rounded>
-                    </div>
-                </div>
-                <div id="TextEntry" class=rounded>
-                        <form id="submitForm" method="post" action="">
-                            <textarea rows="1" cols="1" id="messagetext" name="text" class="rounded" maxlength="700"></textarea>
-                            <p class="label_checkbox_pair">
-                            <input type="checkbox" id="ticket" name="ticket" />
-                            <label for="ticket">Genereer ticket?</label>
-                            </p>
-                            <input type="button" id="submitbutton" class="blueButton" value="submit"/>
-                        </form>
-
-                </div>
+              <div id="SearchMeldingen" class=rounded>
+                  <form id="searchForm" method="post" action="">
+                    <input type="text" id="keyword" name="keyword"/>
+                    <input type="button" id="searchbutton" class="blueButton" value="search"/>
+                  </form>
+                  <input type="button" id="messageButton" class="blueButton" value="Hervat meldingen"/>
+              </div>
+              <div id="Handles">
+                    <div id="HandlesHeader" class="header rounded"><p>Roepnamen</p></div>
+                    <div id="HandlesList" class="list rounded"></div>
+              </div>
+              <div id="Meldingen">
+                    <div id="MeldingenHeader" class="header rounded"><p>Meldingen</p></div>
+                    <div id="MeldingenList" class="list rounded"></div>
+              </div>
+              <div id="Users">
+                  <div id="UsersHeader" class="header rounded"><p>Users</p></div>
+                  <div id="UsersList" class="list rounded"></div>
+              </div>
+              <div id="TextEntry" class=rounded>
+                  <form id="submitForm" method="post" action="">
+                     <textarea rows="1" cols="1" id="messagetext" name="text" class="rounded" maxlength="700"></textarea>
+                     <p class="label_checkbox_pair">
+                     <input type="checkbox" id="ticket" name="ticket" />
+                     <label for="ticket">Genereer ticket?</label>
+                     </p>
+                     <input type="button" id="submitbutton" class="blueButton" value="submit"/>
+                  </form>
+              </div>
             </div>
             <div id="LoggingExtraContainer">
                 <div id="Tickets">
-                    <div id="TicketsHeader" class=rounded><p>Tickets</p></div>
-                    <div id="TicketsList" class=rounded></div>
+                    <div id="TicketsHeader" class="header rounded"><p>Tickets</p></div>
+                    <div id="TicketsList" class="list rounded"></div>
                 </div>
                 <div id="Feedback">
-                    <div id="FeedbackHeader" class=rounded><p>Feedback</p></div>
-                    <div id="FeedbackList" class=rounded></div>
+                    <div id="FeedbackHeader" class="header rounded"><p>Feedback</p></div>
+                    <div id="FeedbackList" class="list rounded"></div>
                 </div>
             </div>
         </div>
-        <div id="LoggingLogin" align="center">
-            <div id="LoggingLoginWindow" class=rounded>
+        <div id="Login" align="center">
+            <div id="LoginWindow" class=rounded>
                 <h1 align="center">Login RVDLog</h1>
                 <BR>
                 <form id="loginForm" method="post" action="">

@@ -29,7 +29,7 @@ var logging = {
     });
 
     $('#messageButton').bind('click',function(){
-      logging.data.jspAPI.getContentPane().empty();
+      logging.data.jspAPIMeldingen.getContentPane().empty();
       logging.data.lastID=1;
       logging.getMessages();
       $('#messageButton').hide();
@@ -46,7 +46,7 @@ var logging = {
         // Converting the #MeldingenList, #UsersList, #HandlesList divs into a jScrollPane,
         // and saving the plugin's API in logging.data:
 
-        logging.data.jspAPI = $('#MeldingenList').jScrollPane({
+        logging.data.jspAPIMeldingen = $('#MeldingenList').jScrollPane({
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
         }).data('jsp');
@@ -71,8 +71,8 @@ var logging = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 
-
-        $('div.parentticket').live('click', function(){
+        //function to implement clicking on dynamic element ticket
+        $('div.list_item_parent_ticket').live('click', function(){
           if($(this).attr("id")!=logging.data.selectedticket)
             {
             logging.data.selectedticket=$(this).attr("id");
@@ -85,7 +85,8 @@ var logging = {
           logging.getTickets();
         });
 
-        $('div.feedback').live('click', function(){
+        //function to implement clicking on dynamic element feedback
+        $('div.list_item_feedback').live('click', function(){
           if($(this).attr("id")!=logging.data.selectedfeedback)
             {
             logging.data.selectedfeedback=$(this).attr("id");
@@ -98,7 +99,7 @@ var logging = {
           logging.getFeedback();
         });
 
-        // Logging a person in the chat:
+        // Logging a person into rvdlog:
         $('#loginForm').submit(function(){
             if(working) return false;
             working = true;
@@ -113,7 +114,6 @@ var logging = {
                 }
                 else    {
                     logging.login(r.username,r.avatar,r.role);
-
                     }
             });
 
@@ -133,12 +133,12 @@ var logging = {
         // Logging the user out:
 
         $('a.logoutButton').live('click',function(){
-            $('#LoggingTopContainer > span').fadeOut(function(){
+            $('#TopContainer > span').fadeOut(function(){
                 $(this).remove();
             });
-            $('#LoggingTopContainer').fadeOut();
-            $('#LoggingMainContainer').fadeOut(function(){
-                $('#LoggingLogin').fadeIn();
+            $('#TopContainer').fadeOut();
+            $('#MainContainer').fadeOut(function(){
+                $('#Login').fadeIn();
             });
 
             $.tzPOST('logout');
@@ -208,7 +208,7 @@ var logging = {
                     text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
                 };
 
-            // Using our addMessageLine method to add the chat
+            // Using our addMessageLine method to add the message
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
             logging.addMessageLine($.extend({},params));
@@ -252,7 +252,9 @@ var logging = {
 
 
     },
-    //end of init function
+    /*-------------------------------------*/
+    /*             END OF INIT             */
+    /*-------------------------------------*/
 
     // The login method hides displays the
     // user's login data and shows the submit form
@@ -268,15 +270,15 @@ var logging = {
         logging.data.avatar = new_avatar;
         logging.data.role = role;
 
-        $('#LoggingTopContainer').html(general.render('loginTopBar',logging.data));
-        $('#LoggingLogin').fadeOut(function(){
-        $('#LoggingMainContainer').fadeIn();
-        $('#LoggingTopContainer').fadeIn();
-        logging.getMessages();
-        logging.getUsers();
-        logging.getHandles();
-        logging.getTickets();
-        logging.getFeedback();
+        $('#TopContainer').html(general.render('loginTopBar',logging.data));
+        $('#Login').fadeOut(function(){
+          $('#MainContainer').fadeIn();
+          $('#TopContainer').fadeIn();
+          logging.getMessages();
+          logging.getUsers();
+          logging.getHandles();
+          logging.getTickets();
+          logging.getFeedback();
         });
     },
 
@@ -306,7 +308,7 @@ var logging = {
             }
             //if no chats exist yet
             if(!logging.data.lastID){
-                logging.data.jspAPI.getContentPane().html('<p class="noMessages">No messages yet</p>');
+                logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages yet</p>');
             }
 
             // Setting a timeout for the next request,
@@ -347,7 +349,7 @@ var logging = {
           {
             if(!r.error)
             {
-              logging.data.jspAPI.getContentPane().empty();
+              logging.data.jspAPIMeldingen.getContentPane().empty();
               for(var i=0;i<r.length;i++){
                 logging.addMessageLine(r[i]);
               }
@@ -360,7 +362,7 @@ var logging = {
           }
           else
           {
-            logging.data.jspAPI.getContentPane().html('<p class="noMessages">No messages found</p>');
+            logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages found</p>');
           }
 
         });
@@ -412,14 +414,14 @@ var logging = {
             if(previous.length){
                 previous.after(markup);
             }
-            else logging.data.jspAPI.getContentPane().append(markup);
+            else logging.data.jspAPIMeldingen.getContentPane().append(markup);
         }
-        else logging.data.jspAPI.getContentPane().append(markup);
+        else logging.data.jspAPIMeldingen.getContentPane().append(markup);
 
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
-        logging.data.jspAPI.reinitialise();
-        logging.data.jspAPI.scrollToBottom(true);
+        logging.data.jspAPIMeldingen.reinitialise();
+        logging.data.jspAPIMeldingen.scrollToBottom(true);
 
     },
 
@@ -515,7 +517,7 @@ var logging = {
                         markup=general.render('parentticket',r[i]);
                         logging.data.jspAPITickets.getContentPane().append(markup);
                         if (r[i].id == logging.data.selectedticket) {
-                            markup_extra=general.render('parentticketextra',r[i]);
+                            markup_extra=general.render('parentticket_expanded',r[i]);
                             logging.data.jspAPITickets.getContentPane().append(markup_extra);
                           }
                     }
@@ -552,7 +554,7 @@ var logging = {
                         markup=general.render('feedback',r[i]);
                         logging.data.jspAPIFeedback.getContentPane().append(markup);
                         if (r[i].id == logging.data.selectedfeedback) {
-                            markup_extra=general.render('feedbackextra',r[i]);
+                            markup_extra=general.render('feedback_expanded',r[i]);
                             logging.data.jspAPIFeedback.getContentPane().append(markup_extra);
                           }
                     }
@@ -576,12 +578,12 @@ var logging = {
 
     },
 
-        reInitJSP : function(){
-            logging.data.jspAPI.reinitialise();
+  reInitJSP : function(){
+            logging.data.jspAPIMeldingen.reinitialise();
             logging.data.jspAPIUsers.reinitialise();
             logging.data.jspAPIHandles.reinitialise();
             logging.data.jspAPITickets.reinitialise();
             logging.data.jspAPIFeedback.reinitialise();
-        }
+  }
 };
 //end of logging var

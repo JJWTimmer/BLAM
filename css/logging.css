@@ -3,64 +3,6 @@ background-color: gray;
 height:100%;
 }
 
-#LoggingTopContainer{
-  position:absolute;
-  left:20px;
-  top: 20px;
-  width:95%;
-  height:50px;
-    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-    border:1px solid #fff;
-    display:none;
-}
-/* Main container */
-#LoggingMainContainer{
-position:absolute;
-  top: 70px;
-  left:20px;
-  width:95%;
-  height:85%;
-
-  margin-bottom:10px;
-    padding-bottom:1%;
-    display:none;
-}
-
-#LoggingLogin{
-position:absolute;
-    top: 70px;
-    left:20px;
-    width:95%;
-    height:85%;
-    margin-bottom:10px;
-    padding-bottom:1%;
-}
-
-#LoggingLoginWindow{
-position:relative;
-    top:30%;
-    width:300px;
-    height:180px;
-    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-    padding:10px;
-    border:1px solid #fff;
-}
-
-#LoggingLoginWindow input{
-    background:url('../img/input_bg.jpg') repeat-x #dcdcdc;
-    height:26px;
-    text_align:center;
-    font:13px/26px Calibri,Arial,sans-serif;
-    color:#777;
-    border:1px solid;
-    border-color:#c1c1c1 #eee #eee #c1c1c1;
-    text-shadow:1px 1px 0 #E4E4E4;
-    padding:0 5px;
-    margin-right:5px;
-    margin-top:5px;
-    width:185px;
-}
-
 #LoggingMeldingenContainer{
   position: relative;
   top: 0%;
@@ -69,13 +11,12 @@ position:relative;
   height:98%;
   background:url('../img/page_bg.jpg') repeat-x #323232;
   margin:1%;
-
 }
 
 #SearchMeldingen{
 position:absolute;
   left:24%;
-  top: 0%;
+  top: 1%;
   width:74%;
   height:10%;
   background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
@@ -92,51 +33,12 @@ position:absolute;
   margin:1%;
 }
 
-#HandlesHeader{
-position:absolute;
-  left:0px;
-  top: -25px;
-  width:100%;
-  height:20px;
-  background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-  text-align:center;
-}
-
-#HandlesList{
-position:absolute;
-  left:0%;
-  top: 0%;
-  width:100%;
-  height:100%;
-  background: #202020;
-    border:1px solid #111111;
-}
-
 #Meldingen{
 position:absolute;
   left:24%;
   top: 17%;
   width:50%;
   height:55%;
-  margin:1%;
-}
-
-#MeldingenHeader{
-position:absolute;
-  left:0%;
-  top: -25px;
-  width:100%;
-  height:20px;
-  background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-  text-align:center;
-}
-
-#MeldingenList{
-position:absolute;
-  left:0%;
-  top: 0%;
-  width:98%;
-  height:98%;
   margin:1%;
 }
 
@@ -149,26 +51,10 @@ position:absolute;
   margin:1%;
 }
 
-#UsersHeader{
-position:absolute;
-  left:0px;
-  top:-25px;
-  width:100%;
-  height:20px;
-  background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-  text-align:center;
-}
-
 #UsersList{
-position:absolute;
-  left:0%;
-  top: 0%;
   width:98%;
-  height:98%;
     /*padding is to solve JSPbar problem in combo with user margin*/
     padding: 1% 0% 1% 4%;
-  background: #202020;
-    border:1px solid #111111;
 }
 
 
@@ -185,8 +71,8 @@ position:absolute;
 
 
 #LoggingExtraContainer{
-    position: relative;
-    top: -100%;
+    position: absolute;
+    top: 0%;
     left: 76%;
     width:22%;
     height:98%;
@@ -202,26 +88,6 @@ position:absolute;
     margin:1%;
 }
 
-#TicketsHeader{
-position:absolute;
-    left:0px;
-    top: -25px;
-    width:100%;
-    height:20px;
-    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-    text-align:center;
-}
-
-#TicketsList{
-    position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: #202020;
-    border:1px solid #111111;
-}
-
 #Feedback{
     position:absolute;
     top: 55%;
@@ -231,121 +97,12 @@ position:absolute;
     margin:1%;
 }
 
-#FeedbackHeader{
-position:absolute;
-    left:0px;
-    top: -25px;
-    width:100%;
-    height:20px;
-    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-    text-align:center;
-}
 
-#FeedbackList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: #202020;
-    border:1px solid #111111;
-}
-
-#LoggingTopContainer .Topbar_img {
-    margin-top:8px;
-    margin-left:10px;
-    width:32px;
-    background:url('../img/unknown30x30.png') no-repeat;
-}
-
-/* TopBar */
-
-#LoggingTopContainer .Topbar_headers {
-padding-right:10px;
-}
-
-#LoggingTopContainer .Topbar_username {
-padding-right:10px;
-}
-
-#LoggingTopContainer .Topbar_role {
-padding-right:10px;
-}
-
-#LoggingTopContainer img {
-/*hides picture when no avatar is present*/
-    /*visibility:hidden;*/
-}
-
-#LoggingTopContainer .Topbar_table {
-position: absolute;
-top: 0px;
-left: 50px;
-}
 
 /* searchform */
 #messageButton {
 display:none;
 
-}
-/* Messages */
-/* overflow: hidden enables the resizing of each div*/
-.message{
-    position:relative;
-    overflow: hidden;
-    width: 95%;
-    border:1px solid #FFFFFF;
-    padding:2px 2px 2px 2px;
-    margin: 0.5% 5% 0.5% 0;
-    background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
-}
-
-.message:last-child{
-    margin-bottom:0;
-}
-
-/*using floats here allows resizing of the parent div (message)
-overflow: hiddden ensures that low resolution version doesnt
-overflow over text, could also use min-width (either way screwed;-))*/
-.message .avatar-info-div{
-width:25%;
-/*min-width:70px;*/
-overflow: hidden;
-float:left;
-}
-
-.message .text-div{
-width:75%;
-float:right;
-}
-
-.message span{
-    color:#777777;
-    text-shadow:1px 1px 0 #FFFFFF;
-    font-size:12px;
-}
-
-.message .text-span{
-    color:#444444;
-    font-size:15px;
-    /*display:inline-block;*/
-}
-
-.message .avatar-td{
-
-    padding-right:4px;
-    background:url('../img/unknown24x24.png') no-repeat;
-}
-
-.message img{
-    /*hides picture when no avatar is present*/
-    visibility:hidden;
-}
-
-.message .info-td{
-    /*added line-height to decrease the space that was used as margin*/
-    font-size:12px;
-    line-height:12px;
 }
 
 /*Submit messages */
@@ -406,156 +163,8 @@ p.label_checkbox_pair label{
     background-position:left bottom;
 }
 
-/* users */
-
-#UsersList .user{
-    background:url('../img/unknown30x30.png') no-repeat 1px 1px #444444;
-    border:1px solid #111111;
-    float:left;
-    height:32px;
-    margin:10px 10px 0 0px;
-    width:32px;
-}
-
-#UsersList .user img{
-    border:1px solid #444444;
-    display:block;
-    visibility:hidden;
-}
-
-p.noMessages,
-#UsersList .count{
-    clear:both;
-    font-size:12px;
-
-    padding:10px;
-    text-align:center;
-    text-shadow:1px 1px 0 #111111;
-    color:#ffffff;
-}
-
-#UsersList .count{
-    font-size:11px;
-}
-
-/* Handles */
-
-#HandlesList .groups{
-    float:left;
-    height:20px;
-    width:95%;
-    margin:2px 0px 2px 0px;
-    text-align:center;
-    background-color:#00B0B0;
-}
-
-#HandlesList .handles{
-    position:relative;
-    overflow: hidden;
-    height:16px;
-    width:84%;
-    margin-left:10%;
-    margin-top:2px;
-    margin-bottom:2px;
-    padding-left:3px;
-    padding-bottom:2px;
-    background-color:#C2DAFF;
-}
-#HandlesList .handlename{
-    float:left;
-    width:40%;
-    text-align:left;
-}
-#HandlesList .handledescription{
-    float:right;
-    width:60%;
-    text-align:left;
-}
-
-/* tickets */
-#TicketsList .parentticket{
-    float:left;
-    width:95%;
-    margin:2px 0px 2px 0px;
-    padding-left:3px;
-    padding-bottom:1px;
-    text-align:left;
-    cursor:pointer;
-    background-color:#00B0B0;
-}
-
-#TicketsList .parentticket:hover{
-    background-color:#B0B0B0;
-}
-
-#TicketsList .parentticketextra{
-    float:left;
-    width:95%;
-    margin:2px 0px 2px 0px;
-    padding-left:3px;
-    padding-bottom:1px;
-    text-align:left;
-    cursor:pointer;
-    background-color:#C2DAFF;
-}
-
-
-/* feedback */
-#FeedbackList .feedback{
-    float:left;
-    width:95%;
-    margin:2px 0px 2px 0px;
-    padding-left:3px;
-    padding-bottom:1px;
-    text-align:left;
-    cursor:pointer;
-    background-color:#00B0B0;
-}
-
-#FeedbackList .feedback:hover{
-    background-color:#B0B0B0;
-}
-
-#FeedbackList .feedbackextra{
-    float:left;
-    width:95%;
-    margin:2px 0px 2px 0px;
-    padding-left:3px;
-    padding-bottom:1px;
-    text-align:left;
-    cursor:pointer;
-    background-color:#C2DAFF;
-}
-
-
-
 /* Overloading the default styles of jScrollPane */
 #UsersList div:first-child[class="jspContainer"]{
     background: #202020;
     width:100%;
-}
-
-.jspVerticalBar{
-    float right;
-    width:20px;
-    background:none;
-}
-
-.jspTrack{
-    width:3px;
-    right:-10px;
-    border:1px solid #111111;
-    background-color:#202020;
-}
-
-.jspDrag {
-    width:20px;
-    left:-9px;
-    height:20px !important;
-    margin-top:-5px;
-    background:url('../img/slider.png') no-repeat;
-}
-
-.jspDrag:hover{
-    background-position:left bottom;
 }

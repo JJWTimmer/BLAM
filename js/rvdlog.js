@@ -10,7 +10,7 @@ var general = {
             case 'loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_headers">username</th><th class="Topbar_headers">Role</th></tr><tr>','<td class="Topbar_username">',params.username,'</td><td class="Topbar_role">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
@@ -34,38 +34,38 @@ var general = {
 
             case 'groups':
                 arr = [
-                    '<div class="groups rounded"><p>',params.name,'</p></div>'
+                    '<div class="list_item_group rounded"><p>',params.name,'</p></div>'
                 ];
             break;
 
             case 'handles':
                 arr = [
-                    '<div class="handles rounded"><div class=handlename><p>',params.handle_name,'</p></div><div class=handledescription><p>',params.description,'</p></div></div>'
+                    '<div class="list_item_handle rounded"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div></div>'
                 ];
 
             break;
 
             case 'parentticket':
                 arr = [
-                    '<div class="parentticket rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                    '<div class="list_item_parent_ticket rounded" id="',params.id,'"><p>',params.title,'</p></div>'
                 ];
             break;
 
-            case 'parentticketextra':
+            case 'parentticket_expanded':
                 arr = [
-                    '<div class="parentticketextra rounded"><p>Melding:</p><p>',params.text,'</p><p>Status:</p><p>',params.status,'</p><p>WL contactpersoon:</p><p>',params.user,'</p><p>tijd melding:</p><p>',params.created,'</p><p>laatste wijziging:</p><p>',params.modified,'</p></div>'
+                    '<div class="list_item_parent_ticket_expanded rounded"><p>Melding:</p><p>',params.text,'</p><p>Status:</p><p>',params.status,'</p><p>WL contactpersoon:</p><p>',params.user,'</p><p>tijd melding:</p><p>',params.created,'</p><p>laatste wijziging:</p><p>',params.modified,'</p></div>'
                 ];
             break;
 
             case 'feedback':
                 arr = [
-                    '<div class="feedback rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                    '<div class="list_item_feedback rounded" id="',params.id,'"><p>',params.title,'</p></div>'
                 ];
             break;
 
-            case 'feedbackextra':
+            case 'feedback_expanded':
                 arr = [
-                    '<div class="feedbackextra rounded"><p>Melding:</p><p>',params.message,'</p><p>WL contactpersoon:</p><p>',params.username,'</p><p>tijd melding:</p><p>',params.created,'</p></div>'
+                    '<div class="list_item_feedback_expanded rounded"><p>Melding:</p><p>',params.message,'</p><p>WL contactpersoon:</p><p>',params.username,'</p><p>tijd melding:</p><p>',params.created,'</p></div>'
                 ];
             break;
         }
