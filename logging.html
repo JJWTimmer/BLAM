@@ -34,12 +34,18 @@
         <div id="LoggingTopContainer" class=rounded></div>
         <div id="LoggingMainContainer">
             <div id="LoggingMeldingenContainer">
-                <div id="SearchMeldingen" class=rounded></div>
-			    <div id="Handles">
+                <div id="SearchMeldingen" class=rounded>
+                <form id="searchForm" method="post" action="">
+                            <input type="text" id="keyword" name="keyword"/>
+                            <input type="button" id="searchbutton" class="blueButton" value="search"/>
+                </form>
+                <input type="button" id="messageButton" class="blueButton" value="Hervat meldingen"/>
+                </div>
+          <div id="Handles">
                     <div id="HandlesHeader" class=rounded><p>Roepnamen</p></div>
                     <div id="HandlesList" class=rounded></div>
                 </div>
-		        <div id="Meldingen">
+            <div id="Meldingen">
                     <div id="MeldingenHeader" class=rounded><p>Meldingen</p></div>
                     <div id="MeldingenList" class=rounded></div>
                 </div>
@@ -57,6 +63,7 @@
                             </p>
                             <input type="button" id="submitbutton" class="blueButton" value="submit"/>
                         </form>
+
                 </div>
             </div>
             <div id="LoggingExtraContainer">

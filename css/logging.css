@@ -283,6 +283,11 @@ top: 0px;
 left: 50px;
 }
 
+/* searchform */
+#messageButton {
+display:none;
+
+}
 /* Messages */
 /* overflow: hidden enables the resizing of each div*/
 .message{
@@ -493,6 +498,36 @@ p.noMessages,
     cursor:pointer;
     background-color:#C2DAFF;
 }
+
+
+/* feedback */
+#FeedbackList .feedback{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 0px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#00B0B0;
+}
+
+#FeedbackList .feedback:hover{
+    background-color:#B0B0B0;
+}
+
+#FeedbackList .feedbackextra{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 0px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#C2DAFF;
+}
+
+
 
 /* Overloading the default styles of jScrollPane */
 #UsersList div:first-child[class="jspContainer"]{

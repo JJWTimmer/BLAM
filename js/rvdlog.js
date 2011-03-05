@@ -50,12 +50,24 @@ var general = {
                     '<div class="parentticket rounded" id="',params.id,'"><p>',params.title,'</p></div>'
                 ];
             break;
+
             case 'parentticketextra':
                 arr = [
                     '<div class="parentticketextra rounded"><p>Melding:</p><p>',params.text,'</p><p>Status:</p><p>',params.status,'</p><p>WL contactpersoon:</p><p>',params.user,'</p><p>tijd melding:</p><p>',params.created,'</p><p>laatste wijziging:</p><p>',params.modified,'</p></div>'
                 ];
             break;
 
+            case 'feedback':
+                arr = [
+                    '<div class="feedback rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                ];
+            break;
+
+            case 'feedbackextra':
+                arr = [
+                    '<div class="feedbackextra rounded"><p>Melding:</p><p>',params.message,'</p><p>WL contactpersoon:</p><p>',params.username,'</p><p>tijd melding:</p><p>',params.created,'</p></div>'
+                ];
+            break;
         }
 
         // A single array join is faster than

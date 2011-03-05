@@ -18,10 +18,23 @@ var logging = {
 
   init : function(){
 
-        // add listener for this button
-        $('#submitbutton').bind('click',function(){
-        $('#submitForm').submit();
-        });
+    // add listener for this button
+    $('#submitbutton').bind('click',function(){
+    $('#submitForm').submit();
+    });
+
+    // add listener for this button
+    $('#searchbutton').bind('click',function(){
+    $('#searchForm').submit();
+    });
+
+    $('#messageButton').bind('click',function(){
+      logging.data.jspAPI.getContentPane().empty();
+      logging.data.lastID=1;
+      logging.getMessages();
+      $('#messageButton').hide();
+      return false;
+    });
 
     // Using the defaultText jQuery plugin, included at the bottom:
     $('#name').defaultText('Nickname');
@@ -53,6 +66,12 @@ var logging = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 
+        logging.data.jspAPIFeedback = $('#FeedbackList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
+
         $('div.parentticket').live('click', function(){
           if($(this).attr("id")!=logging.data.selectedticket)
             {
@@ -64,6 +83,19 @@ var logging = {
             }
           window.clearTimeout(logging.data.idTicketTimeout);
           logging.getTickets();
+        });
+
+        $('div.feedback').live('click', function(){
+          if($(this).attr("id")!=logging.data.selectedfeedback)
+            {
+            logging.data.selectedfeedback=$(this).attr("id");
+            }
+          else
+            {
+            logging.data.selectedfeedback=0;
+            }
+          window.clearTimeout(logging.data.idFeedbackTimeout);
+          logging.getFeedback();
         });
 
         // Logging a person in the chat:
@@ -113,6 +145,35 @@ var logging = {
 
             return false;
         });
+
+
+        // catching when user presses enter
+        $('#keyword').keydown(function(e){
+            if(e.which == 13) {
+                e.preventDefault();
+                $('#searchbutton').trigger('click');
+                return false
+            }
+        })
+
+        // Searching for messages:
+
+        $('#searchForm').submit(function(){
+            var keyword = $('#keyword').val();
+            if(keyword)
+            {
+              if(working) return false;
+                working = true;
+
+              window.clearTimeout(logging.data.idMessagesTimeout);
+              $('#messageButton').show();
+              logging.searchMessages(keyword);
+              $('#keyword').val('');
+              working = false;
+            }
+            return false;
+        });
+
 
         // catching when user presses enter
         $('#messagetext').keydown(function(e){
@@ -215,6 +276,7 @@ var logging = {
         logging.getUsers();
         logging.getHandles();
         logging.getTickets();
+        logging.getFeedback();
         });
     },
 
@@ -272,10 +334,38 @@ var logging = {
                 var nextRequest = 1000;
             }
 
-            setTimeout("logging.getMessages();",nextRequest);
+            logging.data.idMessagesTimeout=setTimeout("logging.getMessages();",nextRequest);
 
         });
     },
+
+
+    searchMessages : function(keyword){
+        $.tzPOST('searchMessages',{keyword:keyword},function(r){
+        //update messages from mysql db
+          if(r.length>0)
+          {
+            if(!r.error)
+            {
+              logging.data.jspAPI.getContentPane().empty();
+              for(var i=0;i<r.length;i++){
+                logging.addMessageLine(r[i]);
+              }
+
+            }
+            else
+            {
+                general.displayError(r.error);
+            }
+          }
+          else
+          {
+            logging.data.jspAPI.getContentPane().html('<p class="noMessages">No messages found</p>');
+          }
+
+        });
+    },
+
 
 
 // The addMessageLine method ads a message entry to the page
@@ -448,11 +538,50 @@ var logging = {
 
     },
 
+    getFeedback : function(){
+        $.tzPOST('getFeedback',function(r){
+          if(r){
+            if(!r.error)
+                {
+                logging.data.jspAPIFeedback.getContentPane().empty();
+
+                var markup;
+                var markup_extra;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('feedback',r[i]);
+                        logging.data.jspAPIFeedback.getContentPane().append(markup);
+                        if (r[i].id == logging.data.selectedfeedback) {
+                            markup_extra=general.render('feedbackextra',r[i]);
+                            logging.data.jspAPIFeedback.getContentPane().append(markup_extra);
+                          }
+                    }
+                  }
+                //empty no feedback
+
+                  if(r.length<1){
+                    var message = 'No feedback exist';
+                    logging.data.jspAPIFeedback.getContentPane().append('<p class="count">'+message+'</p>');
+                    }
+                logging.data.jspAPIFeedback.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+          }
+          logging.data.idFeedbackTimeout=setTimeout("logging.getFeedback();",15000);
+
+        });
+
+    },
+
         reInitJSP : function(){
             logging.data.jspAPI.reinitialise();
             logging.data.jspAPIUsers.reinitialise();
             logging.data.jspAPIHandles.reinitialise();
             logging.data.jspAPITickets.reinitialise();
+            logging.data.jspAPIFeedback.reinitialise();
         }
 };
 //end of logging var
