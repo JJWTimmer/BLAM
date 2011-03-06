@@ -505,7 +505,7 @@ var logging = {
     },
 
     getTickets : function(){
-        $.tzPOST('getTicketList',{recursive : true, status : [{1: 'Open', 2: 'Nieuw'}]},function(r){
+        $.tzPOST('getTicketList',{recursive : false, status : [{1: 'Open', 2: 'Nieuw'}]},function(r){
             if(!r.error)
                 {
                 logging.data.jspAPITickets.getContentPane().empty();

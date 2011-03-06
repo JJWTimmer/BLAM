@@ -57,6 +57,12 @@ var general = {
                 ];
             break;
 
+            case 'childticket':
+                arr = [
+                    '<div class="list_item_child_ticket rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                ];
+            break;
+
             case 'feedback':
                 arr = [
                     '<div class="list_item_feedback rounded" id="',params.id,'"><p>',params.title,'</p></div>'

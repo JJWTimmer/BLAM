@@ -180,6 +180,23 @@ p.noMessages,
     background-color:#B0B0B0;
 }
 
+.list_item_child_ticket{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    font:13px Calibri,Arial,sans-serif;
+    background-color:#C2DAFF;
+}
+
+.list_item_child_ticket:hover{
+    background-color:#B0B0B0;
+}
+
+
 .list_item_parent_ticket_expanded{
     float:left;
     width:95%;

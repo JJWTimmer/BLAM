@@ -55,6 +55,12 @@ height:100%;
     margin:1%;
 }
 
+#UsersList{
+  width:98%;
+    /*padding is to solve JSPbar problem in combo with user margin*/
+    padding: 1% 0% 1% 4%;
+}
+
 #TextEntry{
     position:absolute;
     top: 67%;

@@ -36,7 +36,30 @@ var ticketing = {
       verticalDragMaxHeight: 12
     }).data('jsp');
 
+    ticketing.data.jspAPIUsers = $('#UsersList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+    }).data('jsp');
 
+    ticketing.data.jspAPIHandles = $('#HandlesList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+    }).data('jsp');
+
+    ticketing.data.jspAPINewTickets = $('#NewTicketsList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+    }).data('jsp');
+
+    ticketing.data.jspAPIOpenTickets = $('#OpenTicketsList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+    }).data('jsp');
+
+    ticketing.data.jspAPIClosedTickets = $('#ClosedTicketsList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+      }).data('jsp');
 
         // Logging a person into rvdlog:
 
@@ -115,9 +138,11 @@ var ticketing = {
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
           ticketing.getMessages();
-          //ticketing.getUsers();
-          //ticketing.getHandles();
-
+          ticketing.getUsers();
+          ticketing.getHandles();
+          ticketing.getNewTickets();
+          ticketing.getOpenTickets();
+          ticketing.getClosedTickets();
         });
     },
 
@@ -235,9 +260,214 @@ var ticketing = {
 
     },
 
+// Requesting a list with all the users.
+
+    getUsers : function(){
+
+        $.tzPOST('getUsers',{options:'logged'},function(r){
+            if(!r.error)
+                {
+                  ticketing.data.jspAPIUsers.getContentPane().empty();
+                  var users = [];
+                  var markup;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('user',r[i]);
+                        ticketing.data.jspAPIUsers.getContentPane().append(markup);
+                    }
+                  }
+
+                  //empty no one is online variable
+                  var message = '';
+
+                  if(r.length<1){
+                    message = 'No one is online';
+                  }
+                  else {
+                    message = r.length+' '+(r.length == 1 ? 'person':'people')+' online';
+                  }
+
+                  ticketing.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
+
+                  ticketing.data.jspAPIUsers.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+                setTimeout("ticketing.getUsers();",15000);
+
+            });
+    },
+
+    getHandles : function(){
+        $.tzPOST('getGroups',{recursive:'true'},function(r){
+            if(!r.error)
+                {
+                ticketing.data.jspAPIHandles.getContentPane().empty();
+
+                var markup_group;
+                var markup_handle;
+                for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup_group=general.render('groups',r[i]);
+                        ticketing.data.jspAPIHandles.getContentPane().append(markup_group);
+                        if (!(typeof r[i]['handles'] === 'undefined')) {
+                          for (var j = 0; j < r[i]['handles'].length; j++) {
+                            markup_handle=general.render('handles',r[i]['handles'][j]);
+                            ticketing.data.jspAPIHandles.getContentPane().append(markup_handle);
+                          }
+                        }
+                    }
+                }
+
+                //empty no groups
+                if(r.length<1){
+                    var message = 'No groups exist';
+                    ticketing.data.jspAPIHandles.getContentPane().append('<p class="count">'+message+'</p>');
+                }
+                ticketing.data.jspAPIHandles.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+                setTimeout("ticketing.getHandles();",60000);
+            });
+
+    },
+
+  getNewTickets : function(){
+        $.tzPOST('getTicketList',{recursive : true, status : [{1: 'Nieuw'}]},function(r){
+          if(r){
+            if(!r.error)
+                {
+                ticketing.data.jspAPINewTickets.getContentPane().empty();
+
+                var markup;
+                var markup_child;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('parentticket',r[i]);
+                        ticketing.data.jspAPINewTickets.getContentPane().append(markup);
+                        if (r[i]['children']) {
+                            for (var j = 0; j < r[i]['children'].length ; j++) {
+                              markup_child=general.render('childticket',r[i]['children'][j]);
+                              ticketing.data.jspAPINewTickets.getContentPane().append(markup_child);
+                            }
+
+                        }
+                    }
+                  }
+
+                ticketing.data.jspAPINewTickets.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+          }
+          else
+          {
+            ticketing.data.jspAPIOpenTickets.getContentPane().empty();
+            var message = 'Geen nieuwe tickets';
+            ticketing.data.jspAPIOpenTickets.getContentPane().append('<p class="count">'+message+'</p>');
+            ticketing.data.jspAPIOpenTickets.reinitialise();
+          }
+          ticketing.data.idTicketTimeout=setTimeout("ticketing.getNewTickets();",15000);
+        });
+    },
+
+
+  getOpenTickets : function(){
+        $.tzPOST('getTicketList',{recursive : true, status : [{1:'Open'}]},function(r){
+          if(r){
+            if(!r.error)
+                {
+                ticketing.data.jspAPIOpenTickets.getContentPane().empty();
+
+                var markup;
+                var markup_extra;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('parentticket',r[i]);
+                        ticketing.data.jspAPIOpenTickets.getContentPane().append(markup);
+                        if (r[i]['children']) {
+                            for (var j = 0; j < r[i]['children'].length ; j++) {
+                              markup_child=general.render('childticket',r[i]['children'][j]);
+                              ticketing.data.jspAPIOpenTickets.getContentPane().append(markup_child);
+                            }
+
+                        }
+                    }
+                  }
+                ticketing.data.jspAPIOpenTickets.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+          }
+          else
+          {
+            ticketing.data.jspAPIOpenTickets.getContentPane().empty();
+            var message = 'Geen open tickets';
+            ticketing.data.jspAPIOpenTickets.getContentPane().append('<p class="count">'+message+'</p>');
+            ticketing.data.jspAPIOpenTickets.reinitialise();
+          }
+                ticketing.data.idTicketTimeout=setTimeout("ticketing.getOpenTickets();",15000);
+        });
+    },
+
+    getClosedTickets : function(){
+        $.tzPOST('getTicketList',{recursive : true, status : [{1:'Gesloten'}]},function(r){
+          if(r){
+            if(!r.error)
+                {
+                ticketing.data.jspAPIClosedTickets.getContentPane().empty();
+
+                var markup;
+                var markup_extra;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('parentticket',r[i]);
+                        ticketing.data.jspAPIClosedTickets.getContentPane().append(markup);
+                        if (r[i]['children']) {
+                            for (var j = 0; j < r[i]['children'].length ; j++) {
+                              markup_child=general.render('childticket',r[i]['children'][j]);
+                              ticketing.data.jspAPIClosedTickets.getContentPane().append(markup_child);
+                            }
+
+                        }
+                    }
+                  }
+                ticketing.data.jspAPIClosedTickets.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+          }
+          else
+          {
+            ticketing.data.jspAPIClosedTickets.getContentPane().empty();
+            var message = 'Geen gesloten tickets';
+            ticketing.data.jspAPIClosedTickets.getContentPane().append('<p class="count">'+message+'</p>');
+            ticketing.data.jspAPIClosedTickets.reinitialise();
+          }
+            ticketing.data.idTicketTimeout=setTimeout("ticketing.getClosedTickets();",15000);
+        });
+    },
+
+
+
   reInitJSP : function(){
             ticketing.data.jspAPIMeldingen.reinitialise();
-
+            ticketing.data.jspAPIUsers.reinitialise();
+            ticketing.data.jspAPIHandles.reinitialise();
+            ticketing.data.jspAPINewTickets.reinitialise();
+            ticketing.data.jspAPIOpenTickets.reinitialise();
+            ticketing.data.jspAPIClosedTickets.reinitialise();
   }
 
 };
