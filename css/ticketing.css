@@ -3,32 +3,10 @@ background-color: gray;
 height:100%;
 }
 
-#TicketingTopContainer{
-    position:absolute;
-    left:20px;
-    top: 20px;
-    width:95%;
-    height:50px;
-    background: green;
-    border:1px solid #fff;
-}
-/* Main container */
-#TicketingMainContainer{
-position:absolute;  
-    top: 70px;  
-    left:20px;
-    width:95%;
-    height:85%;
-    background: blue;
-    margin-bottom:5px;
-    padding-bottom:1%;
-}
-
 #TicketingCommunicationContainer{
     position: relative;
     width:45%;
     height:98%;
-    background: red;
     margin:1%;
 }
 
@@ -38,27 +16,7 @@ position:absolute;
     left:0%;
     width:31%;
     height:93%;
-    background: violet;
     margin:1%;
-}
-
-#HandlesHeader{
-position:absolute;
-    left:0px;
-    top:-20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#HandlesList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
 }
 
 #Meldingen{
@@ -67,27 +25,7 @@ position:absolute;
     left:33%;
     width:65%;
     height:26%;
-    background: violet;
     margin:1%;
-}
-
-#MeldingenHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#MeldingenList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
 }
 
 #ChatContainer{
@@ -96,7 +34,6 @@ position:absolute;
     left:33%;
     width:65%;
     height:65%;
-    background: yellow;
     margin:1%;
 }
 
@@ -106,27 +43,7 @@ position:absolute;
     left:0%;
     width:65%;
     height:57%;
-    background: violet;
     margin:1%;
-}
-
-#WL-ChatHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#WL-ChatList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
 }
 
 #Users{
@@ -135,27 +52,13 @@ position:absolute;
     left:67%;
     width:31%;
     height:57%;
-    background: violet;
     margin:1%;
 }
 
-#UsersHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
 #UsersList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
+  width:98%;
+    /*padding is to solve JSPbar problem in combo with user margin*/
+    padding: 1% 0% 1% 4%;
 }
 
 #TextEntry{
@@ -169,12 +72,12 @@ position:absolute;
 }
 
 #TicketingOverviewContainer{
-    position: relative;
-    top: -99.5%;
+    position: absolute;
+    top: 0%;
     left:47%;
     width:20%;
     height:98%;
-    background: red;
+    margin:1%;
 }
 
 #NewTickets{
@@ -182,28 +85,8 @@ position:absolute;
     top: 5%;
     left:0%;
     width:98%;
-    height:26%;
-    background: violet;
+    height:27%;
     margin:1%;
-}
-
-#NewTicketsHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#NewTicketsList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
 }
 
 #OpenTickets{
@@ -211,66 +94,25 @@ position:absolute;
     top: 38%;
     left:0%;
     width:98%;
-    height:26%;
-    background: violet;
+    height:27%;
     margin:1%;
-}
-
-#OpenTicketsHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#OpenTicketsList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
 }
 
 #ClosedTickets{
     position:absolute;
-    top: 72%;
+    top: 71%;
     left:0%;
     width:98%;
-    height:26%;
-    background: violet;
+    height:27%;
     margin:1%;
 }
 
-#ClosedTicketsHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#ClosedTicketsList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
-}
-
 #TicketingDetailsContainer{
-    position: relative;
-    top: -199%;
-    left: 67%;
+    position: absolute;
+    top: 0;
+    left: 68%;
     width:31%;
     height:98%;
-    background: red;
     margin:1%;
 }
 
@@ -279,113 +121,25 @@ position:absolute;
     top: 5%;
     left:0%;
     width:98%;
-    height:23%;
-    background: violet;
+    height:27%;
     margin:1%;
-}
-
-#TicketDetailsHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#TicketDetailsList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
 }
 
 #WL-Actie{
     position:absolute;
-    top: 35%;
+    top: 38%;
     left:0%;
     width:98%;
-    height:13%;
-    background: violet;
+    height:27%;
     margin:1%;
-}
-
-#WL-ActieHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#WL-ActieList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
 }
 
 #Feedback{
     position:absolute;
-    top: 55%;
+    top: 71%;
     left:0%;
     width:98%;
-    height:13%;
-    background: violet;
+    height:27%;
     margin:1%;
 }
 
-#FeedbackHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#FeedbackList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
-}
-
-#TreeviewTicket{
-    position:absolute;
-    top: 75%;
-    left:0%;
-    width:98%;
-    height:23%;
-    background: violet;
-    margin:1%;
-}
-
-#TreeviewTicketHeader{
-position:absolute;
-    left:0px;
-    top: -20px;
-    width:100%;
-    height:20px;
-    background: aqua;
-    text-align:center;
-}
-
-#TreeviewTicketList{
-position:absolute;
-    left:0%;
-    top: 0%;
-    width:100%;
-    height:100%;
-    background: fuchsia;
-}

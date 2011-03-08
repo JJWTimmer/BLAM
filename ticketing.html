@@ -32,27 +32,27 @@
     </head>
 
     <body>
-	    <div id="TicketingTopContainer"></div>
-        <div id="TicketingMainContainer">
+      <div id="TopContainer" class="rounded"></div>
+        <div id="MainContainer">
             <div id="TicketingCommunicationContainer">
-			    <div id="Handles">
-                    <div id="HandlesHeader"><p>Roepnamen</p></div>
-                    <div id="HandlesList"></div>
+          <div id="Handles">
+                    <div id="HandlesHeader" class="header rounded"><p>Roepnamen</p></div>
+                    <div id="HandlesList" class="list rounded"></div>
                 </div>
-		        <div id="Meldingen">
-                    <div id="MeldingenHeader"><p>Meldingen</p></div>
-                    <div id="MeldingenList"></div>
-		        </div>
-		        <div id="ChatContainer">
-                 	<div id="WL-Chat">
-                        <div id="WL-ChatHeader"><p>WL-Chat</p></div>
-                       	<div id="WL-ChatList"></div>
-			        </div>
-		            <div id="Users">
-                        <div id="UsersHeader"><p>Users</p></div>
-                        <div id="UsersList"></div>
-                    </div>    
-			        <div id="TextEntry">
+            <div id="Meldingen">
+                    <div id="MeldingenHeader" class="header rounded"><p>Meldingen</p></div>
+                    <div id="MeldingenList" class="list rounded"></div>
+            </div>
+            <div id="ChatContainer">
+                  <div id="WL-Chat">
+                        <div id="WL-ChatHeader" class="header rounded"><p>WL-Chat</p></div>
+                        <div id="WL-ChatList" class="list rounded"></div>
+              </div>
+                <div id="Users">
+                        <div id="UsersHeader" class="header rounded"><p>Users</p></div>
+                        <div id="UsersList" class="list rounded"></div>
+                    </div>
+              <div id="TextEntry">
                         <form id="submitForm" method="post" action="">
                             <input id="chatText" name="chatText" class="rounded" maxlength="255" />
                             <input type="submit" class="blueButton" value="Submit" />
@@ -62,42 +62,55 @@
             </div>
             <div id="TicketingOverviewContainer">
                 <div id="NewTickets">
-                    <div id="NewTicketsHeader"><p>New Tickets</p></div>
-                    <div id="NewTicketsList"></div>
+                    <div id="NewTicketsHeader" class="header rounded"><p>New Tickets</p></div>
+                    <div id="NewTicketsList" class="list rounded"></div>
                 </div>
                 <div id="OpenTickets">
-                    <div id="OpenTicketsHeader"><p>Open Tickets</p></div>
-                    <div id="OpenTicketsList"></div>
+                    <div id="OpenTicketsHeader" class="header rounded"><p>Open Tickets</p></div>
+                    <div id="OpenTicketsList" class="list rounded"></div>
                 </div>
                 <div id="ClosedTickets">
-                    <div id="ClosedTicketsHeader"><p>Closed Tickets</p></div>
-                    <div id="ClosedTicketsList"></div>
+                    <div id="ClosedTicketsHeader" class="header rounded"><p>Closed Tickets</p></div>
+                    <div id="ClosedTicketsList" class="list rounded"></div>
                 </div>
             </div>
             <div id="TicketingDetailsContainer">
                 <div id="TicketDetails">
-                    <div id="TicketDetailsHeader"><p>Details Ticket</p></div>
-                    <div id="TicketDetailsList"></div>
+                    <div id="TicketDetailsHeader" class="header rounded"><p>Details Ticket</p></div>
+                    <div id="TicketDetailsList" class="list rounded"></div>
                 </div>
                 <div id="WL-Actie">
-                    <div id="WL-ActieHeader"><p>WL-Actie</p></div>
-                    <div id="WL-ActieList"></div>
+                    <div id="WL-ActieHeader" class="header rounded"><p>WL-Actie</p></div>
+                    <div id="WL-ActieList" class="list rounded"></div>
                 </div>
                 <div id="Feedback">
-                    <div id="FeedbackHeader"><p>Terugmelding</p></div>
-                    <div id="FeedbackList"></div>
-                </div>
-                <div id="TreeviewTicket">
-                    <div id="TreeviewTicketHeader"><p>Treeview Ticket </p></div>
-                    <div id="TreeviewTicketList"></div>
+                    <div id="FeedbackHeader" class="header rounded"><p>Terugmelding</p></div>
+                    <div id="FeedbackList" class="list rounded"></div>
                 </div>
             </div>
+        </div>
+        <div id="Login" align="center">
+            <div id="LoginWindow" class=rounded>
+                <h1 align="center">Login RVDLog</h1>
+                <BR>
+                <form id="loginForm" method="post" action="">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr><td align="center">
+                <input id="name" name="username" class="rounded" maxlength="16" />
+                </td></tr><tr><td align="center">
+                <input id="password" name="password" class="rounded" maxlength="16" />
+                </td></tr><tr><td align="center">
+                <input type="submit" class="blueButton" value="Login" />
+                </td></tr>
+                </table>
+                </form>
+            <div>
         </div>
 
 <!--
         <form id="loginForm" method="post" action="">
             <input id="username" name="username" class="rounded" maxlength="16" />
-	    <input id="password" name="password" class="rounded" maxlength="16" />
+      <input id="password" name="password" class="rounded" maxlength="16" />
             <input type="submit" class="blueButton" value="Login" />
         </form>
 -->

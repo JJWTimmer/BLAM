@@ -18,10 +18,23 @@ var logging = {
 
   init : function(){
 
-        // add listener for this button
-        $('#submitbutton').bind('click',function(){
-        $('#submitForm').submit();
-        });
+    // add listener for this button
+    $('#submitbutton').bind('click',function(){
+    $('#submitForm').submit();
+    });
+
+    // add listener for this button
+    $('#searchbutton').bind('click',function(){
+    $('#searchForm').submit();
+    });
+
+    $('#messageButton').bind('click',function(){
+      logging.data.jspAPIMeldingen.getContentPane().empty();
+      logging.data.lastID=1;
+      logging.getMessages();
+      $('#messageButton').hide();
+      return false;
+    });
 
     // Using the defaultText jQuery plugin, included at the bottom:
     $('#name').defaultText('Nickname');
@@ -33,7 +46,7 @@ var logging = {
         // Converting the #MeldingenList, #UsersList, #HandlesList divs into a jScrollPane,
         // and saving the plugin's API in logging.data:
 
-        logging.data.jspAPI = $('#MeldingenList').jScrollPane({
+        logging.data.jspAPIMeldingen = $('#MeldingenList').jScrollPane({
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
         }).data('jsp');
@@ -53,7 +66,13 @@ var logging = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 
-        $('div.parentticket').live('click', function(){
+        logging.data.jspAPIFeedback = $('#FeedbackList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
+        //function to implement clicking on dynamic element ticket
+        $('div.list_item_parent_ticket').live('click', function(){
           if($(this).attr("id")!=logging.data.selectedticket)
             {
             logging.data.selectedticket=$(this).attr("id");
@@ -66,7 +85,21 @@ var logging = {
           logging.getTickets();
         });
 
-        // Logging a person in the chat:
+        //function to implement clicking on dynamic element feedback
+        $('div.list_item_feedback').live('click', function(){
+          if($(this).attr("id")!=logging.data.selectedfeedback)
+            {
+            logging.data.selectedfeedback=$(this).attr("id");
+            }
+          else
+            {
+            logging.data.selectedfeedback=0;
+            }
+          window.clearTimeout(logging.data.idFeedbackTimeout);
+          logging.getFeedback();
+        });
+
+        // Logging a person into rvdlog:
         $('#loginForm').submit(function(){
             if(working) return false;
             working = true;
@@ -81,7 +114,6 @@ var logging = {
                 }
                 else    {
                     logging.login(r.username,r.avatar,r.role);
-
                     }
             });
 
@@ -101,18 +133,47 @@ var logging = {
         // Logging the user out:
 
         $('a.logoutButton').live('click',function(){
-            $('#LoggingTopContainer > span').fadeOut(function(){
+            $('#TopContainer > span').fadeOut(function(){
                 $(this).remove();
             });
-            $('#LoggingTopContainer').fadeOut();
-            $('#LoggingMainContainer').fadeOut(function(){
-                $('#LoggingLogin').fadeIn();
+            $('#TopContainer').fadeOut();
+            $('#MainContainer').fadeOut(function(){
+                $('#Login').fadeIn();
             });
 
             $.tzPOST('logout');
 
             return false;
         });
+
+
+        // catching when user presses enter
+        $('#keyword').keydown(function(e){
+            if(e.which == 13) {
+                e.preventDefault();
+                $('#searchbutton').trigger('click');
+                return false
+            }
+        })
+
+        // Searching for messages:
+
+        $('#searchForm').submit(function(){
+            var keyword = $('#keyword').val();
+            if(keyword)
+            {
+              if(working) return false;
+                working = true;
+
+              window.clearTimeout(logging.data.idMessagesTimeout);
+              $('#messageButton').show();
+              logging.searchMessages(keyword);
+              $('#keyword').val('');
+              working = false;
+            }
+            return false;
+        });
+
 
         // catching when user presses enter
         $('#messagetext').keydown(function(e){
@@ -147,7 +208,7 @@ var logging = {
                     text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
                 };
 
-            // Using our addMessageLine method to add the chat
+            // Using our addMessageLine method to add the message
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
             logging.addMessageLine($.extend({},params));
@@ -191,7 +252,9 @@ var logging = {
 
 
     },
-    //end of init function
+    /*-------------------------------------*/
+    /*             END OF INIT             */
+    /*-------------------------------------*/
 
     // The login method hides displays the
     // user's login data and shows the submit form
@@ -207,14 +270,15 @@ var logging = {
         logging.data.avatar = new_avatar;
         logging.data.role = role;
 
-        $('#LoggingTopContainer').html(general.render('loginTopBar',logging.data));
-        $('#LoggingLogin').fadeOut(function(){
-        $('#LoggingMainContainer').fadeIn();
-        $('#LoggingTopContainer').fadeIn();
-        logging.getMessages();
-        logging.getUsers();
-        logging.getHandles();
-        logging.getTickets();
+        $('#TopContainer').html(general.render('loginTopBar',logging.data));
+        $('#Login').fadeOut(function(){
+          $('#MainContainer').fadeIn();
+          $('#TopContainer').fadeIn();
+          logging.getMessages();
+          logging.getUsers();
+          logging.getHandles();
+          logging.getTickets();
+          logging.getFeedback();
         });
     },
 
@@ -244,7 +308,7 @@ var logging = {
             }
             //if no chats exist yet
             if(!logging.data.lastID){
-                logging.data.jspAPI.getContentPane().html('<p class="noMessages">No messages yet</p>');
+                logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages yet</p>');
             }
 
             // Setting a timeout for the next request,
@@ -272,10 +336,38 @@ var logging = {
                 var nextRequest = 1000;
             }
 
-            setTimeout("logging.getMessages();",nextRequest);
+            logging.data.idMessagesTimeout=setTimeout("logging.getMessages();",nextRequest);
 
         });
     },
+
+
+    searchMessages : function(keyword){
+        $.tzPOST('searchMessages',{keyword:keyword},function(r){
+        //update messages from mysql db
+          if(r.length>0)
+          {
+            if(!r.error)
+            {
+              logging.data.jspAPIMeldingen.getContentPane().empty();
+              for(var i=0;i<r.length;i++){
+                logging.addMessageLine(r[i]);
+              }
+
+            }
+            else
+            {
+                general.displayError(r.error);
+            }
+          }
+          else
+          {
+            logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages found</p>');
+          }
+
+        });
+    },
+
 
 
 // The addMessageLine method ads a message entry to the page
@@ -322,14 +414,14 @@ var logging = {
             if(previous.length){
                 previous.after(markup);
             }
-            else logging.data.jspAPI.getContentPane().append(markup);
+            else logging.data.jspAPIMeldingen.getContentPane().append(markup);
         }
-        else logging.data.jspAPI.getContentPane().append(markup);
+        else logging.data.jspAPIMeldingen.getContentPane().append(markup);
 
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
-        logging.data.jspAPI.reinitialise();
-        logging.data.jspAPI.scrollToBottom(true);
+        logging.data.jspAPIMeldingen.reinitialise();
+        logging.data.jspAPIMeldingen.scrollToBottom(true);
 
     },
 
@@ -413,7 +505,7 @@ var logging = {
     },
 
     getTickets : function(){
-        $.tzPOST('getTicketList',{recursive : true, status : [{1: 'Open', 2: 'Nieuw'}]},function(r){
+        $.tzPOST('getTicketList',{recursive : false, status : [{1: 'Open', 2: 'Nieuw'}]},function(r){
             if(!r.error)
                 {
                 logging.data.jspAPITickets.getContentPane().empty();
@@ -425,7 +517,7 @@ var logging = {
                         markup=general.render('parentticket',r[i]);
                         logging.data.jspAPITickets.getContentPane().append(markup);
                         if (r[i].id == logging.data.selectedticket) {
-                            markup_extra=general.render('parentticketextra',r[i]);
+                            markup_extra=general.render('parentticket_expanded',r[i]);
                             logging.data.jspAPITickets.getContentPane().append(markup_extra);
                           }
                     }
@@ -448,11 +540,50 @@ var logging = {
 
     },
 
-        reInitJSP : function(){
-            logging.data.jspAPI.reinitialise();
+    getFeedback : function(){
+        $.tzPOST('getFeedback',function(r){
+          if(r){
+            if(!r.error)
+                {
+                logging.data.jspAPIFeedback.getContentPane().empty();
+
+                var markup;
+                var markup_extra;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        markup=general.render('feedback',r[i]);
+                        logging.data.jspAPIFeedback.getContentPane().append(markup);
+                        if (r[i].id == logging.data.selectedfeedback) {
+                            markup_extra=general.render('feedback_expanded',r[i]);
+                            logging.data.jspAPIFeedback.getContentPane().append(markup_extra);
+                          }
+                    }
+                  }
+                //empty no feedback
+
+                  if(r.length<1){
+                    var message = 'No feedback exist';
+                    logging.data.jspAPIFeedback.getContentPane().append('<p class="count">'+message+'</p>');
+                    }
+                logging.data.jspAPIFeedback.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+          }
+          logging.data.idFeedbackTimeout=setTimeout("logging.getFeedback();",15000);
+
+        });
+
+    },
+
+  reInitJSP : function(){
+            logging.data.jspAPIMeldingen.reinitialise();
             logging.data.jspAPIUsers.reinitialise();
             logging.data.jspAPIHandles.reinitialise();
             logging.data.jspAPITickets.reinitialise();
-        }
+            logging.data.jspAPIFeedback.reinitialise();
+  }
 };
 //end of logging var

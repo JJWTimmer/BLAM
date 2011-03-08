@@ -1,19 +1,315 @@
 *{
-	margin:0;
-	padding:0;
+  margin:0;
+  padding:0;
 }
 
 body{
-	color:#111;
-	background:url('../img/page_bg.jpg') repeat-x #323232;
-	font:15px Calibri,Arial,sans-serif;
-	border-top:5px solid #212121;
+  height:100%;
+  width:100%
+  color:#111;
+  background:url('../img/page_bg.jpg') repeat-x #323232;
+  font:15px Calibri,Arial,sans-serif;
+  border-top:5px solid #212121;
 }
 
 .rounded{
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
     border-radius:4px;
+}
+
+/* standard format */
+.header{
+  position:absolute;
+  left:0px;
+  top: -25px;
+  width:100%;
+  height:20px;
+  background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+  text-align:center;
+}
+
+.list{
+position:absolute;
+  left:0%;
+  top: 0%;
+  width:100%;
+  height:100%;
+  background: #202020;
+  border:1px solid #111111;
+}
+
+/* Messages */
+/* overflow: hidden enables the resizing of each div*/
+.message{
+    position:relative;
+    overflow: hidden;
+    width: 95%;
+    border:1px solid #FFFFFF;
+    padding:2px 2px 2px 2px;
+    margin: 0.5% 5% 0.5% 1%;
+    background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
+}
+
+.message:last-child{
+    margin-bottom:0;
+}
+
+/*using floats here allows resizing of the parent div (message)
+overflow: hiddden ensures that low resolution version doesnt
+overflow over text, could also use min-width (either way screwed;-))*/
+.message .avatar-info-div{
+width:25%;
+/*min-width:70px;*/
+overflow: hidden;
+float:left;
+}
+
+.message .text-div{
+width:75%;
+float:right;
+}
+
+.message span{
+    color:#777777;
+    text-shadow:1px 1px 0 #FFFFFF;
+    font-size:12px;
+}
+
+.message .text-span{
+    color:#444444;
+    font-size:15px;
+    /*display:inline-block;*/
+}
+
+.message .avatar-td{
+
+    padding-right:4px;
+    background:url('../img/unknown24x24.png') no-repeat;
+}
+
+.message img{
+    /*hides picture when no avatar is present*/
+    visibility:hidden;
+}
+
+.message .info-td{
+    /*added line-height to decrease the space that was used as margin*/
+    font-size:12px;
+    line-height:12px;
+}
+
+/* users */
+
+.user{
+    background:url('../img/unknown30x30.png') no-repeat 1px 1px #444444;
+    border:1px solid #111111;
+    float:left;
+    height:32px;
+    margin:10px 10px 0 0px;
+    width:32px;
+}
+
+.user img{
+    border:1px solid #444444;
+    display:block;
+    visibility:hidden;
+}
+
+p.noMessages,
+.count{
+    clear:both;
+    font-size:12px;
+
+    padding:10px;
+    text-align:center;
+    text-shadow:1px 1px 0 #111111;
+    color:#ffffff;
+}
+
+.count{
+    font-size:11px;
+}
+
+/* Handles */
+.list_item_group{
+    float:left;
+    height:20px;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    text-align:center;
+    padding-left:3px;
+    background-color:#00B0B0;
+}
+
+.list_item_handle{
+    position:relative;
+    height:16px;
+    overflow:hidden;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:2px;
+    background-color:#C2DAFF;
+}
+
+.list_item_handle_name{
+    float:left;
+    width:40%;
+    text-align:left;
+}
+.list_item_handle_description{
+    float:right;
+    width:60%;
+    text-align:left;
+}
+
+/* tickets */
+.list_item_parent_ticket{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#00B0B0;
+}
+
+.list_item_parent_ticket:hover{
+    background-color:#B0B0B0;
+}
+
+.list_item_child_ticket{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    font:13px Calibri,Arial,sans-serif;
+    background-color:#C2DAFF;
+}
+
+.list_item_child_ticket:hover{
+    background-color:#B0B0B0;
+}
+
+
+.list_item_parent_ticket_expanded{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#C2DAFF;
+}
+
+/* feedback */
+.list_item_feedback{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#00B0B0;
+}
+
+.list_item_feedback:hover{
+    background-color:#B0B0B0;
+}
+
+.list_item_feedback_expanded{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 0px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#C2DAFF;
+}
+
+
+/* TopBar */
+#TopContainer .Topbar_info {
+padding-right:10px;
+}
+
+#TopContainer .Topbar_table {
+position: absolute;
+top: 0px;
+left: 50px;
+}
+
+#TopContainer .Topbar_img {
+    margin-top:8px;
+    margin-left:10px;
+    width:32px;
+    background:url('../img/unknown30x30.png') no-repeat;
+}
+
+#TopContainer{
+  position:absolute;
+  left:20px;
+  top: 20px;
+  width:95%;
+  height:50px;
+  background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+  border:1px solid #fff;
+  display:none;
+}
+
+/* Main container */
+#MainContainer{
+position:absolute;
+  top: 70px;
+  left:20px;
+  width:95%;
+  height:85%;
+  margin-bottom:10px;
+  padding-bottom:1%;
+  display:none;
+}
+
+#Login{
+position:absolute;
+    top: 70px;
+    left:20px;
+    width:95%;
+    height:85%;
+    margin-bottom:10px;
+    padding-bottom:1%;
+}
+
+#LoginWindow{
+position:relative;
+    top:30%;
+    width:300px;
+    height:180px;
+    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+    padding:10px;
+    border:1px solid #fff;
+}
+
+#LoginWindow input{
+    background:url('../img/input_bg.jpg') repeat-x #dcdcdc;
+    height:26px;
+    text_align:center;
+    font:13px/26px Calibri,Arial,sans-serif;
+    color:#777;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:0 5px;
+    margin-right:5px;
+    margin-top:5px;
+    width:185px;
 }
 
 /* Additional styles */
@@ -28,7 +324,7 @@ a.logoutButton{
     right:10px;
     text-shadow:1px 1px 0 #888;
     top:7px;
-    
+
     -moz-box-shadow:0 0 7px #888 inset;
     -webkit-box-shadow:0 0 7px #888 inset;
     box-shadow:0 0 7px #888 inset;
@@ -36,7 +332,7 @@ a.logoutButton{
 
 a.logoutButton:hover{
     text-shadow:1px 1px 0 #888;
-    
+
     -moz-box-shadow:0 0 7px #666 inset;
     -webkit-box-shadow:0 0 7px #666 inset;
     box-shadow:0 0 7px #666 inset;
@@ -53,68 +349,31 @@ a.logoutButton:hover{
     padding:16px;
     text-align:center;
     color:#fff;
-    
+
     text-shadow:1px 1px 0 #940f0f;
 }
-/*
-#footer{
-	background-color:#212121;
-	position:fixed;
-	width:100%;
-	height:70px;
-	bottom:0;
-	left:0;
+
+.jspVerticalBar{
+    float right;
+    width:20px;
+    background:none;
 }
 
-a.tzine,a.tzine:visited{
-	background:url("../img/tzine.png") no-repeat right top;
-	border:none;
-	color:#FCFCFC;
-	font-size:12px;
-	height:70px;
-	left:50%;
-	line-height:31px;
-	margin:23px 0 0 110px;
-	position:absolute;
-	top:0;
-	width:290px;
+.jspTrack{
+    width:3px;
+    right:-10px;
+    border:1px solid #111111;
+    background-color:#202020;
 }
 
-.tri{
-	border-color:transparent transparent #212121;
-	border-style:solid;
-	border-width:20px 17px;
-	height:0;
-	left:50%;
-	margin:-40px 0 0 -400px;
-	position:absolute;
-	top:0;
-	width:0;
+.jspDrag {
+    width:20px;
+    left:-9px;
+    height:20px !important;
+    margin-top:-5px;
+    background:url('../img/slider.png') no-repeat;
 }
 
-h1{
-	font-size:20px;
-	font-weight:normal;
-	left:50%;
-	margin-left:-400px;
-	padding:25px 0;
-	position:absolute;
-	width:480px;
+.jspDrag:hover{
+    background-position:left bottom;
 }
-
-a, a:visited {
-	font-size:20px;
-	text-decoration:none;
-	outline:none;
-	border-bottom:1px dotted #97cae6;
-	color:#97cae6;
-}
-
-a:hover{
-	border-bottom:1px dashed transparent;
-}
-
-.clear{
-	clear:both;
-}
-*/
