@@ -67,14 +67,32 @@ var ticketing = {
             {
             ticketing.data.selectedticket=$(this).attr("id");
             }
-
           ticketing.getTicketDetail(ticketing.data.selectedticket);
-
-
         });
 
+        //function to implement clicking on dynamic element ticket
+        $('div.list_item_child_ticket').live('click', function(){
+          if($(this).attr("id")!=ticketing.data.selectedticket)
+            {
+            ticketing.data.selectedticket=$(this).attr("id");
+            }
+          ticketing.getTicketDetail(ticketing.data.selectedticket);
+        });
 
+        //function to implement clicking on Header
+        $('#WL-ActieHeader').bind('click',function(){
+          ticketing.changeTabview('WL-Actie');
+        });
 
+        //function to implement clicking on Header
+        $('#FeedbackHeader').bind('click',function(){
+          ticketing.changeTabview('Feedback');
+        });
+
+        //function to implement clicking on Header
+        $('#TimelineHeader').bind('click',function(){
+          ticketing.changeTabview('Timeline');
+        });
 
         // Logging a person into rvdlog:
 
@@ -158,6 +176,7 @@ var ticketing = {
           ticketing.getNewTickets();
           ticketing.getOpenTickets();
           ticketing.getClosedTickets();
+          ticketing.changeTabview('WL-Actie');
         });
     },
 
@@ -488,6 +507,7 @@ var ticketing = {
                           $('option', $('#owner')).remove();
                           var owner_options = $('#owner').attr('options');
                           var index_owner;
+                          owner_options[0] = new Option("");
                           for(var i=0; i< r.length;i++){
                             if(r[i]){
                               if(r[i].role=='WL' || r[i].role=='Admin')
@@ -506,6 +526,7 @@ var ticketing = {
                           $('option', $('#operator')).remove();
                           var operator_options = $('#operator').attr('options');
                           var index_operator;
+                          operator_options[operator_options.length] = new Option("");
                           for(var i=0; i< r.length;i++){
                             if(r[i]){
                               if(r[i].role=='RVD' || r[i].role=='Admin'){
@@ -535,6 +556,47 @@ var ticketing = {
 
           }
         });
+    },
+
+    changeTabview : function(window){
+        switch(window){
+
+        case 'WL-Actie':
+        $('#WL-ActieHeader').css("background-image", "url(img/solid_blue.jpg)");
+        $('#FeedbackHeader').css("background-image", "url(img/solid_grey.jpg)");
+        $('#TimelineHeader').css("background-image", "url(img/solid_grey.jpg)");
+        $('#FeedbackList').fadeOut();
+        $('#TimelineList').fadeOut();
+        $('#WL-ActieList').fadeIn();
+        $('#WL-Actie').css('z-index',"1");
+        $('#Feedback').css('z-index',"");
+        $('#Timeline').css('z-index',"");
+        break;
+
+        case 'Feedback':
+        $('#WL-ActieHeader').css("background-image", "url(img/solid_grey.jpg)");
+        $('#FeedbackHeader').css("background-image", "url(img/solid_blue.jpg)");
+        $('#TimelineHeader').css("background-image", "url(img/solid_grey.jpg)");
+        $('#TimelineList').fadeOut();
+        $('#WL-ActieList').fadeOut();
+        $('#FeedbackList').fadeIn();
+        $('#WL-Actie').css('z-index',"");
+        $('#Feedback').css('z-index',"1");
+        $('#Timeline').css('z-index',"");
+        break;
+
+        case 'Timeline':
+        $('#WL-ActieHeader').css("background-image", "url(img/solid_grey.jpg)");
+        $('#FeedbackHeader').css("background-image", "url(img/solid_grey.jpg)");
+        $('#TimelineHeader').css("background-image", "url(img/solid_blue.jpg)");
+        $('#WL-ActieList').fadeOut();
+        $('#FeedbackList').fadeOut();
+        $('#TimelineList').fadeIn();
+        $('#WL-Actie').css('z-index',"");
+        $('#Feedback').css('z-index',"");
+        $('#Timeline').css('z-index',"1");
+        break;
+        }
     },
 
 

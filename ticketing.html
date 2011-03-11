@@ -81,11 +81,32 @@
                 </div>
                 <div id="WL-Actie">
                     <div id="WL-ActieHeader" class="header rounded"><p>WL-Actie</p></div>
-                    <div id="WL-ActieList" class="list rounded"></div>
+                    <div id="WL-ActieList" class="list rounded">
+                        <form id="WL-ActieForm" method="post" action="">
+                            <p>Titel: <input id="Title" name="Title" class="rounded" maxlength="255" /></p>
+                            <p>Locatie: <input id="Location" name="Location" class="rounded" maxlength="255" /></p>
+                            <p>Persoon: <input id="Persoon" name="Persoon" class="rounded" maxlength="255" /> Voertuig: <select id="Handle" name="Handle"></select></p>
+                            <p>Commentaar WL: </p>
+                            <textarea rows="1" cols="1" id="wltext" name="text" class="rounded" maxlength="700"></textarea><BR>
+                            <input type="submit" class="blueButton" value="Submit" />
+                        </form>
+                    </div>
                 </div>
                 <div id="Feedback">
                     <div id="FeedbackHeader" class="header rounded"><p>Terugmelding</p></div>
-                    <div id="FeedbackList" class="list rounded"></div>
+                    <div id="FeedbackList" class="list rounded">
+                    <form id="FeedbackForm" method="post" action="">
+                            <p>Titel: <input id="Title" name="Title" class="rounded" maxlength="255" /></p>
+                            <p>Voertuig: <select id="Handle" name="Handle"></select></p>
+                            <p>Terugmelding: <p>
+                            <textarea rows="1" cols="1" id="feedbacktext" name="text" class="rounded" maxlength="700"></textarea><BR>
+                            <input type="submit" class="blueButton" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+                <div id="Timeline">
+                    <div id="TimelineHeader" class="header rounded"><p>Timeline</p></div>
+                    <div id="TimelineList" class="list rounded"></div>
                 </div>
             </div>
         </div>
