@@ -61,6 +61,21 @@ var ticketing = {
             verticalDragMaxHeight: 12
       }).data('jsp');
 
+        //function to implement clicking on dynamic element ticket
+        $('div.list_item_parent_ticket').live('click', function(){
+          if($(this).attr("id")!=ticketing.data.selectedticket)
+            {
+            ticketing.data.selectedticket=$(this).attr("id");
+            }
+
+          ticketing.getTicketDetail(ticketing.data.selectedticket);
+
+
+        });
+
+
+
+
         // Logging a person into rvdlog:
 
         $('#loginForm').submit(function(){
@@ -133,7 +148,7 @@ var ticketing = {
         ticketing.data.avatar = new_avatar;
         ticketing.data.role = role;
 
-        $('#TopContainer').html(general.render('loginTopBar',ticketing.data));
+        $('#TopContainer').html(general.render('ticketing-loginTopBar',ticketing.data));
         $('#Login').fadeOut(function(){
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
@@ -459,6 +474,68 @@ var ticketing = {
         });
     },
 
+    getTicketDetail : function(ticket_id){
+        $.tzTESTPOST('getTicketDetail',{id: ticket_id},function(q){
+          if(q){
+            if(!q.error)
+                {
+                    $('#TicketDetailsList').empty();
+                    $('#TicketDetailsList').html(general.render('ticket_detail',q));
+                    //update select owner
+                    $.tzPOST('getUsers',{options:'all'},function(r){
+                      if(!r.error)
+                        {
+                          $('option', $('#owner')).remove();
+                          var owner_options = $('#owner').attr('options');
+                          var index_owner;
+                          for(var i=0; i< r.length;i++){
+                            if(r[i]){
+                              if(r[i].role=='WL' || r[i].role=='Admin')
+                                {
+                                  if(r[i].username==q.user){
+                                  index_owner=operator_options.length;
+
+                                  }
+                                  owner_options[owner_options.length] = new Option(r[i].username);
+                                }
+                              }
+                          }
+                          if(index_owner)$('#owner option:eq('+index_owner+')' ).attr("selected","selected");
+
+
+                          $('option', $('#operator')).remove();
+                          var operator_options = $('#operator').attr('options');
+                          var index_operator;
+                          for(var i=0; i< r.length;i++){
+                            if(r[i]){
+                              if(r[i].role=='RVD' || r[i].role=='Admin'){
+                                if(r[i].username==q.user)
+                                {
+                                index_operator=operator_options.length;
+                                }
+                                operator_options[operator_options.length] = new Option(r[i].username);
+                              }
+                            }
+                          }
+                          if(index_operator)$('#operator option:eq('+index_operator+')' ).attr("selected","selected");
+                        }
+                      else
+                        {
+                          general.displayError(r.error);
+                        }
+                  });
+                }
+            else
+                {
+                    general.displayError(q.error);
+                }
+          }
+          else
+          {
+
+          }
+        });
+    },
 
 
   reInitJSP : function(){

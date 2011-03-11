@@ -204,7 +204,7 @@ try {
             break;
 		
 		case 'getTicketDetail':
-			$response = RVDLog::getTicketDetail($_POST['id']);
+			$response = array('id' => $_POST['id'], 'title' => "Test titel", 'text' => "Een raar bericht, maar wel heel lang en vervelend en nog veel veeel veeeeeel meeer",'status' => "Geen idee",'user' => "Anne",'created' => "2011-01-01 01:02:03",'modified' => "2011-02-02 04:05:06",'children' => null);
             // returns integer Id, string Status, string Titel, string UserId, string Text, string Locatie, array time(Hours,Minutes), integer MessageId, string MessageUserId, string MessageText or exception
             break;
 		

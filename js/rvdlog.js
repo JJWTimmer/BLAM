@@ -7,10 +7,17 @@ var general = {
 
         var arr = [];
         switch(template){
-            case 'loginTopBar':
+            case 'logging-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+
+            break;
+
+            case 'ticketing-loginTopBar':
+
+                arr = [
+                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
@@ -74,6 +81,28 @@ var general = {
                     '<div class="list_item_feedback_expanded rounded"><p>Melding:</p><p>',params.message,'</p><p>WL contactpersoon:</p><p>',params.username,'</p><p>tijd melding:</p><p>',params.created,'</p></div>'
                 ];
             break;
+
+            case 'ticket_detail':
+            arr = ['<form id="TicketForm" method="post" action="">',
+            '<div class="list_item_ticketdetail rounded">',
+            '<div class="list_item_ticketdetail_title_status rounded">',
+              '<div class=list_item_ticketdetail_title><p>',params.title,'</p></div>',
+              '<div class=list_item_ticketdetail_status><p>status: ',params.status,'</p></div>',
+            '</div>',
+            '<div class="list_item_ticketdetail_label_created rounded">',
+              '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
+              '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
+            '</div>',
+            '<textarea rows="1" cols="1" id="tickettext" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
+            '<div class="list_item_ticketdetail_owner_operator rounded">',
+              '<div class=list_item_ticketdetail_owner><p>WLer: <select id="owner"><option selected>',params.user,'</option></select></p></div>',
+              '<div class=list_item_ticketdetail_operator><p>Operator: <select id="operator"><option selected>',params.user,'</option></select></p></div>',
+            '</div>',
+            '<div class=list_item_ticketdetail_message_modified><p>Laatst gewijzigd:',params.modified,'</p></div>',
+            '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
+            '</div>',
+            '</form>'];
+             break;
         }
 
         // A single array join is faster than
