@@ -120,6 +120,7 @@ textarea#messagetext{
     border-color:#c1c1c1 #eee #eee #c1c1c1;
     text-shadow:1px 1px 0 #E4E4E4;
     padding:0 5px;
+    resize: none;
     }
 
 p.label_checkbox_pair{

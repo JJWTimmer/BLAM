@@ -235,6 +235,96 @@ p.noMessages,
     background-color:#C2DAFF;
 }
 
+/* Ticket Details */
+.list_item_ticketdetail_title_status{
+    position:absolute;
+    overflow:hidden;
+    top:0%;
+    width:96%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    background-color:#00B0B0;
+}
+
+.list_item_ticketdetail_title{
+    float:left;
+    width:60%;
+    text-align:left;
+}
+.list_item_ticketdetail_status{
+    float:right;
+    width:40%;
+    text-align:right;
+}
+
+.list_item_ticketdetail_label_created{
+    top:12%;
+    position: absolute;
+    overflow:hidden;
+    width:96%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+
+.list_item_ticketdetail_label{
+    float:left;
+    width:30%;
+    text-align:left;
+    color: white;
+}
+.list_item_ticketdetail_created{
+    float:right;
+    width:70%;
+    text-align:right;
+    color: white;
+}
+
+textarea#tickettext{
+    position: absolute;
+    width:96%;
+    height: 45%;
+    top:24%;
+    left: 1%;
+    font:13px/14px Calibri,Arial,sans-serif;
+    color:black;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:1% 1%;
+    resize: none;
+}
+
+.list_item_ticketdetail_owner_operator{
+    top:75%;
+    position: absolute;
+    overflow:hidden;
+    width:96%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+
+.list_item_ticketdetail_owner{
+    float:left;
+    width:50%;
+    text-align:left;
+    color: white;
+}
+.list_item_ticketdetail_operator{
+    float:right;
+    width:50%;
+    text-align:right;
+    color: white;
+}
+
+.list_item_ticketdetail #saveticketbutton{
+    position: absolute;
+    top:90%;
+    right:1%;
+}
+
 
 /* TopBar */
 #TopContainer .Topbar_info {

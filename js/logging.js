@@ -270,7 +270,7 @@ var logging = {
         logging.data.avatar = new_avatar;
         logging.data.role = role;
 
-        $('#TopContainer').html(general.render('loginTopBar',logging.data));
+        $('#TopContainer').html(general.render('logging-loginTopBar',logging.data));
         $('#Login').fadeOut(function(){
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
