@@ -19,20 +19,53 @@ class Ticket extends RVDLogBase {
 	public function create() {
 
 		DB::query("
-			INSERT INTO tickets (user_id, title, message_id, status_id, text, created)
+			INSERT INTO tickets (title, message_id, status_id, text, created, modified)
 			VALUES (
-				 " . DB::esc($this->user_id) . ",
 				'" . DB::esc($this->title) . "',
 				 " . DB::esc($this->message_id) . ",
 				 " . DB::esc($this->status_id) . ",
 				'" . DB::esc($this->text) . "',
-                '" . DB::esc($this->created) . "'
+                '" . date('Y-m-d G:i:s') . "',
+                '" . date('Y-m-d G:i:s') . "',
             )
             ");
         
 		$this->id = DB::getMySQLiObject()->insert_id;
         
 		return $this->id;
+	}
+
+	public function createSub() {
+
+		DB::query("
+			INSERT INTO tickets (parent_id, title, text, location, handle_id, title, status_id, created, modified)
+			VALUES (
+				 " . DB::esc($this->parent_id) . ",
+				'" . DB::esc($this->title) . "',
+				'" . DB::esc($this->text) . "',
+				'" . DB::esc($this->location) . "',
+				 " . DB::esc($this->handle_id) . ",
+                1,
+                '" . date('Y-m-d G:i:s') . "'
+                '" . date('Y-m-d G:i:s') . "'
+            )
+            ");
+        
+		$this->id = DB::getMySQLiObject()->insert_id;
+        
+		return $this->id;
+	}    
+    
+	public function update() {
+		DB::query("
+			UPDATE tickets
+			SET	title = '" . DB::esc($this->title) . "',
+				text = '" . DB::esc($this->text) . "',
+                location = '" . DB::esc($this->location) . "',
+                handle_id = " . DB::esc($this->handle_id) . ",
+                modified = '" . date('Y-m-d G:i:s') . "' 
+            WHERE id = " . DB::esc($this->id) . "
+            ");
 	}
     
     public function get($recursive = 'false', $last_id = null, $last_modified = null, $status = array()) {
@@ -43,10 +76,12 @@ class Ticket extends RVDLogBase {
             throw new Exception('invalid parameters for getTicket');
         }
         
-        $q = "SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+        $q = "SELECT t.id AS id, title, location, text, s.name AS status, u.username AS wluser, u2.username AS rvduser, created, modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
+            INNER JOIN messages AS m ON t.message_id = m.id
+            INNER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.parent_id IS NULL";
 
         if (is_numeric($last_id)) {
@@ -63,7 +98,7 @@ class Ticket extends RVDLogBase {
             $results = DB::query($q);
             if ($results) while ($output[] = mysqli_fetch_assoc($results));
             if (!is_null($output) && end($output) == null) array_pop($output);
-            
+
         } elseif ($recursive == 'true') {
             $results = DB::query($q);
             if ($results) {
@@ -83,10 +118,12 @@ class Ticket extends RVDLogBase {
 
     private function getChildren($pid) {
         $results = DB::query("
-            SELECT t.id AS id, title, text, s.name AS status, u.username AS user, created, modified
+            SELECT t.id AS id, title, location, text, s.name AS status, u.username AS wluser, u2.username AS rvduser, created, modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
+            INNER JOIN messages AS m ON t.message_id = m.id
+            INNER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.parent_id = $pid
             ");
         while ($data[] = mysqli_fetch_assoc($results));
@@ -99,7 +136,44 @@ class Ticket extends RVDLogBase {
         }
         return $output;
     }
+    
+    public function close() {
+        $q = "
+            UPDATE tickets
+            SET status_id = 3, modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($this->id)."
+            ";
+        $res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+    }
+    
+    public function setOwner() {
+        $q = "
+            UPDATE tickets
+            SET user_id = ".DB::esc($user_id).", modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($id);
+        $res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+    }
+    
+    public function becomeChild() {
+        $q = "
+            UPDATE tickets
+            SET parent_id = ".DB::esc($parent_id).", modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($id);
+        $res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+    }
 
+    
+    public function becomeParent() {
+        $q = "
+            UPDATE tickets
+            SET parent_id = NULL, modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($id);
+        $res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+    }
 }
 
 ?>

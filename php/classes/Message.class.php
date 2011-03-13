@@ -30,7 +30,7 @@ class Message extends RVDLogBase {
             $results = DB::query("
                 SELECT msg.id, msg.text, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                ");
+                ORDER BY msg.id ASC");
         } elseif (is_array($options)) {
             $last_id = DB::esc($options['last_id']);
             $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
@@ -38,8 +38,10 @@ class Message extends RVDLogBase {
             $q = "
                 SELECT msg.id, msg.text, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                WHERE msg.id > $last_id";
+                WHERE msg.id > $last_id
+                ";
             $q .= ($since ? " AND msg.created > '$since'" : "");
+            $q .= " ORDER BY msg.id ASC";
             $results = DB::query($q);
         } else {
             throw new Exception('Invalid arguments for getMessages');

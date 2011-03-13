@@ -68,11 +68,11 @@ class Feedback extends RVDLogBase {
         return $output;
 	}
 
-	public function close($user_id) {
-
-		$res = DB::query("UPDATE feedbacks SET called = NOW(),
-                    called_by = " . DB::esc($user_id) . " WHERE id = " . DB::esc($this->id));
-        if (!$res) throw new Exception('MYSQL Exception');
+	public function close() {
+        $q = "UPDATE feedbacks SET called = NOW(),
+                    called_by = " . DB::esc($this->called_by) . " WHERE id = " . DB::esc($this->id);
+		$res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
 	}
     
 }

@@ -79,12 +79,10 @@ class RVDLog {
         
         if ($ticket) {
             $wlticket = new Ticket(array(
-                'user_id' => $_SESSION['user']['id'],
                 'message_id' => $insertID,
                 'title' => 'NIEUW',
                 'text' => $text,
-                'status_id' => 1,
-                'created' => date('Y-m-d G:i:s')                
+                'status_id' => 1              
             ));
             
             $wlticket->create();
@@ -160,8 +158,11 @@ class RVDLog {
     }
 
     public static function closeFeedback($id, $user_id){
-        $feedback = new feedback(array('id' => $id));
-        $feedback->close($user_id);
+        $feedback = new feedback(array(
+            'id'        => $id,
+            'called_by' => $_SESSION['user']['id']
+        ));
+        $feedback->close();
     }
 
     public static function addChat($text, $user_id){
@@ -177,54 +178,78 @@ class RVDLog {
         $chatline = new ChatLine(array());
         $chats = $chatline->get($last_id, $date_and_time);
         return $chats;
-    
-    }
-
-    public static function getTicketTreeNew($text, $ticket = false){
-    
-    }
-
-    public static function getTicketTreeOpen($text, $ticket = false){
-    
-    }
-
-    public static function getTicketTreeClosed($text, $ticket = false){
-    
     }
 
     public static function getTicketDetail($id){
-    
+        $ticket = new Ticket(array('id' => $id));
+        $ticket->getDetails();
+        return $ticket;
     }
 
     public static function closeTicket($id){
-    
+        $ticket = new Ticket(array('id' => $id));
+        $ticket->close();
     }
 
     public static function setTicketOwner($id){
-    
+        $ticket = new Ticket(array(
+            'id' => $id,
+            'user_id' => $_SESSION['user']['id']
+        ));
+        $ticket->setOwner();
     }
 
     public static function changeTicketOwner($id, $user_id){
-    
+        $ticket = new Ticket(array(
+            'id'        => $id,
+            'user_id'   => $user_id
+        ));
+        $ticket->setOwner();
     }
 
     public static function changeTicketDetails($id, $title, $text, $location, $handle_id){
-    
+        $ticket = new Ticket(array(
+            'id'        => $id,
+            'title'     => $title,
+            'text'      => $text,
+            'location'  => $location,
+            'handle_id' => $handle_id
+        ));
+        $ticket->update();
     }
 
-    public static function createSubTicket($parent_id, $text, $location, $handle_id){
-    
+    public static function createSubTicket($parent_id, $title, $text, $location, $handle_id){
+        $subticket = new Ticket(array(
+            'parent_id' => $parent_id,
+            'title' => $title,
+            'text' => $text,
+            'location' => $location,
+            'handle_id' => $handle_id
+        ));
+        $id = $subticket->createSub();
+        return $id;
     }
 
     public static function becomeChildTicket($id, $parent_id){
-    
+        $ticket = new Ticket(array(
+            'id'        => $id,
+            'parent_id'   => $parent_id
+        ));
+        $ticket->becomeChild();
     }
 
     public static function becomeParentTicket($id){
-    
+        $ticket = new Ticket(array('id' => $id));
+        $ticket->becomeParent();
     }
 
     public static function createFeedback($ticket_id, $text, $handle_id){
-    
+        $feedback = new Feedback(array(
+            'ticket_id' => $ticket_id,
+            'text' => $text,
+            'handle_id' => $handle_id
+        ));
+        $id = $feedback->create();
+        return $id;
     }
 }
