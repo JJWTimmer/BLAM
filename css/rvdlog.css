@@ -284,7 +284,7 @@ p.noMessages,
 textarea#tickettext{
     position: absolute;
     width:96%;
-    height: 45%;
+    height: 25%;
     top:24%;
     left: 1%;
     font:13px/14px Calibri,Arial,sans-serif;
@@ -294,6 +294,40 @@ textarea#tickettext{
     text-shadow:1px 1px 0 #E4E4E4;
     padding:1% 1%;
     resize: none;
+}
+
+.list_item_ticketdetail_handle_person{
+    top:55%;
+    position: absolute;
+    overflow:hidden;
+    width:96%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+
+.list_item_ticketdetail_handle{
+    float:left;
+    width:50%;
+    text-align:left;
+    color: white;
+}
+.list_item_ticketdetail_person{
+    float:right;
+    width:50%;
+    text-align:right;
+    color: white;
+}
+
+.list_item_ticketdetail_location{
+    top:65%;
+    position: absolute;
+    overflow:hidden;
+    width:96%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    color: white;
 }
 
 .list_item_ticketdetail_owner_operator{

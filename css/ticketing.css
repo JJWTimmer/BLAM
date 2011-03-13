@@ -121,25 +121,66 @@ height:100%;
     top: 5%;
     left:0%;
     width:98%;
-    height:27%;
+    height:40%;
     margin:1%;
 }
 
 #WL-Actie{
     position:absolute;
-    top: 38%;
+    top: 52%;
     left:0%;
     width:98%;
-    height:27%;
+    height:46%;
     margin:1%;
+}
+
+#WL-ActieHeader{
+  Width :33%;
+  Left: 0%;
+}
+
+#WL-ActieHeader:hover{
+    background:transparent;
+    background-color:#B0B0B0;
+    cursor:pointer;
 }
 
 #Feedback{
     position:absolute;
-    top: 71%;
+    top: 52%;
     left:0%;
     width:98%;
-    height:27%;
+    height:46%;
     margin:1%;
 }
 
+#FeedbackHeader{
+  Width :33%;
+  Left: 34%;
+}
+
+#FeedbackHeader:hover{
+    background:transparent;
+    background-color:#B0B0B0;
+    cursor:pointer;
+}
+
+#Timeline{
+    position:absolute;
+    top: 52%;
+    left:0%;
+    width:98%;
+    height:46%;
+    margin:1%;
+}
+
+#TimelineHeader{
+  Width :32%;
+  Left: 68%;
+}
+
+#TimelineHeader:hover{
+    background:transparent;
+    background-color:#B0B0B0;
+    cursor:pointer;
+}
