@@ -31,36 +31,36 @@ class Feedback extends RVDLogBase {
     
     public function get($id = null, $called = null) {
         if (!(is_numeric($id) || is_null($id))
-            || !((is_string($called) && ($called = 'true' || $called = 'false' )) || is_null($id))) {
+            || !((is_string($called) && ($called == 'true' || $called == 'false' )) || is_null($id))) {
             throw new Exception('invalid parameters for getFeedback');
         }
-        
+
         $q = "SELECT f.id AS id, f.ticket_id, f.title, h.handle_name as handle, f.message, f.called, u.username, f.created
             FROM feedbacks AS f
             INNER JOIN tickets AS t ON t.id = f.ticket_id
             INNER JOIN handles AS h ON h.id = f.handle_id
             LEFT OUTER JOIN users u ON u.id = f.called_by";
         $prev_pred = false;
-        if (!empty($id) && is_numeric($_id) ) {
-            $q .= " WHERE t.id > $last_id";
+        if (!empty($id) && is_numeric($id) ) {
+            $q .= " WHERE t.id > $id";
             $prev_pred = true;
         }
-        if (!empty($called) && is_numeric($called)) {
+        if (isset($called)) {
             if (!$prev_pred) $q .= " WHERE ";
             else $q .= " AND ";
-            switch ($status) {
-                case 0:
-                    $q .= " f.called = NULL ";
+            switch ($called) {
+                case 'false':
+                    $q .= " f.called IS NULL ";
                     break;
-                case 1:
-                    $q .= " f.called <> NULL ";
+                case 'true':
+                    $q .= " NOT (f.called IS NULL) ";
                     break;
                 default:
                     // select all
                     break;
             }
         }
-        
+
         $results = DB::query($q);
         if ($results) while ($output[] = mysqli_fetch_assoc($results));
         if (!is_null($output) && end($output) == null) array_pop($output);

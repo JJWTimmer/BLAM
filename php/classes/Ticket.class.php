@@ -68,6 +68,24 @@ class Ticket extends RVDLogBase {
             ");
 	}
     
+    public function getDetails() {
+        $q = "SELECT t.id AS id, t.title, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+            FROM tickets AS t
+            LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            INNER JOIN statuses AS s ON t.status_id = s.id
+            INNER JOIN messages AS m ON t.message_id = m.id
+            INNER JOIN users AS u2 ON m.user_id = u2.id
+            WHERE t.id = " . DB::esc($this->id);
+            
+        $results = DB::query($q);
+        $output = null;
+        if ($results) while ($output[] = mysqli_fetch_assoc($results));
+        if (!is_null($output) && end($output) == null) array_pop($output);
+        
+        return $output;    
+            
+    }
+    
     public function get($recursive = 'false', $last_id = null, $last_modified = null, $status = array()) {
         if (   !($recursive == 'true'|| $recursive == 'false' || is_null($recurive) )
             || !(is_numeric($last_id) || is_null($last_id))
@@ -76,7 +94,7 @@ class Ticket extends RVDLogBase {
             throw new Exception('invalid parameters for getTicket');
         }
         
-        $q = "SELECT t.id AS id, title, location, text, s.name AS status, u.username AS wluser, u2.username AS rvduser, created, modified
+        $q = "SELECT t.id AS id, t.title, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
@@ -93,7 +111,7 @@ class Ticket extends RVDLogBase {
         if (is_array($status) && !empty($status)) {
             $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risc, implode not escaped
         }
-
+        
         if ($recursive == 'false') {
             $results = DB::query($q);
             if ($results) while ($output[] = mysqli_fetch_assoc($results));
@@ -118,7 +136,7 @@ class Ticket extends RVDLogBase {
 
     private function getChildren($pid) {
         $results = DB::query("
-            SELECT t.id AS id, title, location, text, s.name AS status, u.username AS wluser, u2.username AS rvduser, created, modified
+            SELECT t.id AS id, t.title, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
