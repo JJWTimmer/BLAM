@@ -122,7 +122,7 @@ try {
 		
 		case 'getTicketDetail':
             RVDLog::checkLogged();
-			$response = RVDLog::getTicketDetail($_POST['id']);
+			$response = RVDLog::getTicketDetail($_REQUEST['id']);
             // returns integer Id, string Status, string Titel, string UserId, string Text, string Locatie, array time(Hours,Minutes), integer MessageId, string MessageUserId, string MessageText or exception
             break;
 		

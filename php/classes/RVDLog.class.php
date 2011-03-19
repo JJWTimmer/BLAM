@@ -182,8 +182,8 @@ class RVDLog {
 
     public static function getTicketDetail($id){
         $ticket = new Ticket(array('id' => $id));
-        $ticket->getDetails();
-        return $ticket;
+        $details = $ticket->getDetails();
+        return $details;
     }
 
     public static function closeTicket($id){

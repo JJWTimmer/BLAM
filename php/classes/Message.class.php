@@ -57,7 +57,7 @@ class Message extends RVDLogBase {
             $results = DB::query("
                 SELECT msg.id, msg.text, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                WHERE MATCH(text) AGAINST('" . DB::esc($keyword) . "' IN BOOLEAN MODE)
+                WHERE text LIKE '%" . DB::esc($keyword) . "%'
                 ");
         } else {
             return false;

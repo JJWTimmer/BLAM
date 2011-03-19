@@ -541,7 +541,7 @@ var logging = {
     },
 
     getFeedback : function(){
-        $.tzPOST('getFeedback',{called : true},function(r){
+        $.tzPOST('getFeedback',{called : false},function(r){
           if(r){
             if(!r.error)
                 {
