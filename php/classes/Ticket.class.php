@@ -30,7 +30,6 @@ class Ticket extends RVDLogBase {
             )
             ";
 		$res = DB::query($q);
-        logmsg($q);
         
         if ($res)
             $this->id = DB::getMySQLiObject()->insert_id;
