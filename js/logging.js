@@ -9,40 +9,41 @@ var logging = {
 
   // data holds variables for use in the class:
 
-  data : {
-    lastID    : 1,
-    noActivity  : 0
-  },
+    data : {
+        lastID    : 1,
+        noActivity  : 0,
+        groupsLoaded : false
+    },
 
-  // Init binds event listeners and sets up timers:
+    // Init binds event listeners and sets up timers:
 
-  init : function(){
+    init : function(){
 
-    // add listener for this button
-    $('#submitbutton').bind('click',function(){
-    $('#submitForm').submit();
-    });
+        // add listener for this button
+        $('#submitbutton').bind('click',function(){
+        $('#submitForm').submit();
+        });
 
-    // add listener for this button
-    $('#searchbutton').bind('click',function(){
-    $('#searchForm').submit();
-    });
+        // add listener for this button
+        $('#searchbutton').bind('click',function(){
+        $('#searchForm').submit();
+        });
 
-    $('#messageButton').bind('click',function(){
-      logging.data.jspAPIMeldingen.getContentPane().empty();
-      logging.data.lastID=1;
-      logging.getMessages();
-      $('#messageButton').hide();
-      return false;
-    });
+        $('#messageButton').bind('click',function(){
+          logging.data.jspAPIMeldingen.getContentPane().empty();
+          logging.data.lastID=1;
+          logging.getMessages();
+          $('#messageButton').hide();
+          return false;
+        });
 
-    // Using the defaultText jQuery plugin, included at the bottom:
-    $('#name').defaultText('Nickname');
-    $('#password').defaultText('Password');
+        // Using the defaultText jQuery plugin, included at the bottom:
+        $('#name').defaultText('Nickname');
+        $('#password').defaultText('Password');
 
         // We use the working variable to prevent multiple form submissions:
         var working = false;
-
+        
         // Converting the #MeldingenList, #UsersList, #HandlesList divs into a jScrollPane,
         // and saving the plugin's API in logging.data:
 
@@ -241,8 +242,7 @@ var logging = {
 
             return false;
         });
-
-
+        
         //catching window resizes
         var resizeTimer = null;
         $(window).bind('resize', function() {
@@ -293,6 +293,11 @@ var logging = {
             for(var i=0;i<r.length;i++){
                 logging.addMessageLine(r[i]);
             }
+            
+            
+            //highlight bata-123 and arts-1 formats.
+            general.highlightHandles(logging.data.jspAPIMeldingen.getContentPane(), logging.data.groups);
+            
             //if new messages, update to lastid
             //message.data.noActivity is reset, so next update in 1 second
 
@@ -306,6 +311,8 @@ var logging = {
 
                 logging.data.noActivity++;
             }
+            
+            
             //if no chats exist yet
             if(!logging.data.lastID){
                 logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages yet</p>');
@@ -417,7 +424,7 @@ var logging = {
             else logging.data.jspAPIMeldingen.getContentPane().append(markup);
         }
         else logging.data.jspAPIMeldingen.getContentPane().append(markup);
-
+        
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
         logging.data.jspAPIMeldingen.reinitialise();
@@ -470,6 +477,10 @@ var logging = {
         $.tzPOST('getGroups',{recursive:'true'},function(r){
             if(!r.error)
                 {
+                //save groups and handles for later use
+                logging.data.groups = r;
+                logging.data.groupsLoaded = true;
+                
                 logging.data.jspAPIHandles.getContentPane().empty();
 
                 var markup_group;
@@ -499,7 +510,9 @@ var logging = {
                 {
                     general.displayError(r.error);
                 }
-                setTimeout("logging.getHandles();",60000);
+                
+                //doesn't change?
+                //setTimeout("logging.getHandles();",60000); 
             });
 
     },

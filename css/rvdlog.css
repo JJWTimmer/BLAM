@@ -501,3 +501,9 @@ a.logoutButton:hover{
 .jspDrag:hover{
     background-position:left bottom;
 }
+
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+    color: black;
+}

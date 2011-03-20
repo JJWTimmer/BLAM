@@ -39,8 +39,8 @@ class Ticket extends RVDLogBase {
 	}
 
 	public function createSub() {
-
-		DB::query("
+    
+		$res = DB::query("
 			INSERT INTO tickets (parent_id, title, text, location, handle_id, title, status_id, created, modified)
 			VALUES (
 				 " . DB::esc($this->parent_id) . ",
@@ -53,14 +53,17 @@ class Ticket extends RVDLogBase {
                 '" . date('Y-m-d G:i:s') . "'
             )
             ");
-        
+            
+        if (!$res)
+           throw new Exception(DB::getMySQLiObject()->error);
+           
 		$this->id = DB::getMySQLiObject()->insert_id;
         
 		return $this->id;
 	}    
     
 	public function update() {
-		DB::query("
+		$res = DB::query("
 			UPDATE tickets
 			SET	title = '" . DB::esc($this->title) . "',
 				text = '" . DB::esc($this->text) . "',
@@ -69,6 +72,9 @@ class Ticket extends RVDLogBase {
                 modified = '" . date('Y-m-d G:i:s') . "' 
             WHERE id = " . DB::esc($this->id) . "
             ");
+            
+        if (!$res)
+           throw new Exception(DB::getMySQLiObject()->error);
 	}
     
     public function getDetails() {
@@ -81,6 +87,10 @@ class Ticket extends RVDLogBase {
             WHERE t.id = " . DB::esc($this->id);
             
         $results = DB::query($q);
+        
+        if (!$results)
+           throw new Exception(DB::getMySQLiObject()->error);
+        
         $output = null;
         if ($results) while ($output[] = mysqli_fetch_assoc($results));
         if (!is_null($output) && end($output) == null) array_pop($output);
