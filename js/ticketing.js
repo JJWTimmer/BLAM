@@ -494,7 +494,7 @@ var ticketing = {
     },
 
     getTicketDetail : function(ticket_id){
-        $.tzTESTPOST('getTicketDetail',{id: ticket_id},function(q){
+        $.tzPOST('getTicketDetail',{id: ticket_id},function(q){
           if(q){
             if(!q.error)
                 {
