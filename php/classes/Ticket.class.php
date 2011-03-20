@@ -18,7 +18,7 @@ class Ticket extends RVDLogBase {
 
 	public function create() {
 
-		DB::query("
+        $q  = "
 			INSERT INTO tickets (title, message_id, status_id, text, created, modified)
 			VALUES (
 				'" . DB::esc($this->title) . "',
@@ -26,12 +26,15 @@ class Ticket extends RVDLogBase {
 				 " . DB::esc($this->status_id) . ",
 				'" . DB::esc($this->text) . "',
                 '" . date('Y-m-d G:i:s') . "',
-                '" . date('Y-m-d G:i:s') . "',
+                '" . date('Y-m-d G:i:s') . "'
             )
-            ");
+            ";
+		$res = DB::query($q);
         
-		$this->id = DB::getMySQLiObject()->insert_id;
-        
+        if ($res)
+            $this->id = DB::getMySQLiObject()->insert_id;
+        else
+            throw new Exception(DB::getMySQLiObject()->error);
 		return $this->id;
 	}
 
