@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   PRIMARY KEY (`id`),
   KEY `FK_feedback_ticket` (`ticket_id`),
   KEY `FK_feedback_handle` (`handle_id`),
-  KEY `FK_feedback_operator` (`called_by`),
+  KEY `FK_feedback_operator` (`called_by`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `text` text,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_messages_users` (`user_id`),
+  KEY `FK_messages_users` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   KEY `FK_tickets_tickets` (`parent_id`),
   KEY `FK_tickets_messages` (`message_id`),
   KEY `FK_tickets_statuses` (`status_id`),
-  KEY `FK_tickets_handles` (`handle_id`),
+  KEY `FK_tickets_handles` (`handle_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
