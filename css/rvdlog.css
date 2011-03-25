@@ -166,17 +166,54 @@ p.noMessages,
 
 /* tickets */
 .list_item_parent_ticket{
+    position:relative;
+    height:16px;
+    overflow:hidden;
+    width:95%;
+    margin:2px 2px 2px 2px;
+    padding-left:3px;
+    padding-bottom:2px;
+    background-color:#00B0B0;
+}
+
+.list_item_parent_ticket_full{
+    position:relative;
+    height:16px;
+    overflow:hidden;
+    width:95%;
+    margin:2px 2px 2px 2px;
+    padding-left:3px;
+    padding-bottom:2px;
     float:left;
     width:95%;
-    margin:2px 0px 2px 2px;
-    padding-left:3px;
-    padding-bottom:1px;
     text-align:left;
     cursor:pointer;
     background-color:#00B0B0;
 }
 
-.list_item_parent_ticket:hover{
+.list_item_parent_ticket_full:hover{
+    background-color:#B0B0B0;
+}
+
+.list_item_parent_ticket_title{
+    float:left;
+    width:60%;
+    text-align:left;
+    cursor:pointer;
+}
+
+.list_item_parent_ticket_title:hover{
+    background-color:#B0B0B0;
+}
+
+.list_item_parent_ticket_claim{
+    float:right;
+    width:40%;
+    text-align:center;
+    cursor:pointer;
+}
+
+.list_item_parent_ticket_claim:hover{
     background-color:#B0B0B0;
 }
 
@@ -296,31 +333,8 @@ textarea#tickettext{
     resize: none;
 }
 
-.list_item_ticketdetail_handle_person{
-    top:55%;
-    position: absolute;
-    overflow:hidden;
-    width:96%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-}
-
-.list_item_ticketdetail_handle{
-    float:left;
-    width:50%;
-    text-align:left;
-    color: white;
-}
-.list_item_ticketdetail_person{
-    float:right;
-    width:50%;
-    text-align:right;
-    color: white;
-}
-
 .list_item_ticketdetail_location{
-    top:65%;
+    top:60%;
     position: absolute;
     overflow:hidden;
     width:96%;
@@ -355,7 +369,7 @@ textarea#tickettext{
 
 .list_item_ticketdetail #saveticketbutton{
     position: absolute;
-    top:90%;
+    top:88%;
     right:1%;
 }
 

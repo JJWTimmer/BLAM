@@ -10,7 +10,8 @@ var ticketing = {
   // data holds variables for use in the class:
 
   data : {
-    lastID    : 1,
+    lastIDMessages    : 1,
+    lastIDChats    : 1,
     noActivity  : 0
   },
 
@@ -32,6 +33,11 @@ var ticketing = {
     // and saving the plugin's API in logging.data:
 
     ticketing.data.jspAPIMeldingen = $('#MeldingenList').jScrollPane({
+      verticalDragMinHeight: 12,
+      verticalDragMaxHeight: 12
+    }).data('jsp');
+
+		ticketing.data.jspAPIChat = $('#WL-ChatList').jScrollPane({
       verticalDragMinHeight: 12,
       verticalDragMaxHeight: 12
     }).data('jsp');
@@ -61,13 +67,20 @@ var ticketing = {
             verticalDragMaxHeight: 12
       }).data('jsp');
 
-        //function to implement clicking on dynamic element ticket
-        $('div.list_item_parent_ticket').live('click', function(){
+        //function to implement clicking on ticket to get details
+        $('div.list_item_parent_ticket_title').live('click', function(){
           if($(this).attr("id")!=ticketing.data.selectedticket)
             {
             ticketing.data.selectedticket=$(this).attr("id");
             }
           ticketing.getTicketDetail(ticketing.data.selectedticket);
+        });
+
+				//function to implement clicking on claim
+        $('div.list_item_parent_ticket_claim').live('click', function(){ 
+          
+          $.tzPOST('setTicketOwner',{id:$(this).attr("id")},function(r){
+          });
         });
 
         //function to implement clicking on dynamic element ticket
@@ -140,6 +153,58 @@ var ticketing = {
             return false;
         });
 
+				// Submitting a new chat entry:
+
+        $('#submitForm').submit(function(){
+
+            var text = $('#text').val();
+
+            if(text.length == 0){
+                return false;
+            }
+
+            if(working) return false;
+            working = true;
+
+            // Assigning a temporary ID to the chat:
+            var tempID = 't'+Math.round(Math.random()*1000000),
+
+            params = {
+                    id : tempID,
+                    username  : ticketing.data.username,
+                    avatar  : ticketing.data.avatar,
+                    text    : text.replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                };
+
+            // Using our addChatLine method to add the chat
+            // to the screen immediately, without waiting for
+            // the AJAX request to complete:
+            ticketing.addChatLine($.extend({},params));
+
+            // Using our tzPOST wrapper method to send the message
+            // via a POST AJAX request:
+            $.tzPOST('addChat',$(this).serialize(),function(r){
+            if(!r.error){
+                working = false;
+                //empty input form textbox
+                $('#text').val('');
+                
+                //remove old temporary chat
+                $('div.chat-'+tempID).remove();
+
+                //insert newly received ID
+                params['id'] = r.id;
+                ticketing.addChatLine($.extend({},params));
+                }
+            else
+                {
+                general.displayError(r.error);
+                }
+            });
+            return false;
+        });
+
+
         //catching window resizes
         var resizeTimer = null;
         $(window).bind('resize', function() {
@@ -171,6 +236,7 @@ var ticketing = {
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
           ticketing.getMessages();
+          ticketing.getChats();
           ticketing.getUsers();
           ticketing.getHandles();
           ticketing.getNewTickets();
@@ -184,7 +250,7 @@ var ticketing = {
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past messages
 
     getMessages : function(){
-        $.tzPOST('getMessages',{last_id:ticketing.data.lastID,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
+        $.tzPOST('getMessages',{last_id:ticketing.data.lastIDMessages,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
         //update messages from mysql db
             if(!r.error)
             {
@@ -196,7 +262,7 @@ var ticketing = {
 
             if(r.length){
                 ticketing.data.noActivity = 0;
-                ticketing.data.lastID = r[i-1].id;
+                ticketing.data.lastIDMessages = r[i-1].id;
                 }
             else{
                 // If no messages were received, increment
@@ -205,7 +271,7 @@ var ticketing = {
                 ticketing.data.noActivity++;
             }
             //if no chats exist yet
-            if(!ticketing.data.lastID){
+            if(!ticketing.data.lastIDMessages){
                 ticketing.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages yet</p>');
             }
 
@@ -215,16 +281,16 @@ var ticketing = {
             var nextRequest = 1000;
 
             // 2 seconds
-            if(ticketing.data.noActivity > 3){
+            if(ticketing.data.noActivityMessages > 3){
                 nextRequest = 2000;
             }
 
-            if(ticketing.data.noActivity > 10){
+            if(ticketing.data.noActivityMessages > 10){
                 nextRequest = 5000;
             }
 
             // 15 seconds
-            if(ticketing.data.noActivity > 20){
+            if(ticketing.data.noActivityMessages > 20){
                 nextRequest = 15000;
             }
             }
@@ -238,6 +304,67 @@ var ticketing = {
 
         });
     },
+
+
+
+    // This method requests the latest chats
+    // (since last_id,timestamp), and adds them to the page. currently 24 hours past chats
+
+    getChats : function(){
+        $.tzPOST('getChats',{last_id:ticketing.data.lastIDChats,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
+        //update messages from mysql db
+            if(!r.error)
+            {
+            for(var i=0;i<r.length;i++){
+                ticketing.addChatLine(r[i]);
+            }
+            //if new messages, update to lastid
+            //message.data.noActivity is reset, so next update in 1 second
+
+            if(r.length){
+                ticketing.data.noActivity = 0;
+                ticketing.data.lastIDChats = r[i-1].id;
+                }
+            else{
+                // If no messages were received, increment
+                // the noActivity counter.
+                ticketing.data.noActivity++;
+            }
+            //if no chats exist yet
+            if(!ticketing.data.lastIDChats){
+                ticketing.data.jspAPIChats.getContentPane().html('<p class="noChats">No messages yet</p>');
+            }
+
+            // Setting a timeout for the next request,
+            // depending on the message activity:
+
+            var nextRequest = 1000;
+
+            // 2 seconds
+            if(ticketing.data.noActivityChats > 3){
+                nextRequest = 2000;
+            }
+
+            if(ticketing.data.noActivityChats > 10){
+                nextRequest = 5000;
+            }
+
+            // 15 seconds
+            if(ticketing.data.noActivityChats > 20){
+                nextRequest = 15000;
+            }
+            }
+            else
+            {
+                general.displayError(r.error);
+                var nextRequest = 1000;
+            }
+
+            ticketing.data.idChatsTimeout=setTimeout("ticketing.getChats();",nextRequest);
+
+        });
+    },
+
 
 // The addMessageLine method ads a message entry to the page
 
@@ -270,7 +397,7 @@ var ticketing = {
             exists.remove();
         }
 
-        if(!ticketing.data.lastID){
+        if(!ticketing.data.lastIDMessages){
             // If this is the first message, remove the
             // paragraph saying there aren't any:
 
@@ -291,6 +418,62 @@ var ticketing = {
         // reinitialise the jScrollPane plugin:
         ticketing.data.jspAPIMeldingen.reinitialise();
         ticketing.data.jspAPIMeldingen.scrollToBottom(true);
+
+    },
+
+
+// The addMessageLine method ads a message entry to the page
+
+    addChatLine : function(params){
+
+        if((params.avatar=="") || (params.avatar=="NULL"))
+        {
+        params.avatar="img/unknown24x24.png"
+        }
+
+        var d = new Date();
+        var strTime="";
+        if(params.created) {
+
+            // PHP returns the time in UTC (GMT). We use it to feed the date
+            // object and later output it in the user's timezone. JavaScript
+            // internally converts it for us.
+            var date_time=params.created.split(" ");
+            var time = date_time[1].split(":");
+            var strTime=time[0]+':'+time[1];
+            //d.setUTCHours(time[0],time[1]);
+        }
+
+        //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
+        params.time = strTime;
+        var markup = general.render('chatLine',params),
+            exists = $('WL-ChatList .chat-'+params.id);
+
+        if(exists.length){
+            exists.remove();
+        }
+
+        if(!ticketing.data.lastIDChats){
+            // If this is the first chat, remove the
+            // paragraph saying there aren't any:
+
+            $('#WL-ChatList p').remove();
+        }
+
+        //If this isn't a temporary chat:
+        if(params.id.toString().charAt(0) != 't'){
+            var previous = $('#WL-ChatList .chat-'+(+params.id - 1));
+            if(previous.length){
+                previous.after(markup);
+            }
+            else ticketing.data.jspAPIChat.getContentPane().append(markup);
+        }
+        else ticketing.data.jspAPIChat.getContentPane().append(markup);
+        
+        // As we added new content, we need to
+        // reinitialise the jScrollPane plugin:
+        ticketing.data.jspAPIChat.reinitialise();
+        ticketing.data.jspAPIChat.scrollToBottom(true);
 
     },
 
@@ -499,7 +682,7 @@ var ticketing = {
             if(!q.error)
                 {
                     $('#TicketDetailsList').empty();
-                    $('#TicketDetailsList').html(general.render('ticket_detail',q));
+                    $('#TicketDetailsList').html(general.render('ticket_detail',q[0]));
                     //update select owner
                     $.tzPOST('getUsers',{options:'all'},function(r){
                       if(!r.error)
@@ -512,8 +695,8 @@ var ticketing = {
                             if(r[i]){
                               if(r[i].role=='WL' || r[i].role=='Admin')
                                 {
-                                  if(r[i].username==q.user){
-                                  index_owner=operator_options.length;
+                                  if(r[i].username==q[0].wluser){
+                                  index_owner=owner_options.length;
 
                                   }
                                   owner_options[owner_options.length] = new Option(r[i].username);
@@ -530,7 +713,7 @@ var ticketing = {
                           for(var i=0; i< r.length;i++){
                             if(r[i]){
                               if(r[i].role=='RVD' || r[i].role=='Admin'){
-                                if(r[i].username==q.user)
+                                if(r[i].username==q[0].rvduser)
                                 {
                                 index_operator=operator_options.length;
                                 }

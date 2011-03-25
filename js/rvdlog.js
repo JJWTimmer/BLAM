@@ -31,7 +31,11 @@ var general = {
             case 'messageLine':
                 arr = [
                 '<div class="message message-',params.id,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
+            break;
 
+						case 'chatLine':
+                arr = [
+                '<div class="chat chat-',params.id,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
             break;
 
             case 'user':
@@ -60,10 +64,21 @@ var general = {
             break;
 
             case 'parentticket':
+                if(params.wluser="null"){
                 arr = [
-                    '<div class="list_item_parent_ticket rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                    '<div class="list_item_parent_ticket rounded">',
+                    '<div class="list_item_parent_ticket_title rounded" id="',params.id,'"><p>',params.id,': ',params.title,'</p></div>',
+                    '<div class="list_item_parent_ticket_claim rounded" id="',params.id,'"><p>claim</p></div>',
+                    '</div>'
                 ];
-            break;
+              	}
+                else
+                {
+                arr = [
+                    '<div class="list_item_parent_ticket_full rounded" id="',params.id,'"><p>',params.id,': ',params.title,' : ',params.wluser,'</p></div>'
+                			];	
+                }	
+            		break;
 
             case 'parentticket_expanded':
                 arr = [
@@ -101,14 +116,10 @@ var general = {
               '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
             '</div>',
             '<textarea rows="1" cols="1" id="tickettext" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-            '<div class="list_item_ticketdetail_handle_person rounded">',
-              '<div class=list_item_ticketdetail_handle><p>Voertuig: <select id="handle"></select></p></div>',
-              '<div class=list_item_ticketdetail_person><p>Persoon: <input id="person" name="persoon" class="rounded" maxlength="16" /></p></div>',
-            '</div>',
-            '<div class=list_item_ticketdetail_location><p>Locatie: <input id="location" name="location" class="rounded" maxlength="16" /></p></div>',
+            '<div class=list_item_ticketdetail_location><p>Locatie: <input id="location" name="location" class="rounded" maxlength="16" value="',params.location,'"/></p></div>',
             '<div class="list_item_ticketdetail_owner_operator rounded">',
-              '<div class=list_item_ticketdetail_owner><p>WLer: <select id="owner"><option selected>',params.user,'</option></select></p></div>',
-              '<div class=list_item_ticketdetail_operator><p>Operator: <select id="operator"><option selected>',params.user,'</option></select></p></div>',
+              '<div class=list_item_ticketdetail_owner><p>WLer: <select id="owner"><option selected>',params.wluser,'</option></select></p></div>',
+              '<div class=list_item_ticketdetail_operator><p>Operator: <select id="operator"><option selected>',params.rvduser,'</option></select></p></div>',
             '</div>',
             '<div class=list_item_ticketdetail_message_modified><p>Laatst gewijzigd:',params.modified,'</p></div>',
             '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
