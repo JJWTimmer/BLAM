@@ -181,8 +181,9 @@ class Ticket extends RVDLogBase {
     public function setOwner() {
         $q = "
             UPDATE tickets
-            SET user_id = ".DB::esc($user_id).", modified = '".date('Y-m-d G:i:s')."'
-            WHERE id = ".DB::esc($id);
+            SET user_id = ".DB::esc($this->user_id).", modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($this->id);
+
         $res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
     }
@@ -190,8 +191,8 @@ class Ticket extends RVDLogBase {
     public function becomeChild() {
         $q = "
             UPDATE tickets
-            SET parent_id = ".DB::esc($parent_id).", modified = '".date('Y-m-d G:i:s')."'
-            WHERE id = ".DB::esc($id);
+            SET parent_id = ".DB::esc($this->parent_id).", modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($this->id);
         $res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
     }
@@ -201,7 +202,7 @@ class Ticket extends RVDLogBase {
         $q = "
             UPDATE tickets
             SET parent_id = NULL, modified = '".date('Y-m-d G:i:s')."'
-            WHERE id = ".DB::esc($id);
+            WHERE id = ".DB::esc($this->id);
         $res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
     }

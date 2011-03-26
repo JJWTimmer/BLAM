@@ -171,7 +171,7 @@ class RVDLog {
                                     'user_id' => $user_id
                                     ));
         $id = $chatline->create();
-        return $id;
+        return array('id' => $id);
     }
 
     public static function getChats($last_id, $date_and_time){

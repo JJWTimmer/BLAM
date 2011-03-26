@@ -33,14 +33,15 @@ class ChatLine extends RVDLogBase {
                 FROM chatlines AS t INNER JOIN users ON t.user_id = users.id
                 ");
         } elseif (is_numeric($last_id) || strtotime($since)) {
-            $last_id = DB::esc($options['last_id']);
-            $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
+            $last_id = DB::esc($last_id ? $last_id : 0);
+            $since = DB::esc($since);
 
             $q = "
                 SELECT t.id, t.text, t.created, users.username, users.avatar
                 FROM chatlines AS t INNER JOIN users ON t.user_id = users.id
                 WHERE t.id > $last_id";
             $q .= ($since ? " AND t.created > '$since'" : "");
+
             $results = DB::query($q);
         } else {
             return false;
