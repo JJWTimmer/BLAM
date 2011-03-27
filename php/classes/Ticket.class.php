@@ -181,7 +181,7 @@ class Ticket extends RVDLogBase {
     public function setOwner() {
         $q = "
             UPDATE tickets
-            SET user_id = ".DB::esc($this->user_id).", modified = '".date('Y-m-d G:i:s')."'
+            SET user_id = ".DB::esc($this->user_id).", modified = '".date('Y-m-d G:i:s')."', status_id = 2
             WHERE id = ".DB::esc($this->id);
 
         $res = DB::query($q);
