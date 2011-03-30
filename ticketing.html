@@ -83,12 +83,13 @@
                     <div id="WL-ActieHeader" class="header rounded"><p>WL-Actie</p></div>
                     <div id="WL-ActieList" class="list rounded">
                         <form id="WL-ActieForm" method="post" action="">
-                            <p>Titel: <input id="Title" name="Title" class="rounded" maxlength="255" /></p>
-                            <p>Locatie: <input id="Location" name="Location" class="rounded" maxlength="255" /></p>
-                            <p>Persoon: <input id="Persoon" name="Persoon" class="rounded" maxlength="255" /> Voertuig: <select id="Handle" name="Handle"></select></p>
-                            <p>Commentaar WL: </p>
-                            <textarea rows="1" cols="1" id="wltext" name="text" class="rounded" maxlength="700"></textarea><BR>
-                            <input type="submit" class="blueButton" value="Submit" />
+                            <div class="list_item_extra_Header"><h1>Subticket aanmaken</h1></div>
+                            <div class="list_item_extra_Title"><p>Titel: <input id="subticket_Title" name="Title" class="rounded" maxlength="255" /></p></div>
+                            <div class="list_item_extra_Label"><p>Opmerking: </p></div>
+                            <textarea rows="1" cols="1" id="subticket_Text" name="text" class="rounded" maxlength="700"></textarea><BR>
+                            <div class="list_item_extra_Handle"><p>Voertuig: <select id="subticket_Handle" name="handle"></select></p></div>
+                            <div class="list_item_extra_Location"><p>Locatie: <input id="subticket_Location" name="Location" class="rounded" maxlength="255" /></p></div>
+                            <input type="submit" class="list_item_extra_Button blueButton" value="Voeg opmerking toe" />
                         </form>
                     </div>
                 </div>
@@ -96,11 +97,12 @@
                     <div id="FeedbackHeader" class="header rounded"><p>Terugmelding</p></div>
                     <div id="FeedbackList" class="list rounded">
                     <form id="FeedbackForm" method="post" action="">
-                            <p>Titel: <input id="Title" name="Title" class="rounded" maxlength="255" /></p>
-                            <p>Voertuig: <select id="Handle" name="Handle"></select></p>
-                            <p>Terugmelding: <p>
-                            <textarea rows="1" cols="1" id="feedbacktext" name="text" class="rounded" maxlength="700"></textarea><BR>
-                            <input type="submit" class="blueButton" value="Submit" />
+                            <div class="list_item_extra_Header"><h1>Terugmelding</h1></div>
+                            <div class="list_item_extra_Title"><p>Titel: <input id="feedback_Title" name="Title" class="rounded" maxlength="255" /></p></div>
+                          <div class="list_item_extra_Label"><p>Terugmelding: <p></div>
+                            <textarea rows="1" cols="1" id="feedback_Text" name="text" class="rounded" maxlength="700"></textarea><BR>
+                            <div class="list_item_extra_Handle"><p>Voertuig: <select id="feedback_Handle" name="Handle"></select></p></div>
+                            <input type="submit" class="list_item_extra_Button blueButton" value="Doe deze terugmelding" />
                         </form>
                     </div>
                 </div>

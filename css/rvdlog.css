@@ -99,6 +99,68 @@ float:right;
     line-height:12px;
 }
 
+
+
+/* Chats */
+/* overflow: hidden enables the resizing of each div*/
+.chat{
+    position:relative;
+    overflow: hidden;
+    width: 95%;
+    border:1px solid #FFFFFF;
+    padding:2px 2px 2px 2px;
+    margin: 0.5% 5% 0.5% 1%;
+    background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
+}
+
+.chat:last-child{
+    margin-bottom:0;
+}
+
+/*using floats here allows resizing of the parent div (message)
+overflow: hiddden ensures that low resolution version doesnt
+overflow over text, could also use min-width (either way screwed;-))*/
+.chat .avatar-info-div{
+width:40%;
+/*min-width:70px;*/
+overflow: hidden;
+float:left;
+}
+
+.chat .text-div{
+width:60%;
+float:right;
+}
+
+.chat span{
+    color:#777777;
+    text-shadow:1px 1px 0 #FFFFFF;
+    font-size:12px;
+}
+
+.chat .text-span{
+    color:#444444;
+    font-size:15px;
+    /*display:inline-block;*/
+}
+
+.chat .avatar-td{
+
+    padding-right:4px;
+    background:url('../img/unknown24x24.png') no-repeat;
+}
+
+.chat img{
+    /*hides picture when no avatar is present*/
+    visibility:hidden;
+}
+
+.chat .info-td{
+    /*added line-height to decrease the space that was used as margin*/
+    font-size:12px;
+    line-height:12px;
+}
+
 /* users */
 
 .user{
@@ -202,8 +264,10 @@ p.noMessages,
     cursor:pointer;
 }
 
-.list_item_parent_ticket_title:hover{
-    background-color:#B0B0B0;
+.list_item_parent_ticket_user{
+    float:right;
+    width:40%;
+    text-align:center;
 }
 
 .list_item_parent_ticket_claim{
@@ -214,7 +278,7 @@ p.noMessages,
 }
 
 .list_item_parent_ticket_claim:hover{
-    background-color:#B0B0B0;
+    background-color:#FF0000;
 }
 
 .list_item_child_ticket{
@@ -273,25 +337,32 @@ p.noMessages,
 }
 
 /* Ticket Details */
+
 .list_item_ticketdetail_title_status{
     position:absolute;
     overflow:hidden;
     top:0%;
+    height:20px;
     width:96%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
+    margin:2px 1% 2px 0;
     padding-right:1%;
     background-color:#00B0B0;
 }
 
-.list_item_ticketdetail_title{
-    float:left;
-    width:60%;
-    text-align:left;
+#ticket_title{
+		width:100%;
+		height:20px;
 }
+
+.list_item_ticketdetail_title{
+    position: absolute;
+    top:0%;
+    width:50%;
+}
+
 .list_item_ticketdetail_status{
     float:right;
-    width:40%;
+    width:50%;
     text-align:right;
 }
 
@@ -318,10 +389,22 @@ p.noMessages,
     color: white;
 }
 
-textarea#tickettext{
+.list_item_ticketdetail_message_modified{
+    top:88%;
+    position: absolute;
+    overflow:hidden;
+    width:96%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    color: white;
+}
+
+
+textarea#ticket_text{
     position: absolute;
     width:96%;
-    height: 25%;
+    height: 20%;
     top:24%;
     left: 1%;
     font:13px/14px Calibri,Arial,sans-serif;
@@ -333,8 +416,22 @@ textarea#tickettext{
     resize: none;
 }
 
+#ticket_location{
+		width:50%;
+}
+
 .list_item_ticketdetail_location{
-    top:60%;
+    position: absolute;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    top:53%;
+    width:100%;
+    color: white;
+}
+
+.list_item_ticketdetail_handle{
+    top:64%;
     position: absolute;
     overflow:hidden;
     width:96%;
@@ -344,7 +441,7 @@ textarea#tickettext{
     color: white;
 }
 
-.list_item_ticketdetail_owner_operator{
+.list_item_ticketdetail_owner{
     top:75%;
     position: absolute;
     overflow:hidden;
@@ -352,25 +449,107 @@ textarea#tickettext{
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
-}
-
-.list_item_ticketdetail_owner{
-    float:left;
-    width:50%;
-    text-align:left;
     color: white;
 }
-.list_item_ticketdetail_operator{
-    float:right;
-    width:50%;
-    text-align:right;
-    color: white;
+.list_item_ticketdetail #closeticketbutton{
+    position: absolute;
+    top:88%;
+    right:25%;
+    width:100px;
+    height:25px;
 }
 
 .list_item_ticketdetail #saveticketbutton{
     position: absolute;
     top:88%;
     right:1%;
+    width:100px;
+    height:25px;
+}
+
+/*Create subticket*/
+#WL-ActieForm {
+display:none;
+}
+
+.list_item_extra_Header {
+		position: absolute;
+    top:0%;
+    width:100%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    color: white;
+}
+
+.list_item_extra_Title {
+		position: absolute;
+    top:14%;
+    width:100%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    color: white;
+}
+
+#subticket_Title,#feedback_Title,#subticket_Location,#feedback_Location{
+width:50%;
+}
+
+.list_item_extra_Label{
+		position: absolute;
+    top:20%;
+    width:100%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    color: white;
+}
+
+textarea#subticket_Text,textarea#feedback_Text{
+    position: absolute;
+    width:96%;
+    height: 20%;
+    top:30%;
+    left: 1%;
+    font:13px/14px Calibri,Arial,sans-serif;
+    color:black;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:1% 1%;
+    resize: none;
+}
+
+.list_item_extra_Handle{
+		position: absolute;
+    top:60%;
+    width:100%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    color: white;
+}
+
+.list_item_extra_Location{
+		position: absolute;
+		top:70%;
+    width:100%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    color: white;
+}
+
+.list_item_extra_Button{
+	position: absolute;
+	top:80%;
+	width:150px;
+	height:30px;
+	right:10%;
+}
+#FeedbackForm {
+display:none;
 }
 
 
@@ -449,6 +628,7 @@ position:relative;
     margin-top:5px;
     width:185px;
 }
+
 
 /* Additional styles */
 

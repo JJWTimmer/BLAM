@@ -6,6 +6,11 @@ var general = {
     render : function(template,params){
 
         var arr = [];
+        var arr1 = [];
+        var arr2 = [];
+        var arr3 = [];
+        var arr4 = [];
+        var arr5 = [];
         switch(template){
             case 'logging-loginTopBar':
 
@@ -20,7 +25,7 @@ var general = {
                 '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
-            
+
             case 'admin-loginTopBar':
 
                 arr = [
@@ -33,7 +38,7 @@ var general = {
                 '<div class="message message-',params.id,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
             break;
 
-						case 'chatLine':
+            case 'chatLine':
                 arr = [
                 '<div class="chat chat-',params.id,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
             break;
@@ -64,25 +69,28 @@ var general = {
             break;
 
             case 'parentticket':
-                if(params.wluser="null"){
+                if(params.wluser==null && (params.role=="WL" || params.role=="Admin")){
                 arr = [
-                    '<div class="list_item_parent_ticket rounded">',
+                    '<div class="list_item_parent_ticket_full rounded" id="',params.id,'">',
                     '<div class="list_item_parent_ticket_title rounded" id="',params.id,'"><p>',params.id,': ',params.title,'</p></div>',
                     '<div class="list_item_parent_ticket_claim rounded" id="',params.id,'"><p>claim</p></div>',
                     '</div>'
                 ];
-              	}
+                }
                 else
                 {
                 arr = [
-                    '<div class="list_item_parent_ticket_full rounded" id="',params.id,'"><p>',params.id,': ',params.title,' : ',params.wluser,'</p></div>'
-                			];	
-                }	
-            		break;
+                    '<div class="list_item_parent_ticket_full rounded" id="',params.id,'">',
+                    '<div class="list_item_parent_ticket_title rounded" id="',params.id,'"><p>',params.id,': ',params.title,'</p></div>',
+                    '<div class="list_item_parent_ticket_user rounded" id="',params.id,'"><p>',params.wluser,'</p></div>',
+                    '</div>'
+                      ];
+                }
+                break;
 
             case 'parentticket_expanded':
                 arr = [
-                    '<div class="list_item_parent_ticket_expanded rounded"><p>Melding:</p><p>',params.text,'</p><p>Status:</p><p>',params.status,'</p><p>WL contactpersoon:</p><p>',params.user,'</p><p>tijd melding:</p><p>',params.created,'</p><p>laatste wijziging:</p><p>',params.modified,'</p></div>'
+                    '<div class="list_item_parent_ticket_expanded rounded"><p>Melding:</p><p>',params.text,'</p><p>Operator:</p><p>',params.rvduser,'</p><p>Status:</p><p>',params.status,'</p><p>WL contactpersoon:</p><p>',params.wluser,'</p><p>tijd melding:</p><p>',params.created,'</p><p>laatste wijziging:</p><p>',params.modified,'</p></div>'
                 ];
             break;
 
@@ -105,27 +113,62 @@ var general = {
             break;
 
             case 'ticket_detail':
-            arr = ['<form id="TicketForm" method="post" action="">',
+
+            arr1 = ['<form id="TicketForm" method="post" action="">',
             '<div class="list_item_ticketdetail rounded">',
             '<div class="list_item_ticketdetail_title_status rounded">',
-              '<div class=list_item_ticketdetail_title><p>',params.title,'</p></div>',
+              '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
               '<div class=list_item_ticketdetail_status><p>status: ',params.status,'</p></div>',
             '</div>',
             '<div class="list_item_ticketdetail_label_created rounded">',
               '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
               '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
             '</div>',
-            '<textarea rows="1" cols="1" id="tickettext" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-            '<div class=list_item_ticketdetail_location><p>Locatie: <input id="location" name="location" class="rounded" maxlength="16" value="',params.location,'"/></p></div>',
-            '<div class="list_item_ticketdetail_owner_operator rounded">',
-              '<div class=list_item_ticketdetail_owner><p>WLer: <select id="owner"><option selected>',params.wluser,'</option></select></p></div>',
-              '<div class=list_item_ticketdetail_operator><p>Operator: <select id="operator"><option selected>',params.rvduser,'</option></select></p></div>',
-            '</div>',
-            '<div class=list_item_ticketdetail_message_modified><p>Laatst gewijzigd:',params.modified,'</p></div>',
+            '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
+            '<div class="list_item_ticketdetail_location"><p>Location: <input type="text" class="rounded" value="',params.location,'" id="ticket_location"></p></div>'];
+            arr2 = ['<div class=list_item_ticketdetail_owner><p>WLer: <select id="owner"><option selected>',params.wluser,'</option></select></p></div>'];
+            arr3 = ['<div class=list_item_ticketdetail_handle><p>Voertuig: <select id="ticket_Handle"><option selected> </option></select></p></div>',
+            '<div class=list_item_ticketdetail_message_modified><p>Laatst gewijzigd:',params.modified,'</p></div>'];
+            arr4 =['<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
             '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
             '</div>',
             '</form>'];
-             break;
+            arr5 =['<input type="button" id="saveticketbutton" class="blueButton" value="Reopen Ticket"/>',
+            '</div>',
+            '</form>'];
+          //als er al een wl-er is toegewezen
+          if(params.wluser){
+          $.merge(arr1,arr2);
+          $.merge(arr1,arr3);
+            //als ticket niet gesloten is
+            if(params.status!="Gesloten")
+            {
+            $.merge(arr1,arr4);
+            }
+            else
+            {
+            $.merge(arr1,arr5);
+            }
+
+          }
+          //als er geen wl-er is toegewezen
+          else{
+          //als ticket niet gesloten is
+          if(params.status!="Gesloten")
+            {
+            $.merge(arr1,arr3);
+            $.merge(arr1,arr4);
+            }
+
+            else
+            {
+            $.merge(arr1,arr3);
+            $.merge(arr1,arr5);
+            }
+          }
+          arr= arr1;
+          break;
+
         }
 
         // A single array join is faster than
@@ -134,9 +177,9 @@ var general = {
         return arr.join('');
 
     },
-    
+
     //highlight (add rvdlog.css .highlight)
-    highlightHandles : function(elem, groups) {      
+    highlightHandles : function(elem, groups) {
         elem.removeHighlight();
         if (logging.data.groupsLoaded) {
             for (i = 0; i < groups.length; i++) {

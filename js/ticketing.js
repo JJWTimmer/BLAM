@@ -28,7 +28,6 @@ var ticketing = {
 
     var working = false;
 
-
     // Converting the #MeldingenList, #UsersList, #HandlesList divs into a jScrollPane,
     // and saving the plugin's API in logging.data:
 
@@ -37,7 +36,7 @@ var ticketing = {
       verticalDragMaxHeight: 12
     }).data('jsp');
 
-		ticketing.data.jspAPIChat = $('#WL-ChatList').jScrollPane({
+    ticketing.data.jspAPIChats = $('#WL-ChatList').jScrollPane({
       verticalDragMinHeight: 12,
       verticalDragMaxHeight: 12
     }).data('jsp');
@@ -68,7 +67,7 @@ var ticketing = {
       }).data('jsp');
 
         //function to implement clicking on ticket to get details
-        $('div.list_item_parent_ticket_title').live('click', function(){
+        $('div.list_item_parent_ticket_full').live('click', function(){
           if($(this).attr("id")!=ticketing.data.selectedticket)
             {
             ticketing.data.selectedticket=$(this).attr("id");
@@ -76,9 +75,9 @@ var ticketing = {
           ticketing.getTicketDetail(ticketing.data.selectedticket);
         });
 
-				//function to implement clicking on claim
-        $('div.list_item_parent_ticket_claim').live('click', function(){ 
-          
+        //function to implement clicking on claim
+        $('div.list_item_parent_ticket_claim').live('click', function(){
+
           $.tzPOST('setTicketOwner',{id:$(this).attr("id")},function(r){
           });
         });
@@ -153,7 +152,9 @@ var ticketing = {
             return false;
         });
 
-				// Submitting a new chat entry:
+
+
+        // Submitting a new chat entry:
 
         $('#submitForm').submit(function(){
 
@@ -188,7 +189,7 @@ var ticketing = {
                 working = false;
                 //empty input form textbox
                 $('#text').val('');
-                
+
                 //remove old temporary chat
                 $('div.chat-'+tempID).remove();
 
@@ -204,6 +205,88 @@ var ticketing = {
             return false;
         });
 
+      // add listener for this button and change ticket details
+      $('#saveticketbutton').live('click',function(){
+            $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),handle_id:$('#ticket_Handle').val()},function(r){
+              if(r==null){
+
+              }
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+
+            $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
+              if(r==null){
+
+              }
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+            $('#TicketDetailsList').empty();
+            $('#WL-ActieForm').fadeOut();
+            $('#FeedbackForm').fadeOut();
+      });
+
+      // add listener for this button and change ticket details
+      $('#closeticketbutton').live('click',function(){
+            $.tzPOST('closeTicket',{id:ticketing.data.selectedticket},function(r){
+              if(r==null){
+
+              }
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+            $('#TicketDetailsList').empty();
+            $('#WL-ActieForm').fadeOut();
+            $('#FeedbackForm').fadeOut();
+      });
+
+        $('#WL-ActieForm').submit(function(){
+            if(working) return false;
+            working = true;
+
+            $.tzPOST('createSubTicket',{parent_id:ticketing.data.selectedticket,title:$('#subticket_Title').val(),text:$('#subticket_Text').val(),location:$('#subticket_Location').val(),handle_id:$('#subticket_Handle').val()},function(r){
+                working = false;
+
+                if(r.error){
+                    general.displayError(r.error);
+                }
+                else
+                {
+                    $('#subticket_Title').val("");
+                    $('#subticket_Text').val("");
+                    $('#subticket_Location').val("");
+                }
+            });
+
+            return false;
+        });
+
+        $('#FeedbackForm').submit(function(){
+            if(working) return false;
+            working = true;
+
+            $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#feedback_Title').val(),text:$('#feedback_Text').val(),handle_id:$('#feedback_Handle').val()},function(r){
+                working = false;
+
+                if(r.error){
+                    general.displayError(r.error);
+                }
+                else
+                {
+                    $('#feedback_Title').val("");
+                    $('#feedback_Text').val("");
+                }
+            });
+
+            return false;
+        });
 
         //catching window resizes
         var resizeTimer = null;
@@ -261,14 +344,14 @@ var ticketing = {
             //message.data.noActivity is reset, so next update in 1 second
 
             if(r.length){
-                ticketing.data.noActivity = 0;
+                ticketing.data.noActivityMessages = 0;
                 ticketing.data.lastIDMessages = r[i-1].id;
                 }
             else{
                 // If no messages were received, increment
                 // the noActivity counter.
 
-                ticketing.data.noActivity++;
+                ticketing.data.noActivityMessages++;
             }
             //if no chats exist yet
             if(!ticketing.data.lastIDMessages){
@@ -322,13 +405,13 @@ var ticketing = {
             //message.data.noActivity is reset, so next update in 1 second
 
             if(r.length){
-                ticketing.data.noActivity = 0;
+                ticketing.data.noActivityChats = 0;
                 ticketing.data.lastIDChats = r[i-1].id;
                 }
             else{
                 // If no messages were received, increment
                 // the noActivity counter.
-                ticketing.data.noActivity++;
+                ticketing.data.noActivityChats++;
             }
             //if no chats exist yet
             if(!ticketing.data.lastIDChats){
@@ -447,7 +530,7 @@ var ticketing = {
         //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
         params.time = strTime;
         var markup = general.render('chatLine',params),
-            exists = $('WL-ChatList .chat-'+params.id);
+            exists = $('#WL-ChatList .chat-'+params.id);
 
         if(exists.length){
             exists.remove();
@@ -466,14 +549,14 @@ var ticketing = {
             if(previous.length){
                 previous.after(markup);
             }
-            else ticketing.data.jspAPIChat.getContentPane().append(markup);
+            else ticketing.data.jspAPIChats.getContentPane().append(markup);
         }
-        else ticketing.data.jspAPIChat.getContentPane().append(markup);
-        
+        else ticketing.data.jspAPIChats.getContentPane().append(markup);
+
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
-        ticketing.data.jspAPIChat.reinitialise();
-        ticketing.data.jspAPIChat.scrollToBottom(true);
+        ticketing.data.jspAPIChats.reinitialise();
+        ticketing.data.jspAPIChats.scrollToBottom(true);
 
     },
 
@@ -560,12 +643,12 @@ var ticketing = {
             if(!r.error)
                 {
                 ticketing.data.jspAPINewTickets.getContentPane().empty();
-
+                params = {role : ticketing.data.role};
                 var markup;
                 var markup_child;
                   for(var i=0; i< r.length;i++){
                     if(r[i]){
-                        markup=general.render('parentticket',r[i]);
+                        markup=general.render('parentticket',$.extend(r[i],params));
                         ticketing.data.jspAPINewTickets.getContentPane().append(markup);
                         if (r[i]['children']) {
                             for (var j = 0; j < r[i]['children'].length ; j++) {
@@ -602,12 +685,12 @@ var ticketing = {
             if(!r.error)
                 {
                 ticketing.data.jspAPIOpenTickets.getContentPane().empty();
-
+                params = {role : ticketing.data.role};
                 var markup;
                 var markup_extra;
                   for(var i=0; i< r.length;i++){
                     if(r[i]){
-                        markup=general.render('parentticket',r[i]);
+                        markup=general.render('parentticket',$.extend(r[i],params));
                         ticketing.data.jspAPIOpenTickets.getContentPane().append(markup);
                         if (r[i]['children']) {
                             for (var j = 0; j < r[i]['children'].length ; j++) {
@@ -642,12 +725,13 @@ var ticketing = {
             if(!r.error)
                 {
                 ticketing.data.jspAPIClosedTickets.getContentPane().empty();
-
+                params = {role : ticketing.data.role};
                 var markup;
                 var markup_extra;
                   for(var i=0; i< r.length;i++){
                     if(r[i]){
-                        markup=general.render('parentticket',r[i]);
+                        r[i].role=ticketing.data.role;
+                        markup=general.render('parentticket',$.extend(r[i],params));
                         ticketing.data.jspAPIClosedTickets.getContentPane().append(markup);
                         if (r[i]['children']) {
                             for (var j = 0; j < r[i]['children'].length ; j++) {
@@ -683,51 +767,75 @@ var ticketing = {
                 {
                     $('#TicketDetailsList').empty();
                     $('#TicketDetailsList').html(general.render('ticket_detail',q[0]));
+                    $('#WL-ActieForm').fadeIn();
+                    $('#FeedbackForm').fadeIn();
                     //update select owner
                     $.tzPOST('getUsers',{options:'all'},function(r){
                       if(!r.error)
                         {
-                          $('option', $('#owner')).remove();
-                          var owner_options = $('#owner').attr('options');
-                          var index_owner;
-                          owner_options[0] = new Option("");
-                          for(var i=0; i< r.length;i++){
-                            if(r[i]){
-                              if(r[i].role=='WL' || r[i].role=='Admin')
-                                {
-                                  if(r[i].username==q[0].wluser){
-                                  index_owner=owner_options.length;
-
+                          if(q[0].wluser){
+                            $('option', $('#owner')).remove();
+                            var owner_options = $('#owner').attr('options');
+                            var index_owner;
+                            owner_options[0] = new Option("");
+                            for(var i=0; i< r.length;i++){
+                              if(r[i]){
+                                if(r[i].role=='WL' || r[i].role=='Admin')
+                                  {
+                                    if(r[i].username==q[0].wluser){
+                                      index_owner=owner_options.length;
+                                    }
+                                  owner_options[owner_options.length] = new Option(r[i].username,r[i].id);
                                   }
-                                  owner_options[owner_options.length] = new Option(r[i].username);
                                 }
-                              }
-                          }
+                            }
                           if(index_owner)$('#owner option:eq('+index_owner+')' ).attr("selected","selected");
+                          }
+                        }
+                      else
+                        {
+                          general.displayError(r.error);
+                        }
+                    });
 
+                    //update select handles
+                    $.tzPOST('getHandles',{},function(r){
+                      if(!r.error)
+                        {
 
-                          $('option', $('#operator')).remove();
-                          var operator_options = $('#operator').attr('options');
-                          var index_operator;
-                          operator_options[operator_options.length] = new Option("");
-                          for(var i=0; i< r.length;i++){
-                            if(r[i]){
-                              if(r[i].role=='RVD' || r[i].role=='Admin'){
-                                if(r[i].username==q[0].rvduser)
-                                {
-                                index_operator=operator_options.length;
-                                }
-                                operator_options[operator_options.length] = new Option(r[i].username);
+                            $('option', $('#ticket_Handle')).remove();
+                            $('option', $('#subticket_Handle')).remove();
+                            $('option', $('#feedback_Handle')).remove();
+                            var tickethandles_options = $('#ticket_Handle').attr('options');
+                            var subtickethandles_options = $('#subticket_Handle').attr('options');
+                            var feedbackhandles_options = $('#feedback_Handle').attr('options');
+                            var index_handle;
+                            //handles_options[0] = new Option("");
+                            for(var i=0; i< r.length;i++){
+                              if(r[i]){
+                                    //current handle?
+                                    //if(r[i].username==q[0].wluser){
+                                    //  index_handle=handles_options.length;
+                                    //}
+                                  tickethandles_options[tickethandles_options.length] = new Option(r[i].description,r[i].id);
+                                  subtickethandles_options[subtickethandles_options.length] = new Option(r[i].description,r[i].id);
+                                  feedbackhandles_options[feedbackhandles_options.length] = new Option(r[i].description,r[i].id);
+
+                              }
+                              if(index_handle)
+                              {
+                                $('#ticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
+                                $('#subticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
+                                $('#feedback_Handle option:eq('+index_handle+')' ).attr("selected","selected");
                               }
                             }
-                          }
-                          if(index_operator)$('#operator option:eq('+index_operator+')' ).attr("selected","selected");
                         }
                       else
                         {
                           general.displayError(r.error);
                         }
                   });
+
                 }
             else
                 {
@@ -785,6 +893,7 @@ var ticketing = {
 
   reInitJSP : function(){
             ticketing.data.jspAPIMeldingen.reinitialise();
+            ticketing.data.jspAPIChats.reinitialise();
             ticketing.data.jspAPIUsers.reinitialise();
             ticketing.data.jspAPIHandles.reinitialise();
             ticketing.data.jspAPINewTickets.reinitialise();
