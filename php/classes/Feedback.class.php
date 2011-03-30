@@ -16,11 +16,13 @@ class Feedback extends RVDLogBase {
 	public function create() {
 
 		DB::query("
-			INSERT INTO feedbacks (ticket_id, title, handle_id, message, called, called_by, created)
+			INSERT INTO feedbacks (ticket_id, title, handle_id, message, created)
 			VALUES (
-				'" . DB::esc($this->user_id) . "',
-				'" . DB::esc($this->text) . "',
-                '" . DB::esc($this->created) . "'
+				" . DB::esc($this->ticket_id) . ",
+				'" . DB::esc($this->title) . "',
+                " . DB::esc($this->handle_id) . ",
+                '" . DB::esc($this->message) . "',
+                '" . date('Y-m-d G:i:s') . "',
             )
             ");
         

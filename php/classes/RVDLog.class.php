@@ -243,9 +243,10 @@ class RVDLog {
         $ticket->becomeParent();
     }
 
-    public static function createFeedback($ticket_id, $text, $handle_id){
+    public static function createFeedback($ticket_id, $title, $text, $handle_id){
         $feedback = new Feedback(array(
             'ticket_id' => $ticket_id,
+            'title' => $title,
             'text' => $text,
             'handle_id' => $handle_id
         ));

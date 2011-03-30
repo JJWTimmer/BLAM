@@ -41,7 +41,7 @@ class Ticket extends RVDLogBase {
 	public function createSub() {
     
 		$res = DB::query("
-			INSERT INTO tickets (parent_id, title, text, location, handle_id, title, status_id, created, modified)
+			INSERT INTO tickets (parent_id, title, text, location, handle_id, status_id, created, modified)
 			VALUES (
 				 " . DB::esc($this->parent_id) . ",
 				'" . DB::esc($this->title) . "',
@@ -67,9 +67,9 @@ class Ticket extends RVDLogBase {
 			UPDATE tickets
 			SET	title = '" . DB::esc($this->title) . "',
 				text = '" . DB::esc($this->text) . "',
-                location = '" . DB::esc($this->location) . "',
-                handle_id = " . DB::esc($this->handle_id) . ",
-                modified = '" . date('Y-m-d G:i:s') . "' 
+                location = '" . DB::esc($this->location) . "',"
+                . (!empty($this->handle_id) : "handle_id = " . DB::esc($this->handle_id) . "," ? "")
+                . "modified = '" . date('Y-m-d G:i:s') . "' 
             WHERE id = " . DB::esc($this->id) . "
             ");
             
@@ -78,7 +78,7 @@ class Ticket extends RVDLogBase {
 	}
     
     public function getDetails() {
-        $q = "SELECT t.id AS id, t.title, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
@@ -107,7 +107,7 @@ class Ticket extends RVDLogBase {
             throw new Exception('invalid parameters for getTicket');
         }
         
-        $q = "SELECT t.id AS id, t.title, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
@@ -149,7 +149,7 @@ class Ticket extends RVDLogBase {
 
     private function getChildren($pid) {
         $results = DB::query("
-            SELECT t.id AS id, t.title, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+            SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id

@@ -170,7 +170,7 @@ try {
 		
 		case 'createFeedback':
             RVDLog::checkLogged();
-			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['text'], $_POST['handle_id']);
+			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['title'], $_POST['text'], $_POST['handle_id']);
             // returns int feedbackId or exception
             break;
 		
