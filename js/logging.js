@@ -73,7 +73,7 @@ var logging = {
         }).data('jsp');
 
         //function to implement clicking on dynamic element ticket
-        $('div.list_item_parent_ticket').live('click', function(){
+        $('div.list_item_parent_ticket_full').live('click', function(){
           if($(this).attr("id")!=logging.data.selectedticket)
             {
             logging.data.selectedticket=$(this).attr("id");
