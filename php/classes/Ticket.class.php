@@ -63,12 +63,13 @@ class Ticket extends RVDLogBase {
 	}    
     
 	public function update() {
+        $handle = !empty($this->handle_id);
 		$res = DB::query("
 			UPDATE tickets
 			SET	title = '" . DB::esc($this->title) . "',
 				text = '" . DB::esc($this->text) . "',
                 location = '" . DB::esc($this->location) . "',"
-                . (!empty($this->handle_id) : "handle_id = " . DB::esc($this->handle_id) . "," ? "")
+                . ($handle ? "handle_id = " . DB::esc($this->handle_id) . "," : "")
                 . "modified = '" . date('Y-m-d G:i:s') . "' 
             WHERE id = " . DB::esc($this->id) . "
             ");
