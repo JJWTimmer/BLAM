@@ -217,15 +217,17 @@ var ticketing = {
               }
             });
 
-            $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
-              if(r==null){
+            if(!($('div .list_item_ticketdetail_status').text()=="status: Nieuw")){
+              $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
+                if(r==null){
 
-              }
-              else
-              {
-                general.displayError(r.error);
-              }
-            });
+                }
+                else
+                {
+                  general.displayError(r.error);
+                }
+              });
+            }
             $('#TicketDetailsList').empty();
             $('#WL-ActieForm').fadeOut();
             $('#FeedbackForm').fadeOut();
@@ -810,13 +812,15 @@ var ticketing = {
                             var subtickethandles_options = $('#subticket_Handle').attr('options');
                             var feedbackhandles_options = $('#feedback_Handle').attr('options');
                             var index_handle;
-                            //handles_options[0] = new Option("");
+                            tickethandles_options[0] = new Option("");
+                            subtickethandles_options[0] = new Option("");
+                            feedbackhandles_options[0] = new Option("");
                             for(var i=0; i< r.length;i++){
                               if(r[i]){
                                     //current handle?
-                                    //if(r[i].username==q[0].wluser){
-                                    //  index_handle=handles_options.length;
-                                    //}
+                                    if(r[i].id==q[0].handle_id){
+                                      index_handle=tickethandles_options.length;
+                                    }
                                   tickethandles_options[tickethandles_options.length] = new Option(r[i].description,r[i].id);
                                   subtickethandles_options[subtickethandles_options.length] = new Option(r[i].description,r[i].id);
                                   feedbackhandles_options[feedbackhandles_options.length] = new Option(r[i].description,r[i].id);
