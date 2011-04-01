@@ -6,11 +6,7 @@ var general = {
     render : function(template,params){
 
         var arr = [];
-        var arr1 = [];
-        var arr2 = [];
-        var arr3 = [];
-        var arr4 = [];
-        var arr5 = [];
+
         switch(template){
             case 'logging-loginTopBar':
 
@@ -112,63 +108,77 @@ var general = {
                 ];
             break;
 
-            case 'ticket_detail':
+            case 'ticket_detail_new':
+            arr = [
+            '<form id="TicketForm" method="post" action="">',
+              '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
+                '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
+                '<div class="list_item_ticketdetail_label_created rounded">',
+                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
+                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
+                '</div>',
+                '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
+                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
+                '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
+                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
+                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
+                '<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
+                '</div>',
+                '</form>'];
+            break;
 
-            arr1 = ['<form id="TicketForm" method="post" action="">',
-            '<div class="list_item_ticketdetail rounded">',
-            '<div class="list_item_ticketdetail_title_status rounded">',
-              '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
-              '<div class=list_item_ticketdetail_status><p>status: ',params.status,'</p></div>',
-            '</div>',
-            '<div class="list_item_ticketdetail_label_created rounded">',
-              '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
-              '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
-            '</div>',
-            '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-            '<div class="list_item_ticketdetail_location"><p>Location: <input type="text" class="rounded" value="',params.location,'" id="ticket_location"></p></div>'];
-            arr2 = ['<div class=list_item_ticketdetail_owner><p>WLer: <select id="owner"><option selected>',params.wluser,'</option></select></p></div>'];
-            arr3 = ['<div class=list_item_ticketdetail_handle><p>Voertuig: <select id="ticket_Handle"><option selected> </option></select></p></div>',
-            '<div class=list_item_ticketdetail_message_modified><p>Laatst gewijzigd:',params.modified,'</p></div>'];
-            arr4 =['<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
-            '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
-            '</div>',
-            '</form>'];
-            arr5 =['<input type="button" id="saveticketbutton" class="blueButton" value="Reopen Ticket"/>',
-            '</div>',
-            '</form>'];
-          //als er al een wl-er is toegewezen
-          if(params.wluser){
-          $.merge(arr1,arr2);
-          $.merge(arr1,arr3);
-            //als ticket niet gesloten is
-            if(params.status!="Gesloten")
-            {
-            $.merge(arr1,arr4);
-            }
-            else
-            {
-            $.merge(arr1,arr5);
-            }
+            case 'ticket_detail_open':
+            arr = [
+            '<form id="TicketForm" method="post" action="">',
+              '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
+                '<div class=list_item_ticketdetail_status><p>status: ',params.status,'</p></div>',
+                '<div class="list_item_ticketdetail_label_created rounded">',
+                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
+                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
+                '</div>',
+                '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
+                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
+                '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
+                '<div class=list_item_ticketdetail_label_owner><p>WLer:</p></div>',
+                '<div class=list_item_ticketdetail_owner><select id="owner"><option selected>',params.wluser,'</option></select></div>',
+                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
+                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
+                '<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
+                '</div>',
+                '</form>'];
+            break;
 
-          }
-          //als er geen wl-er is toegewezen
-          else{
-          //als ticket niet gesloten is
-          if(params.status!="Gesloten")
-            {
-            $.merge(arr1,arr3);
-            $.merge(arr1,arr4);
-            }
-
-            else
-            {
-            $.merge(arr1,arr3);
-            $.merge(arr1,arr5);
-            }
-          }
-          arr= arr1;
-          break;
-
+            case 'ticket_detail_closed':
+            arr = [
+            '<form id="TicketForm" method="post" action="">',
+              '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
+                '<div class=list_item_ticketdetail_status><p>status: ',params.status,'</p></div>',
+                '<div class="list_item_ticketdetail_label_created rounded">',
+                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
+                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
+                '</div>',
+                '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
+                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
+                '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
+                '<div class="list_item_ticketdetail_label_owner"><p>WLer:</p></div>',
+                '<div class="list_item_ticketdetail_owner"><select id="owner"><option selected>',params.wluser,'</option></select></div>',
+                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
+                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Reopen Ticket"/>',
+                '</div>',
+                '</form>'];
+            break;
         }
 
         // A single array join is faster than

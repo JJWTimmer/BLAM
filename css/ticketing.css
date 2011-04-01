@@ -39,19 +39,19 @@ height:100%;
 
 #WL-Chat{
     position:absolute;
-    top: 8%;
+    top: 40%;
     left:0%;
-    width:65%;
-    height:57%;
+    width:98%;
+    height:44%;
     margin:1%;
 }
 
 #Users{
     position:absolute;
-    top: 8%;
-    left:67%;
-    width:31%;
-    height:57%;
+    top: 5%;
+    left:0%;
+    width:98%;
+    height:25%;
     margin:1%;
 }
 
@@ -63,11 +63,11 @@ height:100%;
 
 #TextEntry{
     position:absolute;
-    top: 67%;
+    top: 88%;
     left:0%;
     width:98%;
-    height:31%;
-    background: white;
+    height:10%;
+    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
     margin:1%;
 }
 

@@ -158,7 +158,7 @@ var ticketing = {
 
         $('#submitForm').submit(function(){
 
-            var text = $('#text').val();
+            var text = $('#Chattext').val();
 
             if(text.length == 0){
                 return false;
@@ -188,7 +188,7 @@ var ticketing = {
             if(!r.error){
                 working = false;
                 //empty input form textbox
-                $('#text').val('');
+                $('#Chattext').val('');
 
                 //remove old temporary chat
                 $('div.chat-'+tempID).remove();
@@ -307,7 +307,7 @@ var ticketing = {
     login : function(username,avatar,role){
         //replace empty avatar filed
         var new_avatar=avatar;
-        if((avatar=="") || (avatar=="NULL"))
+        if((avatar=="") || (avatar=="NULL")|| (avatar==null))
         {
         new_avatar="img/unknown30x30.png";
         }
@@ -455,7 +455,7 @@ var ticketing = {
 
     addMessageLine : function(params){
 
-        if((params.avatar=="") || (params.avatar=="NULL"))
+        if((params.avatar=="") || (params.avatar=="NULL") || (params.avatar==null))
         {
         params.avatar="img/unknown24x24.png"
         }
@@ -511,7 +511,7 @@ var ticketing = {
 
     addChatLine : function(params){
 
-        if((params.avatar=="") || (params.avatar=="NULL"))
+        if((params.avatar=="") || (params.avatar=="NULL") || (params.avatar==null))
         {
         params.avatar="img/unknown24x24.png"
         }
@@ -671,10 +671,10 @@ var ticketing = {
           }
           else
           {
-            ticketing.data.jspAPIOpenTickets.getContentPane().empty();
+            ticketing.data.jspAPINewTickets.getContentPane().empty();
             var message = 'Geen nieuwe tickets';
-            ticketing.data.jspAPIOpenTickets.getContentPane().append('<p class="count">'+message+'</p>');
-            ticketing.data.jspAPIOpenTickets.reinitialise();
+            ticketing.data.jspAPINewTickets.getContentPane().append('<p class="count">'+message+'</p>');
+            ticketing.data.jspAPINewTickets.reinitialise();
           }
           ticketing.data.idTicketTimeout=setTimeout("ticketing.getNewTickets();",15000);
         });
@@ -768,7 +768,19 @@ var ticketing = {
             if(!q.error)
                 {
                     $('#TicketDetailsList').empty();
-                    $('#TicketDetailsList').html(general.render('ticket_detail',q[0]));
+
+                    switch(q[0].status){
+                      case 'Nieuw':
+                        $('#TicketDetailsList').html(general.render('ticket_detail_new',q[0]));
+                      break;
+                      case 'Open':
+                        $('#TicketDetailsList').html(general.render('ticket_detail_open',q[0]));
+                      break;
+                      case 'Gesloten':
+                        $('#TicketDetailsList').html(general.render('ticket_detail_closed',q[0]));
+                      break;
+                    }
+
                     $('#WL-ActieForm').fadeIn();
                     $('#FeedbackForm').fadeIn();
                     //update select owner

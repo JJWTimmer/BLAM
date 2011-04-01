@@ -43,7 +43,7 @@ var logging = {
 
         // We use the working variable to prevent multiple form submissions:
         var working = false;
-        
+
         // Converting the #MeldingenList, #UsersList, #HandlesList divs into a jScrollPane,
         // and saving the plugin's API in logging.data:
 
@@ -242,7 +242,7 @@ var logging = {
 
             return false;
         });
-        
+
         //catching window resizes
         var resizeTimer = null;
         $(window).bind('resize', function() {
@@ -293,11 +293,11 @@ var logging = {
             for(var i=0;i<r.length;i++){
                 logging.addMessageLine(r[i]);
             }
-            
-            
+
+
             //highlight bata-123 and arts-1 formats.
             general.highlightHandles(logging.data.jspAPIMeldingen.getContentPane(), logging.data.groups);
-            
+
             //if new messages, update to lastid
             //message.data.noActivity is reset, so next update in 1 second
 
@@ -311,8 +311,8 @@ var logging = {
 
                 logging.data.noActivity++;
             }
-            
-            
+
+
             //if no chats exist yet
             if(!logging.data.lastID){
                 logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages yet</p>');
@@ -381,7 +381,7 @@ var logging = {
 
     addMessageLine : function(params){
 
-        if((params.avatar=="") || (params.avatar=="NULL"))
+        if((params.avatar=="") || (params.avatar=="NULL") || (params.avatar==null))
         {
         params.avatar="img/unknown24x24.png"
         }
@@ -424,7 +424,7 @@ var logging = {
             else logging.data.jspAPIMeldingen.getContentPane().append(markup);
         }
         else logging.data.jspAPIMeldingen.getContentPane().append(markup);
-        
+
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
         logging.data.jspAPIMeldingen.reinitialise();
@@ -480,7 +480,7 @@ var logging = {
                 //save groups and handles for later use
                 logging.data.groups = r;
                 logging.data.groupsLoaded = true;
-                
+
                 logging.data.jspAPIHandles.getContentPane().empty();
 
                 var markup_group;
@@ -510,9 +510,9 @@ var logging = {
                 {
                     general.displayError(r.error);
                 }
-                
+
                 //doesn't change?
-                //setTimeout("logging.getHandles();",60000); 
+                //setTimeout("logging.getHandles();",60000);
             });
 
     },
