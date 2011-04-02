@@ -40,19 +40,21 @@ class Ticket extends RVDLogBase {
 
 	public function createSub() {
     
-		$res = DB::query("
+        $q = "
 			INSERT INTO tickets (parent_id, title, text, location, handle_id, status_id, created, modified)
 			VALUES (
 				 " . DB::esc($this->parent_id) . ",
 				'" . DB::esc($this->title) . "',
 				'" . DB::esc($this->text) . "',
 				'" . DB::esc($this->location) . "',
-				 " . DB::esc($this->handle_id) . ",
+				 " . DB::esc($this->handle_id ? $this->handle_id : "NULL") . ",
                 1,
-                '" . date('Y-m-d G:i:s') . "'
+                '" . date('Y-m-d G:i:s') . "',
                 '" . date('Y-m-d G:i:s') . "'
             )
-            ");
+            ";
+        logmsg($q);
+		$res = DB::query($q);
             
         if (!$res)
            throw new Exception(DB::getMySQLiObject()->error);

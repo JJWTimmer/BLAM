@@ -37,15 +37,6 @@ CREATE TABLE IF NOT EXISTS `chatlines` (
   FULLTEXT KEY `IXText` (`text`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Gegevens worden uitgevoerd voor tabel `chatlines`
---
-
-INSERT INTO `chatlines` (`id`, `user_id`, `text`, `created`) VALUES
-(1, 1, 'Hihi', '2011-02-20 18:16:56'),
-(2, 2, 'Wat is er?', '2011-02-20 18:17:07'),
-(3, 1, 'Je veter zit los', '2011-02-20 18:17:15');
-
 -- --------------------------------------------------------
 
 --
@@ -66,14 +57,6 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   KEY `FK_feedback_handle` (`handle_id`),
   KEY `FK_feedback_operator` (`called_by`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Gegevens worden uitgevoerd voor tabel `feedbacks`
---
-
-INSERT INTO `feedbacks` (`id`, `ticket_id`, `title`, `handle_id`, `message`, `called`, `created`) VALUES
-(1, 1, 'donuts halen', 2, 'Meldt zure pruim: 5 gesuikerde donuts naar WL', NULL, '2011-02-20 20:09:10');
-
 -- --------------------------------------------------------
 
 --
@@ -85,15 +68,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Gegevens worden uitgevoerd voor tabel `groups`
---
-
-INSERT INTO `groups` (`id`, `name`) VALUES
-(1, 'Autodropjes'),
-(2, 'Racemonsters');
-
 -- --------------------------------------------------------
 
 --
@@ -110,15 +84,6 @@ CREATE TABLE IF NOT EXISTS `handles` (
   KEY `FK_handle_group` (`group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Gegevens worden uitgevoerd voor tabel `handles`
---
-
-INSERT INTO `handles` (`id`, `handle_number`, `handle_name`, `description`, `group_id`) VALUES
-(1, 123, 'bata-123', 'postsorteerder', 1),
-(2, 456, 'bata-456', 'zure pruim', 1),
-(3, 7, 'bata-007', 'Aston Martin', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -133,14 +98,6 @@ CREATE TABLE IF NOT EXISTS `messages` (
   PRIMARY KEY (`id`),
   KEY `FK_messages_users` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Gegevens worden uitgevoerd voor tabel `messages`
---
-
-INSERT INTO `messages` (`id`, `user_id`, `text`, `created`) VALUES
-(1, 1, 'Bata-502 is onderweg naar een of ander checkpoint.', '2011-02-20 18:17:56'),
-(2, 1, 'Moet bata-405 nog iets doen?', '2011-02-20 18:18:16');
 
 -- --------------------------------------------------------
 
@@ -197,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `title` varchar(45) NOT NULL,
   `message_id` int(10) NOT NULL,
   `status_id` int(10) NOT NULL,
-  `handle_id` int(10) NOT NULL,
+  `handle_id` int(10) NULL,
   `location` varchar(255) DEFAULT NULL,
   `text` text,
   `created` datetime DEFAULT NULL,
@@ -209,14 +166,6 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   KEY `FK_tickets_statuses` (`status_id`),
   KEY `FK_tickets_handles` (`handle_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Gegevens worden uitgevoerd voor tabel `tickets`
---
-
-INSERT INTO `tickets` (`id`, `user_id`, `parent_id`, `title`, `message_id`, `status_id`, `handle_id`, `location`, `text`, `created`, `modified`) VALUES
-(1, NULL, NULL, 'zure pruim taak toewijzen', 2, 1, 2, 'hier en daar', 'Uitzoeken of 405 nog een taak heeft en hem op weg sturen', '2011-02-20 18:26:24', '2011-02-20 20:11:27'),
-(2, 1, 1, 'uitgezocht: donuts halen', 2, 2, 2, '', 'feedback verzoek gemaakt, donuts halen...', '2011-02-20 18:46:34', '2011-02-20 18:46:34');
 
 -- --------------------------------------------------------
 
