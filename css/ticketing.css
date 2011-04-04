@@ -121,16 +121,16 @@ height:100%;
     top: 5%;
     left:0%;
     width:98%;
-    height:40%;
+    height:50%;
     margin:1%;
 }
 
 #WL-Actie{
     position:absolute;
-    top: 52%;
+    top: 62%;
     left:0%;
     width:98%;
-    height:46%;
+    height:36%;
     margin:1%;
 }
 
@@ -147,10 +147,10 @@ height:100%;
 
 #Feedback{
     position:absolute;
-    top: 52%;
+    top: 62%;
     left:0%;
     width:98%;
-    height:46%;
+    height:36%;
     margin:1%;
 }
 
@@ -167,10 +167,10 @@ height:100%;
 
 #Timeline{
     position:absolute;
-    top: 52%;
+    top: 62%;
     left:0%;
     width:98%;
-    height:46%;
+    height:36%;
     margin:1%;
 }
 

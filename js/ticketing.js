@@ -71,8 +71,9 @@ var ticketing = {
           if($(this).attr("id")!=ticketing.data.selectedticket)
             {
             ticketing.data.selectedticket=$(this).attr("id");
+            ticketing.data.selectedparentticket=0;
             }
-          ticketing.getTicketDetail(ticketing.data.selectedticket);
+          ticketing.getTicketDetail(ticketing.data.selectedticket,0);
         });
 
         //function to implement clicking on claim
@@ -87,8 +88,9 @@ var ticketing = {
           if($(this).attr("id")!=ticketing.data.selectedticket)
             {
             ticketing.data.selectedticket=$(this).attr("id");
+            ticketing.data.selectedparentticket=$(this).attr("title");
             }
-          ticketing.getTicketDetail(ticketing.data.selectedticket);
+          ticketing.getTicketDetail(ticketing.data.selectedticket,$(this).attr("title"));
         });
 
         //function to implement clicking on Header
@@ -217,7 +219,7 @@ var ticketing = {
               }
             });
 
-            if(!($('div .list_item_ticketdetail_status').text()=="status: Nieuw")){
+            if(!($('div .list_item_ticketdetail_status').text()=="status: Nieuw") && !($('div .list_item_ticketdetail_status').text()=="status: Subticket")){
               $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
                 if(r==null){
 
@@ -228,7 +230,11 @@ var ticketing = {
                 }
               });
             }
+
             $('#TicketDetailsList').empty();
+            $('#WL-ActieList').fadeIn();
+            $('#FeedbackList').fadeIn();
+            $('#TimelineList').fadeIn();
             $('#WL-ActieForm').fadeOut();
             $('#FeedbackForm').fadeOut();
       });
@@ -245,13 +251,62 @@ var ticketing = {
               }
             });
             $('#TicketDetailsList').empty();
+            $('#WL-ActieList').fadeIn();
+            $('#FeedbackList').fadeIn();
+            $('#TimelineList').fadeIn();
             $('#WL-ActieForm').fadeOut();
             $('#FeedbackForm').fadeOut();
       });
 
+      // add listener for this button and change to childticket of certain parentticket
+      $('#childticketbutton').live('click',function(){
+            $.tzPOST('becomeChildTicket',{id:ticketing.data.selectedticket,parent_id:$('#become_Ticket').val()},function(r){
+              if(r==null){
+
+              }
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+            $('#TicketDetailsList').empty();
+            $('#WL-ActieList').fadeIn();
+            $('#FeedbackList').fadeIn();
+            $('#TimelineList').fadeIn();
+            $('#WL-ActieForm').fadeOut();
+            $('#FeedbackForm').fadeOut();
+      });
+
+
+      // add listener for this button and change to parentticket
+      $('#becomeparentticketbutton').live('click',function(){
+            $.tzPOST('becomeParentTicket',{id:ticketing.data.selectedticket},function(r){
+              if(r==null){
+
+              }
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+            $('#TicketDetailsList').empty();
+            $('#WL-ActieList').fadeIn();
+            $('#FeedbackList').fadeIn();
+            $('#TimelineList').fadeIn();
+            $('#WL-ActieForm').fadeOut();
+            $('#FeedbackForm').fadeOut();
+      });
+
+
         $('#WL-ActieForm').submit(function(){
             if(working) return false;
             working = true;
+
+            //check to ensure a childticket doesnt get a childticket
+            var ticketid=ticketing.data.selectedticket;
+            if(ticketing.data.selectedparentticket!=0){
+            ticketid=ticketing.data.selectedparentticket;
+            }
 
             $.tzPOST('createSubTicket',{parent_id:ticketing.data.selectedticket,title:$('#subticket_Title').val(),text:$('#subticket_Text').val(),location:$('#subticket_Location').val(),handle_id:$('#subticket_Handle').val()},function(r){
                 working = false;
@@ -653,8 +708,9 @@ var ticketing = {
                         markup=general.render('parentticket',$.extend(r[i],params));
                         ticketing.data.jspAPINewTickets.getContentPane().append(markup);
                         if (r[i]['children']) {
+                            extra_params = {parent_id : r[i].id};
                             for (var j = 0; j < r[i]['children'].length ; j++) {
-                              markup_child=general.render('childticket',r[i]['children'][j]);
+                              markup_child=general.render('childticket',$.extend(r[i]['children'][j],extra_params));
                               ticketing.data.jspAPINewTickets.getContentPane().append(markup_child);
                             }
 
@@ -695,8 +751,9 @@ var ticketing = {
                         markup=general.render('parentticket',$.extend(r[i],params));
                         ticketing.data.jspAPIOpenTickets.getContentPane().append(markup);
                         if (r[i]['children']) {
+                            extra_params = {parent_id : r[i].id};
                             for (var j = 0; j < r[i]['children'].length ; j++) {
-                              markup_child=general.render('childticket',r[i]['children'][j]);
+                              markup_child=general.render('childticket',$.extend(r[i]['children'][j],extra_params));
                               ticketing.data.jspAPIOpenTickets.getContentPane().append(markup_child);
                             }
 
@@ -736,8 +793,9 @@ var ticketing = {
                         markup=general.render('parentticket',$.extend(r[i],params));
                         ticketing.data.jspAPIClosedTickets.getContentPane().append(markup);
                         if (r[i]['children']) {
+                            extra_params = {parent_id : r[i].id};
                             for (var j = 0; j < r[i]['children'].length ; j++) {
-                              markup_child=general.render('childticket',r[i]['children'][j]);
+                              markup_child=general.render('childticket',$.extend(r[i]['children'][j],extra_params));
                               ticketing.data.jspAPIClosedTickets.getContentPane().append(markup_child);
                             }
 
@@ -762,23 +820,31 @@ var ticketing = {
         });
     },
 
-    getTicketDetail : function(ticket_id){
+    getTicketDetail : function(ticket_id,parent_id){
         $.tzPOST('getTicketDetail',{id: ticket_id},function(q){
           if(q){
             if(!q.error)
                 {
                     $('#TicketDetailsList').empty();
+                    if(parent_id==0){
 
-                    switch(q[0].status){
-                      case 'Nieuw':
-                        $('#TicketDetailsList').html(general.render('ticket_detail_new',q[0]));
-                      break;
-                      case 'Open':
-                        $('#TicketDetailsList').html(general.render('ticket_detail_open',q[0]));
-                      break;
-                      case 'Gesloten':
-                        $('#TicketDetailsList').html(general.render('ticket_detail_closed',q[0]));
-                      break;
+                      switch(q[0].status){
+                        case 'Nieuw':
+                          $('#TicketDetailsList').html(general.render('ticket_detail_new',q[0]));
+                        break;
+                        case 'Open':
+                          $('#TicketDetailsList').html(general.render('ticket_detail_open',q[0]));
+                        break;
+                        case 'Gesloten':
+                          $('#TicketDetailsList').html(general.render('ticket_detail_closed',q[0]));
+                        break;
+
+                      }
+                    }
+                    else
+                    {
+                          q[0].status="Subticket";
+                          $('#TicketDetailsList').html(general.render('subticket_detail',q[0]));
                     }
 
                     $('#WL-ActieForm').fadeIn();
@@ -811,6 +877,37 @@ var ticketing = {
                           general.displayError(r.error);
                         }
                     });
+
+
+                    //update become child ticket
+                    $.tzPOST('getTicketList',{recursive : false, status : [{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]},function(r){
+                      if(!r.error)
+                        {
+                            $('option', $('#become_Ticket')).remove();
+                            var become_Ticket_options = $('#become_Ticket').attr('options');
+
+                            for(var i=0; i< r.length;i++){
+                              var maxlength=20;
+                              if(r[i]){
+                                //don't want to make it a child of its own, that would be weird;-)
+                                if(r[i].title.length<maxlength)
+                                {
+                                maxlength=r[i].title.length;
+                                }
+
+                                if(r[i].id!=ticket_id && r[i].id!=parent_id){
+                                  become_Ticket_options[become_Ticket_options.length] = new Option(r[i].title.substring(0,maxlength),r[i].id);
+                                }
+                              }
+
+                            }
+                        }
+                      else
+                        {
+                          general.displayError(r.error);
+                        }
+                    });
+
 
                     //update select handles
                     $.tzPOST('getHandles',{},function(r){

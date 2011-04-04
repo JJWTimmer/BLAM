@@ -437,7 +437,7 @@ textarea#ticket_text{
     position: absolute;
     width:86%;
     height: 15%;
-    top:24%;
+    top:20%;
     left: 6%;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;
@@ -455,14 +455,14 @@ textarea#ticket_text{
 .list_item_ticketdetail_label_loc
 {
     position: absolute;
-    top:46%;
+    top:42%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_location{
     position: absolute;
-    top:46%;
+    top:42%;
     left:20%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
@@ -472,14 +472,14 @@ textarea#ticket_text{
 
 .list_item_ticketdetail_label_handle{
     position: absolute;
-    top:56%;
+    top:50%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_handle{
     position: absolute;
-    top:56%;
+    top:50%;
     left:20%;
     overflow:hidden;
     width:50%;
@@ -491,12 +491,29 @@ textarea#ticket_text{
 
 .list_item_ticketdetail_label_owner{
     position: absolute;
-    top:66%;
+    top:58%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_owner{
+    position: absolute;
+    top:58%;
+    left:20%;
+    overflow:hidden;
+    width:50%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+.list_item_ticketdetail_label_becomechild{
+    position: absolute;
+    top:66%;
+    left:1%;
+    color: white;
+}
+
+.list_item_ticketdetail_becomechild{
     position: absolute;
     top:66%;
     left:20%;
@@ -507,6 +524,22 @@ textarea#ticket_text{
     padding-right:1%;
 }
 
+.list_item_ticketdetail #childticketbutton{
+    position: absolute;
+    top:66%;
+    left:65%;
+    width:100px;
+    height:25px;
+}
+
+
+.list_item_ticketdetail #becomeparentticketbutton{
+    position: absolute;
+    top:74%;
+    left:65%;
+    width:100px;
+    height:25px;
+}
 
 .list_item_ticketdetail #closeticketbutton{
     position: absolute;
@@ -532,7 +565,7 @@ display:none;
 
 .list_item_extra_Header {
     position: absolute;
-    top:0%;
+    top:-4%;
     width:100%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
@@ -578,7 +611,7 @@ textarea#subticket_Text,textarea#feedback_Text{
     position: absolute;
     width:86%;
     height: 15%;
-    top:30%;
+    top:34%;
     left: 6%;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;
