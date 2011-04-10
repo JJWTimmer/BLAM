@@ -92,7 +92,7 @@ var general = {
 
             case 'childticket':
                 arr = [
-                    '<div class="list_item_child_ticket rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                    '<div class="list_item_child_ticket rounded" id="',params.id,'" title="',params.parent_id,'"><p>',params.title,'</p></div>'
                 ];
             break;
 
@@ -123,6 +123,9 @@ var general = {
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
+                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
                 '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
@@ -136,7 +139,7 @@ var general = {
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
-                '<div class=list_item_ticketdetail_status><p>status: ',params.status,'</p></div>',
+                '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
                 '<div class="list_item_ticketdetail_label_created rounded">',
                   '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
                   '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
@@ -148,6 +151,9 @@ var general = {
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
                 '<div class=list_item_ticketdetail_label_owner><p>WLer:</p></div>',
                 '<div class=list_item_ticketdetail_owner><select id="owner"><option selected>',params.wluser,'</option></select></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
+                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
                 '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
@@ -161,7 +167,7 @@ var general = {
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
-                '<div class=list_item_ticketdetail_status><p>status: ',params.status,'</p></div>',
+                '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
                 '<div class="list_item_ticketdetail_label_created rounded">',
                   '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
                   '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
@@ -173,13 +179,44 @@ var general = {
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
                 '<div class="list_item_ticketdetail_label_owner"><p>WLer:</p></div>',
                 '<div class="list_item_ticketdetail_owner"><select id="owner"><option selected>',params.wluser,'</option></select></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
+                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
                 '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Reopen Ticket"/>',
                 '</div>',
                 '</form>'];
             break;
+
+            case 'subticket_detail':
+            arr = [
+            '<form id="TicketForm" method="post" action="">',
+              '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
+                '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
+                '<div class="list_item_ticketdetail_label_created rounded">',
+                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
+                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
+                '</div>',
+                '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
+                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
+                '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
+                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
+                '<input type="button" id="becomeparentticketbutton" class="blueButton" value="Koppel los!"/>',
+                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
+                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
+                '</div>',
+                '</form>'];
+            break;
+
         }
+
 
         // A single array join is faster than
         // multiple concatenations
