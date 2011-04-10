@@ -53,7 +53,7 @@ class Ticket extends RVDLogBase {
                 '" . date('Y-m-d G:i:s') . "'
             )
             ";
-        logmsg($q);
+
 		$res = DB::query($q);
             
         if (!$res)
@@ -85,7 +85,7 @@ class Ticket extends RVDLogBase {
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
-            INNER JOIN messages AS m ON t.message_id = m.id
+            LEFT OUTER JOIN messages AS m ON t.message_id = m.id
             INNER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.id = " . DB::esc($this->id);
             
@@ -114,8 +114,8 @@ class Ticket extends RVDLogBase {
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
-            INNER JOIN messages AS m ON t.message_id = m.id
-            INNER JOIN users AS u2 ON m.user_id = u2.id
+            LEFT OUTER JOIN messages AS m ON t.message_id = m.id
+            LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.parent_id IS NULL";
 
         if (is_numeric($last_id)) {
@@ -127,7 +127,7 @@ class Ticket extends RVDLogBase {
         if (is_array($status) && !empty($status)) {
             $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risc, implode not escaped
         }
-        
+
         if ($recursive == 'false') {
             $results = DB::query($q);
             if ($results) while ($output[] = mysqli_fetch_assoc($results));
@@ -151,15 +151,16 @@ class Ticket extends RVDLogBase {
 	}
 
     private function getChildren($pid) {
-        $results = DB::query("
+        $q = "
             SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
-            INNER JOIN messages AS m ON t.message_id = m.id
-            INNER JOIN users AS u2 ON m.user_id = u2.id
+            LEFT OUTER JOIN messages AS m ON t.message_id = m.id
+            LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.parent_id = $pid
-            ");
+            ";
+        $results = DB::query($q);
         while ($data[] = mysqli_fetch_assoc($results));
         if (!is_null($data) && end($data) == null) array_pop($data);
         foreach ($data as $child) {

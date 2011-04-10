@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `parent_id` int(10) DEFAULT NULL,
   `title` varchar(45) NOT NULL,
   `message_id` int(10) NOT NULL,
-  `status_id` int(10) NOT NULL,
+  `status_id` int(10) NULL,
   `handle_id` int(10) NULL,
   `location` varchar(255) DEFAULT NULL,
   `text` text,
