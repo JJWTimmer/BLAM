@@ -84,9 +84,9 @@ class Ticket extends RVDLogBase {
         $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
-            INNER JOIN statuses AS s ON t.status_id = s.id
+            LEFT OUTER JOIN statuses AS s ON t.status_id = s.id
             LEFT OUTER JOIN messages AS m ON t.message_id = m.id
-            INNER JOIN users AS u2 ON m.user_id = u2.id
+            LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.id = " . DB::esc($this->id);
             
         $results = DB::query($q);
@@ -98,8 +98,9 @@ class Ticket extends RVDLogBase {
         if ($results) while ($output[] = mysqli_fetch_assoc($results));
         if (!is_null($output) && end($output) == null) array_pop($output);
         
-        return $output;    
-            
+        if (!empty($output)) $output[0]['children'] = $this->getChildren(DB::esc($this->id));
+        
+        return $output; 
     }
     
     public function get($recursive = 'false', $last_id = null, $last_modified = null, $status = array()) {
@@ -125,7 +126,7 @@ class Ticket extends RVDLogBase {
             $q .= " AND t.modified > '$last_modified'";
         }
         if (is_array($status) && !empty($status)) {
-            $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risc, implode not escaped
+            $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
         }
 
         if ($recursive == 'false') {

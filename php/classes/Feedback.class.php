@@ -22,7 +22,7 @@ class Feedback extends RVDLogBase {
 				'" . DB::esc($this->title) . "',
                 " . DB::esc($this->handle_id) . ",
                 '" . DB::esc($this->message) . "',
-                '" . date('Y-m-d G:i:s') . "',
+                '" . date('Y-m-d G:i:s') . "'
             )
             ");
         
