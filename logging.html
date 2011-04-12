@@ -21,7 +21,7 @@
         <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
         <script type="text/javascript" src="js/mwheelIntent.js"></script>
         <script type="text/javascript" src="js/jquery.highlight-3.js"></script>
-        
+
         <!-- general javascript -->
         <script type="text/javascript" src="js/rvdlog.js"></script>
 
@@ -38,7 +38,7 @@
               <div id="SearchMeldingen" class="rounded">
                   <form id="searchForm" method="post" action="">
                     <input type="text" id="keyword" name="keyword"/>
-                    <input type="button" id="searchbutton" class="blueButton" value="search"/>
+                    <input type="button" id="searchbutton" class="blueButton" value="Zoek"/>
                   </form>
                   <input type="button" id="messageButton" class="blueButton" value="Hervat meldingen"/>
               </div>
@@ -51,7 +51,7 @@
                     <div id="MeldingenList" class="list rounded"></div>
               </div>
               <div id="Users">
-                  <div id="UsersHeader" class="header rounded"><p>Users</p></div>
+                  <div id="UsersHeader" class="header rounded"><p>Gebruikers</p></div>
                   <div id="UsersList" class="list rounded"></div>
               </div>
               <div id="TextEntry" class="rounded">
@@ -61,7 +61,10 @@
                      <input type="checkbox" id="ticket" name="ticket" />
                      <label for="ticket">Genereer ticket?</label>
                      </p>
+                     <select id="autotext_Handle"></select>
+                     <input type="button" id="autotextbutton" class="blueButton" value="Voeg roepnaam toe"/>
                      <input type="button" id="submitbutton" class="blueButton" value="submit"/>
+
                   </form>
               </div>
             </div>
@@ -71,7 +74,7 @@
                     <div id="TicketsList" class="list rounded"></div>
                 </div>
                 <div id="Feedback">
-                    <div id="FeedbackHeader" class="header rounded"><p>Feedback</p></div>
+                    <div id="FeedbackHeader" class="header rounded"><p>Terugmeldingen</p></div>
                     <div id="FeedbackList" class="list rounded"></div>
                 </div>
             </div>

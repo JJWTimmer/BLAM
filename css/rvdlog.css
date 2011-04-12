@@ -411,7 +411,7 @@ p.noMessages,
 }
 
 .list_item_ticketdetail_label_modified{
-    bottom:10%;
+    top:68%;
     position: absolute;
     overflow:hidden;
     width:96%;
@@ -422,7 +422,7 @@ p.noMessages,
 }
 
 .list_item_ticketdetail_message_modified{
-    bottom:1%;
+    top:76%;
     position: absolute;
     overflow:hidden;
     width:96%;
@@ -508,17 +508,17 @@ textarea#ticket_text{
 }
 .list_item_ticketdetail_label_becomechild{
     position: absolute;
-    top:66%;
+    top:88%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_becomechild{
     position: absolute;
-    top:66%;
+    top:88%;
     left:20%;
     overflow:hidden;
-    width:50%;
+    width:40%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
@@ -526,24 +526,24 @@ textarea#ticket_text{
 
 .list_item_ticketdetail #childticketbutton{
     position: absolute;
-    top:66%;
-    left:65%;
-    width:100px;
+    top:88%;
+    left:80%;
+    width:70px;
     height:25px;
 }
 
 
 .list_item_ticketdetail #becomeparentticketbutton{
     position: absolute;
-    top:74%;
-    left:65%;
-    width:100px;
+    top:88%;
+    left:55%;
+    width:80px;
     height:25px;
 }
 
 .list_item_ticketdetail #closeticketbutton{
     position: absolute;
-    top:88%;
+    top:74%;
     left:40%;
     width:100px;
     height:25px;
@@ -551,7 +551,7 @@ textarea#ticket_text{
 
 .list_item_ticketdetail #saveticketbutton{
     position: absolute;
-    top:88%;
+    top:74%;
     left:70%;
     width:100px;
     height:25px;

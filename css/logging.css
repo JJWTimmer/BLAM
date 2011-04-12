@@ -100,10 +100,31 @@ position:absolute;
 
 
 /* searchform */
-#messageButton {
-display:none;
 
+#messageButton {
+    display: none;
+    position: absolute;
+    top:10%;
+    left:50%;
+    width:150px;
+    height:25px;
 }
+
+#keyword{
+    position: absolute;
+    top:10%;
+    left:10%;
+    width:20%;
+}
+
+#searchbutton{
+    position: absolute;
+    top:10%;
+    left:35%;
+    width:70px;
+    height:25px;
+}
+
 
 /*Submit messages */
 
@@ -111,7 +132,7 @@ textarea#messagetext{
     position: absolute;
     top:10%;
     left:2%;
-    height:80%;
+    height:50%;
     width:60%;
 
     font:13px/14px Calibri,Arial,sans-serif;
@@ -144,28 +165,51 @@ p.label_checkbox_pair label{
     float: right;
     width:85%;
 }
-#TextEntry .blueButton{
+
+#autotext_Handle{
     position: absolute;
-    bottom:10%;
-    left:70%;
-    background:url('../img/button_blue.png') no-repeat;
-    border:none !important;
-    color:#516D7F !important;
+    top:65%;
+    left:5%;
+    width:20%;
+    }
+
+
+#autotextbutton{
+    position: absolute;
+    top:65%;
+    left:30%;
     font-size:13px;
     height:29px;
     text-align:center;
-    text-shadow:1px 1px 0 rgba(255, 255, 255, 0.4);
+    width: 200px;
+    margin:0;
+    cursor:pointer;
+}
+#submitbutton{
+    position: absolute;
+    top:65%;
+    left:70%;
+    font-size:13px;
+    height:29px;
+    text-align:center;
     width:75px;
     margin:0;
     cursor:pointer;
 }
 
-#TextEntry .blueButton:hover{
+#submitbutton:hover{
     background-position:left bottom;
 }
+
+#autotextbutton:hover{
+    background-position:left bottom;
+}
+
 
 /* Overloading the default styles of jScrollPane */
 #UsersList div:first-child[class="jspContainer"]{
     background: #202020;
     width:100%;
+
+
 }
