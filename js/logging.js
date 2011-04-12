@@ -5,6 +5,8 @@ $(document).ready(function(){
 
 });
 
+var Timeout= new Array();
+
 var logging = {
 
   // data holds variables for use in the class:
@@ -35,6 +37,10 @@ var logging = {
           logging.getMessages();
           $('#messageButton').hide();
           return false;
+        });
+
+        $('#autotextbutton').bind('click',function(){
+          $('#messagetext').val($('#messagetext').val()+$('#autotext_Handle').val()+ ' ');
         });
 
         // Using the defaultText jQuery plugin, included at the bottom:
@@ -82,7 +88,7 @@ var logging = {
             {
             logging.data.selectedticket=0;
             }
-          window.clearTimeout(logging.data.idTicketTimeout);
+          window.clearTimeout(Timeout["Tickets"]);
           logging.getTickets();
         });
 
@@ -96,7 +102,7 @@ var logging = {
             {
             logging.data.selectedfeedback=0;
             }
-          window.clearTimeout(logging.data.idFeedbackTimeout);
+          window.clearTimeout(Timeout["Feedbacks"]);
           logging.getFeedback();
         });
 
@@ -134,6 +140,7 @@ var logging = {
         // Logging the user out:
 
         $('a.logoutButton').live('click',function(){
+            logging.killTimeouts();
             $('#TopContainer > span').fadeOut(function(){
                 $(this).remove();
             });
@@ -165,8 +172,7 @@ var logging = {
             {
               if(working) return false;
                 working = true;
-
-              window.clearTimeout(logging.data.idMessagesTimeout);
+              window.clearTimeout(Timeout["Messages"]);
               $('#messageButton').show();
               logging.searchMessages(keyword);
               $('#keyword').val('');
@@ -225,6 +231,8 @@ var logging = {
                 if(inputcheckbox!=undefined)
                 {
                 $('#ticket').attr('checked',false);
+                window.clearTimeout(Timeout["Tickets"]);
+                logging.getTickets();
                 }
                 //remove old temporary message
                 $('div.message-'+tempID).remove();
@@ -315,7 +323,7 @@ var logging = {
 
             //if no chats exist yet
             if(!logging.data.lastID){
-                logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages yet</p>');
+                logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">Nog geen meldingen</p>');
             }
 
             // Setting a timeout for the next request,
@@ -343,7 +351,7 @@ var logging = {
                 var nextRequest = 1000;
             }
 
-            logging.data.idMessagesTimeout=setTimeout("logging.getMessages();",nextRequest);
+            Timeout["Messages"]=setTimeout("logging.getMessages();",nextRequest);
 
         });
     },
@@ -467,7 +475,7 @@ var logging = {
                 {
                     general.displayError(r.error);
                 }
-                setTimeout("logging.getUsers();",15000);
+                Timeout["Users"]=setTimeout("logging.getUsers();",15000);
 
             });
     },
@@ -475,7 +483,8 @@ var logging = {
 
     getHandles : function(){
         $.tzPOST('getGroups',{recursive:'true'},function(r){
-            if(!r.error)
+            if(r){
+              if(!r.error)
                 {
                 //save groups and handles for later use
                 logging.data.groups = r;
@@ -485,6 +494,9 @@ var logging = {
 
                 var markup_group;
                 var markup_handle;
+                $('option', $('#autotext_Handle')).remove();
+                var autotext_options = $('#autotext_Handle').attr('options');
+
                 for(var i=0; i< r.length;i++){
                     if(r[i]){
                         markup_group=general.render('groups',r[i]);
@@ -493,6 +505,8 @@ var logging = {
                           for (var j = 0; j < r[i]['handles'].length; j++) {
                             markup_handle=general.render('handles',r[i]['handles'][j]);
                             logging.data.jspAPIHandles.getContentPane().append(markup_handle);
+                            autotext_options[autotext_options.length] = new Option(r[i]['handles'][j].handle_name + ' - ' + r[i]['handles'][j].description);
+
                           }
                         }
                     }
@@ -500,20 +514,20 @@ var logging = {
 
                 //empty no groups
 
-                if(r.length<1){
-                    var message = 'No groups exist';
-                    logging.data.jspAPIHandles.getContentPane().append('<p class="count">'+message+'</p>');
-                }
                 logging.data.jspAPIHandles.reinitialise();
                 }
                 else
                 {
                     general.displayError(r.error);
                 }
-
-                //doesn't change?
-                //setTimeout("logging.getHandles();",60000);
-            });
+            }
+            else
+            {
+            var message = 'Geen voertuigen';
+            logging.data.jspAPIHandles.getContentPane().append('<p class="count">'+message+'</p>');
+            logging.data.jspAPIHandles.reinitialise();
+            }
+        });
 
     },
 
@@ -538,7 +552,7 @@ var logging = {
                 //empty no tickets
 
                   if(r.length<1){
-                    var message = 'No tickets exist';
+                    var message = 'Geen tickets';
                     logging.data.jspAPITickets.getContentPane().append('<p class="count">'+message+'</p>');
                     }
                 logging.data.jspAPITickets.reinitialise();
@@ -547,7 +561,7 @@ var logging = {
                 {
                     general.displayError(r.error);
                 }
-                logging.data.idTicketTimeout=setTimeout("logging.getTickets();",15000);
+                Timeout["Tickets"]=setTimeout("logging.getTickets();",15000);
 
         });
 
@@ -575,7 +589,7 @@ var logging = {
                 //empty no feedback
 
                   if(r.length<1){
-                    var message = 'No feedback exist';
+                    var message = 'Geen terugmeldingen';
                     logging.data.jspAPIFeedback.getContentPane().append('<p class="count">'+message+'</p>');
                     }
                 logging.data.jspAPIFeedback.reinitialise();
@@ -585,11 +599,19 @@ var logging = {
                     general.displayError(r.error);
                 }
           }
-          logging.data.idFeedbackTimeout=setTimeout("logging.getFeedback();",15000);
+          Timeout["Feedbacks"]=setTimeout("logging.getFeedback();",15000);
 
         });
 
     },
+
+  killTimeouts : function(){
+            for (key in Timeout)
+            {
+              clearTimeout(Timeout[key]);
+            }
+  },
+
 
   reInitJSP : function(){
             logging.data.jspAPIMeldingen.reinitialise();

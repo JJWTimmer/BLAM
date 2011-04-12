@@ -1,9 +1,12 @@
 $(document).ready(function(){
 
   // Run the init method on document ready:
+
   ticketing.init();
 
 });
+
+var Timeout= new Array();
 
 var ticketing = {
 
@@ -12,7 +15,7 @@ var ticketing = {
   data : {
     lastIDMessages    : 1,
     lastIDChats    : 1,
-    noActivity  : 0
+    noActivity  : 0,
   },
 
   // Init binds event listeners and sets up timers:
@@ -78,8 +81,9 @@ var ticketing = {
 
         //function to implement clicking on claim
         $('div.list_item_parent_ticket_claim').live('click', function(){
-
           $.tzPOST('setTicketOwner',{id:$(this).attr("id")},function(r){
+          ticketing.reInitTickets("New")
+          ticketing.reInitTickets("Open")
           });
         });
 
@@ -143,9 +147,12 @@ var ticketing = {
         // Logging the user out:
 
         $('a.logoutButton').live('click',function(){
+            ticketing.killTimeouts();
             $('#TopContainer > span').fadeOut(function(){
+
                 $(this).remove();
             });
+
             $('#TopContainer').fadeOut();
             $('#MainContainer').fadeOut(function(){
                 $('#Login').fadeIn();
@@ -230,7 +237,7 @@ var ticketing = {
                 }
               });
             }
-
+            ticketing.reInitTickets("All");
             $('#TicketDetailsList').empty();
             $('#WL-ActieList').fadeIn();
             $('#FeedbackList').fadeIn();
@@ -250,6 +257,9 @@ var ticketing = {
                 general.displayError(r.error);
               }
             });
+            ticketing.reInitTickets("Open");
+            ticketing.reInitTickets("Closed");
+
             $('#TicketDetailsList').empty();
             $('#WL-ActieList').fadeIn();
             $('#FeedbackList').fadeIn();
@@ -289,6 +299,7 @@ var ticketing = {
                 general.displayError(r.error);
               }
             });
+            ticketing.reInitTickets("All");
             $('#TicketDetailsList').empty();
             $('#WL-ActieList').fadeIn();
             $('#FeedbackList').fadeIn();
@@ -321,7 +332,13 @@ var ticketing = {
                     $('#subticket_Location').val("");
                 }
             });
-
+            ticketing.reInitTickets("All");
+            $('#TicketDetailsList').empty();
+            $('#WL-ActieList').fadeIn();
+            $('#FeedbackList').fadeIn();
+            $('#TimelineList').fadeIn();
+            $('#WL-ActieForm').fadeOut();
+            $('#FeedbackForm').fadeOut();
             return false;
         });
 
@@ -341,7 +358,12 @@ var ticketing = {
                     $('#feedback_Text').val("");
                 }
             });
-
+            $('#TicketDetailsList').empty();
+            $('#WL-ActieList').fadeIn();
+            $('#FeedbackList').fadeIn();
+            $('#TimelineList').fadeIn();
+            $('#WL-ActieForm').fadeOut();
+            $('#FeedbackForm').fadeOut();
             return false;
         });
 
@@ -412,7 +434,7 @@ var ticketing = {
             }
             //if no chats exist yet
             if(!ticketing.data.lastIDMessages){
-                ticketing.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">No messages yet</p>');
+                ticketing.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">Nog geen meldingen</p>');
             }
 
             // Setting a timeout for the next request,
@@ -440,7 +462,7 @@ var ticketing = {
                 var nextRequest = 1000;
             }
 
-            ticketing.data.idMessagesTimeout=setTimeout("ticketing.getMessages();",nextRequest);
+            Timeout["Messages"]=setTimeout("ticketing.getMessages();",nextRequest);
 
         });
     },
@@ -472,7 +494,7 @@ var ticketing = {
             }
             //if no chats exist yet
             if(!ticketing.data.lastIDChats){
-                ticketing.data.jspAPIChats.getContentPane().html('<p class="noChats">No messages yet</p>');
+                ticketing.data.jspAPIChats.getContentPane().html('<p class="noChats">Nog geen chats</p>');
             }
 
             // Setting a timeout for the next request,
@@ -500,7 +522,7 @@ var ticketing = {
                 var nextRequest = 1000;
             }
 
-            ticketing.data.idChatsTimeout=setTimeout("ticketing.getChats();",nextRequest);
+            Timeout["Chats"]=setTimeout("ticketing.getChats();",nextRequest);
 
         });
     },
@@ -638,10 +660,10 @@ var ticketing = {
                   var message = '';
 
                   if(r.length<1){
-                    message = 'No one is online';
+                    message = 'Niemand is online';
                   }
                   else {
-                    message = r.length+' '+(r.length == 1 ? 'person':'people')+' online';
+                    message = r.length+' '+(r.length == 1 ? 'persoon':'personen')+' online';
                   }
 
                   ticketing.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
@@ -652,20 +674,21 @@ var ticketing = {
                 {
                     general.displayError(r.error);
                 }
-                setTimeout("ticketing.getUsers();",15000);
+                Timeout["Users"]=setTimeout("ticketing.getUsers();",15000);
 
             });
     },
 
     getHandles : function(){
         $.tzPOST('getGroups',{recursive:'true'},function(r){
-            if(!r.error)
+            if(r)
+              {
+              if(!r.error)
                 {
-                ticketing.data.jspAPIHandles.getContentPane().empty();
-
-                var markup_group;
-                var markup_handle;
-                for(var i=0; i< r.length;i++){
+                  ticketing.data.jspAPIHandles.getContentPane().empty();
+                  var markup_group;
+                  var markup_handle;
+                  for(var i=0; i< r.length;i++){
                     if(r[i]){
                         markup_group=general.render('groups',r[i]);
                         ticketing.data.jspAPIHandles.getContentPane().append(markup_group);
@@ -676,21 +699,23 @@ var ticketing = {
                           }
                         }
                     }
-                }
-
-                //empty no groups
-                if(r.length<1){
-                    var message = 'No groups exist';
-                    ticketing.data.jspAPIHandles.getContentPane().append('<p class="count">'+message+'</p>');
-                }
+                  }
                 ticketing.data.jspAPIHandles.reinitialise();
                 }
                 else
                 {
                     general.displayError(r.error);
                 }
-                setTimeout("ticketing.getHandles();",60000);
-            });
+
+              }
+              else
+              {
+                    //empty no groups
+                    var message = 'Geen voertuigen';
+                    ticketing.data.jspAPIHandles.getContentPane().append('<p class="count">'+message+'</p>');
+                    ticketing.data.jspAPIHandles.reinitialise();
+              }
+        });
 
     },
 
@@ -732,7 +757,7 @@ var ticketing = {
             ticketing.data.jspAPINewTickets.getContentPane().append('<p class="count">'+message+'</p>');
             ticketing.data.jspAPINewTickets.reinitialise();
           }
-          ticketing.data.idTicketTimeout=setTimeout("ticketing.getNewTickets();",15000);
+          Timeout["NewTickets"]=setTimeout("ticketing.getNewTickets();",15000);
         });
     },
 
@@ -774,7 +799,7 @@ var ticketing = {
             ticketing.data.jspAPIOpenTickets.getContentPane().append('<p class="count">'+message+'</p>');
             ticketing.data.jspAPIOpenTickets.reinitialise();
           }
-                ticketing.data.idTicketTimeout=setTimeout("ticketing.getOpenTickets();",15000);
+          Timeout["OpenTickets"]=setTimeout("ticketing.getOpenTickets();",15000);
         });
     },
 
@@ -816,7 +841,7 @@ var ticketing = {
             ticketing.data.jspAPIClosedTickets.getContentPane().append('<p class="count">'+message+'</p>');
             ticketing.data.jspAPIClosedTickets.reinitialise();
           }
-            ticketing.data.idTicketTimeout=setTimeout("ticketing.getClosedTickets();",15000);
+          Timeout["ClosedTickets"]=setTimeout("ticketing.getClosedTickets();",15000);
         });
     },
 
@@ -857,7 +882,7 @@ var ticketing = {
                             $('option', $('#owner')).remove();
                             var owner_options = $('#owner').attr('options');
                             var index_owner;
-                            owner_options[0] = new Option("");
+                            /*owner_options[0] = new Option("");*/
                             for(var i=0; i< r.length;i++){
                               if(r[i]){
                                 if(r[i].role=='WL' || r[i].role=='Admin')
@@ -1003,6 +1028,42 @@ var ticketing = {
         }
     },
 
+  killTimeouts : function(){
+            for (key in Timeout)
+            {
+              clearTimeout(Timeout[key]);
+            }
+  },
+
+  reInitTickets : function(type){
+
+      switch(type){
+
+        case 'New':
+          window.clearTimeout(Timeout["NewTickets"]);
+          setTimeout("ticketing.getNewTickets();",500);
+        break;
+
+        case 'Open':
+          window.clearTimeout(Timeout["OpenTickets"]);
+          setTimeout("ticketing.getOpenTickets();",500);
+        break;
+
+        case 'Closed':
+          window.clearTimeout(Timeout["ClosedTickets"]);
+          setTimeout("ticketing.getClosedTickets();",500);
+        break;
+
+        case 'All':
+          window.clearTimeout(Timeout["NewTickets"]);
+          setTimeout("ticketing.getNewTickets();",500);
+          window.clearTimeout(Timeout["OpenTickets"]);
+          setTimeout("ticketing.getOpenTickets();",500);
+          window.clearTimeout(Timeout["ClosedTickets"]);
+          setTimeout("ticketing.getClosedTickets();",500);
+        break;
+      }
+  },
 
   reInitJSP : function(){
             ticketing.data.jspAPIMeldingen.reinitialise();

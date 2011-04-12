@@ -119,7 +119,7 @@ var general = {
                   '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
                 '</div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
@@ -128,8 +128,8 @@ var general = {
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
                 '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
-                '<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
-                '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
+                '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '</div>',
                 '</form>'];
             break;
@@ -145,7 +145,7 @@ var general = {
                   '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
                 '</div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
@@ -156,8 +156,8 @@ var general = {
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
                 '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
-                '<input type="button" id="closeticketbutton" class="blueButton" value="Close Ticket"/>',
-                '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
+                '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '</div>',
                 '</form>'];
             break;
@@ -173,7 +173,7 @@ var general = {
                   '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
                 '</div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
@@ -184,7 +184,7 @@ var general = {
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
                 '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
-                '<input type="button" id="saveticketbutton" class="blueButton" value="Reopen Ticket"/>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Heropen Ticket"/>',
                 '</div>',
                 '</form>'];
             break;
@@ -200,7 +200,7 @@ var general = {
                   '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
                 '</div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-                '<div class=list_item_ticketdetail_label_loc><p>Location:</p></div>',
+                '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
@@ -210,7 +210,7 @@ var general = {
                 '<input type="button" id="becomeparentticketbutton" class="blueButton" value="Koppel los!"/>',
                 '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
                 '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
-                '<input type="button" id="saveticketbutton" class="blueButton" value="Save Ticket"/>',
+                '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '</div>',
                 '</form>'];
             break;
