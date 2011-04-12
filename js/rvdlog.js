@@ -104,7 +104,7 @@ var general = {
 
             case 'feedback_expanded':
                 arr = [
-                    '<div class="list_item_feedback_expanded rounded"><p>Melding:</p><p>',params.message,'</p><p>WL contactpersoon:</p><p>',params.username,'</p><p>tijd melding:</p><p>',params.created,'</p></div>'
+                    '<div class="list_item_feedback_expanded rounded"><p>Melding:</p><p>',params.message,'</p><p>WL contactpersoon:</p><p>',params.wl_user,'</p><p>tijd melding:</p><p>',params.created,'</p></div>'
                 ];
             break;
 

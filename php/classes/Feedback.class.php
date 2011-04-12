@@ -37,11 +37,12 @@ class Feedback extends RVDLogBase {
             throw new Exception('invalid parameters for getFeedback');
         }
 
-        $q = "SELECT f.id AS id, f.ticket_id, f.title, h.handle_name as handle, f.message, f.called, u.username, f.created
+        $q = "SELECT f.id AS id, f.ticket_id, u2.username AS wl_user, f.title, h.handle_name as handle, f.message, f.called, u.username AS called_by, f.created
             FROM feedbacks AS f
             INNER JOIN tickets AS t ON t.id = f.ticket_id
             INNER JOIN handles AS h ON h.id = f.handle_id
-            LEFT OUTER JOIN users u ON u.id = f.called_by";
+            LEFT OUTER JOIN users u ON u.id = f.called_by
+            LEFT OUTER JOIN users u2 ON t.user_id = u2.id";
         $prev_pred = false;
         if (!empty($id) && is_numeric($id) ) {
             $q .= " WHERE t.id > $id";
