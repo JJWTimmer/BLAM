@@ -330,7 +330,7 @@ p.noMessages,
 }
 
 /* feedback */
-.list_item_feedback{
+.list_item_openfeedback {
     float:left;
     width:95%;
     margin:2px 0px 2px 2px;
@@ -341,14 +341,30 @@ p.noMessages,
     background-color:#00B0B0;
 }
 
-.list_item_feedback:hover{
+.list_item_closedfeedback
+{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#00B0B0;
+}
+
+.list_item_openfeedback:hover{
+    background-color:#B0B0B0;
+}
+
+.list_item_closedfeedback:hover{
     background-color:#B0B0B0;
 }
 
 .list_item_feedback_expanded{
     float:left;
     width:95%;
-    margin:2px 0px 2px 0px;
+    margin:2px 0px 2px 2px;
     padding-left:3px;
     padding-bottom:1px;
     text-align:left;

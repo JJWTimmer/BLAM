@@ -84,19 +84,27 @@ position:absolute;
     top:5%;
     left:0%;
     width:98%;
-    height:44%;
+    height:27%;
     margin:1%;
 }
 
-#Feedback{
+#OpenFeedback{
     position:absolute;
-    top: 55%;
+    top: 37%;
     left:0%;
     width:98%;
-    height:43%;
+    height:27%;
     margin:1%;
 }
 
+#ClosedFeedback{
+    position:absolute;
+    top: 69%;
+    left:0%;
+    width:98%;
+    height:27%;
+    margin:1%;
+}
 
 
 /* searchform */
