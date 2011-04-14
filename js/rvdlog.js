@@ -86,7 +86,14 @@ var general = {
 
             case 'parentticket_expanded':
                 arr = [
-                    '<div class="list_item_parent_ticket_expanded rounded"><p>Melding:</p><p>',params.text,'</p><p>Operator:</p><p>',params.rvduser,'</p><p>Status:</p><p>',params.status,'</p><p>WL contactpersoon:</p><p>',params.wluser,'</p><p>tijd melding:</p><p>',params.created,'</p><p>laatste wijziging:</p><p>',params.modified,'</p></div>'
+                    '<div class="list_item_parent_ticket_expanded rounded">',
+                    '<p><b>Melding:</b></p><p>',params.text,'</p>',
+                    '<p><b>Operator: </b>',params.rvduser,'</p>',
+                    '<p><b>Status: </b>',params.status,'</p>',
+                    '<p><b>WL contactpersoon: </b>',params.wluser,'</p>',
+                    '<p><b>tijd melding: </b>',params.created,'</p>',
+                    '<p><b>laatste wijziging: </b>',params.modified,'</p>',
+                    '</div>'
                 ];
             break;
 
@@ -96,15 +103,40 @@ var general = {
                 ];
             break;
 
-            case 'feedback':
+            case 'openfeedback':
                 arr = [
-                    '<div class="list_item_feedback rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                    '<div class="list_item_openfeedback rounded" id="',params.id,'"><p>',params.title,'</p></div>'
                 ];
             break;
 
-            case 'feedback_expanded':
+            case 'closedfeedback':
                 arr = [
-                    '<div class="list_item_feedback_expanded rounded"><p>Melding:</p><p>',params.message,'</p><p>WL contactpersoon:</p><p>',params.wl_user,'</p><p>tijd melding:</p><p>',params.created,'</p></div>'
+                    '<div class="list_item_closedfeedback rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                ];
+            break;
+
+            case 'openfeedback_expanded':
+                arr = [
+                    '<div class="list_item_feedback_expanded rounded" id="',params.id,'">',
+                    '<p><b>Voertuig: </b>',params.handle,'</p>',
+                    '<p><b>Ingevoerd op: </b>',params.created,'</p>',
+                    '<p><b>Terugmelding:</b></p><p>',params.message,'</p>',
+                    '<p><b>WL contactpersoon: </b>',params.wl_user,'</p>',
+                    '<input type="button" id="closefeedback" class="blueButton" value="Terugmelding sluiten"/>',
+                    '</div>'
+                ];
+            break;
+
+            case 'closedfeedback_expanded':
+                arr = [
+                    '<div class="list_item_feedback_expanded rounded" id="',params.id,'">',
+                    '<p><b>Voertuig: </b>',params.handle,'</p>',
+                    '<p><b>Ingevoerd op: </b>',params.created,'</p>',
+                    '<p><b>Terugmelding:</b></p><p>',params.message,'</p>',
+                    '<p><b>WL contactpersoon: </b>',params.wl_user,'</p>',
+                    '<p><b>Afgehandeld door: </b>',params.called_by,'</p>',
+                    '<p><b>Afgehandeld op: </b>',params.called,'</p>',
+                    '</div>'
                 ];
             break;
 

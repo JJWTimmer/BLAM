@@ -279,6 +279,7 @@ var ticketing = {
                 general.displayError(r.error);
               }
             });
+            ticketing.reInitTickets("All");
             $('#TicketDetailsList').empty();
             $('#WL-ActieList').fadeIn();
             $('#FeedbackList').fadeIn();

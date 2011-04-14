@@ -43,6 +43,13 @@ var logging = {
           $('#messagetext').val($('#messagetext').val()+$('#autotext_Handle').val()+ ' ');
         });
 
+        //function to implement clicking on close feedback
+        $('#closefeedback').live('click', function(){
+          $.tzPOST('closeFeedback',{id:$(this).closest("div").attr("id")},function(r){
+          });
+        });
+
+
         // Using the defaultText jQuery plugin, included at the bottom:
         $('#name').defaultText('Nickname');
         $('#password').defaultText('Password');
@@ -73,10 +80,16 @@ var logging = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 
-        logging.data.jspAPIFeedback = $('#FeedbackList').jScrollPane({
+        logging.data.jspAPIOpenFeedback = $('#OpenFeedbackList').jScrollPane({
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
         }).data('jsp');
+
+        logging.data.jspAPIClosedFeedback = $('#ClosedFeedbackList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
 
         //function to implement clicking on dynamic element ticket
         $('div.list_item_parent_ticket_full').live('click', function(){
@@ -93,18 +106,33 @@ var logging = {
         });
 
         //function to implement clicking on dynamic element feedback
-        $('div.list_item_feedback').live('click', function(){
-          if($(this).attr("id")!=logging.data.selectedfeedback)
+        $('div.list_item_openfeedback').live('click', function(){
+          if($(this).attr("id")!=logging.data.selectedopenfeedback)
             {
-            logging.data.selectedfeedback=$(this).attr("id");
+            logging.data.selectedopenfeedback=$(this).attr("id");
             }
           else
             {
-            logging.data.selectedfeedback=0;
+            logging.data.selectedopenfeedback=0;
             }
           window.clearTimeout(Timeout["Feedbacks"]);
           logging.getFeedback();
         });
+
+        //function to implement clicking on dynamic element feedback
+        $('div.list_item_closedfeedback').live('click', function(){
+          if($(this).attr("id")!=logging.data.selectedclosedfeedback)
+            {
+            logging.data.selectedclosedfeedback=$(this).attr("id");
+            }
+          else
+            {
+            logging.data.selectedclosedfeedback=0;
+            }
+          window.clearTimeout(Timeout["Feedbacks"]);
+          logging.getFeedback();
+        });
+
 
         // Logging a person into rvdlog:
         $('#loginForm').submit(function(){
@@ -568,31 +596,46 @@ var logging = {
     },
 
     getFeedback : function(){
-        $.tzPOST('getFeedback',{called: false},function(r){
+        $.tzPOST('getFeedback',{},function(r){
           if(r){
             if(!r.error)
                 {
-                logging.data.jspAPIFeedback.getContentPane().empty();
+                logging.data.jspAPIOpenFeedback.getContentPane().empty();
+                logging.data.jspAPIClosedFeedback.getContentPane().empty();
 
                 var markup;
                 var markup_extra;
                   for(var i=0; i< r.length;i++){
                     if(r[i]){
-                        markup=general.render('feedback',r[i]);
-                        logging.data.jspAPIFeedback.getContentPane().append(markup);
-                        if (r[i].id == logging.data.selectedfeedback) {
-                            markup_extra=general.render('feedback_expanded',r[i]);
-                            logging.data.jspAPIFeedback.getContentPane().append(markup_extra);
+                      if(r[i].called==null)
+                        {
+                          markup=general.render('openfeedback',r[i]);
+                          logging.data.jspAPIOpenFeedback.getContentPane().append(markup);
+                          if (r[i].id == logging.data.selectedopenfeedback) {
+                            markup_extra=general.render('openfeedback_expanded',r[i]);
+                            logging.data.jspAPIOpenFeedback.getContentPane().append(markup_extra);
                           }
+                        }
+                      else
+                        {
+                          markup=general.render('closedfeedback',r[i]);
+                          logging.data.jspAPIClosedFeedback.getContentPane().append(markup);
+                          if (r[i].id == logging.data.selectedclosedfeedback) {
+                            markup_extra=general.render('closedfeedback_expanded',r[i]);
+                            logging.data.jspAPIClosedFeedback.getContentPane().append(markup_extra);
+                          }
+                        }
                     }
                   }
                 //empty no feedback
 
                   if(r.length<1){
                     var message = 'Geen terugmeldingen';
-                    logging.data.jspAPIFeedback.getContentPane().append('<p class="count">'+message+'</p>');
+                    logging.data.jspAPIOpenFeedback.getContentPane().append('<p class="count">'+message+'</p>');
+                    logging.data.jspAPIClosedFeedback.getContentPane().append('<p class="count">'+message+'</p>');
                     }
-                logging.data.jspAPIFeedback.reinitialise();
+                logging.data.jspAPIOpenFeedback.reinitialise();
+                logging.data.jspAPIClosedFeedback.reinitialise();
                 }
                 else
                 {
@@ -618,7 +661,8 @@ var logging = {
             logging.data.jspAPIUsers.reinitialise();
             logging.data.jspAPIHandles.reinitialise();
             logging.data.jspAPITickets.reinitialise();
-            logging.data.jspAPIFeedback.reinitialise();
+            logging.data.jspAPIOpenFeedback.reinitialise();
+            logging.data.jspAPIClosedFeedback.reinitialise();
   }
 };
 //end of logging var
