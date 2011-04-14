@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>RVD log - User Manager</title>
+
+        <!-- jQuery css first, so we can override later -->
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" />
+
+        <!-- second the general css -->
+        <link rel="stylesheet" type="text/css" href="css/rvdlog.css" />
+
+        <!-- last the page specific css -->
+        <link rel="stylesheet" type="text/css" href="css/usermgr.css" />
+
+        <!-- first all the libraries, jquery first is needed for the rest -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="js/mwheelIntent.js"></script>
+        <script type="text/javascript" src="js/jquery.highlight-3.js"></script>
+
+        <!-- general javascript -->
+        <script type="text/javascript" src="js/rvdlog.js"></script>
+
+		<!-- page specific javascript -->
+		<script type="text/javascript" src="js/usermgr.js"></script>
+
+    </head>
+
+    <body>
+        <div id="TopContainer" class="rounded"></div>
+		
+        <div id="MainContainer">
+			<div id="NewUserContainer">
+				<p>Add User:</p>
+				<form id="add_user_form" action="" method="post">
+				<p>
+					Username: <input type="text" name="username" /><br/>
+					Password: <input type="password" name="password" /><br/>
+					Password2: <input type="password" name="password2" /><br/>
+					Avatar: <input type="file" name="avatar" /><br/>
+					Role: <select name="role">
+					</select>
+					<input type="submit" name="submit" value="Add user"/>
+				</p>
+				</form>
+			</div>
+        </div>
+		
+		<div id="Login" align="center">
+            <div id="LoginWindow" class="rounded">
+                <h1 align="center">Login RVDLog</h1>
+                <br/>
+                <form id="loginForm" method="post" action="">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr><td align="center">
+                <input id="name" name="username" class="rounded" type="text" maxlength="16" />
+                </td></tr><tr><td align="center">
+                <input id="password" name="password" class="rounded" type="password" maxlength="16" />
+                </td></tr><tr><td align="center">
+                <input type="submit" class="blueButton" value="Login" />
+                </td></tr>
+                </table>
+                </form>
+            <div>
+        </div>
+
+    </body>
+</html>
