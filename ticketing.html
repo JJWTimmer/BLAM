@@ -35,52 +35,57 @@
       <div id="TopContainer" class="rounded"></div>
         <div id="MainContainer">
             <div id="TicketingCommunicationContainer">
-          <div id="Handles">
-                    <div id="HandlesHeader" class="header rounded"><p>Roepnamen</p></div>
+                <div id="Handles" class="holder rounded">
+                    <div id="HandlesHeader" class="header"><p>Roepnamen</p></div>
                     <div id="HandlesList" class="list rounded"></div>
                 </div>
-            <div id="Meldingen">
-                    <div id="MeldingenHeader" class="header rounded"><p>Meldingen</p></div>
+
+
+                <div id="ChatContainer">
+                  <div id="Meldingen" class="holder rounded">
+                    <div id="MeldingenHeader" class="header"><p>Meldingen</p></div>
                     <div id="MeldingenList" class="list rounded"></div>
-            </div>
-            <div id="ChatContainer">
-                  <div id="WL-Chat">
-                        <div id="WL-ChatHeader" class="header rounded"><p>WL-Chat</p></div>
+                  </div>
+
+                  <div id="WL-Chat" class="holder rounded">
+                        <div id="WL-ChatHeader" class="header"><p>WL-Chat</p></div>
                         <div id="WL-ChatList" class="list rounded"></div>
-              </div>
-                <div id="Users">
-                        <div id="UsersHeader" class="header rounded"><p>Gebruikers</p></div>
+                  </div>
+
+                  <div id="Users" class="holder rounded">
+                        <div id="UsersHeader" class="header"><p>Gebruikers</p></div>
                         <div id="UsersList" class="list rounded"></div>
-                    </div>
-              <div id="TextEntry" class="rounded">
+                  </div>
+
+                  <div id="TextEntry" class="rounded">
                         <form id="submitForm" method="post" action="">
                             <div class="chat_input"><input type="text" id="Chattext" name="text" class="rounded" maxlength="255" /></div>
                             <input type="submit" class="blueButton" id="Chatsubmit"value="Submit" />
                         </form>
-                    </div>
+                  </div>
                 </div>
             </div>
             <div id="TicketingOverviewContainer">
-                <div id="NewTickets">
-                    <div id="NewTicketsHeader" class="header rounded"><p>Nieuwe Tickets</p></div>
+                <div id="NewTickets" class="holder rounded rounded">
+                    <div id="NewTicketsHeader" class="header"><p>Nieuwe Tickets</p></div>
                     <div id="NewTicketsList" class="list rounded"></div>
                 </div>
-                <div id="OpenTickets">
-                    <div id="OpenTicketsHeader" class="header rounded"><p>Open Tickets</p></div>
+                <div id="OpenTickets" class="holder rounded">
+                    <div id="OpenTicketsHeader" class="header"><p>Open Tickets</p></div>
                     <div id="OpenTicketsList" class="list rounded"></div>
                 </div>
-                <div id="ClosedTickets">
-                    <div id="ClosedTicketsHeader" class="header rounded"><p>Gesloten Tickets</p></div>
+                <div id="ClosedTickets" class="holder rounded">
+                    <div id="ClosedTicketsHeader" class="header"><p>Gesloten Tickets</p></div>
                     <div id="ClosedTicketsList" class="list rounded"></div>
                 </div>
             </div>
             <div id="TicketingDetailsContainer">
-                <div id="TicketDetails">
-                    <div id="TicketDetailsHeader" class="header rounded"><p>Details Ticket</p></div>
+                <div id="TicketDetails" class="holder rounded">
+                    <div id="TicketDetailsHeader" class="header"><p>Details Ticket</p></div>
                     <div id="TicketDetailsList" class="list rounded"></div>
                 </div>
-                <div id="WL-Actie">
-                    <div id="WL-ActieHeader" class="header rounded"><p>WL-Actie</p></div>
+                <div id="WL-Actie" class="holder rounded">
+                    <div id="WL-ActieHeader" class="header"><p>WL-Actie</p></div>
                     <div id="WL-ActieList" class="list rounded">
                         <form id="WL-ActieForm" method="post" action="">
                             <div class="list_item_extra_Header"><h1>Subticket aanmaken</h1></div>
@@ -96,8 +101,8 @@
                         </form>
                     </div>
                 </div>
-                <div id="Feedback">
-                    <div id="FeedbackHeader" class="header rounded"><p>Terugmelding</p></div>
+                <div id="Feedback" class="holder rounded">
+                    <div id="FeedbackHeader" class="header"><p>Terugmelding</p></div>
                     <div id="FeedbackList" class="list rounded">
                     <form id="FeedbackForm" method="post" action="">
                             <div class="list_item_extra_Header"><h1>Terugmelding</h1></div>
@@ -112,7 +117,7 @@
                     </div>
                 </div>
                 <div id="Timeline">
-                    <div id="TimelineHeader" class="header rounded"><p>Tijdlijn</p></div>
+                    <div id="TimelineHeader" class="header"><p>Tijdlijn</p></div>
                     <div id="TimelineList" class="list rounded"></div>
                 </div>
             </div>
