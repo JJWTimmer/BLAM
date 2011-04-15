@@ -99,7 +99,7 @@ var general = {
 
             case 'childticket':
                 arr = [
-                    '<div class="list_item_child_ticket rounded" id="',params.id,'" title="',params.parent_id,'"><p>',params.title,'</p></div>'
+                    '<div class="list_item_child_ticket rounded" id="',params.id,'" title="',params.parent_id,'"><p>',params.id,': ',params.title,'</p></div>'
                 ];
             break;
 
@@ -144,22 +144,23 @@ var general = {
             arr = [
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class="list_item_ticketdetail_label_created rounded">',
-                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
-                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
-                '</div>',
+                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
-                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
-                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
+
+
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '</div>',
@@ -170,24 +171,23 @@ var general = {
             arr = [
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class="list_item_ticketdetail_label_created rounded">',
-                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
-                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
-                '</div>',
+                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
                 '<div class=list_item_ticketdetail_label_owner><p>WLer:</p></div>',
                 '<div class=list_item_ticketdetail_owner><select id="owner"><option selected>',params.wluser,'</option></select></div>',
-                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
-                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '</div>',
@@ -198,24 +198,24 @@ var general = {
             arr = [
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class="list_item_ticketdetail_label_created rounded">',
-                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
-                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
-                '</div>',
+                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
                 '<div class="list_item_ticketdetail_label_owner"><p>WLer:</p></div>',
                 '<div class="list_item_ticketdetail_owner"><select id="owner"><option selected>',params.wluser,'</option></select></div>',
-                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
-                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
+
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Heropen Ticket"/>',
                 '</div>',
                 '</form>'];
@@ -225,23 +225,21 @@ var general = {
             arr = [
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
+                '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class="list_item_ticketdetail_label_created rounded">',
-                  '<div class=list_item_ticketdetail_label><p>bericht:</p></div>',
-                  '<div class=list_item_ticketdetail_created><p>tijd bericht: ',params.created,'</p></div>',
-                '</div>',
+                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
-                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan <BR> ticket:</p></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
+                '<div class="list_item_ticketdetail_label_becomechild"><p>gekoppeld aan:</p></div>',
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
-                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<input type="button" id="becomeparentticketbutton" class="blueButton" value="Koppel los!"/>',
-                '<div class=list_item_ticketdetail_label_modified><p>Laatst gewijzigd:</p></div>',
-                '<div class=list_item_ticketdetail_message_modified><p>',params.modified,'</p></div>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '</div>',
                 '</form>'];
@@ -291,6 +289,23 @@ var general = {
 
         elem.hide().appendTo('body').slideDown();
     },
+
+
+    stripToTime : function(date_and_time){
+    var strTime="";
+        if(date_and_time) {
+
+            // PHP returns the time in UTC (GMT). We use it to feed the date
+            // object and later output it in the user's timezone. JavaScript
+            // internally converts it for us.
+            var date_time=date_and_time.split(" ");
+            var time = date_time[1].split(":");
+            var strTime=time[0]+':'+time[1];
+            //d.setUTCHours(time[0],time[1]);
+        }
+    return strTime;
+    },
+
 
 }
 //end of var general

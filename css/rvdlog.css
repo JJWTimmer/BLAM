@@ -7,7 +7,7 @@ body{
   height:100%;
   width:100%
   color:#111;
-  background:url('../img/page_bg.jpg') repeat-x #323232;
+  background:url('../img/page_bg_grey.jpg') repeat-x #323232;
   font:15px Calibri,Arial,sans-serif;
   border-top:5px solid #212121;
 }
@@ -19,24 +19,56 @@ body{
 }
 
 /* standard format */
+.blueButton {
+    padding: 2px 10px;
+    display: inline;
+    background: #777 url(img/button.png) repeat-x bottom;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-shadow: 1px 1px #666;
+    background-color: #2c6da0;
+    }
+.blueButton:hover {
+    background-position: 0 center;
+    }
+
+.blueButton:active {
+    background-position: 0 top;
+    position: relative;
+    top: 1px;
+    padding: 6px 10px 4px;
+}
+.holder{
+  background: #202020;
+  border:1px solid #111111;
+  padding: 25px 2px 2px 2px;
+}
+
 .header{
   position:absolute;
-  left:0px;
-  top: -25px;
+  left:0%;
+  top: 0%;
   width:100%;
-  height:20px;
-  background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+  height:25px;
+  color: white;
+  z-index: 2;
+  font:17px Calibri,Arial,sans-serif;
   text-align:center;
 }
 
 .list{
-position:absolute;
+position:relative;
   left:0%;
   top: 0%;
   width:100%;
   height:100%;
-  background: #202020;
-  border:1px solid #111111;
+  background: #303030;
+
 }
 
 /* Messages */
@@ -176,7 +208,7 @@ float:right;
     position: absolute;
     top:10%;
     left:5%;
-    width:75%;
+    width:65%;
     margin:2px 1% 2px 0;
     padding-left:1%;
 }
@@ -374,16 +406,24 @@ p.noMessages,
 
 /* Ticket Details */
 
+.list_item_ticketdetail_label_title{
+ position: absolute;
+    top:2%;
+    left:1%;
+    color: white;
+}
+
 #ticket_title{
-    width:50%;
+    width:100%;
     height:20px;
+    background-color:#E0E0E0;
 }
 
 .list_item_ticketdetail_title{
     position: absolute;
-    top:0%;
-    left:1%;
-    width:100%;
+    top:1%;
+    left:20%;
+    width:77%;
     margin:2px 1% 2px 0;
     padding-left:1%;
 
@@ -392,7 +432,7 @@ p.noMessages,
 .list_item_ticketdetail_status{
     position:absolute;
     overflow:hidden;
-    top:0%;
+    top:-25px;
     right:1%;
     height:20px;
     width:30%;
@@ -402,59 +442,19 @@ p.noMessages,
     text-align:center;
 }
 
-.list_item_ticketdetail_label_created{
-    top:12%;
+.list_item_ticketdetail_label_ber{
     position: absolute;
-    overflow:hidden;
-    width:96%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-}
-
-.list_item_ticketdetail_label{
-    float:left;
-    width:30%;
-    text-align:left;
+    top:11%;
+    left:1%;
     color: white;
 }
-
-.list_item_ticketdetail_created{
-    float:right;
-    width:70%;
-    text-align:right;
-    color: white;
-}
-
-.list_item_ticketdetail_label_modified{
-    top:68%;
-    position: absolute;
-    overflow:hidden;
-    width:96%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_message_modified{
-    top:76%;
-    position: absolute;
-    overflow:hidden;
-    width:96%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
-}
-
 
 textarea#ticket_text{
     position: absolute;
-    width:86%;
+    width:74%;
     height: 15%;
-    top:20%;
-    left: 6%;
+    top:11%;
+    left: 22%;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;
     border:1px solid;
@@ -462,29 +462,40 @@ textarea#ticket_text{
     text-shadow:1px 1px 0 #E4E4E4;
     padding:1% 1%;
     resize: none;
+    background-color:#E0E0E0;
 }
+
 
 #ticket_location{
     width:100%;
+    background-color:#E0E0E0;
 }
 
 .list_item_ticketdetail_label_loc
 {
     position: absolute;
-    top:42%;
+    top:30%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_location{
     position: absolute;
-    top:42%;
+    top:30%;
     left:20%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
-    width:50%;
+    width:76%;
 }
+
+.list_item_ticketdetail_time{
+    position: absolute;
+    top:40%;
+    left:1%;
+    color: white;
+}
+
 
 .list_item_ticketdetail_label_handle{
     position: absolute;
@@ -503,18 +514,44 @@ textarea#ticket_text{
     padding-left:1%;
     padding-right:1%;
     color: white;
+
 }
+
+.list_item_ticketdetail_label_persoon{
+    position: absolute;
+    top:50%;
+    left:51%;
+    color: white;
+}
+
+.list_item_ticketdetail_persoon{
+    position: absolute;
+    top:50%;
+    left:66%;
+    overflow:hidden;
+    width:30%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+
+#ticket_persoon{
+    width:100%;
+    height:20px;
+    background-color:#E0E0E0;
+}
+
 
 .list_item_ticketdetail_label_owner{
     position: absolute;
-    top:58%;
+    top:60%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_owner{
     position: absolute;
-    top:58%;
+    top:60%;
     left:20%;
     overflow:hidden;
     width:50%;
@@ -522,6 +559,8 @@ textarea#ticket_text{
     padding-left:1%;
     padding-right:1%;
 }
+
+
 .list_item_ticketdetail_label_becomechild{
     position: absolute;
     top:88%;
@@ -532,9 +571,8 @@ textarea#ticket_text{
 .list_item_ticketdetail_becomechild{
     position: absolute;
     top:88%;
-    left:20%;
-    overflow:hidden;
-    width:40%;
+    left:30%;
+    width:30%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
@@ -543,7 +581,7 @@ textarea#ticket_text{
 .list_item_ticketdetail #childticketbutton{
     position: absolute;
     top:88%;
-    left:80%;
+    right:5%;
     width:70px;
     height:25px;
 }
@@ -552,7 +590,7 @@ textarea#ticket_text{
 .list_item_ticketdetail #becomeparentticketbutton{
     position: absolute;
     top:88%;
-    left:55%;
+    right:5%;
     width:80px;
     height:25px;
 }
@@ -560,17 +598,19 @@ textarea#ticket_text{
 .list_item_ticketdetail #closeticketbutton{
     position: absolute;
     top:74%;
-    left:40%;
-    width:100px;
+    right:10%;
+    width:120px;
     height:25px;
+    background-color: #e50000;
 }
 
 .list_item_ticketdetail #saveticketbutton{
     position: absolute;
     top:74%;
-    left:70%;
-    width:100px;
+    left:10%;
+    width:120px;
     height:25px;
+    background-color: #58aa00;
 }
 
 
@@ -601,8 +641,8 @@ display:none;
 .list_item_extra_Title {
     position: absolute;
     top:14%;
-    left:20%;
-    width:50%;
+    left:23%;
+    width:70%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
@@ -611,11 +651,12 @@ display:none;
 
 #subticket_Title,#feedback_Title,#subticket_Location,#feedback_Location{
 width:100%;
+background-color:#E0E0E0;
 }
 
 .list_item_extra_Label{
     position: absolute;
-    top:22%;
+    top:30%;
     width:100%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
@@ -625,10 +666,10 @@ width:100%;
 
 textarea#subticket_Text,textarea#feedback_Text{
     position: absolute;
-    width:86%;
+    width:69%;
     height: 15%;
-    top:34%;
-    left: 6%;
+    top:30%;
+    left: 25%;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;
     border:1px solid;
@@ -640,7 +681,7 @@ textarea#subticket_Text,textarea#feedback_Text{
 
 .list_item_extra_label_Handle{
     position: absolute;
-    top:55%;
+    top:53%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
@@ -649,9 +690,9 @@ textarea#subticket_Text,textarea#feedback_Text{
 
 .list_item_extra_Handle{
     position: absolute;
-    top:55%;
-    left:20%;
-    width:55%;
+    top:53%;
+    left:23%;
+    width:70%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
@@ -670,8 +711,8 @@ textarea#subticket_Text,textarea#feedback_Text{
 .list_item_extra_Location{
     position: absolute;
     top:65%;
-    left:20%;
-    width:50%;
+    left:23%;
+    width:70%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
@@ -681,7 +722,7 @@ textarea#subticket_Text,textarea#feedback_Text{
 .list_item_extra_Button{
   position: absolute;
   top:80%;
-  width:150px;
+  width:200px;
   height:30px;
   right:10%;
 }

@@ -12,6 +12,7 @@ class Ticket extends RVDLogBase {
 	protected $status_id = '';
 	protected $handle_id = '';
 	protected $location = '';
+    protected $reference = '';
 	protected $text = '';
     protected $created = '';
 	protected $modified = '';
@@ -41,12 +42,13 @@ class Ticket extends RVDLogBase {
 	public function createSub() {
     
         $q = "
-			INSERT INTO tickets (parent_id, title, text, location, handle_id, status_id, created, modified)
+			INSERT INTO tickets (parent_id, title, text, location, reference, handle_id, status_id, created, modified)
 			VALUES (
 				 " . DB::esc($this->parent_id) . ",
 				'" . DB::esc($this->title) . "',
 				'" . DB::esc($this->text) . "',
 				'" . DB::esc($this->location) . "',
+                '" . DB::esc($this->reference) . "',
 				 " . DB::esc($this->handle_id ? $this->handle_id : "NULL") . ",
                 1,
                 '" . date('Y-m-d G:i:s') . "',
@@ -70,7 +72,8 @@ class Ticket extends RVDLogBase {
 			UPDATE tickets
 			SET	title = '" . DB::esc($this->title) . "',
 				text = '" . DB::esc($this->text) . "',
-                location = '" . DB::esc($this->location) . "',"
+                location = '" . DB::esc($this->location) . "',
+                reference = '" . DB::esc($this->reference) . "',"
                 . ($handle ? "handle_id = " . DB::esc($this->handle_id) . "," : "")
                 . "modified = '" . date('Y-m-d G:i:s') . "' 
             WHERE id = " . DB::esc($this->id) . "
@@ -81,7 +84,7 @@ class Ticket extends RVDLogBase {
 	}
     
     public function getDetails() {
-        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             LEFT OUTER JOIN statuses AS s ON t.status_id = s.id
@@ -111,13 +114,14 @@ class Ticket extends RVDLogBase {
             throw new Exception('invalid parameters for getTicket');
         }
         
-        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
             LEFT OUTER JOIN messages AS m ON t.message_id = m.id
             LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
-            WHERE t.parent_id IS NULL";
+            WHERE t.parent_id IS NULL
+            ";
 
         if (is_numeric($last_id)) {
             $q .= "AND t.id > $last_id";
@@ -128,7 +132,9 @@ class Ticket extends RVDLogBase {
         if (is_array($status) && !empty($status)) {
             $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
         }
-
+        
+        $q .= " ORDER BY t.id ASC";
+        
         if ($recursive == 'false') {
             $results = DB::query($q);
             if ($results) while ($output[] = mysqli_fetch_assoc($results));
@@ -153,13 +159,14 @@ class Ticket extends RVDLogBase {
 
     private function getChildren($pid) {
         $q = "
-            SELECT t.id AS id, t.title, t.handle_id, t.location, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+            SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
             LEFT OUTER JOIN messages AS m ON t.message_id = m.id
             LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.parent_id = $pid
+            ORDER BY t.id ASC
             ";
         $results = DB::query($q);
         while ($data[] = mysqli_fetch_assoc($results));

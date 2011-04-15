@@ -539,22 +539,14 @@ var ticketing = {
         }
 
         var d = new Date();
-        var strTime="";
-        if(params.created) {
 
-            // PHP returns the time in UTC (GMT). We use it to feed the date
-            // object and later output it in the user's timezone. JavaScript
-            // internally converts it for us.
-            var date_time=params.created.split(" ");
-            var time = date_time[1].split(":");
-            var strTime=time[0]+':'+time[1];
-            //d.setUTCHours(time[0],time[1]);
-        }
 
         //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-        params.time = strTime;
+
+        params.time = general.stripToTime(params.created);
+
         var markup = general.render('messageLine',params),
-            exists = $('#MeldingenList .message-'+params.id);
+          exists = $('#MeldingenList .message-'+params.id);
 
         if(exists.length){
             exists.remove();
@@ -913,7 +905,7 @@ var ticketing = {
                             var become_Ticket_options = $('#become_Ticket').attr('options');
 
                             for(var i=0; i< r.length;i++){
-                              var maxlength=20;
+                              var maxlength=15;
                               if(r[i]){
                                 //don't want to make it a child of its own, that would be weird;-)
                                 if(r[i].title.length<maxlength)
@@ -922,7 +914,8 @@ var ticketing = {
                                 }
 
                                 if(r[i].id!=ticket_id && r[i].id!=parent_id){
-                                  become_Ticket_options[become_Ticket_options.length] = new Option(r[i].title.substring(0,maxlength),r[i].id);
+                                  strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
+                                  become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[i].id);
                                 }
                               }
 

@@ -4,54 +4,55 @@ height:100%;
 }
 
 #TicketingCommunicationContainer{
-    position: relative;
+    position: absolute;
+    left:0%;
     width:45%;
     height:98%;
-    margin:1%;
+    margin-top:1%;
 }
 
 #Handles{
     position:absolute;
-    top: 5%;
+    top: 0%;
     left:0%;
     width:31%;
     height:93%;
+    margin-top:1%;
+}
+
+#ChatContainer{
+    position:absolute;
+    top: 0%;
+    left: 33%;
+    width:65%;
+    height:98%;
     margin:1%;
 }
 
 #Meldingen{
     position:absolute;
-    top: 5%;
-    left:33%;
-    width:65%;
-    height:26%;
-    margin:1%;
-}
-
-#ChatContainer{
-    position:absolute;
-    top: 33%;
-    left:33%;
-    width:65%;
-    height:65%;
-    margin:1%;
-}
-
-#WL-Chat{
-    position:absolute;
-    top: 40%;
+    top: -1%;
     left:0%;
     width:98%;
-    height:44%;
+    height:30%;
     margin:1%;
 }
 
 #Users{
     position:absolute;
-    top: 5%;
+    top: 36%;
     left:0%;
     width:98%;
-    height:25%;
+    height:13%;
+    margin:1%;
+}
+
+#WL-Chat{
+    position:absolute;
+    top: 55%;
+    left:0%;
+    width:98%;
+    height:33%;
     margin:1%;
 }
 
@@ -63,47 +64,47 @@ height:100%;
 
 #TextEntry{
     position:absolute;
-    top: 88%;
+    top: 95%;
     left:0%;
     width:98%;
-    height:10%;
+    height:5%;
     background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-    margin:1%;
+    margin: 1%;
 }
 
 #TicketingOverviewContainer{
     position: absolute;
     top: 0%;
-    left:47%;
-    width:20%;
+    left:45%;
+    width:22%;
     height:98%;
     margin:1%;
 }
 
 #NewTickets{
     position:absolute;
-    top: 5%;
+    top: 0%;
     left:0%;
     width:98%;
-    height:27%;
+    height:20%;
     margin:1%;
 }
 
 #OpenTickets{
     position:absolute;
-    top: 38%;
+    top: 26%;
     left:0%;
     width:98%;
-    height:27%;
+    height:40%;
     margin:1%;
 }
 
 #ClosedTickets{
     position:absolute;
-    top: 71%;
+    top: 72%;
     left:0%;
     width:98%;
-    height:27%;
+    height:22%;
     margin:1%;
 }
 
@@ -118,10 +119,10 @@ height:100%;
 
 #TicketDetails{
     position:absolute;
-    top: 5%;
+    top: 0%;
     left:0%;
     width:98%;
-    height:50%;
+    height:55%;
     margin:1%;
 }
 
@@ -130,7 +131,7 @@ height:100%;
     top: 62%;
     left:0%;
     width:98%;
-    height:36%;
+    height:32%;
     margin:1%;
 }
 
@@ -150,7 +151,7 @@ height:100%;
     top: 62%;
     left:0%;
     width:98%;
-    height:36%;
+    height:32%;
     margin:1%;
 }
 
@@ -170,7 +171,7 @@ height:100%;
     top: 62%;
     left:0%;
     width:98%;
-    height:36%;
+    height:32%;
     margin:1%;
 }
 

@@ -4,19 +4,18 @@ height:100%;
 }
 
 #LoggingMeldingenContainer{
-  position: relative;
+  position: absolute;
   top: 0%;
   left: 0%;
   width:75%;
   height:98%;
-  background:url('../img/page_bg.jpg') repeat-x #323232;
   margin:1%;
 }
 
 #SearchMeldingen{
 position:absolute;
   left:24%;
-  top: 1%;
+  top: 0%;
   width:74%;
   height:10%;
   background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
@@ -26,17 +25,17 @@ position:absolute;
 
 #Handles{
   position:absolute;
-  top: 5%;
+  top: 0%;
   left:0%;
   width:22%;
-  height:93%;
+  height:95%;
   margin:1%;
 }
 
 #Meldingen{
 position:absolute;
   left:24%;
-  top: 17%;
+  top: 12%;
   width:50%;
   height:55%;
   margin:1%;
@@ -45,7 +44,7 @@ position:absolute;
 #Users{
 position:absolute;
   right:0%;
-  top: 17%;
+  top: 12%;
   width:22%;
   height:55%;
   margin:1%;
@@ -81,28 +80,28 @@ position:absolute;
 
 #Tickets{
     position:absolute;
-    top:5%;
+    top:0%;
     left:0%;
     width:98%;
-    height:27%;
+    height:28%;
     margin:1%;
 }
 
 #OpenFeedback{
     position:absolute;
-    top: 37%;
+    top: 33%;
     left:0%;
     width:98%;
-    height:27%;
+    height:28%;
     margin:1%;
 }
 
 #ClosedFeedback{
     position:absolute;
-    top: 69%;
+    top: 66%;
     left:0%;
     width:98%;
-    height:27%;
+    height:28%;
     margin:1%;
 }
 

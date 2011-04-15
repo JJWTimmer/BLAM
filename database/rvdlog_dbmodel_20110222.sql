@@ -156,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `status_id` int(10) NULL,
   `handle_id` int(10) NULL,
   `location` varchar(255) DEFAULT NULL,
+  `reference` varchar(255) NULL,
   `text` text,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,

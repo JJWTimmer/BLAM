@@ -207,23 +207,25 @@ class RVDLog {
         $ticket->setOwner();
     }
 
-    public static function changeTicketDetails($id, $title, $text, $location, $handle_id){
+    public static function changeTicketDetails($id, $title, $text, $location, $reference, $handle_id){
         $ticket = new Ticket(array(
             'id'        => $id,
             'title'     => $title,
             'text'      => $text,
             'location'  => $location,
+            'reference' => $reference,
             'handle_id' => $handle_id
         ));
         $ticket->update();
     }
 
-    public static function createSubTicket($parent_id, $title, $text, $location, $handle_id){
+    public static function createSubTicket($parent_id, $title, $text, $location, $reference, $handle_id){
         $subticket = new Ticket(array(
             'parent_id' => $parent_id,
             'title' => $title,
             'text' => $text,
             'location' => $location,
+            'reference' => $reference,
             'handle_id' => $handle_id
         ));
         $id = $subticket->createSub();
@@ -247,7 +249,7 @@ class RVDLog {
         $feedback = new Feedback(array(
             'ticket_id' => $ticket_id,
             'title' => $title,
-            'message' => $text,
+            'message' => $message,
             'handle_id' => $handle_id
         ));
         $id = $feedback->create();
