@@ -146,13 +146,13 @@ try {
 		
 		case 'changeTicketDetails':
             RVDLog::checkLogged();
-			$response = RVDLog::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['handle_id']);
+			$response = RVDLog::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['reference'], $_POST['handle_id']);
             // returns null or exception
             break;
 		
 		case 'createSubTicket':
             RVDLog::checkLogged();
-			$response = RVDLog::createSubTicket($_POST['parent_id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['handle_id'] );
+			$response = RVDLog::createSubTicket($_POST['parent_id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['reference'], $_POST['handle_id'] );
             // returns integer SubTicketId or exception
             break;
 		
