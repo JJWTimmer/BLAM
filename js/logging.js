@@ -46,6 +46,8 @@ var logging = {
         //function to implement clicking on close feedback
         $('#closefeedback').live('click', function(){
           $.tzPOST('closeFeedback',{id:$(this).closest("div").attr("id")},function(r){
+            window.clearTimeout(Timeout["Feedbacks"]);
+            Timeout["Feedbacks"]=setTimeout("logging.getFeedback();",1000);
           });
         });
 
@@ -324,6 +326,8 @@ var logging = {
     getMessages : function(){
         $.tzPOST('getMessages',{last_id:logging.data.lastID,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
         //update messages from mysql db
+          if(r)
+          {
             if(!r.error)
             {
             for(var i=0;i<r.length;i++){
@@ -380,8 +384,13 @@ var logging = {
             }
 
             Timeout["Messages"]=setTimeout("logging.getMessages();",nextRequest);
-
+          }
+          else
+          {
+          logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">Nog geen meldingen</p>');
+          }
         });
+
     },
 
 

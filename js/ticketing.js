@@ -216,7 +216,7 @@ var ticketing = {
 
       // add listener for this button and change ticket details
       $('#saveticketbutton').live('click',function(){
-            $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),handle_id:$('#ticket_Handle').val()},function(r){
+            $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
               if(r==null){
 
               }
@@ -238,12 +238,8 @@ var ticketing = {
               });
             }
             ticketing.reInitTickets("All");
-            $('#TicketDetailsList').empty();
-            $('#WL-ActieList').fadeIn();
-            $('#FeedbackList').fadeIn();
-            $('#TimelineList').fadeIn();
-            $('#WL-ActieForm').fadeOut();
-            $('#FeedbackForm').fadeOut();
+            general.displaySaved("Saved Ticket: " + $('#ticket_title').val());
+            setTimeout("ticketing.getTicketDetail(ticketing.data.selectedticket,0);",500);
       });
 
       // add listener for this button and change ticket details
@@ -317,55 +313,63 @@ var ticketing = {
             //check to ensure a childticket doesnt get a childticket
             var ticketid=ticketing.data.selectedticket;
             if(ticketing.data.selectedparentticket!=0){
-            ticketid=ticketing.data.selectedparentticket;
+              ticketid=ticketing.data.selectedparentticket;
             }
+            if($('#subticket_Title').val()!="")
+            {
+              $.tzPOST('createSubTicket',{parent_id:ticketing.data.selectedticket,title:$('#subticket_Title').val(),text:$('#subticket_Text').val(),location:$('#subticket_Location').val(),handle_id:$('#subticket_Handle').val()},function(r){
+                  working = false;
 
-            $.tzPOST('createSubTicket',{parent_id:ticketing.data.selectedticket,title:$('#subticket_Title').val(),text:$('#subticket_Text').val(),location:$('#subticket_Location').val(),handle_id:$('#subticket_Handle').val()},function(r){
-                working = false;
-
-                if(r.error){
-                    general.displayError(r.error);
-                }
-                else
-                {
+                  if(r.error){
+                      general.displayError(r.error);
+                  }
+                  else
+                  {
+                    general.displaySaved("subticket aangemaakt: " + $('#subticket_Title').val());
                     $('#subticket_Title').val("");
                     $('#subticket_Text').val("");
                     $('#subticket_Location').val("");
-                }
-            });
-            ticketing.reInitTickets("All");
-            $('#TicketDetailsList').empty();
-            $('#WL-ActieList').fadeIn();
-            $('#FeedbackList').fadeIn();
-            $('#TimelineList').fadeIn();
-            $('#WL-ActieForm').fadeOut();
-            $('#FeedbackForm').fadeOut();
+                  }
+              });
+              ticketing.reInitTickets("All");
+
+
+            }
+            else
+            {
+              alert("Niet alles ingevuld!");
+              working = false;
+            }
             return false;
         });
 
         $('#FeedbackForm').submit(function(){
             if(working) return false;
             working = true;
+                if($('#feedback_Title').val()!="" && $('#feedback_Text').val()!="" && $('#feedback_Handle').val()!="")
+                {
+                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#feedback_Title').val(),text:$('#feedback_Text').val(),handle_id:$('#feedback_Handle').val()},function(r){
+                    working = false;
 
-            $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#feedback_Title').val(),text:$('#feedback_Text').val(),handle_id:$('#feedback_Handle').val()},function(r){
-                working = false;
+                    if(r.error){
+                        general.displayError(r.error);
+                    }
+                    else
+                    {
+                        general.displaySaved("Terugmelding aangemaakt: " + $('#feedback_Title').val());
+                        $('#feedback_Title').val("");
+                        $('#feedback_Text').val("");
+                    }
+                  });
 
-                if(r.error){
-                    general.displayError(r.error);
+
                 }
                 else
                 {
-                    $('#feedback_Title').val("");
-                    $('#feedback_Text').val("");
+                alert("Niet alles ingevuld!");
+                working = false;
                 }
-            });
-            $('#TicketDetailsList').empty();
-            $('#WL-ActieList').fadeIn();
-            $('#FeedbackList').fadeIn();
-            $('#TimelineList').fadeIn();
-            $('#WL-ActieForm').fadeOut();
-            $('#FeedbackForm').fadeOut();
-            return false;
+          return false;
         });
 
         //catching window resizes
@@ -913,12 +917,16 @@ var ticketing = {
                                 maxlength=r[i].title.length;
                                 }
 
-                                if(r[i].id!=ticket_id && r[i].id!=parent_id){
+                                if(r[i].id!=ticket_id && r[i].id!=parent_id && q[0].status!="Subticket"){
                                   strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
                                   become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[i].id);
                                 }
-                              }
 
+                                if(q[0].status=="Subticket"){
+                                  strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
+                                  $('#become_Ticket').val(strOption);
+                                }
+                              }
                             }
                         }
                       else

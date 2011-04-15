@@ -7,21 +7,21 @@
 #leftLink{
 	height:50px;
 	position:absolute;
-	left:0px;
+	left:-200px;
 	top:0 px;
 	width:250px;
 }
 #middleLink{
 	height:50px;
 	position:absolute;
-    left: 130px;
+    left:0px;
 	top:0 px;
 	width:250px;
 }
 #rightLink{
 	height:50px;
 	position:absolute;
-	right:0px;
+	left:200px;
 	top:0 px;
 	width:250px;
 }

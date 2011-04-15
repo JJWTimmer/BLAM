@@ -154,8 +154,8 @@ var general = {
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
-                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
-                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
                 '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
@@ -181,8 +181,8 @@ var general = {
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
-                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
-                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
                 '<div class=list_item_ticketdetail_label_owner><p>WLer:</p></div>',
                 '<div class=list_item_ticketdetail_owner><select id="owner"><option selected>',params.wluser,'</option></select></div>',
                 '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
@@ -208,8 +208,8 @@ var general = {
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
-                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
-                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
                 '<div class="list_item_ticketdetail_label_owner"><p>WLer:</p></div>',
                 '<div class="list_item_ticketdetail_owner"><select id="owner"><option selected>',params.wluser,'</option></select></div>',
                 '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
@@ -235,10 +235,10 @@ var general = {
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
-                '<p class="list_item_ticketdetail_label_persoon">Persoon:</p>',
-                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="','" id="ticket_persoon"></div>',
+                '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
+                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
                 '<div class="list_item_ticketdetail_label_becomechild"><p>gekoppeld aan:</p></div>',
-                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
+                '<div class=list_item_ticketdetail_becomechild><input type="text" readonly="readonly" class="rounded" value="','" id="become_Ticket"></div>',
                 '<input type="button" id="becomeparentticketbutton" class="blueButton" value="Koppel los!"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '</div>',
@@ -273,7 +273,28 @@ var general = {
     displayError : function(msg){
 
         var elem = $('<div>',{
-            id      : 'chatErrorMessage',
+            id      : 'ErrorMessage',
+            html    : msg
+        });
+
+        elem.click(function(){
+            $(this).fadeOut(function(){
+                $(this).remove();
+            });
+        });
+
+        setTimeout(function(){
+            elem.click();
+        },5000);
+
+        elem.hide().appendTo('body').slideDown();
+    },
+
+// This method displays saved message on the top of the page:
+    displaySaved : function(msg){
+
+        var elem = $('<div>',{
+            id      : 'SavedMessage',
             html    : msg
         });
 
