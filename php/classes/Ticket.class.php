@@ -121,7 +121,6 @@ class Ticket extends RVDLogBase {
             LEFT OUTER JOIN messages AS m ON t.message_id = m.id
             LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.parent_id IS NULL
-            ORDER BY t.id ASC
             ";
 
         if (is_numeric($last_id)) {
@@ -133,7 +132,9 @@ class Ticket extends RVDLogBase {
         if (is_array($status) && !empty($status)) {
             $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
         }
-
+        
+        $q .= " ORDER BY t.id ASC";
+        
         if ($recursive == 'false') {
             $results = DB::query($q);
             if ($results) while ($output[] = mysqli_fetch_assoc($results));
