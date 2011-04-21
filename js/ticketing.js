@@ -112,6 +112,68 @@ var ticketing = {
           ticketing.changeTabview('Timeline');
         });
 
+
+        //function to implement clicking on dynamic element groups
+        $('div.list_item_group').live('click', function(){
+          if(!working)
+          {
+            working = true;
+            var groupid=$(this).attr("id");
+            if($(this).attr('visible')==0){
+                $(this).attr('visible','1');
+                $(".list_item_handle").each(function(i) {
+                if($(this).hasClass(groupid))
+                  {
+                  $(this).fadeIn();
+                  }
+                });
+            }
+            else
+            {
+                $(this).attr('visible','0');
+                $(".list_item_handle").each(function(i) {
+                if($(this).hasClass(groupid))
+                  {
+                  $(this).fadeOut();
+                  }
+                });
+            }
+
+            working=false;
+          }
+          ticketing.data.jspAPIHandles.reinitialise();
+        });
+
+        $('#search_handles').live('keyup', function (e) {
+
+            $(".list_item_group").each(function(i) {
+              $(this).attr('visible','1');
+            });
+
+            if($('#search_handles').val()=="")
+            {
+              $(".list_item_handle").each(function(i) {
+                $(this).fadeIn();
+              });
+            }
+            else
+            {
+                var keyword=$('#search_handles').val().toLowerCase();
+                $(".list_item_handle").each(function(i) {
+                  var handle_name=$(this).children('.list_item_handle_name').text().toLowerCase();
+                  var handle_description=$(this).children('.list_item_handle_description').text().toLowerCase();
+                  if((handle_name.search(keyword) < 0) && (handle_description.search(keyword) < 0))
+                    {
+                    $(this).fadeOut();
+                    }
+                  else
+                    {
+                    $(this).fadeIn();
+                    }
+                });
+            }
+        })
+
         // Logging a person into rvdlog:
 
         $('#loginForm').submit(function(){
@@ -683,6 +745,7 @@ var ticketing = {
               if(!r.error)
                 {
                   ticketing.data.jspAPIHandles.getContentPane().empty();
+                  ticketing.data.jspAPIHandles.getContentPane().append('<input type="text" class="rounded" value="" id="search_handles">');
                   var markup_group;
                   var markup_handle;
                   for(var i=0; i< r.length;i++){
@@ -691,6 +754,7 @@ var ticketing = {
                         ticketing.data.jspAPIHandles.getContentPane().append(markup_group);
                         if (!(typeof r[i]['handles'] === 'undefined')) {
                           for (var j = 0; j < r[i]['handles'].length; j++) {
+                            r[i]['handles'][j].groupid=r[i].id;
                             markup_handle=general.render('handles',r[i]['handles'][j]);
                             ticketing.data.jspAPIHandles.getContentPane().append(markup_handle);
                           }

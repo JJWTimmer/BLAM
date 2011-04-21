@@ -51,7 +51,6 @@ var logging = {
           });
         });
 
-
         // Using the defaultText jQuery plugin, included at the bottom:
         $('#name').defaultText('Nickname');
         $('#password').defaultText('Password');
@@ -107,6 +106,72 @@ var logging = {
           logging.getTickets();
         });
 
+        //function to implement clicking on dynamic element groups
+        $('div.list_item_group').live('click', function(){
+          if(!working)
+          {
+            working = true;
+            var groupid=$(this).attr("id");
+            if($(this).attr('visible')==0){
+                $(this).attr('visible','1');
+                $(".list_item_handle").each(function(i) {
+                if($(this).hasClass(groupid))
+                  {
+                  $(this).fadeIn();
+                  }
+                });
+            }
+            else
+            {
+                $(this).attr('visible','0');
+                $(".list_item_handle").each(function(i) {
+                if($(this).hasClass(groupid))
+                  {
+                  $(this).fadeOut();
+                  }
+                });
+            }
+
+            working=false;
+          }
+          logging.data.jspAPIHandles.reinitialise();
+        });
+
+        //function to implement clicking on dynamic element handle
+        $('div.list_item_handle').live('click', function(){
+          $('#messagetext').val($('#messagetext').val()+$(this).children('.list_item_handle_name').text() + '-' + $(this).children('.list_item_handle_description').text());
+        });
+
+        $('#search_handles').live('keyup', function (e) {
+            $(".list_item_group").each(function(i) {
+              $(this).attr('visible','1');
+            });
+
+            if($('#search_handles').val()=="")
+            {
+              $(".list_item_handle").each(function(i) {
+                $(this).fadeIn();
+              });
+            }
+            else
+            {
+                var keyword=$('#search_handles').val().toLowerCase();
+                $(".list_item_handle").each(function(i) {
+                  var handle_name=$(this).children('.list_item_handle_name').text().toLowerCase();
+                  var handle_description=$(this).children('.list_item_handle_description').text().toLowerCase();
+                  if((handle_name.search(keyword) < 0) && (handle_description.search(keyword) < 0))
+                    {
+                    $(this).fadeOut();
+                    }
+                  else
+                    {
+                    $(this).fadeIn();
+                    }
+                });
+            }
+        })
+
+
         //function to implement clicking on dynamic element feedback
         $('div.list_item_openfeedback').live('click', function(){
           if($(this).attr("id")!=logging.data.selectedopenfeedback)
@@ -120,6 +185,7 @@ var logging = {
           window.clearTimeout(Timeout["Feedbacks"]);
           logging.getFeedback();
         });
+
 
         //function to implement clicking on dynamic element feedback
         $('div.list_item_closedfeedback').live('click', function(){
@@ -528,6 +594,7 @@ var logging = {
                 logging.data.groupsLoaded = true;
 
                 logging.data.jspAPIHandles.getContentPane().empty();
+                logging.data.jspAPIHandles.getContentPane().append('<input type="text" class="rounded" value="" id="search_handles">');
 
                 var markup_group;
                 var markup_handle;
@@ -540,6 +607,7 @@ var logging = {
                         logging.data.jspAPIHandles.getContentPane().append(markup_group);
                         if (!(typeof r[i]['handles'] === 'undefined')) {
                           for (var j = 0; j < r[i]['handles'].length; j++) {
+                            r[i]['handles'][j].groupid=r[i].id;
                             markup_handle=general.render('handles',r[i]['handles'][j]);
                             logging.data.jspAPIHandles.getContentPane().append(markup_handle);
                             autotext_options[autotext_options.length] = new Option(r[i]['handles'][j].handle_name + ' - ' + r[i]['handles'][j].description);

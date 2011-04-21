@@ -53,13 +53,13 @@ var general = {
 
             case 'groups':
                 arr = [
-                    '<div class="list_item_group rounded"><p>',params.name,'</p></div>'
+                    '<div class="list_item_group rounded" id=group-',params.id,' visible="1"><p>',params.name,'</p></div>'
                 ];
             break;
 
             case 'handles':
                 arr = [
-                    '<div class="list_item_handle rounded"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div></div>'
+                    '<div class="list_item_handle rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div></div>'
                 ];
 
             break;

@@ -279,6 +279,14 @@ p.noMessages,
     text-align:left;
 }
 
+#search_handles{
+    width:90%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+
+
 /* tickets */
 .list_item_parent_ticket{
     position:relative;
