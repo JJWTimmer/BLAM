@@ -212,7 +212,6 @@ p.label_checkbox_pair label{
     background-position:left bottom;
 }
 
-
 /* Overloading the default styles of jScrollPane */
 #UsersList div:first-child[class="jspContainer"]{
     background: #202020;

@@ -16,6 +16,7 @@ var ticketing = {
     lastIDMessages    : 1,
     lastIDChats    : 1,
     noActivity  : 0,
+    HandlelistVisible : 1,
   },
 
   // Init binds event listeners and sets up timers:
@@ -31,7 +32,7 @@ var ticketing = {
 
     var working = false;
 
-    // Converting the #MeldingenList, #UsersList, #HandlesList divs into a jScrollPane,
+    // Converting the #MeldingenList, #HandlesList divs into a jScrollPane,
     // and saving the plugin's API in logging.data:
 
     ticketing.data.jspAPIMeldingen = $('#MeldingenList').jScrollPane({
@@ -42,11 +43,6 @@ var ticketing = {
     ticketing.data.jspAPIChats = $('#WL-ChatList').jScrollPane({
       verticalDragMinHeight: 12,
       verticalDragMaxHeight: 12
-    }).data('jsp');
-
-    ticketing.data.jspAPIUsers = $('#UsersList').jScrollPane({
-            verticalDragMinHeight: 12,
-            verticalDragMaxHeight: 12
     }).data('jsp');
 
     ticketing.data.jspAPIHandles = $('#HandlesList').jScrollPane({
@@ -112,6 +108,33 @@ var ticketing = {
           ticketing.changeTabview('Timeline');
         });
 
+        $('#handlelist_toggle_button').live('click', function(){
+          if(!working)
+          {
+              working = true;
+              if(ticketing.data.HandlelistVisible==1)
+              {
+              //$('#Handles').fadeOut();
+              $('#Handles').css('display','none');
+              $('#ChatContainer').css('left','0%');
+              $('#ChatContainer').css('width','100%');
+              $('#handlelist_toggle_button').attr('value','Roepnamenlijst aan');
+              ticketing.data.HandlelistVisible=0;
+              }
+              else
+              {
+              //$('#Handles').fadeIn();
+              $('#Handles').css('display','block');
+              $('#ChatContainer').css('left','33%');
+              $('#ChatContainer').css('width','65%');
+              $('#handlelist_toggle_button').attr('value','Roepnamenlijst uit');
+              ticketing.data.HandlelistVisible=1;
+              }
+              ticketing.reInitJSP();
+              working=false;
+          }
+        });
+
 
         //function to implement clicking on dynamic element groups
         $('div.list_item_group').live('click', function(){
@@ -125,6 +148,7 @@ var ticketing = {
                 if($(this).hasClass(groupid))
                   {
                   $(this).fadeIn();
+
                   }
                 });
             }
@@ -141,6 +165,9 @@ var ticketing = {
 
             working=false;
           }
+          //ticketing.data.jspAPIHandles.getContentPane().append('<div class=test></div>');
+          //ticketing.data.jspAPIHandles.reinitialise();
+          //$('#HandlesList .test').remove();
           ticketing.data.jspAPIHandles.reinitialise();
         });
 
@@ -705,29 +732,35 @@ var ticketing = {
         $.tzPOST('getUsers',{options:'logged'},function(r){
             if(!r.error)
                 {
-                  ticketing.data.jspAPIUsers.getContentPane().empty();
+                  $('div.Topbar_nr_users').empty();
+                  $('div.Topbar_users').empty();
                   var users = [];
-                  var markup;
+                  var markup='<p>';
+
                   for(var i=0; i< r.length;i++){
                     if(r[i]){
-                        markup=general.render('user',r[i]);
-                        ticketing.data.jspAPIUsers.getContentPane().append(markup);
+                        if(i<r.length-1)
+                          {
+                          markup=markup+r[i].username+', ';
+                        }
+                        else
+                        {
+                        markup=markup+r[i].username;
+                        }
                     }
                   }
+                  markup=markup+'</p>';
+                  $('div.Topbar_users').append(markup);
 
-                  //empty no one is online variable
+
                   var message = '';
-
                   if(r.length<1){
-                    message = 'Niemand is online';
+                    message = '<p>users online(0)</p>';
                   }
                   else {
-                    message = r.length+' '+(r.length == 1 ? 'persoon':'personen')+' online';
+                    message = '<p>users online('+r.length+'):</p>';
                   }
-
-                  ticketing.data.jspAPIUsers.getContentPane().append('<p class="count">'+message+'</p>');
-
-                  ticketing.data.jspAPIUsers.reinitialise();
+                  $('div.Topbar_nr_users').append(message);
                 }
                 else
                 {
@@ -1134,7 +1167,6 @@ var ticketing = {
   reInitJSP : function(){
             ticketing.data.jspAPIMeldingen.reinitialise();
             ticketing.data.jspAPIChats.reinitialise();
-            ticketing.data.jspAPIUsers.reinitialise();
             ticketing.data.jspAPIHandles.reinitialise();
             ticketing.data.jspAPINewTickets.reinitialise();
             ticketing.data.jspAPIOpenTickets.reinitialise();

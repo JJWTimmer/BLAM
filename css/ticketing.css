@@ -26,50 +26,47 @@ height:100%;
     left: 33%;
     width:65%;
     height:98%;
-    margin:1%;
+    margin-top:1%;
 }
+
+#WL-Chat
+{
+  padding: 25px 2px 35px 2px;
+}
+
+#Chatsubmit{
+    position: absolute;
+    bottom: 1%;
+    margin-bottom: 4px;
+    right:5%;
+}
+
+.chat_input{
+    position: absolute;
+    bottom:1%;
+    left:5%;
+    width:65%;
+    margin:2px 1% 2px 0;
+    padding-left:1%;
+}
+
 
 #Meldingen{
     position:absolute;
     top: -1%;
     left:0%;
     width:98%;
-    height:30%;
-    margin:1%;
-}
-
-#Users{
-    position:absolute;
-    top: 36%;
-    left:0%;
-    width:98%;
-    height:13%;
+    height:45%;
     margin:1%;
 }
 
 #WL-Chat{
     position:absolute;
-    top: 55%;
+    top: 50%;
     left:0%;
     width:98%;
-    height:33%;
+    height:40%;
     margin:1%;
-}
-
-#UsersList{
-  width:98%;
-    /*padding is to solve JSPbar problem in combo with user margin*/
-    padding: 1% 0% 1% 4%;
-}
-
-#TextEntry{
-    position:absolute;
-    top: 95%;
-    left:0%;
-    width:98%;
-    height:5%;
-    background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
-    margin: 1%;
 }
 
 #TicketingOverviewContainer{
