@@ -31,12 +31,12 @@ var general = {
 
             case 'messageLine':
                 arr = [
-                '<div class="message message-',params.id,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
+                '<div class="message message-',params.id,' rounded">','<div class="msg-avatar"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
             break;
 
             case 'chatLine':
                 arr = [
-                '<div class="chat chat-',params.id,' rounded">','<div class="avatar-info-div"><table><tr><td class="avatar-td"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /> </td><td class=info-td> ',params.username, ':<BR>',params.time,'</td></tr></table></div><div class="text-div"><span class="text-span">',params.text,'</span></div></div>'];
+                '<div class="chat chat-',params.id,' rounded">','<div class="chat-avatar"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="chat-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="chat-text"><span class="text-span">',params.text,'</span></div></div>'];
             break;
 
             case 'user':

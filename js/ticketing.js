@@ -506,7 +506,10 @@ var ticketing = {
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past messages
 
     getMessages : function(){
-        $.tzPOST('getMessages',{last_id:ticketing.data.lastIDMessages,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
+        var d=new Date();
+        //var strTimestamp= '"'+d.getFullYear()+'-'+ ((d.getMonth()+1) < 10 ? '0' : '' )+ (d.getMonth()+1) + '-' + d.getDate()+ ' ' + (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':' + d.getSeconds() '"';
+        var strTimestamp= '1';
+        $.tzPOST('getMessages',{last_id:ticketing.data.lastIDMessages,date_and_time:strTimestamp},function(r){
         //update messages from mysql db
             if(!r.error)
             {
@@ -567,7 +570,10 @@ var ticketing = {
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past chats
 
     getChats : function(){
-        $.tzPOST('getChats',{last_id:ticketing.data.lastIDChats,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
+        var d=new Date();
+        //var strTimestamp= d.getFullYear()+'-'+ ((d.getMonth()+1) < 10 ? '0' : '' )+ (d.getMonth()+1) + '-' + d.getDate()+ ' ' + (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':' + d.getSeconds();
+        var strTimestamp= Math.round(new Date().getTime()/1000-23*3600);
+        $.tzPOST('getChats',{last_id:ticketing.data.lastIDChats,date_and_time:strTimestamp},function(r){
         //update messages from mysql db
             if(!r.error)
             {
@@ -633,10 +639,13 @@ var ticketing = {
 
         var d = new Date();
 
-
-        //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-
+        if(params.created){
         params.time = general.stripToTime(params.created);
+        }
+        else
+        {
+        params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
+        }
 
         var markup = general.render('messageLine',params),
           exists = $('#MeldingenList .message-'+params.id);
@@ -680,20 +689,15 @@ var ticketing = {
         }
 
         var d = new Date();
-        var strTime="";
-        if(params.created) {
 
-            // PHP returns the time in UTC (GMT). We use it to feed the date
-            // object and later output it in the user's timezone. JavaScript
-            // internally converts it for us.
-            var date_time=params.created.split(" ");
-            var time = date_time[1].split(":");
-            var strTime=time[0]+':'+time[1];
-            //d.setUTCHours(time[0],time[1]);
+        if(params.created) {
+        params.time = general.stripToTime(params.created);
+        }
+        else {
+        params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
         }
 
-        //params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-        params.time = strTime;
+
         var markup = general.render('chatLine',params),
             exists = $('#WL-ChatList .chat-'+params.id);
 

@@ -71,12 +71,12 @@ position:relative;
 /* overflow: hidden enables the resizing of each div*/
 .message{
     position:relative;
-    overflow: hidden;
     width: 95%;
     border:1px solid #FFFFFF;
     padding:2px 2px 2px 2px;
     margin: 0.5% 5% 0.5% 1%;
     background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
+    overflow: hidden;
 }
 
 .message:last-child{
@@ -86,16 +86,26 @@ position:relative;
 /*using floats here allows resizing of the parent div (message)
 overflow: hiddden ensures that low resolution version doesnt
 overflow over text, could also use min-width (either way screwed;-))*/
-.message .avatar-info-div{
-width:25%;
-/*min-width:70px;*/
-overflow: hidden;
-float:left;
+
+
+.message .msg-avatar{
+    padding-right:4px;
+    background:url('../img/unknown24x24.png') no-repeat;
+    clear: left;
+    float:left;
+    display:block;
 }
 
-.message .text-div{
-width:75%;
-float:right;
+.message .msg-info{
+    float:left;
+    font-size:12px;
+    line-height:12px;
+    margin-right: 2px;
+ }
+
+/* This works because the div is now set to a certain BFC format */
+.message .msg-text{
+  overflow:hidden;
 }
 
 .message span{
@@ -104,16 +114,11 @@ float:right;
     font-size:12px;
 }
 
+
 .message .text-span{
     color:#444444;
     font-size:15px;
-    /*display:inline-block;*/
-}
-
-.message .avatar-td{
-
-    padding-right:4px;
-    background:url('../img/unknown24x24.png') no-repeat;
+    align:left;
 }
 
 .message img{
@@ -121,11 +126,6 @@ float:right;
     visibility:hidden;
 }
 
-.message .info-td{
-    /*added line-height to decrease the space that was used as margin*/
-    font-size:12px;
-    line-height:12px;
-}
 
 
 
@@ -148,16 +148,24 @@ float:right;
 /*using floats here allows resizing of the parent div (message)
 overflow: hiddden ensures that low resolution version doesnt
 overflow over text, could also use min-width (either way screwed;-))*/
-.chat .avatar-info-div{
-width:25%;
-/*min-width:70px;*/
-overflow: hidden;
-float:left;
+.chat .chat-avatar{
+    padding-right:4px;
+    background:url('../img/unknown24x24.png') no-repeat;
+    clear: left;
+    float:left;
+    display:block;
 }
 
-.chat .text-div{
-width:75%;
-float:right;
+.chat .chat-info{
+    float:left;
+    font-size:12px;
+    line-height:12px;
+    margin-right: 2px;
+ }
+
+/* This works because the div is now set to a certain BFC format */
+.chat .chat-text{
+  overflow:hidden;
 }
 
 .chat span{
@@ -172,22 +180,12 @@ float:right;
     /*display:inline-block;*/
 }
 
-.chat .avatar-td{
-
-    padding-right:4px;
-    background:url('../img/unknown24x24.png') no-repeat;
-}
 
 .chat img{
     /*hides picture when no avatar is present*/
     visibility:hidden;
 }
 
-.chat .info-td{
-    /*added line-height to decrease the space that was used as margin*/
-    font-size:12px;
-    line-height:12px;
-}
 
 #Chattext{
     width:100%;
