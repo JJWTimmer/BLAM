@@ -2,13 +2,14 @@
 
 /* Ticket is used for the log entries */
 
-class Feedback extends RVDLogBase {
+class Update extends RVDLogBase {
 	
 	protected $id = '';
 	protected $ticket_id = '';
+	protected $type = '';
 	protected $title = '';
-	protected $handle_id = '';
 	protected $message = '';
+	protected $handle_id = '';
 	protected $called = '';
 	protected $called_by = '';
     protected $created = '';
@@ -16,11 +17,12 @@ class Feedback extends RVDLogBase {
 	public function create() {
 
 		DB::query("
-			INSERT INTO feedbacks (ticket_id, title, handle_id, message, created)
+			INSERT INTO updates (ticket_id, type, title, message,  handle_id, created)
 			VALUES (
 				" . DB::esc($this->ticket_id) . ",
+				'" .DB::esc($this->type) . "',
 				'" . DB::esc($this->title) . "',
-                " . DB::esc($this->handle_id) . ",
+                " . (empty($this->handle_id) ? 'NULL' : DB::esc($this->handle_id)) . ",
                 '" . DB::esc($this->message) . "',
                 '" . date('Y-m-d G:i:s') . "'
             )
@@ -71,8 +73,8 @@ class Feedback extends RVDLogBase {
         return $output;
 	}
 
-	public function close() {
-        $q = "UPDATE feedbacks SET called = NOW(),
+	public function closeFeedback() {
+        $q = "UPDATE updates SET called = NOW(),
                     called_by = " . DB::esc($this->called_by) . " WHERE id = " . DB::esc($this->id);
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);

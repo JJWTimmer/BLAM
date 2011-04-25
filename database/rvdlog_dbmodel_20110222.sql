@@ -43,19 +43,20 @@ CREATE TABLE IF NOT EXISTS `chatlines` (
 -- Tabelstructuur voor tabel `feedbacks`
 --
 
-CREATE TABLE IF NOT EXISTS `feedbacks` (
+CREATE TABLE IF NOT EXISTS `updates` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(10) NOT NULL,
+  `type` ENUM('update', 'feedback') NOT NULL,
   `title` varchar(45) NOT NULL,
-  `handle_id` int(10) NOT NULL,
   `message` text NOT NULL,
-  `called` datetime DEFAULT NULL,
+  `handle_id` int(10) NULL,
+  `called` datetime NULL,
   `called_by` int(10) NULL,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_feedback_ticket` (`ticket_id`),
-  KEY `FK_feedback_handle` (`handle_id`),
-  KEY `FK_feedback_operator` (`called_by`)
+  KEY `FK_updates_ticket` (`ticket_id`),
+  KEY `FK_updates_handle` (`handle_id`),
+  KEY `FK_updates_operator` (`called_by`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 -- --------------------------------------------------------
 
@@ -151,13 +152,14 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) DEFAULT NULL,
   `parent_id` int(10) DEFAULT NULL,
-  `title` varchar(45) NOT NULL,
   `message_id` int(10) NOT NULL,
   `status_id` int(10) NULL,
-  `handle_id` int(10) NULL,
-  `location` varchar(255) DEFAULT NULL,
-  `reference` varchar(255) NULL,
+  `title` varchar(45) NOT NULL,
   `text` text,
+  `location` varchar(255) DEFAULT NULL,
+  `solution` text,
+  `handle_id` int(10) NULL,
+  `reference` varchar(255) NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
