@@ -16,7 +16,7 @@ require_once "classes/ChatLine.class.php";
 require_once "classes/User.class.php";
 require_once "classes/Handle.class.php";
 require_once "classes/Group.class.php";
-require_once "classes/Feedback.class.php";
+require_once "classes/Update.class.php";
 
 session_name('RVDLog');
 session_start();
@@ -57,6 +57,12 @@ try {
 		case 'addMessage':
             RVDLog::checkLogged();
 			$response = RVDLog::addMessage($_POST['text'], $_POST['ticket']);
+            // returns MessageId or exception
+            break;
+		//*
+		case 'updateMessage':
+            RVDLog::checkLogged();
+			$response = RVDLog::updateMessage($_POST['id'], $_POST['text'], $_POST['ticket']);
             // returns MessageId or exception
             break;
 		
@@ -143,17 +149,23 @@ try {
 			$response = RVDLog::changeTicketOwner($_POST['id'], $_POST['user_id']);
             // returns null or exception
             break;
-		
+		//*
 		case 'changeTicketDetails':
             RVDLog::checkLogged();
-			$response = RVDLog::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['reference'], $_POST['handle_id']);
+			$response = RVDLog::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['solution'], $_POST['reference'], $_POST['handle_id']);
             // returns null or exception
             break;
-		
-		case 'createSubTicket':
+		//*
+		case 'createUpdate':
             RVDLog::checkLogged();
-			$response = RVDLog::createSubTicket($_POST['parent_id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['reference'], $_POST['handle_id'] );
-            // returns integer SubTicketId or exception
+			$response = RVDLog::createUpdate($_POST['ticket_id'], $_POST['title'], $_POST['message']);
+            // returns integer UpdateId or exception
+            break;
+		//*
+		case 'createFeedback':
+            RVDLog::checkLogged();
+			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['title'], $_POST['message'], $_POST['handle_id']);
+            // returns integer FeedbackId or exception
             break;
 		
 		case 'becomeChildTicket':
@@ -166,12 +178,6 @@ try {
             RVDLog::checkLogged();
 			$response = RVDLog::becomeParentTicket($_POST['id']);
             // returns null or exception
-            break;
-		
-		case 'createFeedback':
-            RVDLog::checkLogged();
-			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['title'], $_POST['text'], $_POST['handle_id']);
-            // returns int feedbackId or exception
             break;
 		
 		default:

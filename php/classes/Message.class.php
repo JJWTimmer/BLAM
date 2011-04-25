@@ -67,6 +67,13 @@ class Message extends RVDLogBase {
         if (!is_null($data) && end($data) == null) array_pop($data);
 		return $data;
 	}
+	
+	public function update() {
+        $q = "UPDATE updates SET called = NOW(),
+                    called_by = " . DB::esc($this->called_by) . " WHERE id = " . DB::esc($this->id);
+		$res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+	}
 
 }
 

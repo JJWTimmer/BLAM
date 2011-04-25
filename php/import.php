@@ -31,7 +31,6 @@ else {
 					debug($q);
 					$res = DB::query($q);
 					$row = $res->fetch_assoc();
-					debug($row);
 					$q = "insert into handles (handle_name, description, group_id) values ('$data[2]', '$data[1]', $row[id])";
 					debug($q);
 					DB::query($q);

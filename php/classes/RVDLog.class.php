@@ -207,28 +207,39 @@ class RVDLog {
         $ticket->setOwner();
     }
 
-    public static function changeTicketDetails($id, $title, $text, $location, $reference, $handle_id){
+    public static function changeTicketDetails($id, $title, $text, $location, $solution, $reference, $handle_id){
         $ticket = new Ticket(array(
             'id'        => $id,
             'title'     => $title,
             'text'      => $text,
             'location'  => $location,
+			'solution'  => $solution,
             'reference' => $reference,
             'handle_id' => $handle_id
         ));
         $ticket->update();
     }
 
-    public static function createSubTicket($parent_id, $title, $text, $location, $reference, $handle_id){
-        $subticket = new Ticket(array(
-            'parent_id' => $parent_id,
+    public static function createUpdate($ticket_id, $title, $message){
+        $update = new Update(array(
+            'ticket_id' => $ticket_id,
+			'type' => 'update',
             'title' => $title,
-            'text' => $text,
-            'location' => $location,
-            'reference' => $reference,
+            'message' => $message
+        ));
+        $id = $update->create();
+        return $id;
+    }
+
+    public static function createFeedback($ticket_id, $title, $message, $handle_id){
+        $update = new Update(array(
+            'ticket_id' => $ticket_id,
+			'type' => 'feedback',
+            'title' => $title,
+            'message' => $message,
             'handle_id' => $handle_id
         ));
-        $id = $subticket->createSub();
+        $id = $update->create();
         return $id;
     }
 
@@ -243,16 +254,5 @@ class RVDLog {
     public static function becomeParentTicket($id){
         $ticket = new Ticket(array('id' => $id));
         $ticket->becomeParent();
-    }
-
-    public static function createFeedback($ticket_id, $title, $message, $handle_id){
-        $feedback = new Feedback(array(
-            'ticket_id' => $ticket_id,
-            'title' => $title,
-            'message' => $message,
-            'handle_id' => $handle_id
-        ));
-        $id = $feedback->create();
-        return $id;
     }
 }

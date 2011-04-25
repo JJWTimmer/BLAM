@@ -7,13 +7,14 @@ class Ticket extends RVDLogBase {
 	protected $id = '';
 	protected $user_id = '';
 	protected $parent_id = '';
-	protected $title = '';
 	protected $message_id = '';
 	protected $status_id = '';
-	protected $handle_id = '';
-	protected $location = '';
-    protected $reference = '';
+	protected $title = '';
 	protected $text = '';
+	protected $location = '';
+	protected $solution = '';
+	protected $handle_id = '';
+    protected $reference = '';
     protected $created = '';
 	protected $modified = '';
 
@@ -38,33 +39,6 @@ class Ticket extends RVDLogBase {
             throw new Exception(DB::getMySQLiObject()->error);
 		return $this->id;
 	}
-
-	public function createSub() {
-    
-        $q = "
-			INSERT INTO tickets (parent_id, title, text, location, reference, handle_id, status_id, created, modified)
-			VALUES (
-				 " . DB::esc($this->parent_id) . ",
-				'" . DB::esc($this->title) . "',
-				'" . DB::esc($this->text) . "',
-				'" . DB::esc($this->location) . "',
-                '" . DB::esc($this->reference) . "',
-				 " . DB::esc($this->handle_id ? $this->handle_id : "NULL") . ",
-                1,
-                '" . date('Y-m-d G:i:s') . "',
-                '" . date('Y-m-d G:i:s') . "'
-            )
-            ";
-
-		$res = DB::query($q);
-            
-        if (!$res)
-           throw new Exception(DB::getMySQLiObject()->error);
-           
-		$this->id = DB::getMySQLiObject()->insert_id;
-        
-		return $this->id;
-	}    
     
 	public function update() {
         $handle = !empty($this->handle_id);
@@ -73,6 +47,7 @@ class Ticket extends RVDLogBase {
 			SET	title = '" . DB::esc($this->title) . "',
 				text = '" . DB::esc($this->text) . "',
                 location = '" . DB::esc($this->location) . "',
+				solution = '" . DB::esc($this->solution) . "',
                 reference = '" . DB::esc($this->reference) . "',"
                 . ($handle ? "handle_id = " . DB::esc($this->handle_id) . "," : "")
                 . "modified = '" . date('Y-m-d G:i:s') . "' 
@@ -84,7 +59,7 @@ class Ticket extends RVDLogBase {
 	}
     
     public function getDetails() {
-        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             LEFT OUTER JOIN statuses AS s ON t.status_id = s.id
@@ -114,7 +89,7 @@ class Ticket extends RVDLogBase {
             throw new Exception('invalid parameters for getTicket');
         }
         
-        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
@@ -159,7 +134,7 @@ class Ticket extends RVDLogBase {
 
     private function getChildren($pid) {
         $q = "
-            SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+            SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
