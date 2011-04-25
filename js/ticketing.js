@@ -93,21 +93,6 @@ var ticketing = {
           ticketing.getTicketDetail(ticketing.data.selectedticket,$(this).attr("title"));
         });
 
-        //function to implement clicking on Header
-        $('#WL-ActieHeader').bind('click',function(){
-          ticketing.changeTabview('WL-Actie');
-        });
-
-        //function to implement clicking on Header
-        $('#FeedbackHeader').bind('click',function(){
-          ticketing.changeTabview('Feedback');
-        });
-
-        //function to implement clicking on Header
-        $('#TimelineHeader').bind('click',function(){
-          ticketing.changeTabview('Timeline');
-        });
-
         $('#handlelist_toggle_button').live('click', function(){
           if(!working)
           {
@@ -200,6 +185,12 @@ var ticketing = {
                 });
             }
         })
+
+        //function to implement clicking on thickbox link
+        $('#openmodalbutton').live('click', function(){
+          general.tb_open_new("UpdatesAndFeedbacks.html?height=300&width=300");
+          $(".bla").append("<p>test2</p>");
+        });
 
         // Logging a person into rvdlog:
 
@@ -346,12 +337,7 @@ var ticketing = {
             ticketing.reInitTickets("Closed");
 
             $('#TicketDetailsList').empty();
-            $('#WL-ActieList').fadeIn();
-            $('#FeedbackList').fadeIn();
-            $('#TimelineList').fadeIn();
-            $('#WL-ActieForm').fadeOut();
-            $('#FeedbackForm').fadeOut();
-      });
+            });
 
       // add listener for this button and change to childticket of certain parentticket
       $('#childticketbutton').live('click',function(){
@@ -366,11 +352,6 @@ var ticketing = {
             });
             ticketing.reInitTickets("All");
             $('#TicketDetailsList').empty();
-            $('#WL-ActieList').fadeIn();
-            $('#FeedbackList').fadeIn();
-            $('#TimelineList').fadeIn();
-            $('#WL-ActieForm').fadeOut();
-            $('#FeedbackForm').fadeOut();
       });
 
 
@@ -387,50 +368,9 @@ var ticketing = {
             });
             ticketing.reInitTickets("All");
             $('#TicketDetailsList').empty();
-            $('#WL-ActieList').fadeIn();
-            $('#FeedbackList').fadeIn();
-            $('#TimelineList').fadeIn();
-            $('#WL-ActieForm').fadeOut();
-            $('#FeedbackForm').fadeOut();
       });
 
 
-        $('#WL-ActieForm').submit(function(){
-            if(working) return false;
-            working = true;
-
-            //check to ensure a childticket doesnt get a childticket
-            var ticketid=ticketing.data.selectedticket;
-            if(ticketing.data.selectedparentticket!=0){
-              ticketid=ticketing.data.selectedparentticket;
-            }
-            if($('#subticket_Title').val()!="")
-            {
-              $.tzPOST('createSubTicket',{parent_id:ticketing.data.selectedticket,title:$('#subticket_Title').val(),text:$('#subticket_Text').val(),location:$('#subticket_Location').val(),handle_id:$('#subticket_Handle').val()},function(r){
-                  working = false;
-
-                  if(r.error){
-                      general.displayError(r.error);
-                  }
-                  else
-                  {
-                    general.displaySaved("subticket aangemaakt: " + $('#subticket_Title').val());
-                    $('#subticket_Title').val("");
-                    $('#subticket_Text').val("");
-                    $('#subticket_Location').val("");
-                  }
-              });
-              ticketing.reInitTickets("All");
-
-
-            }
-            else
-            {
-              alert("Niet alles ingevuld!");
-              working = false;
-            }
-            return false;
-        });
 
         $('#FeedbackForm').submit(function(){
             if(working) return false;
@@ -498,7 +438,6 @@ var ticketing = {
           ticketing.getNewTickets();
           ticketing.getOpenTickets();
           ticketing.getClosedTickets();
-          ticketing.changeTabview('WL-Actie');
         });
     },
 
@@ -969,9 +908,9 @@ var ticketing = {
                           q[0].status="Subticket";
                           $('#TicketDetailsList').html(general.render('subticket_detail',q[0]));
                     }
-
-                    $('#WL-ActieForm').fadeIn();
-                    $('#FeedbackForm').fadeIn();
+                    $('#ticket_feedback_title').defaultText('Titel voor terugmelding');
+                    $('#ticket_update').defaultText('Text voor update');
+                    $('#ticket_feedback').defaultText('Text voor terugmelding');
                     //update select owner
                     $.tzPOST('getUsers',{options:'all'},function(r){
                       if(!r.error)
@@ -1043,14 +982,14 @@ var ticketing = {
                         {
 
                             $('option', $('#ticket_Handle')).remove();
-                            $('option', $('#subticket_Handle')).remove();
-                            $('option', $('#feedback_Handle')).remove();
+                            //$('option', $('#subticket_Handle')).remove();
+                            $('option', $('#ticket_feedback_Handle')).remove();
                             var tickethandles_options = $('#ticket_Handle').attr('options');
-                            var subtickethandles_options = $('#subticket_Handle').attr('options');
-                            var feedbackhandles_options = $('#feedback_Handle').attr('options');
+                            //var subtickethandles_options = $('#subticket_Handle').attr('options');
+                            var feedbackhandles_options = $('#ticket_feedback_Handle').attr('options');
                             var index_handle;
                             tickethandles_options[0] = new Option("");
-                            subtickethandles_options[0] = new Option("");
+                            //subtickethandles_options[0] = new Option("");
                             feedbackhandles_options[0] = new Option("");
                             for(var i=0; i< r.length;i++){
                               if(r[i]){
@@ -1059,15 +998,15 @@ var ticketing = {
                                       index_handle=tickethandles_options.length;
                                     }
                                   tickethandles_options[tickethandles_options.length] = new Option(r[i].description,r[i].id);
-                                  subtickethandles_options[subtickethandles_options.length] = new Option(r[i].description,r[i].id);
+                                  //subtickethandles_options[subtickethandles_options.length] = new Option(r[i].description,r[i].id);
                                   feedbackhandles_options[feedbackhandles_options.length] = new Option(r[i].description,r[i].id);
 
                               }
                               if(index_handle)
                               {
                                 $('#ticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
-                                $('#subticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
-                                $('#feedback_Handle option:eq('+index_handle+')' ).attr("selected","selected");
+                                //$('#subticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
+                                $('#ticket_feedback_Handle option:eq('+index_handle+')' ).attr("selected","selected");
                               }
                             }
                         }
@@ -1090,46 +1029,6 @@ var ticketing = {
         });
     },
 
-    changeTabview : function(window){
-        switch(window){
-
-        case 'WL-Actie':
-        $('#WL-ActieHeader').css("background-image", "url(img/solid_blue.jpg)");
-        $('#FeedbackHeader').css("background-image", "url(img/solid_grey.jpg)");
-        $('#TimelineHeader').css("background-image", "url(img/solid_grey.jpg)");
-        $('#FeedbackList').fadeOut();
-        $('#TimelineList').fadeOut();
-        $('#WL-ActieList').fadeIn();
-        $('#WL-Actie').css('z-index',"1");
-        $('#Feedback').css('z-index',"");
-        $('#Timeline').css('z-index',"");
-        break;
-
-        case 'Feedback':
-        $('#WL-ActieHeader').css("background-image", "url(img/solid_grey.jpg)");
-        $('#FeedbackHeader').css("background-image", "url(img/solid_blue.jpg)");
-        $('#TimelineHeader').css("background-image", "url(img/solid_grey.jpg)");
-        $('#TimelineList').fadeOut();
-        $('#WL-ActieList').fadeOut();
-        $('#FeedbackList').fadeIn();
-        $('#WL-Actie').css('z-index',"");
-        $('#Feedback').css('z-index',"1");
-        $('#Timeline').css('z-index',"");
-        break;
-
-        case 'Timeline':
-        $('#WL-ActieHeader').css("background-image", "url(img/solid_grey.jpg)");
-        $('#FeedbackHeader').css("background-image", "url(img/solid_grey.jpg)");
-        $('#TimelineHeader').css("background-image", "url(img/solid_blue.jpg)");
-        $('#WL-ActieList').fadeOut();
-        $('#FeedbackList').fadeOut();
-        $('#TimelineList').fadeIn();
-        $('#WL-Actie').css('z-index',"");
-        $('#Feedback').css('z-index',"");
-        $('#Timeline').css('z-index',"1");
-        break;
-        }
-    },
 
   killTimeouts : function(){
             for (key in Timeout)

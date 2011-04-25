@@ -406,7 +406,7 @@ p.noMessages,
 
 .list_item_ticketdetail_label_title{
  position: absolute;
-    top:2%;
+    top:1%;
     left:1%;
     color: white;
 }
@@ -419,7 +419,7 @@ p.noMessages,
 
 .list_item_ticketdetail_title{
     position: absolute;
-    top:1%;
+    top:0%;
     left:20%;
     width:77%;
     margin:2px 1% 2px 0;
@@ -442,7 +442,7 @@ p.noMessages,
 
 .list_item_ticketdetail_label_ber{
     position: absolute;
-    top:11%;
+    top:6%;
     left:1%;
     color: white;
 }
@@ -450,8 +450,8 @@ p.noMessages,
 textarea#ticket_text{
     position: absolute;
     width:74%;
-    height: 15%;
-    top:11%;
+    height: 7%;
+    top:6%;
     left: 22%;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;
@@ -472,14 +472,14 @@ textarea#ticket_text{
 .list_item_ticketdetail_label_loc
 {
     position: absolute;
-    top:30%;
+    top:16%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_location{
     position: absolute;
-    top:30%;
+    top:16%;
     left:20%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
@@ -487,24 +487,47 @@ textarea#ticket_text{
     width:76%;
 }
 
-.list_item_ticketdetail_time{
+.list_item_ticketdetail_label_opl
+{
     position: absolute;
-    top:40%;
+    top:22%;
     left:1%;
     color: white;
 }
 
+textarea#ticket_oplossing{
+    position: absolute;
+    width:74%;
+    height: 7%;
+    top:22%;
+    left: 22%;
+    font:13px/14px Calibri,Arial,sans-serif;
+    color:black;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:1% 1%;
+    resize: none;
+    background-color:#E0E0E0;
+}
+
+.list_item_ticketdetail_time{
+    position: absolute;
+    top:31%;
+    left:21%;
+    color: white;
+}
 
 .list_item_ticketdetail_label_handle{
     position: absolute;
-    top:50%;
+    top:35%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_handle{
     position: absolute;
-    top:50%;
+    top:35%;
     left:20%;
     overflow:hidden;
     width:50%;
@@ -512,19 +535,18 @@ textarea#ticket_text{
     padding-left:1%;
     padding-right:1%;
     color: white;
-
 }
 
 .list_item_ticketdetail_label_persoon{
     position: absolute;
-    top:50%;
-    left:51%;
+    top:35%;
+    left:46%;
     color: white;
 }
 
 .list_item_ticketdetail_persoon{
     position: absolute;
-    top:50%;
+    top:35%;
     left:66%;
     overflow:hidden;
     width:30%;
@@ -542,14 +564,14 @@ textarea#ticket_text{
 
 .list_item_ticketdetail_label_owner{
     position: absolute;
-    top:60%;
+    top:40%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_owner{
     position: absolute;
-    top:60%;
+    top:40%;
     left:20%;
     overflow:hidden;
     width:50%;
@@ -558,17 +580,34 @@ textarea#ticket_text{
     padding-right:1%;
 }
 
+.list_item_ticketdetail #closeticketbutton{
+    position: absolute;
+    top:45%;
+    right:10%;
+    width:120px;
+    height:20px;
+    background-color: #e50000;
+}
+
+.list_item_ticketdetail #saveticketbutton{
+    position: absolute;
+    top:45%;
+    left:10%;
+    width:120px;
+    height:20px;
+    background-color: #58aa00;
+}
 
 .list_item_ticketdetail_label_becomechild{
     position: absolute;
-    top:88%;
+    top:50%;
     left:1%;
     color: white;
 }
 
 .list_item_ticketdetail_becomechild{
     position: absolute;
-    top:88%;
+    top:50%;
     left:30%;
     width:30%;
     margin:2px 1% 2px 1%;
@@ -578,96 +617,35 @@ textarea#ticket_text{
 
 .list_item_ticketdetail #childticketbutton{
     position: absolute;
-    top:88%;
+    top:50%;
     right:5%;
     width:70px;
-    height:25px;
+    height:20px;
 }
 
 
 .list_item_ticketdetail #becomeparentticketbutton{
     position: absolute;
-    top:88%;
+    top:50%;
     right:5%;
     width:80px;
-    height:25px;
+    height:20px;
 }
 
-.list_item_ticketdetail #closeticketbutton{
+.list_item_ticketdetail_label_update
+{
     position: absolute;
-    top:74%;
-    right:10%;
-    width:120px;
-    height:25px;
-    background-color: #e50000;
-}
-
-.list_item_ticketdetail #saveticketbutton{
-    position: absolute;
-    top:74%;
-    left:10%;
-    width:120px;
-    height:25px;
-    background-color: #58aa00;
-}
-
-
-/*Create subticket*/
-#WL-ActieForm {
-display:none;
-}
-
-.list_item_extra_Header {
-    position: absolute;
-    top:-4%;
-    width:100%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
+    top:54%;
+    left:1%;
     color: white;
 }
 
-.list_item_extra_label_Title{
+textarea#ticket_update{
     position: absolute;
-    top:14%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
-}
-
-.list_item_extra_Title {
-    position: absolute;
-    top:14%;
-    left:23%;
-    width:70%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
-}
-
-#subticket_Title,#feedback_Title,#subticket_Location,#feedback_Location{
-width:100%;
-background-color:#E0E0E0;
-}
-
-.list_item_extra_Label{
-    position: absolute;
-    top:30%;
-    width:100%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
-}
-
-textarea#subticket_Text,textarea#feedback_Text{
-    position: absolute;
-    width:69%;
-    height: 15%;
-    top:30%;
-    left: 25%;
+    width:34%;
+    height: 17%;
+    top:58%;
+    left: 1%;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;
     border:1px solid;
@@ -675,60 +653,140 @@ textarea#subticket_Text,textarea#feedback_Text{
     text-shadow:1px 1px 0 #E4E4E4;
     padding:1% 1%;
     resize: none;
+    background-color:#E0E0E0;
 }
 
-.list_item_extra_label_Handle{
+.list_item_ticketdetail #saveupdatebutton{
     position: absolute;
-    top:53%;
+    top:78%;
+    left:1%;
+    width:120px;
+    height:20px;
+    background-color: #58aa00;
+}
+
+.list_item_ticketdetail_label_last_update
+{
+    position: absolute;
+    top:82%;
+    left:1%;
+    color: white;
+}
+
+textarea#ticket_last_update{
+    position: absolute;
+    width:44%;
+    height: 7%;
+    top:86%;
+    left: 1%;
+    font:13px/14px Calibri,Arial,sans-serif;
+    color:black;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:1% 1%;
+    resize: none;
+    background-color:#E0E0E0;
+}
+
+.list_item_ticketdetail_label_feedback
+{
+    position: absolute;
+    top:54%;
+    left:41%;
+    color: white;
+}
+
+#ticket_feedback_title{
+    width:100%;
+    background-color:#E0E0E0;
+}
+
+.list_item_ticketdetail_feedback_title{
+    position: absolute;
+    top:57.5%;
+    left:39%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    width:55%;
+}
+
+textarea#ticket_feedback{
+    position: absolute;
+    width:53%;
+    height: 8%;
+    top:63%;
+    left: 41%;
+    font:13px/14px Calibri,Arial,sans-serif;
+    color:black;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:1% 1%;
+    resize: none;
+    background-color:#E0E0E0;
+}
+
+.list_item_ticketdetail_label_feedback_handle{
+    position: absolute;
+    top:73.5%;
+    left:41%;
+    color: white;
+}
+
+.list_item_ticketdetail_feedback_handle{
+    position: absolute;
+    top:73.5%;
+    left:61%;
+    overflow:hidden;
+    width:30%;
     margin:2px 1% 2px 1%;
     padding-left:1%;
     padding-right:1%;
     color: white;
 }
 
-.list_item_extra_Handle{
+.list_item_ticketdetail #savefeedbackbutton{
     position: absolute;
-    top:53%;
-    left:23%;
-    width:70%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
+    top:78%;
+    left:46%;
+    width:175px;
+    height:20px;
+    background-color: #58aa00;
+}
+
+.list_item_ticketdetail_label_last_feedback
+{
+    position: absolute;
+    top:82%;
+    left:51%;
     color: white;
 }
 
-.list_item_extra_label_Location{
+textarea#ticket_last_feedback{
     position: absolute;
-    top:65%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
+    width:44%;
+    height: 7%;
+    top:86%;
+    left: 51%;
+    font:13px/14px Calibri,Arial,sans-serif;
+    color:black;
+    border:1px solid;
+    border-color:#c1c1c1 #eee #eee #c1c1c1;
+    text-shadow:1px 1px 0 #E4E4E4;
+    padding:1% 1%;
+    resize: none;
+    background-color:#E0E0E0;
 }
 
-.list_item_extra_Location{
+.list_item_ticketdetail #openmodalbutton{
     position: absolute;
-    top:65%;
-    left:23%;
-    width:70%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
+    top:96%;
+    left:25%;
+    width:225px;
+    height:20px;
 }
-
-.list_item_extra_Button{
-  position: absolute;
-  top:80%;
-  width:200px;
-  height:30px;
-  right:10%;
-}
-
-#FeedbackForm {
-display:none;
-}
-
 
 /* TopBar */
 #TopContainer .Topbar_info {

@@ -9,6 +9,7 @@
         <!-- jQuery css first, so we can override later -->
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" />
+        <link rel="stylesheet" type="text/css" href="css/thickbox.css" media="screen" />
 
         <!-- second the general css -->
         <link rel="stylesheet" type="text/css" href="css/rvdlog.css" />
@@ -22,6 +23,7 @@
         <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
         <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
         <script type="text/javascript" src="js/mwheelIntent.js"></script>
+        <script type="text/javascript" src="js/thickbox.js"></script>
 
         <!-- general javascript -->
         <script type="text/javascript" src="js/rvdlog.js"></script>
@@ -75,43 +77,7 @@
                 <div id="TicketDetails" class="holder rounded">
                     <div id="TicketDetailsHeader" class="header"><p>Details Ticket</p></div>
                     <div id="TicketDetailsList" class="list rounded"></div>
-                </div>
-                <div id="WL-Actie" class="holder rounded">
-                    <div id="WL-ActieHeader" class="header"><p>WL-Actie</p></div>
-                    <div id="WL-ActieList" class="list rounded">
-                        <form id="WL-ActieForm" method="post" action="">
-                            <div class="list_item_extra_Header"><h1>Subticket aanmaken</h1></div>
-                            <div class="list_item_extra_label_Title"><p>Titel:</p></div>
-                            <div class="list_item_extra_Title"><input id="subticket_Title" name="Title" class="rounded" maxlength="255" /></div>
-                            <div class="list_item_extra_Label"><p>Opmerking: </p></div>
-                            <textarea rows="1" cols="1" id="subticket_Text" name="text" class="rounded" maxlength="700"></textarea><BR>
-                            <div class="list_item_extra_label_Handle"><p>Voertuig:</p></div>
-                            <div class="list_item_extra_Handle"><select id="subticket_Handle" name="handle"></select></div>
-                            <div class="list_item_extra_label_Location"><p>Locatie:</p></div>
-                            <div class="list_item_extra_Location"><input id="subticket_Location" name="Location" class="rounded" maxlength="255" /></div>
-                            <input type="submit" class="list_item_extra_Button" value="Voeg subticket toe" />
-                        </form>
-                    </div>
-                </div>
-                <div id="Feedback" class="holder rounded">
-                    <div id="FeedbackHeader" class="header"><p>Terugmelding</p></div>
-                    <div id="FeedbackList" class="list rounded">
-                    <form id="FeedbackForm" method="post" action="">
-                            <div class="list_item_extra_Header"><h1>Terugmelding</h1></div>
-                            <div class="list_item_extra_label_Title"><p>Titel:</p></div>
-                            <div class="list_item_extra_Title"><input id="feedback_Title" name="Title" class="rounded" maxlength="255" /></div>
-                            <div class="list_item_extra_Label"><p>Terugmelding: <p></div>
-                            <textarea rows="1" cols="1" id="feedback_Text" name="text" class="rounded" maxlength="700"></textarea><BR>
-                            <div class="list_item_extra_label_Handle"><p>Voertuig:</p></div>
-                            <div class="list_item_extra_Handle"><select id="feedback_Handle" name="Handle"></select></div>
-                            <input type="submit" class="list_item_extra_Button" value="Doe deze terugmelding" />
-                        </form>
-                    </div>
-                </div>
-                <div id="Timeline">
-                    <div id="TimelineHeader" class="header"><p>Tijdlijn</p></div>
-                    <div id="TimelineList" class="list rounded"></div>
-                </div>
+                </div> 
             </div>
         </div>
         <div id="Login" align="center">
@@ -129,15 +95,8 @@
                 </td></tr>
                 </table>
                 </form>
-            <div>
+            </div>
         </div>
 
-<!--
-        <form id="loginForm" method="post" action="">
-            <input id="username" name="username" class="rounded" maxlength="16" />
-      <input id="password" name="password" class="rounded" maxlength="16" />
-            <input type="submit" class="blueButton" value="Login" />
-        </form>
--->
     </body>
 </html>

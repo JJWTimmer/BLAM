@@ -152,6 +152,8 @@ var general = {
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<div class=list_item_ticketdetail_label_opl><p>Oplossing:</p></div>',
+                '<textarea rows="1" cols="1" id="ticket_oplossing" name="solution" class="rounded" maxlength="500">',,'</textarea>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
                 '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
@@ -159,10 +161,22 @@ var general = {
                 '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-
-
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
+                '<p class="list_item_ticketdetail_label_update">Update:</p>',
+                '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
+                '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
+                '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
+                '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
+                '<div class=list_item_ticketdetail_feedback_title><input type="text" class="rounded" value="',,'" id="ticket_feedback_title"></div>',
+                '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
+                '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
+                '<p class="list_item_ticketdetail_label_feedback_handle">Voertuig:</p>',
+                '<div class=list_item_ticketdetail_feedback_handle><p><select id="ticket_feedback_Handle"><option selected> </option></select></p></div>',
+                '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
+                '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
+                '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
+                '<input type="button" id="openmodalbutton" class="blueButton" value="Alle Updates en Terugmeldingen"/>',
                 '</div>',
                 '</form>'];
             break;
@@ -179,6 +193,8 @@ var general = {
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<div class=list_item_ticketdetail_label_opl><p>Oplossing:</p></div>',
+                '<textarea rows="1" cols="1" id="ticket_oplossing" name="solution" class="rounded" maxlength="500">',,'</textarea>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
                 '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
@@ -190,6 +206,20 @@ var general = {
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
+                '<p class="list_item_ticketdetail_label_update">Update:</p>',
+                '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
+                '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
+                '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
+                '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
+                '<div class=list_item_ticketdetail_feedback_title><input type="text" class="rounded" value="',,'" id="ticket_feedback_title"></div>',
+                '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
+                '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
+                '<p class="list_item_ticketdetail_label_feedback_handle">Voertuig:</p>',
+                '<div class=list_item_ticketdetail_feedback_handle><p><select id="ticket_feedback_Handle"><option selected> </option></select></p></div>',
+                '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
+                '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
+                '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
+                '<input type="button" id="openmodalbutton" class="blueButton" value="Alle Updates en Terugmeldingen"/>',
                 '</div>',
                 '</form>'];
             break;
@@ -206,6 +236,8 @@ var general = {
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<div class=list_item_ticketdetail_label_opl><p>Oplossing:</p></div>',
+                '<textarea rows="1" cols="1" id="ticket_oplossing" name="solution" class="rounded" maxlength="500">',,'</textarea>',
                 '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
                 '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
                 '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
@@ -215,8 +247,21 @@ var general = {
                 '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Heropen Ticket"/>',
+                '<p class="list_item_ticketdetail_label_update">Update:</p>',
+                '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
+                '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
+                '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
+                '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
+                '<div class=list_item_ticketdetail_feedback_title><input type="text" class="rounded" value="',,'" id="ticket_feedback_title"></div>',
+                '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
+                '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
+                '<p class="list_item_ticketdetail_label_feedback_handle">Voertuig:</p>',
+                '<div class=list_item_ticketdetail_feedback_handle><p><select id="ticket_feedback_Handle"><option selected> </option></select></p></div>',
+                '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
+                '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
+                '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
+                '<input type="button" id="openmodalbutton" class="blueButton" value="Alle Updates en Terugmeldingen"/>',
                 '</div>',
                 '</form>'];
             break;
@@ -233,6 +278,8 @@ var general = {
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
+                '<div class=list_item_ticketdetail_label_opl><p>Oplossing:</p></div>',
+                '<textarea rows="1" cols="1" id="ticket_oplossing" name="solution" class="rounded" maxlength="500">',,'</textarea>',
                 '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
                 '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
                 '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
@@ -327,6 +374,10 @@ var general = {
     return strTime;
     },
 
+    tb_open_new : function(jThickboxNewLink){
+      tb_show(null,jThickboxNewLink,null);
+    },
+
 
 }
 //end of var general
@@ -344,6 +395,7 @@ $.tzTESTPOST = function(action,data,callback){
 $.tzGET = function(action,data,callback){
     $.get('php/ajax.php?action='+action,data,callback,'json');
 }
+
 
 // A custom jQuery method for placeholder text:
 // Can be applied to any textbox
