@@ -640,11 +640,27 @@ textarea#ticket_oplossing{
     color: white;
 }
 
+#ticket_update_title{
+    width:100%;
+    background-color:#E0E0E0;
+}
+
+.list_item_ticketdetail_update_title{
+    position: absolute;
+    top:57.5%;
+    left:-1%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+    width:36%;
+}
+
+
 textarea#ticket_update{
     position: absolute;
     width:34%;
-    height: 17%;
-    top:58%;
+    height: 11%;
+    top:63%;
     left: 1%;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;

@@ -296,7 +296,7 @@ var ticketing = {
 
       // add listener for this button and change ticket details
       $('#saveticketbutton').live('click',function(){
-            $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
+            $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),solution:$('#ticket_oplossing').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
               if(r==null){
 
               }
@@ -354,7 +354,6 @@ var ticketing = {
             $('#TicketDetailsList').empty();
       });
 
-
       // add listener for this button and change to parentticket
       $('#becomeparentticketbutton').live('click',function(){
             $.tzPOST('becomeParentTicket',{id:ticketing.data.selectedticket},function(r){
@@ -370,14 +369,29 @@ var ticketing = {
             $('#TicketDetailsList').empty();
       });
 
+      // add listener for this button and add an update
+      $('#saveupdatebutton').live('click',function(){
+            $.tzPOST('createUpdate',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_update_title').val(),message:$('#ticket_update').val()},function(r){
+              if(r==null){
+
+              }
+              else
+              {
+                general.displayError(r.error);
+              }
+            general.displaySaved("Update aangemaakt: " + $('#ticket_update_title').val());
+            $('#ticket_update_title').val("");
+            $('#ticket_update').val("");
+            });
+      });
 
 
-        $('#FeedbackForm').submit(function(){
+        $('#savefeedbackbutton').live('click',function(){
             if(working) return false;
             working = true;
-                if($('#feedback_Title').val()!="" && $('#feedback_Text').val()!="" && $('#feedback_Handle').val()!="")
+                if($('#ticket_feedback_title').val()!="" && $('#ticket_feedback').val()!="" && $('#ticket_feedback_Handle').val()!="")
                 {
-                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#feedback_Title').val(),text:$('#feedback_Text').val(),handle_id:$('#feedback_Handle').val()},function(r){
+                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_feedback_title').val(),text:$('#ticket_feedback').val(),handle_id:$('#ticket_feedback_Handle').val()},function(r){
                     working = false;
 
                     if(r.error){
@@ -385,13 +399,11 @@ var ticketing = {
                     }
                     else
                     {
-                        general.displaySaved("Terugmelding aangemaakt: " + $('#feedback_Title').val());
-                        $('#feedback_Title').val("");
-                        $('#feedback_Text').val("");
+                        general.displaySaved("Terugmelding aangemaakt: " + $('ticket_feedback_title').val());
+                        $('#ticket_feedback_title').val("");
+                        $('#ticket_feedback').val("");
                     }
                   });
-
-
                 }
                 else
                 {
@@ -908,6 +920,7 @@ var ticketing = {
                           q[0].status="Subticket";
                           $('#TicketDetailsList').html(general.render('subticket_detail',q[0]));
                     }
+                    $('#ticket_update_title').defaultText('Titel voor update');
                     $('#ticket_feedback_title').defaultText('Titel voor terugmelding');
                     $('#ticket_update').defaultText('Text voor update');
                     $('#ticket_feedback').defaultText('Text voor terugmelding');
