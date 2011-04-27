@@ -95,9 +95,11 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `text` text,
+  `ticket_id` int(10) NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_messages_users` (`user_id`)
+  KEY `FK_messages_users` (`user_id`),
+  KEY `FK_messages_tickets` (`ticket_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------

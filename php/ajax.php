@@ -62,7 +62,7 @@ try {
 		//*
 		case 'updateMessage':
             RVDLog::checkLogged();
-			$response = RVDLog::updateMessage($_POST['id'], $_POST['text'], $_POST['ticket']);
+			$response = RVDLog::updateMessage($_POST['id'], $_POST['text']);
             // returns MessageId or exception
             break;
 		
@@ -101,7 +101,7 @@ try {
 			$response = RVDLog::getTicketList($_POST['recursive'], $_POST['last_id'], $_POST['last_modified'], $_POST['status']);//boolean recursive: false for only parents, int $last_id, date-string $last_modified, array of string $status for filtering ($status only for parent!).
             // returns array(integer Id, string Title, string Text, string Status, string user, datetime created, datetime modified) tickets or exception
             break;
-		
+		//!*
 		case 'getFeedback':
             RVDLog::checkLogged();
 			$response = RVDLog::getFeedback($_POST['id'], $_POST['called']);
@@ -131,7 +131,13 @@ try {
 			$response = RVDLog::getTicketDetail($_POST['id']);
             // returns integer Id, string Status, string Titel, string UserId, string Text, string Locatie, array time(Hours,Minutes), integer MessageId, string MessageUserId, string MessageText or exception
             break;
-		
+            
+		case 'getUpdates':
+            RVDLog::checkLogged();
+			$response = RVDLog::getUpdates($_POST['ticket_id'], $_POST['type']);
+            // returns returns array (id, type, ticket_id, title, message, handlename, called, called_by, created)
+            break;
+            
 		case 'closeTicket':
             RVDLog::checkLogged();
 			$response = RVDLog::closeTicket($_POST['id']);

@@ -7,6 +7,7 @@ class Message extends RVDLogBase {
 	protected $id = '';
 	protected $user_id = '';
 	protected $text = '';
+    protected $ticket_id = '';
     protected $created = '';
 	
 	public function create() {
@@ -28,7 +29,7 @@ class Message extends RVDLogBase {
     public function get($options = 'all') {
         if (is_string($options) && $options == 'all') {
             $results = DB::query("
-                SELECT msg.id, msg.text, msg.created, users.username, users.avatar
+                SELECT msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 ORDER BY msg.id ASC");
         } elseif (is_array($options)) {
@@ -36,7 +37,7 @@ class Message extends RVDLogBase {
             $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
             
             $q = "
-                SELECT msg.id, msg.text, msg.created, users.username, users.avatar
+                SELECT msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 WHERE msg.id > $last_id
                 ";
@@ -55,7 +56,7 @@ class Message extends RVDLogBase {
     public function search($keyword) {
         if (is_string($keyword)) {
             $results = DB::query("
-                SELECT msg.id, msg.text, msg.created, users.username, users.avatar
+                SELECT msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 WHERE text LIKE '%" . DB::esc($keyword) . "%'
                 ");
@@ -69,12 +70,18 @@ class Message extends RVDLogBase {
 	}
 	
 	public function update() {
-        $q = "UPDATE updates SET called = NOW(),
-                    called_by = " . DB::esc($this->called_by) . " WHERE id = " . DB::esc($this->id);
+        $q = "UPDATE messages SET text = " .DB::esc($this->text). "
+              WHERE id = " . DB::esc($this->id);
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
 	}
-
+	
+	public function setTicket($tick_no) {
+        $q = "UPDATE messages SET ticket_id = " . DB::esc($tick_no) . ",
+              WHERE id = " . DB::esc($this->id);
+		$res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+	}
 }
 
 ?>

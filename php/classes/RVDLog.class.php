@@ -77,6 +77,7 @@ class RVDLog {
 		// The create method returns the new id
 		$insertID = $msg->create();
         
+        $tick_no = null;
         if ($ticket) {
             $wlticket = new Ticket(array(
                 'message_id' => $insertID,
@@ -85,12 +86,25 @@ class RVDLog {
                 'status_id' => 1              
             ));
             
-            $wlticket->create();
+            $tick_no = $wlticket->create();
         }
+        
+        if ($tick_no) $msg->setTicket($tick_no);
         
 		return array('id' => $insertID);
 	}
-
+    
+    // returns MessageId or exception
+	public static function updateMessage($id, $text){
+		$msg = new Message(array(
+			'id'	=> $id,
+			'text'	    => $text
+		));
+	
+		$msg->update();
+        
+		return array('id' => $msg->id);
+	}
     public static function getMessages($msg_id, $date_and_time = null) {
         if (empty($msg_id)) {
             throw new Exception('No parameters given to getMessages');
@@ -152,11 +166,18 @@ class RVDLog {
 
     // returns array (integer Id, string Title, string HandleName, string Message, string userWL, Datetime called, Datetime created)feedback or exception
     public static function getFeedback($id, $called) {
-        $feedback = new feedback(array());
-        $feedbacks = $feedback->get($id, $called);
+        $feedback = new update(array());
+        $feedbacks = $feedback->getFeedback($id, $called);
         return $feedbacks;
     }
-
+    
+    // returns array (id, ticket_id, type, title, message, handlename, called, called_by, created)
+    public static function getUpdates($for, $type) {
+        $updates = new update(array());
+        $updates = $updates->get($for, $type);
+        return $updates;
+    }
+    
     public static function closeFeedback($id, $user_id){
         $feedback = new feedback(array(
             'id'        => $id,
