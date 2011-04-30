@@ -156,7 +156,7 @@ var ticketing = {
           ticketing.data.jspAPIHandles.reinitialise();
         });
 
-        $('#search_handles').live('keyup', function (e) {
+        $('#search_handles').keyup(function (e) {
 
             $(".list_item_group").each(function(i) {
               $(this).attr('visible','1');
@@ -188,8 +188,7 @@ var ticketing = {
 
         //function to implement clicking on thickbox link
         $('#openmodalbutton').live('click', function(){
-          general.tb_open_new("UpdatesAndFeedbacks.html?height=300&width=300");
-          $(".bla").append("<p>test2</p>");
+          general.tb_open_new('UpdatesAndFeedbacks.html?&KeepThis=true&height=300&width=300');
         });
 
         // Logging a person into rvdlog:
@@ -275,7 +274,6 @@ var ticketing = {
             // via a POST AJAX request:
             $.tzPOST('addChat',$(this).serialize(),function(r){
             if(!r.error){
-                working = false;
                 //empty input form textbox
                 $('#Chattext').val('');
 
@@ -291,6 +289,7 @@ var ticketing = {
                 general.displayError(r.error);
                 }
             });
+            working = false;
             return false;
         });
 
@@ -324,6 +323,29 @@ var ticketing = {
 
       // add listener for this button and change ticket details
       $('#closeticketbutton').live('click',function(){
+              $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),solution:$('#ticket_oplossing').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
+              if(r==null){
+
+              }
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+
+            if(!($('div .list_item_ticketdetail_status').text()=="status: Nieuw") && !($('div .list_item_ticketdetail_status').text()=="status: Subticket")){
+              $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
+                if(r==null){
+
+                }
+                else
+                {
+                  general.displayError(r.error);
+                }
+              });
+            }
+
+
             $.tzPOST('closeTicket',{id:ticketing.data.selectedticket},function(r){
               if(r==null){
 
@@ -335,7 +357,7 @@ var ticketing = {
             });
             ticketing.reInitTickets("Open");
             ticketing.reInitTickets("Closed");
-
+            general.displaySaved("Saved Ticket: " + $('#ticket_title').val());
             $('#TicketDetailsList').empty();
             });
 
@@ -382,6 +404,9 @@ var ticketing = {
             general.displaySaved("Update aangemaakt: " + $('#ticket_update_title').val());
             $('#ticket_update_title').val("");
             $('#ticket_update').val("");
+            $('#ticket_update_title').defaultText('Titel voor update');
+            $('#ticket_update').defaultText('Text voor update');
+            ticketing.TicketDetailUpdates(ticketing.data.selectedticket);
             });
       });
 
@@ -391,7 +416,7 @@ var ticketing = {
             working = true;
                 if($('#ticket_feedback_title').val()!="" && $('#ticket_feedback').val()!="" && $('#ticket_feedback_Handle').val()!="")
                 {
-                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_feedback_title').val(),text:$('#ticket_feedback').val(),handle_id:$('#ticket_feedback_Handle').val()},function(r){
+                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_feedback_title').val(),message:$('#ticket_feedback').val(),handle_id:$('#ticket_feedback_Handle').val()},function(r){
                     working = false;
 
                     if(r.error){
@@ -399,9 +424,12 @@ var ticketing = {
                     }
                     else
                     {
-                        general.displaySaved("Terugmelding aangemaakt: " + $('ticket_feedback_title').val());
+                        general.displaySaved("Terugmelding aangemaakt: " + $('#ticket_feedback_title').val());
                         $('#ticket_feedback_title').val("");
                         $('#ticket_feedback').val("");
+                        $('#ticket_feedback_title').defaultText('Titel voor terugmelding');
+                        $('#ticket_feedback').defaultText('Text voor terugmelding');
+                        ticketing.TicketDetailUpdates(ticketing.data.selectedticket);
                     }
                   });
                 }
@@ -733,7 +761,7 @@ var ticketing = {
               if(!r.error)
                 {
                   ticketing.data.jspAPIHandles.getContentPane().empty();
-                  ticketing.data.jspAPIHandles.getContentPane().append('<input type="text" class="rounded" value="" id="search_handles">');
+                  //ticketing.data.jspAPIHandles.getContentPane().append('<input type="text" class="rounded" value="" id="search_handles">');
                   var markup_group;
                   var markup_handle;
                   for(var i=0; i< r.length;i++){
@@ -895,153 +923,210 @@ var ticketing = {
     },
 
     getTicketDetail : function(ticket_id,parent_id){
-        $.tzPOST('getTicketDetail',{id: ticket_id},function(q){
-          if(q){
-            if(!q.error)
+        //main function that displays the ticketdetails
+        $.tzPOST('getTicketDetail',{id: ticket_id},function(r){
+          if(r){
+            if(!r.error)
                 {
                     $('#TicketDetailsList').empty();
                     if(parent_id==0){
 
-                      switch(q[0].status){
+                      switch(r[0].status){
                         case 'Nieuw':
-                          $('#TicketDetailsList').html(general.render('ticket_detail_new',q[0]));
+                          $('#TicketDetailsList').html(general.render('ticket_detail_new',r[0]));
                         break;
                         case 'Open':
-                          $('#TicketDetailsList').html(general.render('ticket_detail_open',q[0]));
+                          $('#TicketDetailsList').html(general.render('ticket_detail_open',r[0]));
                         break;
                         case 'Gesloten':
-                          $('#TicketDetailsList').html(general.render('ticket_detail_closed',q[0]));
+                          $('#TicketDetailsList').html(general.render('ticket_detail_closed',r[0]));
                         break;
 
                       }
                     }
                     else
                     {
-                          q[0].status="Subticket";
-                          $('#TicketDetailsList').html(general.render('subticket_detail',q[0]));
+                          r[0].status="Subticket";
+                          $('#TicketDetailsList').html(general.render('subticket_detail',r[0]));
                     }
                     $('#ticket_update_title').defaultText('Titel voor update');
                     $('#ticket_feedback_title').defaultText('Titel voor terugmelding');
                     $('#ticket_update').defaultText('Text voor update');
                     $('#ticket_feedback').defaultText('Text voor terugmelding');
-                    //update select owner
-                    $.tzPOST('getUsers',{options:'all'},function(r){
-                      if(!r.error)
-                        {
-                          if(q[0].wluser){
-                            $('option', $('#owner')).remove();
-                            var owner_options = $('#owner').attr('options');
-                            var index_owner;
-                            /*owner_options[0] = new Option("");*/
-                            for(var i=0; i< r.length;i++){
-                              if(r[i]){
-                                if(r[i].role=='WL' || r[i].role=='Admin')
-                                  {
-                                    if(r[i].username==q[0].wluser){
-                                      index_owner=owner_options.length;
-                                    }
-                                  owner_options[owner_options.length] = new Option(r[i].username,r[i].id);
-                                  }
-                                }
-                            }
-                          if(index_owner)$('#owner option:eq('+index_owner+')' ).attr("selected","selected");
-                          }
-                        }
-                      else
-                        {
-                          general.displayError(r.error);
-                        }
-                    });
 
-
-                    //update become child ticket
-                    $.tzPOST('getTicketList',{recursive : false, status : [{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]},function(r){
-                      if(!r.error)
-                        {
-                            $('option', $('#become_Ticket')).remove();
-                            var become_Ticket_options = $('#become_Ticket').attr('options');
-
-                            for(var i=0; i< r.length;i++){
-                              var maxlength=15;
-                              if(r[i]){
-                                //don't want to make it a child of its own, that would be weird;-)
-                                if(r[i].title.length<maxlength)
-                                {
-                                maxlength=r[i].title.length;
-                                }
-
-                                if(r[i].id!=ticket_id && r[i].id!=parent_id && q[0].status!="Subticket"){
-                                  strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
-                                  become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[i].id);
-                                }
-
-                                if(q[0].status=="Subticket"){
-                                  strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
-                                  $('#become_Ticket').val(strOption);
-                                }
-                              }
-                            }
-                        }
-                      else
-                        {
-                          general.displayError(r.error);
-                        }
-                    });
-
-
-                    //update select handles
-                    $.tzPOST('getHandles',{},function(r){
-                      if(!r.error)
-                        {
-
-                            $('option', $('#ticket_Handle')).remove();
-                            //$('option', $('#subticket_Handle')).remove();
-                            $('option', $('#ticket_feedback_Handle')).remove();
-                            var tickethandles_options = $('#ticket_Handle').attr('options');
-                            //var subtickethandles_options = $('#subticket_Handle').attr('options');
-                            var feedbackhandles_options = $('#ticket_feedback_Handle').attr('options');
-                            var index_handle;
-                            tickethandles_options[0] = new Option("");
-                            //subtickethandles_options[0] = new Option("");
-                            feedbackhandles_options[0] = new Option("");
-                            for(var i=0; i< r.length;i++){
-                              if(r[i]){
-                                    //current handle?
-                                    if(r[i].id==q[0].handle_id){
-                                      index_handle=tickethandles_options.length;
-                                    }
-                                  tickethandles_options[tickethandles_options.length] = new Option(r[i].description,r[i].id);
-                                  //subtickethandles_options[subtickethandles_options.length] = new Option(r[i].description,r[i].id);
-                                  feedbackhandles_options[feedbackhandles_options.length] = new Option(r[i].description,r[i].id);
-
-                              }
-                              if(index_handle)
-                              {
-                                $('#ticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
-                                //$('#subticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
-                                $('#ticket_feedback_Handle option:eq('+index_handle+')' ).attr("selected","selected");
-                              }
-                            }
-                        }
-                      else
-                        {
-                          general.displayError(r.error);
-                        }
-                  });
-
+                    ticketing.TicketDetailUsers(r[0].wluser);
+                    ticketing.TicketDetailTickets(r[0].status,ticket_id,parent_id);
+                    ticketing.TicketDetailHandles(r[0].handle_id,r[0].status);
+                    if(r[0].status!='Subticket'){
+                    ticketing.TicketDetailUpdates(ticket_id);
+                    }
                 }
             else
                 {
-                    general.displayError(q.error);
+                    general.displayError(r.error);
                 }
           }
           else
           {
-
+            $('#TicketDetailsList').html('<p>Invalid ticket selected, please contact your local admin!</p>');
           }
         });
     },
 
+    TicketDetailUsers : function(wl_user){
+      //update select owner in ticketdetails
+      $.tzPOST('getUsers',{options:'all'},function(r){
+      if(!r.error)
+      {
+        if(wl_user){
+          $('option', $('#owner')).remove();
+          var owner_options = $('#owner').attr('options');
+          var index_owner;
+          /*owner_options[0] = new Option("");*/
+            for(var i=0; i< r.length;i++){
+              if(r[i]){
+                if(r[i].role=='WL' || r[i].role=='Admin')
+                  {
+                    if(r[i].username==wl_user){
+                      index_owner=owner_options.length;
+                    }
+                    owner_options[owner_options.length] = new Option(r[i].username,r[i].id);
+                  }
+              }
+            }
+            if(index_owner)$('#owner option:eq('+index_owner+')' ).attr("selected","selected");
+        }
+      }
+      else
+        {
+          general.displayError(r.error);
+        }
+      });
+    },
+
+    TicketDetailTickets : function(ticketstatus,ticket_id,parent_id){
+      //update become child ticket in TicketDetail
+      $.tzPOST('getTicketList',{recursive : false, status : [{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]},function(r){
+        if(!r.error)
+          {
+            $('option', $('#become_Ticket')).remove();
+              var become_Ticket_options = $('#become_Ticket').attr('options');
+                for(var i=0; i< r.length;i++){
+                  var maxlength=15;
+                    if(r[i]){
+                      //don't want to make it a child of its own, that would be weird;-)
+                      if(r[i].title.length<maxlength)
+                      {
+                        maxlength=r[i].title.length;
+                      }
+                      if(r[i].id!=ticket_id && r[i].id!=parent_id && ticketstatus!="Subticket")
+                      {
+                        strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
+                        become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[i].id);
+                      }
+                      if(ticketstatus=="Subticket")
+                      {
+                        strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
+                        $('#become_Ticket').val(strOption);
+                      }
+                    }
+                }
+          }
+          else
+          {
+           general.displayError(r.error);
+          }
+      });
+    },
+
+    TicketDetailHandles : function(handle_id,ticketstatus){
+    //update select handles in ticketDetails
+      $.tzPOST('getHandles',{},function(r){
+        if(!r.error)
+          {
+            $('option', $('#ticket_Handle')).remove();
+            $('option', $('#ticket_feedback_Handle')).remove();
+            var tickethandles_options = $('#ticket_Handle').attr('options');
+            if(ticketstatus!="Subticket"){
+              var feedbackhandles_options = $('#ticket_feedback_Handle').attr('options');
+              feedbackhandles_options[0] = new Option("");
+            }
+            var index_handle;
+            tickethandles_options[0] = new Option("");
+              for(var i=0; i< r.length;i++){
+                if(r[i]){
+                    //check whether the ticket handle is in this list, if it is, store the index
+                    if(r[i].id==handle_id){
+                      index_handle=tickethandles_options.length;
+                    }
+                    //add the handles to the select
+                    tickethandles_options[tickethandles_options.length] = new Option(r[i].description,r[i].id);
+                    if(ticketstatus!="Subticket"){
+                    feedbackhandles_options[feedbackhandles_options.length] = new Option(r[i].description,r[i].id);
+                    }
+                }
+                //if the index was stored, use it to select this item
+                if(index_handle)
+                {
+                  $('#ticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
+                  if(ticketstatus!="Subticket"){
+                    $('#ticket_feedback_Handle option:eq('+index_handle+')' ).attr("selected","selected");
+                  }
+                }
+              }
+          }
+          else
+          {
+            general.displayError(r.error);
+          }
+      });
+    },
+
+    TicketDetailUpdates : function(ticket_id){
+      //update the last update box in ticketdetails
+      $.tzPOST('getUpdates',{ticket_id:ticket_id,type:'update'},function(r){
+      if(!r.error)
+      {
+          if(r && r.length>0){
+              $('p.list_item_ticketdetail_label_last_update').show();
+              $('#ticket_last_update').show();
+              $('#openmodalbutton').show();
+              var length_updates=r.length-1;
+              var markup=r[length_updates].title+":\n"+r[length_updates].message;
+              //update time
+              $('p.list_item_ticketdetail_label_last_update').text('Laatste update('+general.stripToTime(r[length_updates].created)+'):');
+              //update text field
+              $('#ticket_last_update').val(markup);
+          }
+      }
+      else
+        {
+          general.displayError(r.error);
+        }
+      });
+
+      $.tzPOST('getUpdates',{ticket_id:ticket_id,type:'feedback'},function(r){
+      if(!r.error)
+      {
+          if(r && r.length>0){
+            $('p.list_item_ticketdetail_label_last_feedback').show();
+            $('#ticket_last_feedback').show();
+            $('#openmodalbutton').show();
+            var length_feedback=r.length-1;
+            var markup=r[length_feedback].title+":\n"+r[length_feedback].message;
+            //update time
+            $('p.list_item_ticketdetail_label_last_feedback').text('Laatste terugmelding('+general.stripToTime(r[length_feedback].created)+'):');
+            //update text field
+            $('#ticket_last_feedback').val(markup);
+          }
+      }
+      else
+        {
+          general.displayError(r.error);
+        }
+      });
+
+    },
 
   killTimeouts : function(){
             for (key in Timeout)

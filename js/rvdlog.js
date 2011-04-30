@@ -140,6 +140,36 @@ var general = {
                 ];
             break;
 
+
+            case 'feedbackTB':
+                arr = [
+                    '<div class="list_item_TB_holder rounded" id="',params.id,'">',
+                    '<div class="list_item_TB_header">',
+                      '<p text-align="left">Terugmelding(',params.handle_name,'):<BR>',params.title,'</p>',
+                    '</div>',
+                      '<div class="list_item_feedbackTB_item rounded">',
+                        '<p>',params.message,'</p>',
+                        '<p class="list_item_TB_time"> gecreerd op: ',general.stripToTime(params.created),'</p>',
+                      '</div>',
+                    '</div>'
+                ];
+            break;
+
+            case 'updateTB':
+                arr = [
+                '<div class="list_item_TB_holder rounded" id="',params.id,'">',
+                    '<div class="list_item_TB_header">',
+                      '<p text-align="left">Update:<BR>',params.title,'</p>',
+                    '</div>',
+                    '<div class="list_item_updateTB_item rounded" id="',params.id,'">',
+                    '<p>',params.message,'</p>',
+                    '<p class="list_item_TB_time"> gecreerd op: ',general.stripToTime(params.created),'</p>',
+                    '</div>',
+                '</div>'
+                ];
+            break;
+
+
             case 'ticket_detail_new':
             arr = [
             '<form id="TicketForm" method="post" action="">',
@@ -208,6 +238,7 @@ var general = {
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
                 '<p class="list_item_ticketdetail_label_update">Update:</p>',
+                '<div class=list_item_ticketdetail_update_title><input type="text" class="rounded" value="',,'" id="ticket_update_title"></div>',
                 '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
                 '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
@@ -250,6 +281,7 @@ var general = {
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Heropen Ticket"/>',
                 '<p class="list_item_ticketdetail_label_update">Update:</p>',
+                '<div class=list_item_ticketdetail_update_title><input type="text" class="rounded" value="',,'" id="ticket_update_title"></div>',
                 '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
                 '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',

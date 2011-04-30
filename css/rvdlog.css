@@ -687,6 +687,7 @@ textarea#ticket_update{
     top:82%;
     left:1%;
     color: white;
+    display: none;
 }
 
 textarea#ticket_last_update{
@@ -703,6 +704,7 @@ textarea#ticket_last_update{
     padding:1% 1%;
     resize: none;
     background-color:#E0E0E0;
+    display: none;
 }
 
 .list_item_ticketdetail_label_feedback
@@ -778,6 +780,7 @@ textarea#ticket_feedback{
     top:82%;
     left:51%;
     color: white;
+    display: none;
 }
 
 textarea#ticket_last_feedback{
@@ -794,14 +797,16 @@ textarea#ticket_last_feedback{
     padding:1% 1%;
     resize: none;
     background-color:#E0E0E0;
+    display: none;
 }
 
 .list_item_ticketdetail #openmodalbutton{
     position: absolute;
     top:96%;
     left:25%;
-    width:225px;
+    width:250px;
     height:20px;
+    display: none;
 }
 
 /* TopBar */

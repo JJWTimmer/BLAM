@@ -142,7 +142,7 @@ var logging = {
           $('#messagetext').val($('#messagetext').val()+$(this).children('.list_item_handle_name').text() + '-' + $(this).children('.list_item_handle_description').text());
         });
 
-        $('#search_handles').live('keyup', function (e) {
+        $('#search_handles').keyup(function (e) {
             $(".list_item_group").each(function(i) {
               $(this).attr('visible','1');
             });
@@ -321,7 +321,6 @@ var logging = {
             var inputcheckbox = $('#ticket:checked').val();
             $.tzPOST('addMessage',$(this).serialize(),function(r){
             if(!r.error){
-                working = false;
                 //empty input form textbox
                 $('#messagetext').val('');
                 if(inputcheckbox!=undefined)
@@ -343,7 +342,7 @@ var logging = {
                 }
 
             });
-
+            working = false;
             return false;
         });
 
@@ -589,7 +588,7 @@ var logging = {
                 logging.data.groupsLoaded = true;
 
                 logging.data.jspAPIHandles.getContentPane().empty();
-                logging.data.jspAPIHandles.getContentPane().append('<input type="text" class="rounded" value="" id="search_handles">');
+                //logging.data.jspAPIHandles.getContentPane().append('<input type="text" class="rounded" value="" id="search_handles">');
 
                 var markup_group;
                 var markup_handle;
