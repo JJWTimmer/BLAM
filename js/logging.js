@@ -389,7 +389,8 @@ var logging = {
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past messages
 
     getMessages : function(){
-        $.tzPOST('getMessages',{last_id:logging.data.lastID,date_and_time:Math.round(new Date().getTime()/1000-23*3600)},function(r){
+        var strTimestamp= '1';
+        $.tzPOST('getMessages',{last_id:logging.data.lastID,date_and_time:strTimestamp},function(r){
         //update messages from mysql db
           if(r)
           {
@@ -399,8 +400,7 @@ var logging = {
                 logging.addMessageLine(r[i]);
             }
 
-
-            //highlight bata-123 and arts-1 formats.
+            // bata-123 and arts-1 formats.
             general.highlightHandles(logging.data.jspAPIMeldingen.getContentPane(), logging.data.groups);
 
             //if new messages, update to lastid
@@ -516,7 +516,6 @@ var logging = {
         if(!logging.data.lastID){
             // If this is the first chat, remove the
             // paragraph saying there aren't any:
-
             $('#MeldingenList p').remove();
         }
 

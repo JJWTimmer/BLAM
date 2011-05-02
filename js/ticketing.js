@@ -188,7 +188,7 @@ var ticketing = {
 
         //function to implement clicking on thickbox link
         $('#openmodalbutton').live('click', function(){
-          general.tb_open_new('UpdatesAndFeedbacks.html?&KeepThis=true&height=300&width=300');
+          general.tb_open_new('UpdatesAndFeedbacks.html?&KeepThis=true&height=500&width=800');
         });
 
         // Logging a person into rvdlog:
