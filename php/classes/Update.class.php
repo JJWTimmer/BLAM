@@ -21,7 +21,7 @@ class Update extends RVDLogBase {
 			VALUES (
 				" . DB::esc($this->ticket_id) . ",
 				'" .DB::esc($this->type) . "',
-				'" . DB::esc($this->title) . "',
+				'" . (empty($this->title) ? 'NULL' : DB::esc($this->title)) . "',
                 '" . DB::esc($this->message) . "',
                 " . (empty($this->handle_id) ? 'NULL' : DB::esc($this->handle_id)) . ",
                 '" . date('Y-m-d G:i:s') . "'
