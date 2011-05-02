@@ -38,8 +38,8 @@
         $chatlines = new ajaxCRUD("chatlines", "chatlines", "id");
         $chatlines->setLimit(10);
 
-        $feedbacks = new ajaxCRUD("feedbacks", "feedbacks", "id");
-        $feedbacks->setLimit(10);
+        $updates = new ajaxCRUD("updates", "updates", "id");
+        $updates->setLimit(10);
 
         $groups = new ajaxCRUD("groups", "groups", "id");
         $groups->setLimit(10);
@@ -70,7 +70,7 @@
       <span id="select-table">
           <select id="table-selector">
             <option value="#chatlines-div">chatlines</option>
-            <option value="#feedbacks-div">feedbacks</option>
+            <option value="#updates-div">updates</option>
             <option value="#groups-div">groups</option>
             <option value="#handles-div">handles</option>
             <option value="#messages-div">messages</option>
@@ -85,9 +85,9 @@
             $chatlines->showTable();
           ?>
       </div>
-      <div id="feedbacks-div" class="table-div">
+      <div id="updates-div" class="table-div">
       <?php
-        $feedbacks->showTable();
+        $updates->showTable();
       ?>
       </div>
       <div id="groups-div" class="table-div">
