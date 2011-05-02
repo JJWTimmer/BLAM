@@ -26,7 +26,7 @@ class ChatLine extends RVDLogBase {
 		
 	}
     
-    public function get($last_id = 'all', $since = null) {
+    public function get($last_id = 'all', $since = null) { //TODO: max toevoegen
         if (is_string($last_id) && $last_id == 'all') {
             $results = DB::query("
                 SELECT t.id, t.text, t.created, users.username, users.avatar

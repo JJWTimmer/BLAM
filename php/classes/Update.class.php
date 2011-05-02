@@ -38,17 +38,17 @@ class Update extends RVDLogBase {
     public function get($for, $type = 'all') {
         if (is_string($type) && $type == 'all') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, u.called, u.called_by, u.created
+                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, h.description, u.called, u.called_by, u.created
                 FROM updates AS u LEFT OUTER JOIN handles AS h ON u.handle_id = h.id
                 WHERE u.ticket_id = " . DB::esc($for));
         } elseif (is_string($type) && $type == 'update') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, u.called, u.called_by, u.created
+                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, h.description, u.called, u.called_by, u.created
                 FROM updates AS u LEFT OUTER JOIN handles AS h ON u.handle_id = h.id
                 WHERE type = 'update' AND u.ticket_id = " . DB::esc($for));
         } elseif (is_string($type) && $type == 'feedback') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, u.called, u.called_by, u.created
+                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, h.description, u.called, u.called_by, u.created
                 FROM updates AS u LEFT OUTER JOIN handles AS h ON u.handle_id = h.id
                 WHERE type = 'feedback' AND u.ticket_id = " . DB::esc($for));
         } else {
@@ -66,7 +66,7 @@ class Update extends RVDLogBase {
             throw new Exception('invalid parameters for getFeedback');
         }
 
-        $q = "SELECT f.id AS id, f.ticket_id, u2.username AS wl_user, f.title, h.handle_name as handle, f.message, f.called, u.username AS called_by, f.created
+        $q = "SELECT f.id AS id, f.ticket_id, u2.username AS wl_user, f.title, h.handle_name as handle, h.description, f.message, f.called, u.username AS called_by, f.created
             FROM updates AS f
             INNER JOIN tickets AS t ON t.id = f.ticket_id
             INNER JOIN handles AS h ON h.id = f.handle_id

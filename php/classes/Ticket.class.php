@@ -58,6 +58,21 @@ class Ticket extends RVDLogBase {
            throw new Exception(DB::getMySQLiObject()->error);
 	}
     
+	public function updateText() {
+		$res = DB::query("
+			UPDATE tickets
+			SET	text = '" . DB::esc($this->text) . "',
+            modified = '" . date('Y-m-d G:i:s') . "' 
+            WHERE message_id = " . DB::esc($this->message_id)
+            );
+            
+        if (!$res)
+           throw new Exception(DB::getMySQLiObject()->error);
+        $id = DB::getMySQLiObject()->insert_id;
+        logmsg($id);   
+        return $id;
+	}
+    
     public function getDetails() {
         $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t

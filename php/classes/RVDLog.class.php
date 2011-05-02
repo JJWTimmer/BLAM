@@ -166,24 +166,24 @@ class RVDLog {
 
     // returns array (integer Id, string Title, string HandleName, string Message, string userWL, Datetime called, Datetime created)feedback or exception
     public static function getFeedback($id, $called) {
-        $feedback = new update(array());
+        $feedback = new Update(array());
         $feedbacks = $feedback->getFeedback($id, $called);
         return $feedbacks;
     }
     
     // returns array (id, ticket_id, type, title, message, handlename, called, called_by, created)
     public static function getUpdates($for, $type) {
-        $updates = new update(array());
+        $updates = new Update(array());
         $updates = $updates->get($for, $type);
         return $updates;
     }
     
     public static function closeFeedback($id, $user_id){
-        $feedback = new feedback(array(
+        $feedback = new Update(array(
             'id'        => $id,
             'called_by' => $_SESSION['user']['id']
         ));
-        $feedback->close();
+        $feedback->closeFeedback();
     }
 
     public static function addChat($text, $user_id){

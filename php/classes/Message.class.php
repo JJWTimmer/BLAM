@@ -32,12 +32,14 @@ class Message extends RVDLogBase {
                 SELECT msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 ORDER BY msg.id ASC");
-        } elseif (is_array($options)) {
+        } elseif (is_array($options)) { //TODO: last_timestamp, max toevoegen
             $last_id = DB::esc($options['last_id']);
             $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
+            $max = DB::esc($options['max']);
+            $ts = DB::esc($options['last_timestamp']);
             
             $q = "
-                SELECT msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
+                SELECT " . (!empty($max) ? "TOP $max" : "") . " msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 WHERE msg.id > $last_id
                 ";
@@ -74,10 +76,13 @@ class Message extends RVDLogBase {
               WHERE id = " . DB::esc($this->id);
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+        $ticket = new Ticket(array('message_id' => DB::esc($this->id), 'text' => DB::esc($this->text)));
+        $ticket->updateText();
+        
 	}
 	
 	public function setTicket($tick_no) {
-        $q = "UPDATE messages SET ticket_id = " . DB::esc($tick_no) . ",
+        $q = "UPDATE messages SET ticket_id = " . DB::esc($tick_no) . "
               WHERE id = " . DB::esc($this->id);
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
