@@ -26,6 +26,15 @@
 	width:250px;
 }
 
+#reallyrightLink{
+	height:50px;
+	position:absolute;
+	left:400px;
+	top:0 px;
+	width:250px;
+}
+
+
 /* Main chat container */
 
 #chatContainer{

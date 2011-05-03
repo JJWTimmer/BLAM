@@ -389,8 +389,8 @@ var logging = {
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past messages
 
     getMessages : function(){
-        var strTimestamp= '1';
-        $.tzPOST('getMessages',{last_id:logging.data.lastID,date_and_time:strTimestamp},function(r){
+        //timestamp uses 2 hours (120 min)
+        $.tzPOST('getMessages',{last_id:logging.data.lastID,date_and_time:general.generateTimestamp(120)},function(r){
         //update messages from mysql db
           if(r)
           {
@@ -417,11 +417,18 @@ var logging = {
                 logging.data.noActivity++;
             }
 
-
-            //if no chats exist yet
-            if(!logging.data.lastID){
+            //if no messages exist yet
+            if($("#MeldingenList .jspContainer .jspPane > div").length==0 && $("#MeldingenList .jspContainer .jspPane > p").length==0){
                 logging.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">Nog geen meldingen</p>');
+                logging.data.jspAPIMeldingen.reinitialise();
             }
+
+            if($("#MeldingenList .jspContainer .jspPane > div").length > 0 && $("#MeldingenList .jspContainer .jspPane > p").length > 0){
+              // If this is the first melding, remove the
+              // paragraph saying there aren't any:
+              $('#MeldingenList .jspContainer .jspPane > p').remove();
+            }
+
 
             // Setting a timeout for the next request,
             // depending on the message activity:
@@ -447,6 +454,7 @@ var logging = {
                 general.displayError(r.error);
                 var nextRequest = 1000;
             }
+
 
             Timeout["Messages"]=setTimeout("logging.getMessages();",nextRequest);
           }
@@ -511,12 +519,6 @@ var logging = {
 
         if(exists.length){
             exists.remove();
-        }
-
-        if(!logging.data.lastID){
-            // If this is the first chat, remove the
-            // paragraph saying there aren't any:
-            $('#MeldingenList p').remove();
         }
 
         //If this isn't a temporary chat:

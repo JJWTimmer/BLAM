@@ -175,6 +175,7 @@ var general = {
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
                 '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
+                '<div class=list_item_ticketdetail_id><input type="text" class="rounded" readonly="readonly" value="',params.id,':" id="ticket_id"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
                 '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
@@ -193,17 +194,14 @@ var general = {
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
+                '<hr id=ticketdetail_line>',
                 '<p class="list_item_ticketdetail_label_update">Update:</p>',
-                '<div class=list_item_ticketdetail_update_title><input type="text" class="rounded" value="',,'" id="ticket_update_title"></div>',
                 '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
                 '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
                 '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
                 '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
-                '<div class=list_item_ticketdetail_feedback_title><input type="text" class="rounded" value="',,'" id="ticket_feedback_title"></div>',
                 '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<p class="list_item_ticketdetail_label_feedback_handle">Voertuig:</p>',
-                '<div class=list_item_ticketdetail_feedback_handle><p><select id="ticket_feedback_Handle"><option selected> </option></select></p></div>',
                 '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
                 '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
@@ -217,6 +215,7 @@ var general = {
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
                 '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
+                '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
                 '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
@@ -237,17 +236,14 @@ var general = {
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
+                '<hr id=ticketdetail_line>',
                 '<p class="list_item_ticketdetail_label_update">Update:</p>',
-                '<div class=list_item_ticketdetail_update_title><input type="text" class="rounded" value="',,'" id="ticket_update_title"></div>',
                 '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
                 '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
                 '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
-                '<div class=list_item_ticketdetail_feedback_title><input type="text" class="rounded" value="',,'" id="ticket_feedback_title"></div>',
                 '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
                 '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<p class="list_item_ticketdetail_label_feedback_handle">Voertuig:</p>',
-                '<div class=list_item_ticketdetail_feedback_handle><p><select id="ticket_feedback_Handle"><option selected> </option></select></p></div>',
                 '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
                 '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
@@ -261,6 +257,7 @@ var general = {
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
                 '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
+                '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
                 '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
@@ -280,17 +277,14 @@ var general = {
                 '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
                 '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Heropen Ticket"/>',
+                '<hr id=ticketdetail_line>',
                 '<p class="list_item_ticketdetail_label_update">Update:</p>',
-                '<div class=list_item_ticketdetail_update_title><input type="text" class="rounded" value="',,'" id="ticket_update_title"></div>',
                 '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
                 '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
                 '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
-                '<div class=list_item_ticketdetail_feedback_title><input type="text" class="rounded" value="',,'" id="ticket_feedback_title"></div>',
                 '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
                 '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<p class="list_item_ticketdetail_label_feedback_handle">Voertuig:</p>',
-                '<div class=list_item_ticketdetail_feedback_handle><p><select id="ticket_feedback_Handle"><option selected> </option></select></p></div>',
                 '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
                 '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
                 '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
@@ -304,6 +298,7 @@ var general = {
             '<form id="TicketForm" method="post" action="">',
               '<div class="list_item_ticketdetail rounded">',
                 '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
+                '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
                 '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
@@ -319,8 +314,9 @@ var general = {
                 '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
                 '<div class="list_item_ticketdetail_label_becomechild"><p>gekoppeld aan:</p></div>',
                 '<div class=list_item_ticketdetail_becomechild><input type="text" readonly="readonly" class="rounded" value="','" id="become_Ticket"></div>',
-                '<input type="button" id="becomeparentticketbutton" class="blueButton" value="Koppel los!"/>',
+                '<input type="button" id="becomeparentticketButton" class="blueButton" value="Koppel los!"/>',
                 '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
+                '<hr id=ticketdetail_line>',
                 '</div>',
                 '</form>'];
             break;
@@ -411,6 +407,17 @@ var general = {
       tb_show(null,jThickboxNewLink,null);
     },
 
+    generateTimestamp : function(subtract_time_minutes){
+        var now=new Date();
+        if (subtract_time_minutes>0)
+          {
+            //date value is the time in ms from 1970. subtract the amount of ms needed to get a date in the past
+            var d=new Date(now-60000*subtract_time_minutes);
+            //generate the timestamp format: YYYY-MM-DD hh:mm:ss
+            var strTimestamp= d.getFullYear()+'-'+ ((d.getMonth()+1) < 10 ? '0' : '' )+ (d.getMonth()+1) + '-' + ((d.getDate()) < 10 ? '0' : '' )+ d.getDate() + ' ' + (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':'+(d.getSeconds() < 10 ? '0':'') + d.getSeconds();
+          }
+    return strTimestamp;
+    },
 
 }
 //end of var general

@@ -393,41 +393,48 @@ var ticketing = {
 
       // add listener for this button and add an update
       $('#saveupdatebutton').live('click',function(){
-            $.tzPOST('createUpdate',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_update_title').val(),message:$('#ticket_update').val()},function(r){
-              if(r==null){
+        if(working) return false;
+        working = true;
+        if($('#ticket_update').val()!="" && $('#ticket_update').val()!="Text voor update")
+          {
+            $.tzPOST('createUpdate',{ticket_id:ticketing.data.selectedticket,message:$('#ticket_update').val()},function(r){
+              working = false;
+              if(r.error){
+                    general.displayError(r.error);
+                  }
+                  else
+                  {
+                    general.displaySaved("Update aangemaakt: " + $('#ticket_title').val());
+                    $('#ticket_update').val("");
+                    $('#ticket_update').defaultText('Text voor update');
+                    ticketing.TicketDetailUpdates(ticketing.data.selectedticket);
+                  }
 
-              }
-              else
-              {
-                general.displayError(r.error);
-              }
-            general.displaySaved("Update aangemaakt: " + $('#ticket_update_title').val());
-            $('#ticket_update_title').val("");
-            $('#ticket_update').val("");
-            $('#ticket_update_title').defaultText('Titel voor update');
-            $('#ticket_update').defaultText('Text voor update');
-            ticketing.TicketDetailUpdates(ticketing.data.selectedticket);
             });
+          }
+          else
+                {
+                alert("Niet goed ingevuld!");
+                working = false;
+                }
+          return false;
       });
 
 
         $('#savefeedbackbutton').live('click',function(){
             if(working) return false;
             working = true;
-                if($('#ticket_feedback_title').val()!="" && $('#ticket_feedback').val()!="" && $('#ticket_feedback_Handle').val()!="")
+                if($('#ticket_feedback').val()!="" && $('#ticket_feedback').val()!="Text voor terugmelding")
                 {
-                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_feedback_title').val(),message:$('#ticket_feedback').val(),handle_id:$('#ticket_feedback_Handle').val()},function(r){
+                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_title').val(),message:$('#ticket_feedback').val()},function(r){
                     working = false;
-
                     if(r.error){
                         general.displayError(r.error);
                     }
                     else
                     {
-                        general.displaySaved("Terugmelding aangemaakt: " + $('#ticket_feedback_title').val());
-                        $('#ticket_feedback_title').val("");
+                        general.displaySaved("Terugmelding aangemaakt: " + $('#ticket_title').val());
                         $('#ticket_feedback').val("");
-                        $('#ticket_feedback_title').defaultText('Titel voor terugmelding');
                         $('#ticket_feedback').defaultText('Text voor terugmelding');
                         ticketing.TicketDetailUpdates(ticketing.data.selectedticket);
                     }
@@ -435,7 +442,7 @@ var ticketing = {
                 }
                 else
                 {
-                alert("Niet alles ingevuld!");
+                alert("Niet goed ingevuld!");
                 working = false;
                 }
           return false;
@@ -485,10 +492,8 @@ var ticketing = {
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past messages
 
     getMessages : function(){
-        var d=new Date();
-        //var strTimestamp= '"'+d.getFullYear()+'-'+ ((d.getMonth()+1) < 10 ? '0' : '' )+ (d.getMonth()+1) + '-' + d.getDate()+ ' ' + (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':' + d.getSeconds() '"';
-        var strTimestamp= '1';
-        $.tzPOST('getMessages',{last_id:ticketing.data.lastIDMessages,date_and_time:strTimestamp},function(r){
+        //timestamp uses 2 hours (120 min)
+        $.tzPOST('getMessages',{last_id:ticketing.data.lastIDMessages,date_and_time:general.generateTimestamp(1)},function(r){
         //update messages from mysql db
             if(!r.error)
             {
@@ -508,9 +513,17 @@ var ticketing = {
 
                 ticketing.data.noActivityMessages++;
             }
-            //if no chats exist yet
-            if(!ticketing.data.lastIDMessages){
+
+            //if no messages exist yet
+            if($("#MeldingenList .jspContainer .jspPane > div").length==0 && $("#MeldingenList .jspContainer .jspPane > p").length==0){
                 ticketing.data.jspAPIMeldingen.getContentPane().html('<p class="noMessages">Nog geen meldingen</p>');
+                ticketing.data.jspAPIMeldingen.reinitialise();
+            }
+
+            if($("#MeldingenList .jspContainer .jspPane > div").length > 0 && $("#MeldingenList .jspContainer .jspPane > p").length > 0){
+              // If this is the first melding, remove the
+              // paragraph saying there aren't any:
+              $('#MeldingenList .jspContainer .jspPane > p').remove();
             }
 
             // Setting a timeout for the next request,
@@ -543,16 +556,13 @@ var ticketing = {
         });
     },
 
-
-
     // This method requests the latest chats
     // (since last_id,timestamp), and adds them to the page. currently 24 hours past chats
 
     getChats : function(){
         var d=new Date();
-        //var strTimestamp= d.getFullYear()+'-'+ ((d.getMonth()+1) < 10 ? '0' : '' )+ (d.getMonth()+1) + '-' + d.getDate()+ ' ' + (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':' + d.getSeconds();
-        var strTimestamp= Math.round(new Date().getTime()/1000-23*3600);
-        $.tzPOST('getChats',{last_id:ticketing.data.lastIDChats,date_and_time:strTimestamp},function(r){
+        //timestamp uses 2 hours (120 min)
+        $.tzPOST('getChats',{last_id:ticketing.data.lastIDChats,date_and_time:general.generateTimestamp(1)},function(r){
         //update messages from mysql db
             if(!r.error)
             {
@@ -571,9 +581,17 @@ var ticketing = {
                 // the noActivity counter.
                 ticketing.data.noActivityChats++;
             }
-            //if no chats exist yet
-            if(!ticketing.data.lastIDChats){
-                ticketing.data.jspAPIChats.getContentPane().html('<p class="noChats">Nog geen chats</p>');
+
+            //if no messages exist yet
+            if($("#WL-ChatList .jspContainer .jspPane > div").length==0 && $("#WL-ChatList .jspContainer .jspPane > p").length==0){
+                ticketing.data.jspAPIChats.getContentPane().html('<p class="noMessages">Nog geen chats</p>');
+                ticketing.data.jspAPIChats.reinitialise();
+            }
+
+            if($("#WL-ChatList .jspContainer .jspPane > div").length > 0 && $("#WL-ChatList .jspContainer .jspPane > p").length > 0){
+              // If this is the first melding, remove the
+              // paragraph saying there aren't any:
+              $('#WL-ChatList .jspContainer .jspPane > p').remove();
             }
 
             // Setting a timeout for the next request,
@@ -631,13 +649,6 @@ var ticketing = {
 
         if(exists.length){
             exists.remove();
-        }
-
-        if(!ticketing.data.lastIDMessages){
-            // If this is the first message, remove the
-            // paragraph saying there aren't any:
-
-            $('#MeldingenList p').remove();
         }
 
         //If this isn't a temporary message:
@@ -889,7 +900,7 @@ var ticketing = {
                 params = {role : ticketing.data.role};
                 var markup;
                 var markup_extra;
-                  for(var i=0; i< r.length;i++){
+                  for(var i=r.length; i>0;i--){
                     if(r[i]){
                         r[i].role=ticketing.data.role;
                         markup=general.render('parentticket',$.extend(r[i],params));
@@ -949,8 +960,7 @@ var ticketing = {
                           r[0].status="Subticket";
                           $('#TicketDetailsList').html(general.render('subticket_detail',r[0]));
                     }
-                    $('#ticket_update_title').defaultText('Titel voor update');
-                    $('#ticket_feedback_title').defaultText('Titel voor terugmelding');
+
                     $('#ticket_update').defaultText('Text voor update');
                     $('#ticket_feedback').defaultText('Text voor terugmelding');
 
@@ -1045,12 +1055,9 @@ var ticketing = {
         if(!r.error)
           {
             $('option', $('#ticket_Handle')).remove();
-            $('option', $('#ticket_feedback_Handle')).remove();
+
             var tickethandles_options = $('#ticket_Handle').attr('options');
-            if(ticketstatus!="Subticket"){
-              var feedbackhandles_options = $('#ticket_feedback_Handle').attr('options');
-              feedbackhandles_options[0] = new Option("");
-            }
+
             var index_handle;
             tickethandles_options[0] = new Option("");
               for(var i=0; i< r.length;i++){
@@ -1061,17 +1068,13 @@ var ticketing = {
                     }
                     //add the handles to the select
                     tickethandles_options[tickethandles_options.length] = new Option(r[i].description,r[i].id);
-                    if(ticketstatus!="Subticket"){
-                    feedbackhandles_options[feedbackhandles_options.length] = new Option(r[i].description,r[i].id);
-                    }
+
                 }
                 //if the index was stored, use it to select this item
                 if(index_handle)
                 {
                   $('#ticket_Handle option:eq('+index_handle+')' ).attr("selected","selected");
-                  if(ticketstatus!="Subticket"){
-                    $('#ticket_feedback_Handle option:eq('+index_handle+')' ).attr("selected","selected");
-                  }
+
                 }
               }
           }
@@ -1092,7 +1095,7 @@ var ticketing = {
               $('#ticket_last_update').show();
               $('#openmodalbutton').show();
               var length_updates=r.length-1;
-              var markup=r[length_updates].title+":\n"+r[length_updates].message;
+              var markup=r[length_updates].message;
               //update time
               $('p.list_item_ticketdetail_label_last_update').text('Laatste update('+general.stripToTime(r[length_updates].created)+'):');
               //update text field
@@ -1113,7 +1116,7 @@ var ticketing = {
             $('#ticket_last_feedback').show();
             $('#openmodalbutton').show();
             var length_feedback=r.length-1;
-            var markup=r[length_feedback].title+":\n"+r[length_feedback].message;
+            var markup=r[length_feedback].message;
             //update time
             $('p.list_item_ticketdetail_label_last_feedback').text('Laatste terugmelding('+general.stripToTime(r[length_feedback].created)+'):');
             //update text field
