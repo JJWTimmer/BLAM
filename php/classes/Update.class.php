@@ -46,7 +46,7 @@ class Update extends RVDLogBase {
                 . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'feedback') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.title, u.message, u.called, u.called_by, u.created
+                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, u.created
                 FROM updates AS u
                 WHERE u.type = 'feedback' AND u.ticket_id = " . DB::esc($for)
                 . " LIMIT 0,100");
@@ -65,7 +65,7 @@ class Update extends RVDLogBase {
             throw new Exception('invalid parameters for getFeedback');
         }
 
-        $q = "SELECT f.id AS id, f.ticket_id, t.title, u2.username AS wl_user, f.title, f.message, f.called, u.username AS called_by, f.created
+        $q = "SELECT f.id AS id, f.ticket_id, t.title, u2.username AS wl_user, f.message, f.called, u.username AS called_by, f.created
             FROM updates AS f
             INNER JOIN tickets AS t ON t.id = f.ticket_id
             LEFT OUTER JOIN users u ON u.id = f.called_by
@@ -88,6 +88,7 @@ class Update extends RVDLogBase {
             }
         }
         $q .= " LIMIT 0, 100";
+
         $results = DB::query($q);
         if ($results) while ($output[] = mysqli_fetch_assoc($results));
         if (!is_null($output) && end($output) == null) array_pop($output);
