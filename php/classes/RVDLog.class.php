@@ -241,24 +241,21 @@ class RVDLog {
         $ticket->update();
     }
 
-    public static function createUpdate($ticket_id, $title, $message){
+    public static function createUpdate($ticket_id, $message){
         $update = new Update(array(
             'ticket_id' => $ticket_id,
 			'type' => 'update',
-            'title' => $title,
             'message' => $message
         ));
         $id = $update->create();
         return $id;
     }
 
-    public static function createFeedback($ticket_id, $title, $message, $handle_id){
+    public static function createFeedback($ticket_id, $message){
         $update = new Update(array(
             'ticket_id' => $ticket_id,
 			'type' => 'feedback',
-            'title' => $title,
-            'message' => $message,
-            'handle_id' => $handle_id
+            'message' => $message
         ));
         $id = $update->create();
         return $id;

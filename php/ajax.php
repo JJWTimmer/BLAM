@@ -164,13 +164,13 @@ try {
 		//*
 		case 'createUpdate':
             RVDLog::checkLogged();
-			$response = RVDLog::createUpdate($_POST['ticket_id'], $_POST['title'], $_POST['message']);
+			$response = RVDLog::createUpdate($_POST['ticket_id'], $_POST['message']);
             // returns integer UpdateId or exception
             break;
 		//*
 		case 'createFeedback':
             RVDLog::checkLogged();
-			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['title'], $_POST['message'], $_POST['handle_id']);
+			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['message']);
             // returns integer FeedbackId or exception
             break;
 		

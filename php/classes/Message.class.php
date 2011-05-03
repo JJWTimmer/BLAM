@@ -9,14 +9,16 @@ class Message extends RVDLogBase {
 	protected $text = '';
     protected $ticket_id = '';
     protected $created = '';
+    protected $modified = '';
 	
 	public function create() {
 
 		DB::query("
-			INSERT INTO messages (user_id, text, created)
+			INSERT INTO messages (user_id, text, created, modified)
 			VALUES (
 				" . DB::esc($this->user_id) . ",
 				'" . DB::esc($this->text) . "',
+                '" . DB::esc($this->created) . "',
                 '" . DB::esc($this->created) . "'
             )
             ");
@@ -29,22 +31,23 @@ class Message extends RVDLogBase {
     public function get($options = 'all') {
         if (is_string($options) && $options == 'all') {
             $results = DB::query("
-                SELECT msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
+                SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                ORDER BY msg.id ASC");
-        } elseif (is_array($options)) { //TODO: last_timestamp, max toevoegen
+                ORDER BY msg.id ASC LIMIT 0,100");
+        } elseif (is_array($options)) { //TODO: last_timestamp
             $last_id = DB::esc($options['last_id']);
             $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
             $max = DB::esc($options['max']);
             $ts = DB::esc($options['last_timestamp']);
             
-            $q = "
-                SELECT " . (!empty($max) ? "TOP $max" : "") . " msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
+            $q = "SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                WHERE msg.id > $last_id
-                ";
+                WHERE msg.id > $last_id";
             $q .= ($since ? " AND msg.created > '$since'" : "");
+            $q .= ($ts ? " AND msg.modified > '$ts'" : "");
             $q .= " ORDER BY msg.id ASC";
+            $q .= " LIMIT 0,100";
+
             $results = DB::query($q);
         } else {
             throw new Exception('Invalid arguments for getMessages');
@@ -58,10 +61,10 @@ class Message extends RVDLogBase {
     public function search($keyword) {
         if (is_string($keyword)) {
             $results = DB::query("
-                SELECT msg.id, msg.text, msg.ticket_id, msg.created, users.username, users.avatar
+                SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 WHERE text LIKE '%" . DB::esc($keyword) . "%'
-                ");
+                LIMIT 0,100");
         } else {
             return false;
         }

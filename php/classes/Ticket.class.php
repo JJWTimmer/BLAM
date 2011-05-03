@@ -42,17 +42,17 @@ class Ticket extends RVDLogBase {
     
 	public function update() {
         $handle = !empty($this->handle_id);
-		$res = DB::query("
+        $q = "
 			UPDATE tickets
 			SET	title = '" . DB::esc($this->title) . "',
 				text = '" . DB::esc($this->text) . "',
                 location = '" . DB::esc($this->location) . "',
 				solution = '" . DB::esc($this->solution) . "',
                 reference = '" . DB::esc($this->reference) . "',"
-                . ($handle ? "handle_id = " . DB::esc($this->handle_id) . "," : "")
+                . "handle_id = " . ($handle ?  DB::esc($this->handle_id)  : "NULL") . ","
                 . "modified = '" . date('Y-m-d G:i:s') . "' 
-            WHERE id = " . DB::esc($this->id) . "
-            ");
+            WHERE id = " . DB::esc($this->id);
+		$res = DB::query($q);
             
         if (!$res)
            throw new Exception(DB::getMySQLiObject()->error);
@@ -110,8 +110,7 @@ class Ticket extends RVDLogBase {
             INNER JOIN statuses AS s ON t.status_id = s.id
             LEFT OUTER JOIN messages AS m ON t.message_id = m.id
             LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
-            WHERE t.parent_id IS NULL
-            ";
+            WHERE t.parent_id IS NULL";
 
         if (is_numeric($last_id)) {
             $q .= "AND t.id > $last_id";
@@ -124,6 +123,7 @@ class Ticket extends RVDLogBase {
         }
         
         $q .= " ORDER BY t.id ASC";
+        $q .= " LIMIT 0, 100";
         
         if ($recursive == 'false') {
             $results = DB::query($q);

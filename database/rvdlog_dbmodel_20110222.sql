@@ -47,15 +47,12 @@ CREATE TABLE IF NOT EXISTS `updates` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(10) NOT NULL,
   `type` ENUM('update', 'feedback') NOT NULL,
-  `title` varchar(45) NOT NULL,
   `message` text NOT NULL,
-  `handle_id` int(10) NULL,
   `called` datetime NULL,
   `called_by` int(10) NULL,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_updates_ticket` (`ticket_id`),
-  KEY `FK_updates_handle` (`handle_id`),
   KEY `FK_updates_operator` (`called_by`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 -- --------------------------------------------------------
@@ -97,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `text` text,
   `ticket_id` int(10) NULL,
   `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_messages_users` (`user_id`),
   KEY `FK_messages_tickets` (`ticket_id`)

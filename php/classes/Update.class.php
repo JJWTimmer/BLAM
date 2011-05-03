@@ -7,9 +7,7 @@ class Update extends RVDLogBase {
 	protected $id = '';
 	protected $ticket_id = '';
 	protected $type = '';
-	protected $title = '';
 	protected $message = '';
-	protected $handle_id = '';
 	protected $called = '';
 	protected $called_by = '';
     protected $created = '';
@@ -17,13 +15,11 @@ class Update extends RVDLogBase {
 	public function create() {
 
         $q = "
-			INSERT INTO updates (ticket_id, type, title, message, handle_id, created)
+			INSERT INTO updates (ticket_id, type, message, created)
 			VALUES (
 				" . DB::esc($this->ticket_id) . ",
 				'" .DB::esc($this->type) . "',
-				'" . (empty($this->title) ? 'NULL' : DB::esc($this->title)) . "',
                 '" . DB::esc($this->message) . "',
-                " . (empty($this->handle_id) ? 'NULL' : DB::esc($this->handle_id)) . ",
                 '" . date('Y-m-d G:i:s') . "'
             )
             ";
@@ -38,19 +34,22 @@ class Update extends RVDLogBase {
     public function get($for, $type = 'all') {
         if (is_string($type) && $type == 'all') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, h.description, u.called, u.called_by, u.created
-                FROM updates AS u LEFT OUTER JOIN handles AS h ON u.handle_id = h.id
-                WHERE u.ticket_id = " . DB::esc($for));
+                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, u.created
+                FROM updates AS u
+                WHERE u.ticket_id = " . DB::esc($for)
+                . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'update') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, h.description, u.called, u.called_by, u.created
-                FROM updates AS u LEFT OUTER JOIN handles AS h ON u.handle_id = h.id
-                WHERE type = 'update' AND u.ticket_id = " . DB::esc($for));
+                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, u.created
+                FROM updates AS u
+                WHERE type = 'update' AND u.ticket_id = " . DB::esc($for)
+                . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'feedback') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.title, u.message, h.handle_name, h.description, u.called, u.called_by, u.created
-                FROM updates AS u LEFT OUTER JOIN handles AS h ON u.handle_id = h.id
-                WHERE type = 'feedback' AND u.ticket_id = " . DB::esc($for));
+                SELECT u.id, u.ticket_id, u.type, u.title, u.message, u.called, u.called_by, u.created
+                FROM updates AS u
+                WHERE u.type = 'feedback' AND u.ticket_id = " . DB::esc($for)
+                . " LIMIT 0,100");
         } else {
             throw new Exception('Invalid arguments for get update');
         }
@@ -66,10 +65,9 @@ class Update extends RVDLogBase {
             throw new Exception('invalid parameters for getFeedback');
         }
 
-        $q = "SELECT f.id AS id, f.ticket_id, u2.username AS wl_user, f.title, h.handle_name as handle, h.description, f.message, f.called, u.username AS called_by, f.created
+        $q = "SELECT f.id AS id, f.ticket_id, t.title, u2.username AS wl_user, f.title, f.message, f.called, u.username AS called_by, f.created
             FROM updates AS f
             INNER JOIN tickets AS t ON t.id = f.ticket_id
-            INNER JOIN handles AS h ON h.id = f.handle_id
             LEFT OUTER JOIN users u ON u.id = f.called_by
             LEFT OUTER JOIN users u2 ON t.user_id = u2.id
             WHERE f.type = 'feedback'";
@@ -89,7 +87,7 @@ class Update extends RVDLogBase {
                     break;
             }
         }
-
+        $q .= " LIMIT 0, 100";
         $results = DB::query($q);
         if ($results) while ($output[] = mysqli_fetch_assoc($results));
         if (!is_null($output) && end($output) == null) array_pop($output);
@@ -103,9 +101,6 @@ class Update extends RVDLogBase {
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
 	}
-    
-    
-    
 }
 
 ?>
