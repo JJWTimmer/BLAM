@@ -493,7 +493,7 @@ var ticketing = {
 
     getMessages : function(){
         //timestamp uses 2 hours (120 min)
-        $.tzPOST('getMessages',{last_id:ticketing.data.lastIDMessages,date_and_time:general.generateTimestamp(1)},function(r){
+        $.tzPOST('getMessages',{last_id:ticketing.data.lastIDMessages,date_and_time:general.generateTimestamp(120)},function(r){
         //update messages from mysql db
             if(!r.error)
             {
@@ -562,7 +562,7 @@ var ticketing = {
     getChats : function(){
         var d=new Date();
         //timestamp uses 2 hours (120 min)
-        $.tzPOST('getChats',{last_id:ticketing.data.lastIDChats,date_and_time:general.generateTimestamp(1)},function(r){
+        $.tzPOST('getChats',{last_id:ticketing.data.lastIDChats,since:general.generateTimestamp(120)},function(r){
         //update messages from mysql db
             if(!r.error)
             {
