@@ -4,19 +4,19 @@
 
 class Ticket extends RVDLogBase {
 	
-	protected $id = '';
-	protected $user_id = '';
-	protected $parent_id = '';
-	protected $message_id = '';
-	protected $status_id = '';
-	protected $title = '';
-	protected $text = '';
-	protected $location = '';
-	protected $solution = '';
-	protected $handle_id = '';
-    protected $reference = '';
-    protected $created = '';
-	protected $modified = '';
+	public $id = '';
+	public $user_id = '';
+	public $parent_id = '';
+	public $message_id = '';
+	public $status_id = '';
+	public $title = '';
+	public $text = '';
+	public $location = '';
+	public $solution = '';
+	public $handle_id = '';
+    public $reference = '';
+    public $created = '';
+	public $modified = '';
 
 	public function create() {
 

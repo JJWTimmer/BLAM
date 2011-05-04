@@ -2,11 +2,11 @@
 
 class User extends RVDLogBase {
 	
-    protected $id = '';
-	protected $username = '';
-    protected $password = '';
-    protected $role = '';
-    protected $avatar = '';
+    public $id = '';
+	public $username = '';
+    public $password = '';
+    public $role = '';
+    public $avatar = '';
 	
 	public function create() {
 		

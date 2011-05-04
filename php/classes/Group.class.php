@@ -4,8 +4,8 @@
 
 class Group extends RVDLogBase {
 	
-	protected $id = '';
-	protected $name = '';
+	public $id = '';
+	public $name = '';
 	
     public function get($recursive = 'false') {
         if ($recursive == 'false') {

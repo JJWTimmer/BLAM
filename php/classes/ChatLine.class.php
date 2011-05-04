@@ -4,10 +4,10 @@
 
 class ChatLine extends RVDLogBase {
 	
-	protected $id = '';
-	protected $text = '';
-    protected $user_id = '';
-	protected $created = '';
+	public $id = '';
+	public $text = '';
+    public $user_id = '';
+	public $created = '';
 	
 	public function create(){
 		

@@ -4,10 +4,10 @@
 
 class Handle extends RVDLogBase {
 	
-	protected $id = '';
-	protected $handle_number = '';
-	protected $handle_name = '';
-    protected $description = '';
+	public $id = '';
+	public $handle_number = '';
+	public $handle_name = '';
+    public $description = '';
 
     public function get($group = null) {
         if (is_null($group)) {

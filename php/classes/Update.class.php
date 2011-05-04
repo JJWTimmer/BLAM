@@ -4,13 +4,13 @@
 
 class Update extends RVDLogBase {
 	
-	protected $id = '';
-	protected $ticket_id = '';
-	protected $type = '';
-	protected $message = '';
-	protected $called = '';
-	protected $called_by = '';
-    protected $created = '';
+	public $id = '';
+	public $ticket_id = '';
+	public $type = '';
+	public $message = '';
+	public $called = '';
+	public $called_by = '';
+    public $created = '';
 
 	public function create() {
 
