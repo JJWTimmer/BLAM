@@ -4,12 +4,12 @@
 
 class Message extends RVDLogBase {
 	
-	protected $id = '';
-	protected $user_id = '';
-	protected $text = '';
-    protected $ticket_id = '';
-    protected $created = '';
-    protected $modified = '';
+	public $id = '';
+	public $user_id = '';
+	public $text = '';
+    public $ticket_id = '';
+    public $created = '';
+    public $modified = '';
 	
 	public function create() {
 
@@ -75,7 +75,7 @@ class Message extends RVDLogBase {
 	}
 	
 	public function update() {
-        $q = "UPDATE messages SET text = " .DB::esc($this->text). "
+        $q = "UPDATE messages SET text = '" .DB::esc($this->text). "', modified = '".date('Y-m-d G:i:s')."'
               WHERE id = " . DB::esc($this->id);
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
