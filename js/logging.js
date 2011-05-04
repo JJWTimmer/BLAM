@@ -135,6 +135,8 @@ var logging = {
           if($(this).attr("id")!=logging.data.selectedticket)
             {
             logging.data.selectedticket=$(this).attr("id");
+            logging.data.selectedclosedfeedback=0;
+            logging.data.selectedopenfeedback=0;
             }
           else
             {
@@ -215,6 +217,8 @@ var logging = {
           if($(this).attr("id")!=logging.data.selectedopenfeedback)
             {
             logging.data.selectedopenfeedback=$(this).attr("id");
+            logging.data.selectedclosedfeedback=0;
+            logging.data.selectedticket=0;
             }
           else
             {
@@ -230,6 +234,8 @@ var logging = {
           if($(this).attr("id")!=logging.data.selectedclosedfeedback)
             {
             logging.data.selectedclosedfeedback=$(this).attr("id");
+            logging.data.selectedopenfeedback=0;
+            logging.data.selectedticket=0;
             }
           else
             {

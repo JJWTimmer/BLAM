@@ -88,6 +88,7 @@ var general = {
                 arr = [
                     '<div class="list_item_parent_ticket_expanded rounded">',
                     '<p><b>Melding:</b></p><p>',params.text,'</p>',
+                    '<p><b>Locatie:</b>',params.location,'</p>',
                     '<p><b>Operator: </b>',params.rvduser,'</p>',
                     '<p><b>Status: </b>',params.status,'</p>',
                     '<p><b>WL contactpersoon: </b>',params.wluser,'</p>',
@@ -147,7 +148,7 @@ var general = {
                     '</div>',
                       '<div class="list_item_feedbackTB_item rounded">',
                         '<p>',params.message,'</p>',
-                        '<p class="list_item_TB_time"> gecreerd op: ',general.stripToTime(params.created),'</p>',
+                        '<p class="list_item_TB_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
                       '</div>',
                     '</div>'
                 ];
@@ -161,7 +162,7 @@ var general = {
                     '</div>',
                       '<div class="list_item_feedbackTB_item rounded">',
                         '<p>',params.message,'</p>',
-                        '<p class="list_item_TB_time"> gecreerd op: ',general.stripToTime(params.created),' afgerond op:',general.stripToTime(params.called),' door:',params.calledby,'</p>',
+                        '<p class="list_item_TB_time"> gecre&euml;erd op: ',general.stripToTime(params.created),' afgerond op:',general.stripToTime(params.called),' door:',params.calledby,'</p>',
                       '</div>',
                     '</div>'
                 ];
@@ -175,7 +176,7 @@ var general = {
                     '</div>',
                     '<div class="list_item_updateTB_item rounded" id="',params.id,'">',
                     '<p>',params.message,'</p>',
-                    '<p class="list_item_TB_time"> gecreerd op: ',general.stripToTime(params.created),'</p>',
+                    '<p class="list_item_TB_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
                     '</div>',
                 '</div>'
                 ];
@@ -190,8 +191,8 @@ var general = {
                 '<div class=list_item_ticketdetail_id><input type="text" class="rounded" readonly="readonly" value="',params.id,':" id="ticket_id"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
-                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
+                '<div class=list_item_ticketdetail_time><p>gecre&euml;erd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>Bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
@@ -230,8 +231,8 @@ var general = {
                 '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
-                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
+                '<div class=list_item_ticketdetail_time><p>gecre&euml;erd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>Bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
@@ -272,8 +273,8 @@ var general = {
                 '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
-                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
+                '<div class=list_item_ticketdetail_time><p>gecre&euml;erd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>Bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
@@ -313,8 +314,8 @@ var general = {
                 '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
                 '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class=list_item_ticketdetail_time><p>gecreerd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
-                '<div class=list_item_ticketdetail_label_ber><p>bericht:</p></div>',
+                '<div class=list_item_ticketdetail_time><p>gecre&euml;erd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
+                '<div class=list_item_ticketdetail_label_ber><p>Bericht:</p></div>',
                 '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
                 '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
                 '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
