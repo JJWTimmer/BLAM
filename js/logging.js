@@ -55,6 +55,7 @@ var logging = {
         $('div.message').live('click', function(){
           $('#messagetext').val($(this).find("span").text());
           $('#submitbutton').hide();
+          $('p.label_checkbox_pair').hide();
           $('#updatebutton').show();
           $('#cancelbutton').show();
           logging.data.selectedmessage=$(this).attr("id");
@@ -63,6 +64,7 @@ var logging = {
         $('#cancelbutton').bind('click',function(){
           $('#messagetext').val('');
           $('#submitbutton').show();
+          $('p.label_checkbox_pair').show();
           $('#updatebutton').hide();
           $('#cancelbutton').hide();
           logging.data.selectedmessage=0;
@@ -74,8 +76,9 @@ var logging = {
                     general.displayError(r.error);
                 }
                 else    {
-                  $('#messagetext').val()="";
+                  $('#messagetext').val('');
                   $('#submitbutton').show();
+                  $('p.label_checkbox_pair').show();
                   $('#updatebutton').hide();
                   $('#cancelbutton').hide();
                   logging.data.selectedmessage=0;
