@@ -31,7 +31,7 @@ var general = {
 
             case 'messageLine':
                 arr = [
-                '<div class="message message-',params.id,' rounded">','<div class="msg-avatar"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
+                '<div class="message message-',params.id,' rounded" id=',params.id,'>','<div class="msg-avatar"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
             break;
 
             case 'chatLine':
@@ -118,10 +118,9 @@ var general = {
             case 'openfeedback_expanded':
                 arr = [
                     '<div class="list_item_feedback_expanded rounded" id="',params.id,'">',
-                    '<p><b>Voertuig: </b>',params.handle,'</p>',
-                    '<p><b>Ingevoerd op: </b>',params.created,'</p>',
                     '<p><b>Terugmelding:</b></p><p>',params.message,'</p>',
                     '<p><b>WL contactpersoon: </b>',params.wl_user,'</p>',
+                    '<p><b>Ingevoerd op: </b>',params.created,'</p>',
                     '<input type="button" id="closefeedback" class="blueButton" value="Terugmelding sluiten"/>',
                     '</div>'
                 ];
@@ -130,10 +129,9 @@ var general = {
             case 'closedfeedback_expanded':
                 arr = [
                     '<div class="list_item_feedback_expanded rounded" id="',params.id,'">',
-                    '<p><b>Voertuig: </b>',params.handle,'</p>',
-                    '<p><b>Ingevoerd op: </b>',params.created,'</p>',
                     '<p><b>Terugmelding:</b></p><p>',params.message,'</p>',
                     '<p><b>WL contactpersoon: </b>',params.wl_user,'</p>',
+                    '<p><b>Ingevoerd op: </b>',params.created,'</p>',
                     '<p><b>Afgehandeld door: </b>',params.called_by,'</p>',
                     '<p><b>Afgehandeld op: </b>',params.called,'</p>',
                     '</div>'
@@ -141,11 +139,11 @@ var general = {
             break;
 
 
-            case 'feedbackTB':
+            case 'feedbackTBOpen':
                 arr = [
                     '<div class="list_item_TB_holder rounded" id="',params.id,'">',
                     '<div class="list_item_TB_header">',
-                      '<p text-align="left">Terugmelding(',params.handle_name,'):<BR>',params.title,'</p>',
+                      '<p text-align="left">Terugmelding:</p>',
                     '</div>',
                       '<div class="list_item_feedbackTB_item rounded">',
                         '<p>',params.message,'</p>',
@@ -155,11 +153,25 @@ var general = {
                 ];
             break;
 
+            case 'feedbackTBClosed':
+                arr = [
+                    '<div class="list_item_TB_holder rounded" id="',params.id,'">',
+                    '<div class="list_item_TB_header">',
+                      '<p text-align="left">Afgeronde Terugmelding</p>',
+                    '</div>',
+                      '<div class="list_item_feedbackTB_item rounded">',
+                        '<p>',params.message,'</p>',
+                        '<p class="list_item_TB_time"> gecreerd op: ',general.stripToTime(params.created),' afgerond op:',general.stripToTime(params.called),' door:',params.calledby,'</p>',
+                      '</div>',
+                    '</div>'
+                ];
+            break;
+
             case 'updateTB':
                 arr = [
                 '<div class="list_item_TB_holder rounded" id="',params.id,'">',
                     '<div class="list_item_TB_header">',
-                      '<p text-align="left">Update:<BR>',params.title,'</p>',
+                      '<p text-align="left">Update:</p>',
                     '</div>',
                     '<div class="list_item_updateTB_item rounded" id="',params.id,'">',
                     '<p>',params.message,'</p>',

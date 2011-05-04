@@ -43,8 +43,9 @@
                   <input type="button" id="messageButton" class="blueButton" value="Hervat meldingen"/>
               </div>
               <div id="Handles" class="holder rounded">
-                    <div id="HandlesHeader" class="header rounded"><p>Roepnamen</p></div>
+                    <div id="HandlesHeader" class="header rounded"><p>Roepnamen</p>
                     <input type="text" class="rounded" value="" id="search_handles">
+                    </div>
                     <div id="HandlesList" class="list rounded"></div>
               </div>
               <div id="Meldingen" class="holder rounded">
@@ -55,6 +56,12 @@
                   <div id="UsersHeader" class="header rounded"><p>Gebruikers</p></div>
                   <div id="UsersList" class="list rounded"></div>
               </div>
+
+              <div id="Display" class="holder rounded">
+                  <div id="DisplayHeader" class="header rounded"><p>Weergave</p></div>
+                  <div id="DisplayList" class="list rounded"></div>
+              </div>
+
               <div id="TextEntry" class="rounded">
                   <form id="submitForm" method="post" action="">
                      <textarea rows="1" cols="1" id="messagetext" name="text" class="rounded" maxlength="700"></textarea>
@@ -64,6 +71,8 @@
                      </p>
                      <select id="autotext_Handle"></select>
                      <input type="button" id="autotextbutton" class="blueButton" value="Voeg roepnaam toe"/>
+                     <input type="button" id="cancelbutton" class="blueButton" value="cancel"/>
+                     <input type="button" id="updatebutton" class="blueButton" value="update"/>
                      <input type="button" id="submitbutton" class="blueButton" value="submit"/>
 
                   </form>

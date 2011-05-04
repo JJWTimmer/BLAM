@@ -51,6 +51,38 @@ var logging = {
           });
         });
 
+        //function to implement clicking on message
+        $('div.message').live('click', function(){
+          $('#messagetext').val($(this).find("span").text());
+          $('#submitbutton').hide();
+          $('#updatebutton').show();
+          $('#cancelbutton').show();
+          logging.data.selectedmessage=$(this).attr("id");
+        });
+
+        $('#cancelbutton').bind('click',function(){
+          $('#messagetext').val('');
+          $('#submitbutton').show();
+          $('#updatebutton').hide();
+          $('#cancelbutton').hide();
+          logging.data.selectedmessage=0;
+        });
+
+        $('#updatebutton').bind('click',function(){
+          $.tzPOST('updateMessage',{id:logging.data.selectedmessage,text:$('#messagetext').val()},function(r){
+              if(r.error){
+                    general.displayError(r.error);
+                }
+                else    {
+                  $('#messagetext').val()="";
+                  $('#submitbutton').show();
+                  $('#updatebutton').hide();
+                  $('#cancelbutton').hide();
+                  logging.data.selectedmessage=0;
+                }
+              });
+        });
+
         // Using the defaultText jQuery plugin, included at the bottom:
         $('#name').defaultText('Nickname');
         $('#password').defaultText('Password');
@@ -90,6 +122,12 @@ var logging = {
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
         }).data('jsp');
+
+        logging.data.jspAPIDisplay = $('#DisplayList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+        }).data('jsp');
+
 
 
         //function to implement clicking on dynamic element ticket
@@ -644,8 +682,9 @@ var logging = {
                         markup=general.render('parentticket',r[i]);
                         logging.data.jspAPITickets.getContentPane().append(markup);
                         if (r[i].id == logging.data.selectedticket) {
+                            logging.data.jspAPIDisplay.getContentPane().empty();
                             markup_extra=general.render('parentticket_expanded',r[i]);
-                            logging.data.jspAPITickets.getContentPane().append(markup_extra);
+                            logging.data.jspAPIDisplay.getContentPane().append(markup_extra);
                           }
                     }
                   }
@@ -656,6 +695,7 @@ var logging = {
                     logging.data.jspAPITickets.getContentPane().append('<p class="count">'+message+'</p>');
                     }
                 logging.data.jspAPITickets.reinitialise();
+                logging.data.jspAPIDisplay.reinitialise();
                 }
                 else
                 {
@@ -684,8 +724,9 @@ var logging = {
                           markup=general.render('openfeedback',r[i]);
                           logging.data.jspAPIOpenFeedback.getContentPane().append(markup);
                           if (r[i].id == logging.data.selectedopenfeedback) {
+                            logging.data.jspAPIDisplay.getContentPane().empty();
                             markup_extra=general.render('openfeedback_expanded',r[i]);
-                            logging.data.jspAPIOpenFeedback.getContentPane().append(markup_extra);
+                            logging.data.jspAPIDisplay.getContentPane().append(markup_extra);
                           }
                         }
                       else
@@ -693,8 +734,9 @@ var logging = {
                           markup=general.render('closedfeedback',r[i]);
                           logging.data.jspAPIClosedFeedback.getContentPane().append(markup);
                           if (r[i].id == logging.data.selectedclosedfeedback) {
+                            logging.data.jspAPIDisplay.getContentPane().empty();
                             markup_extra=general.render('closedfeedback_expanded',r[i]);
-                            logging.data.jspAPIClosedFeedback.getContentPane().append(markup_extra);
+                            logging.data.jspAPIDisplay.getContentPane().append(markup_extra);
                           }
                         }
                     }
@@ -708,6 +750,7 @@ var logging = {
                     }
                 logging.data.jspAPIOpenFeedback.reinitialise();
                 logging.data.jspAPIClosedFeedback.reinitialise();
+                logging.data.jspAPIDisplay.reinitialise();
                 }
                 else
                 {
@@ -735,6 +778,7 @@ var logging = {
             logging.data.jspAPITickets.reinitialise();
             logging.data.jspAPIOpenFeedback.reinitialise();
             logging.data.jspAPIClosedFeedback.reinitialise();
+            logging.data.jspAPIDisplay.reinitialise()
   }
 };
 //end of logging var

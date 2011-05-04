@@ -25,10 +25,11 @@ position:absolute;
 
 #Handles{
   position:absolute;
+  padding: 50px 2px 2px 2px;
+  height:89%;
   top: 0%;
   left:0%;
   width:22%;
-  height:95%;
   margin:1%;
 }
 
@@ -46,7 +47,7 @@ position:absolute;
   right:0%;
   top: 12%;
   width:22%;
-  height:55%;
+  height:25%;
   margin:1%;
 }
 
@@ -55,6 +56,17 @@ position:absolute;
     /*padding is to solve JSPbar problem in combo with user margin*/
     padding: 1% 0% 1% 4%;
 }
+
+#Display{
+position:absolute;
+  right:0%;
+  top: 42%;
+  width:22%;
+  height:25%;
+  margin:1%;
+}
+
+
 
 
 #TextEntry{
@@ -211,6 +223,30 @@ p.label_checkbox_pair label{
 #autotextbutton:hover{
     background-position:left bottom;
 }
+
+#cancelbutton {
+    display: none;
+    position: absolute;
+    top:65%;
+    left:55%;
+    font-size:13px;
+    width:150px;
+    height:29px;
+    background-color: #e50000;
+}
+
+#updatebutton {
+    display: none;
+    position: absolute;
+    top:65%;
+    left:75%;
+    width:150px;
+    font-size:13px;
+    height:29px;
+    background-color: #58aa00;
+}
+
+
 
 /* Overloading the default styles of jScrollPane */
 #UsersList div:first-child[class="jspContainer"]{

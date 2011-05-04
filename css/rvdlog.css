@@ -270,6 +270,7 @@ p.noMessages,
 
 #search_handles{
     position:absolute;
+    left:0px;
     top:25px;
     width:90%;
     margin:2px 1% 2px 1%;

@@ -18,7 +18,13 @@ $(document).ready(function(){
                   for(var i=0; i< r.length;i++){
                     if(r[i]){
                         if(r[i].type=='feedback'){
-                        markup=general.render('feedbackTB',r[i]);
+                          if(r[i].called==null){
+                            markup=general.render('feedbackTBOpen',r[i]);
+                          }
+                          else
+                          {
+                            markup=general.render('feedbackTBClosed',r[i]);
+                          }
                         Container.getContentPane().append(markup);
                         }
                         else
