@@ -79,6 +79,8 @@ var logging = {
                   $('#updatebutton').hide();
                   $('#cancelbutton').hide();
                   logging.data.selectedmessage=0;
+                  logging.data.lastID=1;
+                  logging.getMessages();
                 }
               });
         });
