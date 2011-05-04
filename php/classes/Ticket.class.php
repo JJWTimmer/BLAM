@@ -69,7 +69,7 @@ class Ticket extends RVDLogBase {
         if (!$res)
            throw new Exception(DB::getMySQLiObject()->error);
         $id = DB::getMySQLiObject()->insert_id;
-        logmsg($id);   
+  
         return $id;
 	}
     
