@@ -37,6 +37,15 @@ class DB {
 	//perform query, return result
 	public static function query($q){
 		return self::$instance->MySQLi->query($q);
+	}    
+	//return error`
+	public static function error(){
+		return self::$instance->MySQLi->error;
+	}
+    
+    //return error`
+	public static function rows(){
+		return self::$instance->MySQLi->affected_rows;
 	}
     
 	//add escape characters string
