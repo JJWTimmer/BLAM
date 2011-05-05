@@ -467,7 +467,7 @@ var ticketing = {
         var new_avatar=avatar;
         if((avatar=="") || (avatar=="NULL")|| (avatar==null))
         {
-        new_avatar="img/unknown30x30.png";
+        new_avatar="unknown30x30.png";
         }
 
         ticketing.data.username = username;
@@ -631,7 +631,7 @@ var ticketing = {
 
         if((params.avatar=="") || (params.avatar=="NULL") || (params.avatar==null))
         {
-        params.avatar="img/unknown24x24.png"
+        params.avatar="unknown24x24.png"
         }
 
         var d = new Date();
@@ -675,7 +675,7 @@ var ticketing = {
 
         if((params.avatar=="") || (params.avatar=="NULL") || (params.avatar==null))
         {
-        params.avatar="img/unknown24x24.png"
+        params.avatar="unknown24x24.png"
         }
 
         var d = new Date();

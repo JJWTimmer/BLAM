@@ -11,42 +11,42 @@ var general = {
             case 'logging-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="img/',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
             case 'ticketing-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td><td rowspan="2" valign="middle"><input type="button" id="handlelist_toggle_button" value="Roepnamenlijst uit"/></td><th rowspan="2" valign="middle"><div class="Topbar_nr_users"></div></th></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><div class="Topbar_users"></div></td><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="img/',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td><td rowspan="2" valign="middle"><input type="button" id="handlelist_toggle_button" value="Roepnamenlijst uit"/></td><th rowspan="2" valign="middle"><div class="Topbar_nr_users"></div></th></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><div class="Topbar_users"></div></td><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
             case 'admin-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td><a href="../logging.html" target="_self" valign="middle">Logging</a></td><td><a href="../ticketing.html" target="_self" valign="middle">Ticketing</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="img/',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td><a href="../logging.html" target="_self" valign="middle">Logging</a></td><td><a href="../ticketing.html" target="_self" valign="middle">Ticketing</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
             case 'messageLine':
                 arr = [
-                '<div class="message message-',params.id,' rounded" id=',params.id,'>','<div class="msg-avatar"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
+                '<div class="message message-',params.id,' rounded" id=',params.id,'>','<div class="msg-avatar"><img src="img/',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
             break;
 
             case 'chatLine':
                 arr = [
-                '<div class="chat chat-',params.id,' rounded">','<div class="chat-avatar"><img src="',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="chat-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="chat-text"><span class="text-span">',params.text,'</span></div></div>'];
+                '<div class="chat chat-',params.id,' rounded">','<div class="chat-avatar"><img src="img/',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="chat-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="chat-text"><span class="text-span">',params.text,'</span></div></div>'];
             break;
 
             case 'user':
                 var new_avatar=params.avatar;
                 if((params.avatar=="")||(params.avatar=="NULL"))
                 {
-                var new_avatar="img/unknown30x30.png";
+                var new_avatar="unknown30x30.png";
                 }
                 arr = [
-                    '<div class="user" title="',params.username,'"><img src="',
+                    '<div class="user" title="',params.username,'"><img src="img/',
                     new_avatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
                 ];
             break;

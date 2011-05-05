@@ -415,7 +415,7 @@ var logging = {
         var new_avatar=avatar;
         if((avatar=="") || (avatar=="NULL"))
         {
-        new_avatar="img/unknown30x30.png";
+        new_avatar="unknown30x30.png";
         }
 
         logging.data.username = username;
@@ -550,7 +550,7 @@ var logging = {
 
         if((params.avatar=="") || (params.avatar=="NULL") || (params.avatar==null))
         {
-        params.avatar="img/unknown24x24.png"
+        params.avatar="unknown24x24.png"
         }
 
         var d = new Date();

@@ -809,7 +809,7 @@ textarea#ticket_last_feedback{
     margin-left:10px;
     margin-right:10px;
     width:32px;
-    background:url('../img/unknown30x30.png') no-repeat;
+    /*background:url('../img/unknown30x30.png') no-repeat;*/
 }
 
 #TopContainer .Topbar_nr_users {
