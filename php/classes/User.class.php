@@ -65,7 +65,7 @@ class User extends RVDLogBase {
             unset($this->password);
             
             if ( $dbresult->num_rows == 1 ) {
-				logmsg($user);
+
                 $user = $dbresult->fetch_array();
                 $this->id       = $user['id'];
                 $this->username = $user['username'];
