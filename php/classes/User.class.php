@@ -5,18 +5,18 @@ class User extends RVDLogBase {
     public $id = '';
 	public $username = '';
     public $password = '';
+    public $newpw = '';
     public $role = '';
     public $avatar = '';
 	
 	public function create() {
 		
 		DB::query("
-			INSERT INTO users (username, password, role_id, avatar)
+			INSERT INTO users (username, password, role_id)
 			VALUES (
 				'" . DB::esc($this->username) . "',
 				'" . hash('sha1', DB::esc($this->password)) . "',
-                '" . DB::esc($this->role_id) . "',
-                '" . DB::esc($this->avatar) . "'
+                '" . DB::esc($this->role) . "'
             )
             ");
             
@@ -35,6 +35,20 @@ class User extends RVDLogBase {
                 role_id='".DB::esc($this->role_id)."' 
                 WHERE id=".DB::esc($this->id)
                 );	
+	}	
+    
+    	
+	public function setAvatar() {
+        $q = "
+                UPDATE users
+                SET avatar='".DB::esc($this->avatar)."'
+                WHERE id=".DB::esc($this->id);
+		DB::query($q);	
+	}	
+    
+	public function delete() {
+	
+		DB::query("DELETE FROM users WHERE id=".DB::esc($this-id));	
 	}
     
     public function login() {
@@ -78,6 +92,20 @@ class User extends RVDLogBase {
             SET logged_in = 0
             WHERE id = " . DB::esc($this->id)
             );
+    }
+    
+    public function changepw() {
+        $res = DB::query("SELECT * FROM users WHERE id = ".DB::esc($this->id)." AND password = '".sha1($this->password)."'");
+        if (DB::rows() > 0) {
+            $q = "UPDATE users SET password = '" . sha1($this->newpw) . "' WHERE id = ".DB::esc($this->id);
+            $res2 = DB::query($q);
+            if (DB::rows() > 0 )
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
     }
     
     public function activity() {
