@@ -65,6 +65,7 @@ var general = {
             break;
 
             case 'parentticket':
+				
                 if(params.wluser==null && (params.role=="WL" || params.role=="Admin")){
                 arr = [
                     '<div class="list_item_parent_ticket_full rounded" id="',params.id,'">',

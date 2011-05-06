@@ -900,7 +900,7 @@ var ticketing = {
                 params = {role : ticketing.data.role};
                 var markup;
                 var markup_extra;
-                  for(var i=r.length; i>0;i--){
+                  for(var i=0; i<r.length;i++){
                     if(r[i]){
                         r[i].role=ticketing.data.role;
                         markup=general.render('parentticket',$.extend(r[i],params));
