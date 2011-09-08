@@ -14,6 +14,7 @@ class Handle extends RVDLogBase {
             $results = DB::query("
                 SELECT id, handle_number, handle_name, description
                 FROM handles
+                order by handle_name ASC
                 ");
         } elseif (is_numeric($group)) {
             $group_id = DB::esc($group);
@@ -22,6 +23,7 @@ class Handle extends RVDLogBase {
                 SELECT id, handle_number, handle_name, description
                 FROM handles
                 WHERE group_id = $group_id
+                order by handle_name ASC
                 ");
         } else {
             return false;
