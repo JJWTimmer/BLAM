@@ -44,7 +44,7 @@ var logging = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 
-        // Logging a person into rvdlog:
+        // Logging a person into blam:
         $('#loginForm').submit(function(){
             if(working) return false;
             working = true;

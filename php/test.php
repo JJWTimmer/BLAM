@@ -8,14 +8,14 @@ require_once "config.include.php";
 require_once "util.include.php";
 
 require_once "classes/DB.class.php";
-require_once "classes/RVDLog.class.php";
-require_once "classes/RVDLogBase.class.php";
+require_once "classes/BLAM.class.php";
+require_once "classes/BLAMBase.class.php";
 require_once "classes/Message.class.php";
 require_once "classes/Ticket.class.php";
 require_once "classes/ChatLine.class.php";
 require_once "classes/User.class.php";
 
-//session_name('RVDLog');
+//session_name('BLAM');
 session_start();
 
 if ( get_magic_quotes_gpc() ) {
@@ -66,7 +66,7 @@ try {
             break;
 		
 		case 'addMessage':
-			//$response = RVDLog::addMessage($_POST['text'], $_POST['ticket']);
+			//$response = BLAM::addMessage($_POST['text'], $_POST['ticket']);
             $_SESSION['last_id']=$_SESSION['last_id']+1;
             $response = array(
                     'messageid'  => $_SESSION['last_id']
@@ -127,7 +127,7 @@ try {
             break;
 		
 		case 'searchMessages':
-			$response = RVDLog::searchMessages($_POST['keyword']);
+			$response = BLAM::searchMessages($_POST['keyword']);
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
 		
@@ -159,47 +159,47 @@ try {
             break;
 		
 		case 'getHandles':
-			$response = RVDLog::getHandles();
+			$response = BLAM::getHandles();
             // returns array(int groupid, string groupname, array(integer Id, integer HandleNumber, string HandleName) handles) groups or exception
             break;
 		
 		case 'getTicketList':
-			$response = RVDLog::getTicketList();
+			$response = BLAM::getTicketList();
             // returns array tickets(integer Id, string Text, string Status, string userWL, array time(Hours,Minutes)) or exception
             break;
 		
 		case 'getFeedback':
-			$response = RVDLog::getFeedback();
+			$response = BLAM::getFeedback();
             // returns array feedback (integer Id, string Titel, string HandleName, string Message, string userWL, array time (Hours, Minutes)) or exception
             break;
 		
 		case 'closeFeedback':
-			$response = RVDLog::closeFeedback($_POST['id']);
+			$response = BLAM::closeFeedback($_POST['id']);
             // returns null or exception
             break;
 		
 		case 'addChat':
-			$response = RVDLog::addChat($_POST['text']);
+			$response = BLAM::addChat($_POST['text']);
             // returns ChatId or exception
             break;
 		
 		case 'getChats':
-			$response = RVDLog::getChats($_POST['last_id'], $_POST['date']);
+			$response = BLAM::getChats($_POST['last_id'], $_POST['date']);
             // returns array chat(int MessageID, string Text, string Username, string Avatar, array time(hours, minutes)) or exception
             break;
 		
 		case 'getTicketTreeNew':
-			$response = RVDLog::getTicketTreeNew();
+			$response = BLAM::getTicketTreeNew();
             // returns array tickets(integer Id, string Titel,array time(Hours,Minutes)) or exception
             break;
 		
 		case 'getTicketTreeOpen':
-			$response = RVDLog::getTicketTreeOpen();
+			$response = BLAM::getTicketTreeOpen();
             // returns array tickets(integer Id, string Titel, string UserId,,array time(Hours,Minutes)) or exception
             break;
 		
 		case 'getTicketTreeClosed':
-			$response = RVDLog::getTicketTreeClosed();
+			$response = BLAM::getTicketTreeClosed();
             // returns array tickets(integer Id, string Titel, string UserId,,array time(Hours,Minutes)) or exception
             break;
 		
@@ -209,42 +209,42 @@ try {
             break;
 		
 		case 'closeTicket':
-			$response = RVDLog::closeTicket($_POST['id']);
+			$response = BLAM::closeTicket($_POST['id']);
             // returns null or exception
             break;
 		
 		case 'setTicketOwner':
-			$response = RVDLog::setTicketOwner($_POST['id']);
+			$response = BLAM::setTicketOwner($_POST['id']);
             // returns null or exception
             break;
 		
 		case 'changeTicketOwner':
-			$response = RVDLog::changeTicketOwner($_POST['id'], $_POST['user_id']);
+			$response = BLAM::changeTicketOwner($_POST['id'], $_POST['user_id']);
             // returns null or exception
             break;
 		
 		case 'changeTicketDetails':
-			$response = RVDLog::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['handle_id']);
+			$response = BLAM::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['handle_id']);
             // returns null or exception
             break;
 		
 		case 'createSubTicket':
-			$response = RVDLog::createSubTicket($_POST['parent_id'], $_POST['text'], $_POST['location'], $_POST['handle_id'] );
+			$response = BLAM::createSubTicket($_POST['parent_id'], $_POST['text'], $_POST['location'], $_POST['handle_id'] );
             // returns integer SubTicketId or exception
             break;
 		
 		case 'becomeChildTicket':
-			$response = RVDLog::becomeChildTicket($_POST['id'], $_POST['parent_id']);
+			$response = BLAM::becomeChildTicket($_POST['id'], $_POST['parent_id']);
             // returns null or exception
             break;
 		
 		case 'becomeParentTicket':
-			$response = RVDLog::becomeParentTicket($_POST['id']);
+			$response = BLAM::becomeParentTicket($_POST['id']);
             // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
             break;
 		
 		case 'createFeedback':
-			$response = RVDLog::createFeedback($_POST['ticket_id'], $_POST['text'], $_POST['handle_id']);
+			$response = BLAM::createFeedback($_POST['ticket_id'], $_POST['text'], $_POST['handle_id']);
             // returns array users(integer Id, string Role, string Username, integer Totaal) or exception
             break;
 		

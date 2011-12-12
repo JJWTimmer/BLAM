@@ -2,7 +2,7 @@
 
 /* Chat line is used for the chat entries */
 
-class ChatLine extends RVDLogBase {
+class ChatLine extends BLAMBase {
 	
 	public $id = '';
 	public $text = '';

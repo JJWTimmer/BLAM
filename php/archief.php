@@ -3,11 +3,11 @@
 require_once 'util.include.php';
 require_once 'config.include.php';
 require_once 'classes/DB.class.php';
-require_once "classes/RVDLog.class.php";
-require_once "classes/RVDLogBase.class.php";
+require_once "classes/BLAM.class.php";
+require_once "classes/BLAMBase.class.php";
 require_once "classes/User.class.php";
 
-session_name('RVDLog');
+session_name('BLAM');
 session_start();
 
 ?>
@@ -30,7 +30,7 @@ session_start();
     switch($_GET['action']){
 
     case 'messages':
-      RVDLog::checkLogged();
+      BLAM::checkLogged();
       $q = "select msg.id, msg.text, msg.ticket_id, msg.created, users.username from messages AS msg INNER JOIN users ON msg.user_id = users.id ORDER BY msg.id ASC";
       $res = DB::query($q);
       echo '<table border="1">';
@@ -43,7 +43,7 @@ session_start();
     break;
 
     case 'tickets':
-      RVDLog::checkLogged();
+      BLAM::checkLogged();
       $q = "
             SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, u.username AS wluser, t.created, t.modified, h.description AS voertuignaam
             FROM tickets AS t

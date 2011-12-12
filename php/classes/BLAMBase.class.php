@@ -2,9 +2,9 @@
 
 /* This is the base class */
 
-class RVDLogBase {
+class BLAMBase {
 
-	// This constructor is used by all the RVDLog classes:
+	// This constructor is used by all the BLAM classes:
 
 	public function __construct(array $options){
 		//This function saves all the parameter from $options that are defined in the class

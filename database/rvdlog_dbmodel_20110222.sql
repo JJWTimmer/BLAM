@@ -16,10 +16,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `rvdlog`
+-- Database: `BLAM`
 --
-CREATE DATABASE `rvdlog` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rvdlog`;
+CREATE DATABASE `BLAM` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `BLAM`;
 
 -- --------------------------------------------------------
 
@@ -194,7 +194,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role_id`, `avatar`, `logged_in`, `last_activity`) VALUES
 (1, 'Jasper', 'a08670ff00ab376dfca8a7542dcce81626b2b469', 3, '', 0, '2011-02-19 18:52:00'),
-(2, 'Anne', '96657fd33d4351fb0ec777fd7064e03b0adc3a35', 1, '', 0, '2011-02-20 18:16:00');
+(2, 'Anne', '213bf94d31b9b21100e4fb2b86bebb29a2d8bf5c', 3, '', 0, '2011-02-20 18:16:00'),
+(3, 'Martijn', '10ae63b69ae5ab71b07f9e64004a0207f53fea34', 3, '', 0, '2011-12-11 0:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

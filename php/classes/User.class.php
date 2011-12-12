@@ -1,6 +1,6 @@
 <?php
 
-class User extends RVDLogBase {
+class User extends BLAMBase {
 	
     public $id = '';
 	public $username = '';

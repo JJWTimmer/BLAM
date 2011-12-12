@@ -2,7 +2,7 @@
 
 /* Message is used for the log entries */
 
-class Group extends RVDLogBase {
+class Group extends BLAMBase {
 	
 	public $id = '';
 	public $name = '';

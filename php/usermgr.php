@@ -9,11 +9,11 @@ require_once "config.include.php";
 require_once "util.include.php";
 
 require_once "classes/DB.class.php";
-require_once "classes/RVDLogBase.class.php";
-require_once "classes/RVDLog.class.php";
+require_once "classes/BLAMBase.class.php";
+require_once "classes/BLAM.class.php";
 require_once "classes/User.class.php";
 
-session_name('RVDLog');
+session_name('BLAM');
 session_start();
 
 DB::init($dbOptions);
@@ -25,7 +25,7 @@ DB::init($dbOptions);
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>RVD log Index</title>
 
-        <link rel="stylesheet" type="text/css" href="css/rvdlog.css" />
+        <link rel="stylesheet" type="text/css" href="css/blam.css" />
         <link rel="stylesheet" type="text/css" href="css/chat.css" />
     </head>
 
@@ -33,7 +33,7 @@ DB::init($dbOptions);
 <?php
 
 try {
-    RVDLog::checkLogged();
+    BLAM::checkLogged();
 
     if ($_GET['action'] == 'new') {
         if (!$_SESSION['user']['role_id'] == 3) die ("niet genoeg rechten");

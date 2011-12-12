@@ -191,7 +191,7 @@ var ticketing = {
           general.tb_open_new('UpdatesAndFeedbacks.html?&KeepThis=true&height=500&width=800');
         });
 
-        // Logging a person into rvdlog:
+        // Logging a person into blam:
 
         $('#loginForm').submit(function(){
             if(working) return false;

@@ -2,7 +2,7 @@
 
 /* Message is used for the log entries */
 
-class Handle extends RVDLogBase {
+class Handle extends BLAMBase {
 	
 	public $id = '';
 	public $handle_number = '';

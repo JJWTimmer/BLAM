@@ -2,7 +2,7 @@
 
 /* Ticket is used for the log entries */
 
-class Update extends RVDLogBase {
+class Update extends BLAMBase {
 	
 	public $id = '';
 	public $ticket_id = '';
