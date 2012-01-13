@@ -11,7 +11,7 @@ var general = {
             case 'logging-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="img/',params.avatar,'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td></tr><tr>','<td class="Topbar_info">',params.username,'</td><td class="Topbar_info">',params.role,'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 

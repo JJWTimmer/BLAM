@@ -72,7 +72,7 @@ class Update extends BLAMBase {
             LEFT OUTER JOIN users u2 ON t.user_id = u2.id
             WHERE f.type = 'feedback'";
         if (!empty($id) && is_numeric($id) ) {
-            $q .= " AND t.id > $id";
+            $q .= " AND f.id = $id";
         }
         if (isset($called)) {
             switch ($called) {
