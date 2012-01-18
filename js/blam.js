@@ -187,7 +187,7 @@ var general = {
             case 'ticket_detail_new':
             arr = [
             '<form id="TicketForm" method="post" action="">',
-              '<div class="list_item_ticketdetail rounded">',
+              '<div id="bla" class="list_item_ticketdetail rounded">',
                 '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
                 '<div class=list_item_ticketdetail_id><input type="text" class="rounded" readonly="readonly" value="',params.id,':" id="ticket_id"></div>',
                 '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',

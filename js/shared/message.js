@@ -69,7 +69,7 @@ function Message (pane) {
                 general.displayError(r.error);
                 var nextRequest = 1000;
             }
-            Timeout["Messages"]=setTimeout("message.getMessages();",nextRequest);
+            Timeout["Messages"]=setTimeout(function(){self.getMessages();},nextRequest);
           }
           else
           {

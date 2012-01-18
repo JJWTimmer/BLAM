@@ -91,8 +91,8 @@ var logging = {
 				user = new User(logging.data.jspAPIUsers);
 				handle = new Handle(logging.data.jspAPIHandles);
 				ticket = new Ticket(logging.data.jspAPITickets,[{1: 'Open', 2: 'Nieuw'}]);
-				feedbackOpen = new Feedback(logging.data.jspAPIOpenFeedback,'false');
-				feedbackClosed = new Feedback(logging.data.jspAPIClosedFeedback,'true');
+				feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback,'false');
+				feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback,'true');
 				display = new Display(logging.data.jspAPIDisplay);
 				
 				//function to implement clicking on message
@@ -168,37 +168,9 @@ var logging = {
         
 				//function to search through handles
         $('#search_handles').keyup(function (e) {
-            $(".list_item_group").each(function(i) {
-              $(this).attr('visible','1');
-            });
-
-            if($('#search_handles').val()=="")
-            {
-              $(".list_item_handle").each(function(i) {
-                $(this).fadeIn();
-              });
-            }
-            else
-            {
-                var keyword=$('#search_handles').val().toLowerCase();
-                $(".list_item_handle").each(function(i) {
-                  var handle_name=$(this).children('.list_item_handle_name').text().toLowerCase();
-                  var handle_description=$(this).children('.list_item_handle_description').text().toLowerCase();
-                  if((handle_name.search(keyword) < 0) && (handle_description.search(keyword) < 0))
-                    {
-                    $(this).fadeOut();
-                    }
-                  else
-                    {
-                    $(this).fadeIn();
-                    }
-                });
-            }
-        })
+            handle.searchHandles($('#search_handles').val());
+        });
         
-        
-        
-				
         //function to implement clicking on dynamic element ticket
         $('div.list_item_parent_ticket_full').live('click', function(){
 				display.showTicket($(this).attr("id"));				
@@ -219,10 +191,7 @@ var logging = {
           feedbackOpen.closeFeedback($(this).closest("div").attr("id"));
         });
 
-				
-
 				// Searching for messages:
-
         $('#searchForm').submit(function(){
             var keyword = $('#keyword').val();
             if(keyword)
@@ -237,19 +206,49 @@ var logging = {
             }
             return false;
         });
-
-
-        // Logging a person into blam:
-        $('#loginForm').submit(function(){
+        
+         // Submitting a new message entry:
+        $('#submitForm').submit(function(){
+            var text = $('#messagetext').val();
+            if(text.length == 0){
+                return false;
+            }
             if(working) return false;
             working = true;
-						Login.submitLogin($('#name').val(),$('#password').val());
+						message.submitMessage(text);
             working = false;
             return false;
         });
 
-				//Check if user is already logged in
-        Login.checkLogged();
+       $('#loginForm').submit(function(){
+            if(working) return false;
+            working = true;
+
+            // Using our tzPOST wrapper function (defined in the bottom):
+            //$(this).serialize encodes all the name form elements to be used by php
+            $.tzPOST('login',$(this).serialize(),function(r){
+                working = false;
+
+                if(r.error){
+                    general.displayError(r.error);
+                }
+                else
+                {
+                    logging.login(r.username,r.avatar,r.role);
+                }
+            });
+
+            return false;
+        });
+
+        // Checking whether the user is already logged (browser refresh)
+
+        $.tzPOST('checkLogged',function(r){
+            if(!r.error)
+            {
+                logging.login(r.username,r.avatar,r.role);
+            }
+        });
                 
         // Logging the user out:
         $('a.logoutButton').live('click',function(){
@@ -265,20 +264,6 @@ var logging = {
             return false;
         });
 
-        // Submitting a new message entry:
-        $('#submitForm').submit(function(){
-            var text = $('#messagetext').val();
-            if(text.length == 0){
-                return false;
-            }
-            if(working) return false;
-            working = true;
-						message.submitMessage(text);
-            working = false;
-            return false;
-        });
-        
-        
 
         //catching window resizes
         var resizeTimer = null;

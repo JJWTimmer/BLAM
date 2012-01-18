@@ -1,4 +1,4 @@
-function Feedback (pane,called) {
+function UpdateAndFeedback(pane,called) {
 	//constructor
 	var self = this;
 	var pane = pane;
@@ -43,11 +43,11 @@ function Feedback (pane,called) {
           }
         	if(called=='false')
         	{
-          Timeout["FeedbacksOpen"]=setTimeout("feedbackOpen.getFeedback();",15000);
+          Timeout["FeedbacksOpen"]=setTimeout(function(){self.getFeedback();},15000);
 					}
 					else
 					{
-					Timeout["FeedbacksClosed"]=setTimeout("feedbackClosed.getFeedback();",15000);
+					Timeout["FeedbacksClosed"]=setTimeout(function(){self.getFeedback();},15000);
 					}
   		});
 	};
@@ -61,8 +61,55 @@ function Feedback (pane,called) {
           	feedbackClosed.getFeedback();
       		
       });
-	
-	
 	};
 	
+	this.fillUpdate = function(ticket_id,label_id,last_update_id){
+	//update the last update box in ticketdetails
+      $.tzPOST('getUpdates',{ticket_id:ticket_id,type:'update'},function(r){
+      	if(!r.error)
+      	{
+          if(r && r.length>0){
+              label_id.show();
+              last_update_id.show();
+              $('#openmodalbutton').show();
+              var length_updates=r.length-1;
+              var markup=r[length_updates].message;
+              //update time
+              label_id.text('Laatste update('+general.stripToTime(r[length_updates].created)+'):');
+              //update text field
+              last_update_id.val(markup);
+          }
+      	}
+      	else
+        {
+          general.displayError(r.error);
+        }
+      });
+		
+	};
+	
+	this.fillFeedback = function(ticket_id,label_id,last_feedback_id){
+	//update the last feedback box in ticketdetails
+      $.tzPOST('getUpdates',{ticket_id:ticket_id,type:'feedback'},function(r){
+      if(!r.error)
+      {
+          if(r && r.length>0){
+            label_id.show();
+            last_feedback_id.show();
+            $('#openmodalbutton').show();
+            var length_feedback=r.length-1;
+            var markup=r[length_feedback].message;
+            //update time
+            label_id.text('Laatste terugmelding('+general.stripToTime(r[length_feedback].created)+'):');
+            //update text field
+            last_feedback_id.val(markup);
+          }
+      }
+      else
+        {
+          general.displayError(r.error);
+        }
+      });
+		
+	};
 }
