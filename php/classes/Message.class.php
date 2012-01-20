@@ -28,35 +28,50 @@ class Message extends BLAMBase {
 		return $this->id;
 	}
     
-    public function get($options = 'all') {
-        if (is_string($options) && $options == 'all') {
-            $results = DB::query("
+    public function get($options = 'empty') {
+        if(is_array($options)) {
+        	if ($options['first_id']) {
+            $first_id = DB::esc($options['first_id']);
+            		$q="SELECT * FROM (
+            		SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
+                FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
+                WHERE msg.id < $first_id
+                ORDER BY msg.id DESC LIMIT 5) t
+                ORDER BY id ASC";
+                $results = DB::query($q);
+        	}
+        	elseif ($options['since'] && $options['since']!=null) {
+            		$since = DB::esc($options['since']);             
+           			$q="SELECT * FROM (
+            		SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
+                FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
+                WHERE msg.modified > '".$since."'
+                ORDER BY msg.id DESC LIMIT 5) t
+                ORDER BY id ASC";
+                 $results = DB::query($q);
+        	} 
+        	elseif($options['since']==null){
+      					$q="SELECT * FROM (
                 SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                ORDER BY msg.id ASC LIMIT 0,100");
-        } elseif (is_array($options)) { //TODO: last_timestamp
-            $last_id = DB::esc($options['last_id']);
-            $since = DB::esc($options['since'] ? $options['since'] : date('Y-m-d G:i:s'));
-            $max = DB::esc($options['max']);
-            $ts = DB::esc($options['last_timestamp']);
-            
-            $q = "SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
-                FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                WHERE msg.id > $last_id";
-            $q .= ($since ? " AND msg.created > '$since'" : "");
-            $q .= ($ts ? " AND msg.modified > '$ts'" : "");
-            $q .= " ORDER BY msg.id ASC";
-            $q .= " LIMIT 0,100";
-
-            $results = DB::query($q);
-        } else {
+                ORDER BY msg.id DESC LIMIT 5) t
+                ORDER BY id ASC";
+                $results = DB::query($q);
+      		}
+      	}	
+      	else{
             throw new Exception('Invalid arguments for getMessages');
         }
-            
-		while ($data[] = mysqli_fetch_assoc($results));
+        $results = DB::query($q);
+        $findmin = DB::query("select min(id) from messages");
+        $first_id_db = array_pop(mysqli_fetch_assoc($findmin));
+        
+			$data[] = array('timestamp' => date('Y-m-d G:i:s'),'first_id_db' => $first_id_db);
+			while ($data[] = mysqli_fetch_assoc($results));
         if (!is_null($data) && end($data) == null) array_pop($data);
-		return $data;
-	}
+					
+			return $data;
+		}
     
     public function search($keyword) {
         if (is_string($keyword)) {
@@ -73,6 +88,7 @@ class Message extends BLAMBase {
         if (!is_null($data) && end($data) == null) array_pop($data);
 		return $data;
 	}
+	
 	
 	public function update() {
         $q = "UPDATE messages SET text = '" .DB::esc($this->text). "', modified = '".date('Y-m-d G:i:s')."'

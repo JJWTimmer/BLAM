@@ -96,7 +96,7 @@ var logging = {
 				display = new Display(logging.data.jspAPIDisplay);
 				
 				//function to implement clicking on message
-        $('div.message').live('click', function(){
+        $('#MeldingenList .message').live('click', function(){
           $('#messagetext').val($(this).find("span").text());
           $('#submitbutton').hide();
           $('p.label_checkbox_pair').hide();
@@ -104,6 +104,15 @@ var logging = {
           $('#cancelbutton').show();
           logging.data.selectedmessage=$(this).attr("id");
         });
+
+	       $('#MeldingenList .retrieve_messages').live('click', function(){
+          if(!working)
+          	{
+          	working = true;
+          	message.getOldMessages();
+          	working = false;
+          	}
+         });
 
         $('#cancelbutton').bind('click',function(){
           $('#messagetext').val('');

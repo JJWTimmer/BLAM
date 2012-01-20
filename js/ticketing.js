@@ -74,7 +74,16 @@ var ticketing = {
       ticketSelect = new Ticket("",[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]);
       display = new Display ($('#TicketDetailsList'));
       updatefeedback = new UpdateAndFeedback("","");
-      
+      	
+      	//function to implement getting previous messages from db
+      	$('#MeldingenList .retrieve_messages').live('click', function(){
+          if(!working)
+          	{
+          	working = true;
+          	message.getOldMessages();
+          	working = false;
+          	}
+         });
       
         //function to implement clicking on ticket to get details
         $('div.list_item_parent_ticket_full').live('click', function(){

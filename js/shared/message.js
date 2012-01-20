@@ -3,31 +3,47 @@ function Message (pane) {
 	var self = this;
 	var pane = pane;
 	var noActivity = 0;
-	var lastID = 1;
+	var firstID = 0;
+	var lastTimestamp="";
   
 	// function to retrieve new messages from database
 	// (since last_id,timestamp) currently 2 hours past messages		
 	// uses pane to determine where to put messages
 		this.getMessages = function(){
 				//timestamp uses 2 hours (120 min)
-        $.tzPOST('getMessages',{last_id:lastID,date_and_time:general.generateTimestamp(120)},function(r){
+        $.tzPOST('getMessages',{timestamp_last_update:lastTimestamp},function(r){
         //update messages from mysql db
           if(r)
           {
             if(!r.error)
             {
-            	for(var i=0;i<r.length;i++){
-                self.addMessageLine(r[i]);
+            	if(lastTimestamp=="")
+            	{
+            		firstID=r[1].id;
+            		pane.getContentPane().html('<div class="retrieve_messages rounded"><p align="center">Haal oudere berichten op...</p></div>');
+            		pane.reinitialise();
             	}
-									
+            	
+            	//first record (record 0) is always the timestamp from the server
+            	lastTimestamp=r[0].timestamp;
+            	for(var i=1;i<r.length;i++){
+                self.addMessageLine(r[i]);
+            		//update first ID if necessary
+								if(r[i].id<firstID)
+								{
+									firstID=r[i].id;
+								}
+            	}
+														
             	// bata-123 and arts-1 formats.
             	//general.highlightHandles(this.pane.getContentPane(), logging.data.groups);
 
             	//if new messages, update to lastid
             	//message.data.noActivity is reset, so next update in 1 second
-            	if(r.length){
+            	if(r.length>1){
               	noActivity = 0;
                 lastID = r[i-1].id;
+                pane.scrollToBottom(true);
               }
             	else{
                 // If no messages were received, increment
@@ -104,7 +120,31 @@ function Message (pane) {
         });
     };
 
-		
+		this.getOldMessages = function(){
+			$.tzPOST('getMessages',{first_id:firstID},function(r){
+				if(r)
+          {
+            if(!r.error)
+            {
+          		for(var i=1;i<r.length;i++){
+                self.addMessageLine(r[i]);
+                if(parseInt(r[i].id)<parseInt(firstID))
+								{
+									firstID=r[i].id;
+								}
+            	}
+          		if(parseInt(firstID)==parseInt(r[0].first_id_db))
+          		{
+          			$('#MeldingenList .retrieve_messages').remove();
+          		}
+          	}
+          	else
+            {
+                general.displayError(r.error);
+            }
+					}
+			});		
+		};
 
 		// The addMessageLine function adds a message entry to the page
 		// uses pane to determine where to put messages
@@ -127,26 +167,57 @@ function Message (pane) {
 
         var markup = general.render('messageLine',params),
             exists = $('#MeldingenList .message-'+params.id);
-
+				
+				//check if message already exists --> replace
         if(exists.length){
+        		exists.after(markup);
             exists.remove();
+            alert("replaced message...");
         }
-
-        //If this isn't a temporary chat:
-        if(params.id.toString().charAt(0) != 't'){
-            var previous = $('#MeldingenList .message-'+(+params.id - 1));
-            if(previous.length){
-                previous.before(markup);
-            }
-            else pane.getContentPane().prepend(markup);
+        else{
+        	 //check for temporary message --> add at end
+        	 if(params.id.toString().charAt(0) == 't'){
+        	 		pane.getContentPane().append(markup);
+        	 }
+        	 else
+        	 {
+        	 		//is there already a message with a id one smaller? --> add after this
+        	 		var previous = $('#MeldingenList .message-'+(+params.id - 1));
+            	if(previous.length){
+            	  	previous.after(markup);
+            	} else {
+            		//is this the first message? --> append it
+            		if(firstID==params.id){
+            			pane.getContentPane().append(markup);
+            		}
+        	 			else
+        	 			{
+        	 				//has the new message an id that is smaller than first id? --> place before lastid
+        	 				if(parseInt(params.id) < parseInt(firstID))
+        	 				{
+	        					var first = $('#MeldingenList .message-'+(+firstID));
+        						first.before(markup);
+        	 				}
+        	 				else
+        	 				{
+        	 					//go through the entire list and place it somewhere logically
+        	 					var closest;
+        						$("#MeldingenList .message").each(function(i) {
+        							if(parseInt($(this).attr('id'))<parseInt(params.id))
+        								{
+        									closest=$(this);
+        								}
+        						});
+         	 					closest.after(markup);
+           				}
+        	 			}
+        	 		}
+        	 }	 
         }
-        else pane.getContentPane().prepend(markup);
-
+        				
         // As we added new content, we need to
         // reinitialise the jScrollPane plugin:
         pane.reinitialise();
-        pane.scrollToBottom(true);
-
     };
     
     this.submitMessage = function(messagetext){

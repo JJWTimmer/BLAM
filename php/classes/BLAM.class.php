@@ -105,6 +105,7 @@ class BLAM {
         
 		return array('id' => $msg->id);
 	}
+		/*
     public static function getMessages($msg_id, $date_and_time = null) {
         if (empty($msg_id)) {
             throw new Exception('No parameters given to getMessages');
@@ -125,7 +126,20 @@ class BLAM {
         
         return $messages;
     }
-
+		*/
+		
+		  public static function getMessages($msg_id,$timestamp_last_update) {
+                
+        $msg = new Message(array());
+        $options = array(
+        				'first_id'   => $msg_id,
+                'since'     => $timestamp_last_update
+                );
+        $messages = $msg->get($options);
+      	return $messages;
+			}
+		
+		
     public static function searchMessages($keyword) {
         if (empty($keyword)) {
             throw new Exception('No keyword given to searchMessages');
