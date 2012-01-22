@@ -105,39 +105,17 @@ class BLAM {
         
 		return array('id' => $msg->id);
 	}
-		/*
-    public static function getMessages($msg_id, $date_and_time = null) {
-        if (empty($msg_id)) {
-            throw new Exception('No parameters given to getMessages');
-        }
-        
-        $msg = new Message(array());
-        
-        if (is_string($msg_id) && $msg_id == 'all') {
-            $messages = $msg->get('all');
-        } else {
-            $options = array(
-                'last_id'   => $msg_id,
-                'since'     => $date_and_time
-            );
-       
-            $messages = $msg->get($options);
-        }
-        
-        return $messages;
-    }
-		*/
 		
-		  public static function getMessages($msg_id,$timestamp_last_update) {
-                
+	  public static function getMessages($msg_id, $timestamp_last_update = null) {           
         $msg = new Message(array());
         $options = array(
         				'first_id'   => $msg_id,
-                'since'     => $timestamp_last_update
+                'since'     => $timestamp_last_update,
+                'limit_paging' => 5
                 );
         $messages = $msg->get($options);
       	return $messages;
-			}
+		}
 		
 		
     public static function searchMessages($keyword) {
@@ -209,9 +187,14 @@ class BLAM {
         return array('id' => $id);
     }
 
-    public static function getChats($last_id, $date_and_time){
+    public static function getChats($chat_id, $timestamp_last_update = null){
         $chatline = new ChatLine(array());
-        $chats = $chatline->get($last_id, $date_and_time);
+        $options = array(
+        				'first_id'   => $chat_id,
+                'since'     => $timestamp_last_update,
+                'limit_paging' => 5
+                );
+        $chats = $chatline->get($options);
         return $chats;
     }
 

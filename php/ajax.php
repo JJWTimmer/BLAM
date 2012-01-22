@@ -65,13 +65,7 @@ try {
 			$response = BLAM::updateMessage($_POST['id'], $_POST['text']);
             // returns MessageId or exception
             break;
-		
-		//case 'getMessages':
-    //        BLAM::checkLogged();//date_time string format: '2011-02-23 09:03:01'
-		//	$response = BLAM::getMessages($_POST['last_id'], $_POST['date_and_time']); 
-    //        //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
-    //        break;
-    
+		    
 		case 'getMessages':
             BLAM::checkLogged();//date_time string format: '2011-02-23 09:03:01'
 				$response = BLAM::getMessages($_POST['first_id'],$_POST['timestamp_last_update']); 
@@ -128,7 +122,7 @@ try {
 		
 		case 'getChats':
             BLAM::checkLogged();
-			$response = BLAM::getChats($_POST['last_id'], $_POST['since']);//last_id is mandatory, id or 'all'
+			$response = BLAM::getChats($_POST['first_id'], $_POST['timestamp_last_update']);//last_id is mandatory, id or 'all'
             // returns array(int MessageID, string Text, string Username, string Avatar, Datetime created) chats or exception
             break;
 		

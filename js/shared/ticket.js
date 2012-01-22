@@ -46,6 +46,7 @@ function Ticket (pane,status) {
                 {
                     general.displayError(r.error);
                 }
+                //Time out might overwrite for different ticket types
                 Timeout["Tickets"]=setTimeout(function(){self.getTickets();},15000);
 
         });

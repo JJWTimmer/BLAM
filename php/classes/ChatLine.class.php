@@ -26,29 +26,35 @@ class ChatLine extends BLAMBase {
 		
 	}
     
-    public function get($last_id = 'all', $since = null) { //TODO: max toevoegen
-        if (is_string($last_id) && $last_id == 'all') {
-            $results = DB::query("
-                SELECT t.id, t.text, t.created, users.username, users.avatar
-                FROM chatlines AS t INNER JOIN users ON t.user_id = users.id
-                ");
-        } elseif (is_numeric($last_id) || strtotime($since)) {
-            $last_id = DB::esc($last_id ? $last_id : 0);
-            $since = DB::esc($since);
-
-            $q = "
-                SELECT t.id, t.text, t.created, users.username, users.avatar
-                FROM chatlines AS t INNER JOIN users ON t.user_id = users.id
-                WHERE t.id > $last_id";
-            $q .= ($since ? " AND t.created > '$since'" : "");
-
-            $results = DB::query($q);
-        } else {
-            return false;
+    public function get($options = 'empty') {
+    			if(is_array($options)) {
+        			$q="SELECT * FROM (
+            			SELECT t.id, t.text, t.created, users.username, users.avatar
+                	FROM chatlines AS t INNER JOIN users ON t.user_id = users.id";
+        			if ($options['first_id'] && is_numeric($options['first_id'])) {
+            		$first_id = DB::esc($options['first_id']);
+            		$limit_paging = DB::esc($options['limit_paging']);
+              		$q.= " WHERE t.id < $first_id";
+              		$q.= " ORDER BY t.id DESC LIMIT $limit_paging) t";
+              		$q.= " ORDER BY id ASC";
+        			}
+        			else{
+            		$since = DB::esc($options['since']);
+            			$q .= ($since ? " WHERE t.created >= '".$since."'" : "");	
+                	$q.=" ORDER BY t.id DESC LIMIT 5) t";
+                	$q.=" ORDER BY id ASC";
+          		}
+      				$results = DB::query($q);
+      		}	
+      	else{
+            throw new Exception('Invalid arguments for getChats');
         }
-            
+    
+    $data[] = array('timestamp' => date('Y-m-d G:i:s'),'limit' => 'true');        
 		while ($data[] = mysqli_fetch_assoc($results));
         if (!is_null($data) && end($data) == null) array_pop($data);
+    if($limit_paging && count($data) < ($limit_paging+1)) $data[0]['limit']='false';
+    $data[0]['query']=$q;
 		return $data;
 	}
 }

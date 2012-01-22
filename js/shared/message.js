@@ -7,19 +7,16 @@ function Message (pane) {
 	var lastTimestamp="";
   
 	// function to retrieve new messages from database
-	// (since last_id,timestamp) currently 2 hours past messages		
 	// uses pane to determine where to put messages
 		this.getMessages = function(){
-				//timestamp uses 2 hours (120 min)
         $.tzPOST('getMessages',{timestamp_last_update:lastTimestamp},function(r){
         //update messages from mysql db
           if(r)
           {
             if(!r.error)
             {
-            	if(lastTimestamp=="")
-            	{
-            		firstID=r[1].id;
+            	if(lastTimestamp=="" && r.length>1)
+            	{	
             		pane.getContentPane().html('<div class="retrieve_messages rounded"><p align="center">Haal oudere berichten op...</p></div>');
             		pane.reinitialise();
             	}
@@ -28,26 +25,28 @@ function Message (pane) {
             	lastTimestamp=r[0].timestamp;
             	for(var i=1;i<r.length;i++){
                 self.addMessageLine(r[i]);
-            		//update first ID if necessary
+								//update first ID if necessary
 								if(r[i].id<firstID)
 								{
 									firstID=r[i].id;
 								}
             	}
 														
-            	// bata-123 and arts-1 formats.
-            	//general.highlightHandles(this.pane.getContentPane(), logging.data.groups);
-
+							//general.highlightHandles(pane.getContentPane(), handle.getgroups());
+																					
             	//if new messages, update to lastid
             	//message.data.noActivity is reset, so next update in 1 second
             	if(r.length>1){
               	noActivity = 0;
-                lastID = r[i-1].id;
                 pane.scrollToBottom(true);
+                // bata-123 and arts-1 formats.
+                if(firstID==0)
+                {
+                	firstID=r[1].id;
+                }
               }
             	else{
-                // If no messages were received, increment
-                // the noActivity counter.
+                // If no messages were received, increment the noActivity counter.
                 noActivity++;
             	}
 							
@@ -57,10 +56,10 @@ function Message (pane) {
                 pane.reinitialise();
             	}
 
-            	if($("#MeldingenList .jspContainer .jspPane > div").length > 0 && $("#MeldingenList .jspContainer .jspPane > p").length > 0){
-              	// If this is the first melding, remove the
-              	// paragraph saying there aren't any:
+							// If this is the first melding, remove the paragraph saying there aren't any:
+            	if($("#MeldingenList .jspContainer .jspPane > div").length > 0 && $("#MeldingenList .jspContainer .jspPane > p").length > 0){	 
               	$('#MeldingenList .jspContainer .jspPane > p').remove();
+              	pane.reinitialise();
             	}
 
             	// Setting a timeout for the next request,
@@ -126,6 +125,7 @@ function Message (pane) {
           {
             if(!r.error)
             {
+            	//alert(r[0].query);
           		for(var i=1;i<r.length;i++){
                 self.addMessageLine(r[i]);
                 if(parseInt(r[i].id)<parseInt(firstID))
@@ -133,7 +133,7 @@ function Message (pane) {
 									firstID=r[i].id;
 								}
             	}
-          		if(parseInt(firstID)==parseInt(r[0].first_id_db))
+          		if(r[0].limit=='false')
           		{
           			$('#MeldingenList .retrieve_messages').remove();
           		}
@@ -172,7 +172,6 @@ function Message (pane) {
         if(exists.length){
         		exists.after(markup);
             exists.remove();
-            alert("replaced message...");
         }
         else{
         	 //check for temporary message --> add at end
@@ -208,7 +207,13 @@ function Message (pane) {
         									closest=$(this);
         								}
         						});
+        						if(closest){
          	 					closest.after(markup);
+         	 					}
+         	 					else
+         	 					{
+         	 						pane.getContentPane().append(markup);
+         	 					}
            				}
         	 			}
         	 		}

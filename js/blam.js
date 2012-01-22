@@ -348,7 +348,7 @@ var general = {
     //highlight (add rvdlog.css .highlight)
     highlightHandles : function(elem, groups) {
         elem.removeHighlight();
-        if (logging.data.groupsLoaded) {
+        //if (logging.data.groupsLoaded) {
             for (i = 0; i < groups.length; i++) {
                 var grp = groups[i].handles;
                 for (j = 0; j < grp.length; j++) {
@@ -356,7 +356,7 @@ var general = {
                     elem.highlight(grp[j].description);
                 }
             }
-        }
+        //}
     },
 
 // This method displays an error message on the top of the page:

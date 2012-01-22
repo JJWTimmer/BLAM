@@ -4,7 +4,11 @@ function Handle (pane) {
 	var pane = pane;
   var groups;
   var groupsLoaded;	
-  
+  	
+  	this.getgroups = function(){
+  	return groups;	
+  	};
+ 		
  		this.getHandles = function(){
 			$.tzPOST('getGroups',{recursive:'true'},function(r){
             if(r){

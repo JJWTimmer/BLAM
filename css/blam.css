@@ -137,7 +137,7 @@ overflow over text, could also use min-width (either way screwed;-))*/
 
 /* Chats */
 /* overflow: hidden enables the resizing of each div*/
-.chat{
+.chat, .retrieve_chats{
     position:relative;
     overflow: hidden;
     width: 95%;
@@ -145,6 +145,12 @@ overflow over text, could also use min-width (either way screwed;-))*/
     padding:2px 2px 2px 2px;
     margin: 0.5% 5% 0.5% 1%;
     background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
+}
+
+.retrieve_chats:hover{
+ background:url('') repeat-x #d5d5d5;
+ background-color:#B0B0B0;
+ cursor:pointer;
 }
 
 .chat:last-child{

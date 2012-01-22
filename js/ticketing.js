@@ -85,6 +85,16 @@ var ticketing = {
           	}
          });
       
+      	//function to implement getting previous messages from db
+      	$('#WL-ChatList .retrieve_chats').live('click', function(){
+          if(!working)
+          	{
+          	working = true;
+          	chat.getOldChats();
+          	working = false;
+          	}
+         });
+      
         //function to implement clicking on ticket to get details
         $('div.list_item_parent_ticket_full').live('click', function(){
           if($(this).attr("id")!=ticketing.data.selectedticket)
