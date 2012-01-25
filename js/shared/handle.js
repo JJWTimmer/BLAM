@@ -67,21 +67,21 @@ function Handle (pane) {
 	  };
 
 	this.searchHandles = function(keyword){
-		$(".list_item_group").each(function(i) {
+		$(".list_item_first").each(function(i) {
               //make every group visible again
               $(this).attr('visible','1');
             });
 						//if field is empty show every handle
             if(keyword=="")
             {
-              $(".list_item_handle").each(function(i) {
+              $(".list_item_second").each(function(i) {
                 $(this).fadeIn();
               });
             }
             else
             {
                 var keyword_LC=keyword.toLowerCase();
-                $(".list_item_handle").each(function(i) {
+                $(".list_item_second").each(function(i) {
                   var handle_name=$(this).children('.list_item_handle_name').text().toLowerCase();
                   var handle_description=$(this).children('.list_item_handle_description').text().toLowerCase();
                   if((handle_name.search(keyword_LC) < 0) && (handle_description.search(keyword_LC) < 0))

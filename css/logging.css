@@ -246,6 +246,12 @@ p.label_checkbox_pair label{
     background-color: #58aa00;
 }
 
+/* adding hover for messages */
+.message_hover:hover{
+ background:url('') repeat-x #d5d5d5;
+ background-color:#B0B0B0;
+ cursor:pointer;
+}
 
 
 /* Overloading the default styles of jScrollPane */

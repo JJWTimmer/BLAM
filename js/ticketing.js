@@ -63,6 +63,11 @@ var ticketing = {
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
       }).data('jsp');
+      
+    ticketing.data.jspAPITicketDetails = $('#TicketDetailsList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+    	}).data('jsp');
                
       user = new User("TopBar");
       message = new Message(ticketing.data.jspAPIMeldingen);
@@ -72,11 +77,12 @@ var ticketing = {
       ticketOpen = new Ticket(ticketing.data.jspAPIOpenTickets,[{1: 'Open'}]);
       ticketClosed = new Ticket(ticketing.data.jspAPIClosedTickets,[{1: 'Gesloten'}]);
       ticketSelect = new Ticket("",[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]);
-      display = new Display ($('#TicketDetailsList'));
+      //display = new Display ($('#TicketDetailsList'));
+      display = new Display (ticketing.data.jspAPITicketDetails);
       updatefeedback = new UpdateAndFeedback("","");
-      	
+           	
       	//function to implement getting previous messages from db
-      	$('#MeldingenList .retrieve_messages').live('click', function(){
+      	$('#MeldingenList .retrieve_previous').live('click', function(){
           if(!working)
           	{
           	working = true;
@@ -86,7 +92,7 @@ var ticketing = {
          });
       
       	//function to implement getting previous messages from db
-      	$('#WL-ChatList .retrieve_chats').live('click', function(){
+      	$('#WL-ChatList .retrieve_previous').live('click', function(){
           if(!working)
           	{
           	working = true;
@@ -96,7 +102,7 @@ var ticketing = {
          });
       
         //function to implement clicking on ticket to get details
-        $('div.list_item_parent_ticket_full').live('click', function(){
+        $('div.parent_ticket').live('click', function(){
           if($(this).attr("id")!=ticketing.data.selectedticket)
             {
             ticketing.data.selectedticket=$(this).attr("id");
@@ -114,7 +120,7 @@ var ticketing = {
         });
 
         //function to implement clicking on dynamic element ticket
-        $('div.list_item_child_ticket').live('click', function(){
+        $('div.child_ticket').live('click', function(){
           if($(this).attr("id")!=ticketing.data.selectedticket)
             {
             ticketing.data.selectedticket=$(this).attr("id");
@@ -151,14 +157,14 @@ var ticketing = {
         });
 
         //function to implement clicking on dynamic element groups
-        $('div.list_item_group').live('click', function(){
+        $('#Handles .list_item_first').live('click', function(){
           if(!working)
           {
             working = true;
             var groupid=$(this).attr("id");
             if($(this).attr('visible')==0){
                 $(this).attr('visible','1');
-                $(".list_item_handle").each(function(i) {
+                $(".list_item_second").each(function(i) {
                 if($(this).hasClass(groupid))
                   {
                   $(this).fadeIn();
@@ -169,7 +175,7 @@ var ticketing = {
             else
             {
                 $(this).attr('visible','0');
-                $(".list_item_handle").each(function(i) {
+                $(".list_item_second").each(function(i) {
                 if($(this).hasClass(groupid))
                   {
                   $(this).fadeOut();
@@ -179,9 +185,6 @@ var ticketing = {
 
             working=false;
           }
-          //ticketing.data.jspAPIHandles.getContentPane().append('<div class=test></div>');
-          //ticketing.data.jspAPIHandles.reinitialise();
-          //$('#HandlesList .test').remove();
           ticketing.data.jspAPIHandles.reinitialise();
         });
 
@@ -441,6 +444,7 @@ var ticketing = {
         $('#Login').fadeOut(function(){
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
+          
           message.getMessages();
           chat.getChats();
           user.getUsers();

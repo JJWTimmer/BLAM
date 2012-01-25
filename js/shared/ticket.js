@@ -19,7 +19,7 @@ function Ticket (pane,status) {
                 var markup_child;
                   for(var i=0; i< r.length;i++){
                     if(r[i]){
-                        markup=general.render('parentticket',r[i]);
+                      markup=general.render('parentticket',$.extend(r[i],params));
                         pane.getContentPane().append(markup);
                         
                         if (r[i]['children']) {

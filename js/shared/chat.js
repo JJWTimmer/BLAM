@@ -19,7 +19,7 @@ function Chat (pane) {
             	//alert(r[0].query);
             	if(lastTimestamp=="" && r.length>1)
             	{	
-            		pane.getContentPane().html('<div class="retrieve_chats rounded"><p align="center">Haal oudere berichten op...</p></div>');
+            		pane.getContentPane().html('<div class="retrieve_previous rounded"><p align="center">Haal oudere berichten op...</p></div>');
             		pane.reinitialise();
             	}
             	
@@ -106,7 +106,8 @@ function Chat (pane) {
             	}
           		if(r[0].limit=='false')
           		{
-          			$('#WL-ChatList .retrieve_chats').remove();
+          			$('#WL-ChatList .retrieve_previous').remove();
+          			pane.reinitialise();
           		}
           	}
           	else
@@ -135,8 +136,8 @@ function Chat (pane) {
         }
 
 
-        var markup = general.render('chatLine',params),
-        exists = $('#WL-ChatList .chat-'+params.id);
+        var markup = general.render('messageLine',params),
+        exists = $('#WL-ChatList .message-'+params.id);
 
         //check if message already exists --> replace
         if(exists.length){
@@ -151,7 +152,7 @@ function Chat (pane) {
         	 else
         	 {
         	 		//is there already a message with a id one smaller? --> add after this
-        	 		var previous = $('#WL-ChatList .chat-'+(+params.id - 1));
+        	 		var previous = $('#WL-ChatList .message-'+(+params.id - 1));
             	if(previous.length){
             	  	previous.after(markup);
             	} else {
@@ -164,7 +165,7 @@ function Chat (pane) {
         	 				//has the new message an id that is smaller than first id? --> place before lastid
         	 				if(parseInt(params.id) < parseInt(firstID))
         	 				{
-	        					var first = $('#WL-ChatList .chat-'+(+firstID));
+	        					var first = $('#WL-ChatList .message-'+(+firstID));
         						first.before(markup);
         	 				}
         	 				else
@@ -216,7 +217,7 @@ function Chat (pane) {
                 //empty input form textbox
                 $('#Chattext').val('');
                 //remove old temporary chat
-                $('div.chat-'+tempID).remove();
+                $('div.message-'+tempID).remove();
                 //insert newly received ID
                 params['id'] = r.id;
                 self.addChatLine($.extend({},params));

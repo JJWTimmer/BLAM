@@ -15,14 +15,7 @@ function UpdateAndFeedback(pane,called) {
                 		var markup_extra;
                   	for(var i=0; i< r.length;i++){
                     	if(r[i]){
-                          if(called=='false')
-                          {
-                          markup=general.render('openfeedback',r[i]);
-                        	}
-                        	else
-                        	{
-                        	markup=general.render('closedfeedback',r[i]);
-                        	}
+                          markup=general.render('feedback',r[i]);
                           pane.getContentPane().append(markup);
                     	}
                   	}
@@ -62,7 +55,7 @@ function UpdateAndFeedback(pane,called) {
       		
       });
 	};
-	
+	/*
 	this.fillUpdate = function(ticket_id,label_id,last_update_id){
 	//update the last update box in ticketdetails
       $.tzPOST('getUpdates',{ticket_id:ticket_id,type:'update'},function(r){
@@ -112,4 +105,44 @@ function UpdateAndFeedback(pane,called) {
       });
 		
 	};
+	*/
+	
+	this.fillUpdateFeedback = function(ticket_id,pane){
+	$.tzPOST('getUpdates',{ticket_id:ticket_id, type :'all'},function(r){
+            if(r)
+              {
+              if(!r.error)
+                {
+                  //$('#openmodalbutton').show();
+                  var markup;
+                  for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        if(r[i].type=='feedback'){
+                          if(r[i].called==null){
+                            markup=general.render('feedbackTBOpen',r[i]);
+                          }
+                          else
+                          {
+                            markup=general.render('feedbackTBClosed',r[i]);
+                          }
+                        pane.getContentPane().append(markup);
+                        }
+                        else
+                        {
+                        markup=general.render('updateTB',r[i]);
+                        pane.getContentPane().append(markup);
+                        }
+                    }
+                  }
+                pane.reinitialise();
+                }
+                else
+                {
+                    general.displayError(r.error);
+                }
+
+              }
+        });
+	};
+	
 }

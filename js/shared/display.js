@@ -10,28 +10,34 @@ function Display (pane) {
             if(!r.error)
                 {
                     //$('#TicketDetailsList').empty();
-                    pane.empty();
+                    pane.getContentPane().empty();
                     if(parent_id==0){
 
                       switch(r[0].status){
                         case 'Nieuw':
-                          //$('#TicketDetailsList').html();
-                          
-                          pane.html(general.render('ticket_detail_new',r[0]));
+                          //pane.html(general.render('ticket_detail_new',r[0]));
+                          pane.getContentPane().append(general.render('ticket_detail_new',r[0]));
+                          pane.reinitialise();
                         break;
                         case 'Open':
-                          pane.html(general.render('ticket_detail_open',r[0]));
+                        	//pane.html(general.render('ticket_detail_open',r[0]));
+                        	pane.getContentPane().append(general.render('ticket_detail_open',r[0]));
+                          pane.reinitialise();
                         break;
                         case 'Gesloten':
-                          pane.html(general.render('ticket_detail_closed',r[0]));
+                          //pane.html(general.render('ticket_detail_closed',r[0]));
+                          pane.getContentPane().append(general.render('ticket_detail_closed',r[0]));
+                          pane.reinitialise();
                         break;
 
                       }
                     }
                     else
                     {
+                          //pane.html(general.render('subticket_detail',r[0]));
                           r[0].status="Subticket";
-                          pane.html(general.render('subticket_detail',r[0]));
+                          pane.getContentPane().append(general.render('subticket_detail',r[0]));
+                          pane.reinitialise();
                     }
 
                     $('#ticket_update').defaultText('Text voor update');
@@ -44,8 +50,9 @@ function Display (pane) {
                     
                     if(r[0].status!='Subticket'){
                     	$('#become_Ticket').attr('options')[0] = new Option("selecteer ticket");
-                    	updatefeedback.fillUpdate(ticket_id,$('p.list_item_ticketdetail_label_last_update'),$('#ticket_last_update'));
-                    	updatefeedback.fillFeedback(ticket_id,$('p.list_item_ticketdetail_label_last_feedback'),$('#ticket_last_feedback'));
+                    	//updatefeedback.fillUpdate(ticket_id,$('p.list_item_ticketdetail_label_last_update'),$('#ticket_last_update'));
+                    	//updatefeedback.fillFeedback(ticket_id,$('p.list_item_ticketdetail_label_last_feedback'),$('#ticket_last_feedback'));
+                    	updatefeedback.fillUpdateFeedback(ticket_id,pane);
                     }
                     else
                     {

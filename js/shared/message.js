@@ -17,7 +17,7 @@ function Message (pane) {
             {
             	if(lastTimestamp=="" && r.length>1)
             	{	
-            		pane.getContentPane().html('<div class="retrieve_messages rounded"><p align="center">Haal oudere berichten op...</p></div>');
+            		pane.getContentPane().html('<div class="retrieve_previous rounded"><p align="center">Haal oudere berichten op...</p></div>');
             		pane.reinitialise();
             	}
             	
@@ -135,7 +135,7 @@ function Message (pane) {
             	}
           		if(r[0].limit=='false')
           		{
-          			$('#MeldingenList .retrieve_messages').remove();
+          			$('#MeldingenList .retrieve_previous').remove();
           		}
           	}
           	else
