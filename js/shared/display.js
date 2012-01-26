@@ -71,7 +71,7 @@ function Display (pane) {
           }
         });		
 		};
-		
+						
  		this.showTicket = function(ticket_id){
 		
 				$.tzPOST('getTicketDetail',{id: ticket_id},function(r){

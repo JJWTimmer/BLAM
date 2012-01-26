@@ -4,13 +4,14 @@ function Ticket (pane,status) {
 	var pane = pane;
 	//status is used to identify which type of tickets should be displayed (open, closed, new)
 	var status = status;
-  	
+  var TimeOut = null;  	
   	
   	
  		this.getTickets = function(){		
 		$.tzPOST('getTicketList',{recursive : true, status : status},function(r){
-            if(!r.error)
-                {
+            if(r){
+            	if(!r.error)
+              {
                 pane.getContentPane().empty();
                 //!!!Reference to user.getRole() function is not so nice...
                 params = {role : user.getRole()};
@@ -47,13 +48,18 @@ function Ticket (pane,status) {
                     general.displayError(r.error);
                 }
                 //Time out might overwrite for different ticket types
-                Timeout["Tickets"]=setTimeout(function(){self.getTickets();},15000);
-
+                TimeOut=setTimeout(function(){self.getTickets();},15000);
+						}
+						else
+						{
+						//No tickets available, so empty it
+						pane.getContentPane().empty();
+						TimeOut=setTimeout(function(){self.getTickets();},15000);
+						pane.reinitialise();
+						}
         });
-
-		
 	  };
-	  //r[0].status,ticket_id,parent_id
+	  
 	  this.fillTicket = function(selectElement,ticket_id,parent_id){
 	    //update become child ticket in TicketDetail
       $.tzPOST('getTicketList',{recursive : false, status : status},function(r){
@@ -89,7 +95,16 @@ function Ticket (pane,status) {
            general.displayError(r.error);
           }
       });
+	  }; 
 	  
-	  	
-	  };
+	  this.refreshTickets = function(){
+        clearTimeout(TimeOut);
+        setTimeout(function(){self.getTickets();},500);
+    };
+	  
+		this.kill = function(){
+		//alert(TimeOut);
+		clearTimeout(TimeOut);
+		}
+
 }

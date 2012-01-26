@@ -5,6 +5,7 @@ function Message (pane) {
 	var noActivity = 0;
 	var firstID = 0;
 	var lastTimestamp="";
+	var TimeOut = null;
   
 	// function to retrieve new messages from database
 	// uses pane to determine where to put messages
@@ -84,7 +85,7 @@ function Message (pane) {
                 general.displayError(r.error);
                 var nextRequest = 1000;
             }
-            Timeout["Messages"]=setTimeout(function(){self.getMessages();},nextRequest);
+            TimeOut=setTimeout(function(){self.getMessages();},nextRequest);
           }
           else
           {
@@ -240,6 +241,7 @@ function Message (pane) {
             // to the screen immediately, without waiting for
             // the AJAX request to complete:
             self.addMessageLine($.extend({},params));
+   
 						var inputcheckbox = $('#ticket:checked').val();
 
             // Using our tzPOST wrapper method to send the message
@@ -253,7 +255,7 @@ function Message (pane) {
             		{
             			var ticket_en='';
             		}
-                        
+            
             $.tzPOST('addMessage',{text:messagetext,ticket:ticket_en},function(r){
             if(!r.error){
                 //empty input form textbox
@@ -261,8 +263,7 @@ function Message (pane) {
                 if(inputcheckbox!=undefined)
                 {
                 	$('#ticket').attr('checked',false);
-                	window.clearTimeout(Timeout["Tickets"]);
-                
+                	ticket.refreshTickets();
                 	//temporarily not available
                 	ticket.getTickets();
                 }
@@ -282,12 +283,21 @@ function Message (pane) {
   	
   	
   	};
+  	this.clearMessages = function(){
+        firstID = 0;
+        pane.getContentPane().empty();
+    };
   	
   	this.refreshMessages = function(){
-        lastID=1;
+        firstID = 0;
+        lastTimestamp="";
         pane.getContentPane().empty();
         self.getMessages();
     };
 
+		this.kill = function(){
+		//alert(TimeOut);
+		clearTimeout(TimeOut);
+		}
 
 }

@@ -5,8 +5,6 @@ $(document).ready(function(){
 
 });
 
-var Timeout= new Array();
-
 var logging = {
 
   // data holds variables for use in the class:
@@ -207,8 +205,9 @@ var logging = {
             {
               if(working) return false;
                 working = true;
-              window.clearTimeout(Timeout["Messages"]);
+              message.kill();
               $('#messageButton').show();
+              message.clearMessages();
               message.searchMessages(keyword);
               $('#keyword').val('');
               working = false;
@@ -315,11 +314,12 @@ var logging = {
     },
 
    killTimeouts : function(){
-            for (key in Timeout)
-            {
-              clearTimeout(Timeout[key]);
-            }
-  },  
+            message.kill();
+  					user.kill();
+  					ticket.kill();
+  					feedbackOpen.kill();
+  					feedbackClosed.kill();
+  	},  
 
   reInitJSP : function(){
             logging.data.jspAPIMeldingen.reinitialise();

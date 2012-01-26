@@ -5,6 +5,7 @@ function Chat (pane) {
 	var noActivity = 0;
 	var firstID = 0;
 	var lastTimestamp="";
+	var TimeOut = null;
 		
 	
 	// This method requests the latest chats
@@ -85,7 +86,7 @@ function Chat (pane) {
                 var nextRequest = 1000;
             }
 
-            Timeout["Chats"]=setTimeout(function(){self.getChats();},nextRequest);
+            TimeOut=setTimeout(function(){self.getChats();},nextRequest);
             
         });
     };
@@ -227,7 +228,11 @@ function Chat (pane) {
                 general.displayError(r.error);
                 }
             });
-	
     };
+    
+    this.kill = function(){
+		//alert(TimeOut);
+		clearTimeout(TimeOut);
+		}
 		
 }

@@ -5,6 +5,7 @@ function User (pane) {
 	var username;
 	var avatar;
 	var role;
+	var TimeOut = null;	
   	
   	this.setUser = function(username,avatar,role){
   		self.username=username;
@@ -94,7 +95,7 @@ function User (pane) {
                 {
                     general.displayError(r.error);
                 }
-                Timeout["Users"]=setTimeout(function(){self.getUsers();},15000);
+                TimeOut=setTimeout(function(){self.getUsers();},15000);
       });
 	  };
 	  
@@ -131,4 +132,9 @@ function User (pane) {
       });
   	};
 	  
+    this.kill = function(){
+		//alert(TimeOut);
+		clearTimeout(TimeOut);
+		}
+		
 }

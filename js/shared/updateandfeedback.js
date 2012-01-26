@@ -4,6 +4,7 @@ function UpdateAndFeedback(pane,called) {
 	var pane = pane;
 	//status is used to identify which type of feedbacks should be displayed (open, closed)
 	var called = called;
+	var TimeOut = null;	
   	
  	this.getFeedback = function(){
         $.tzPOST('getFeedback',{called: called},function(r){
@@ -34,14 +35,8 @@ function UpdateAndFeedback(pane,called) {
           {
                     general.displayError(r.error);
           }
-        	if(called=='false')
-        	{
-          Timeout["FeedbacksOpen"]=setTimeout(function(){self.getFeedback();},15000);
-					}
-					else
-					{
-					Timeout["FeedbacksClosed"]=setTimeout(function(){self.getFeedback();},15000);
-					}
+        	
+          TimeOut=setTimeout(function(){self.getFeedback();},15000);
   		});
 	};
 	
@@ -143,6 +138,56 @@ function UpdateAndFeedback(pane,called) {
 
               }
         });
+	};
+	
+		this.saveUpdate = function(ticketUpdateField){
+			if(ticketUpdateField.val()!="" && ticketUpdateField.val()!="Text voor update")
+    	{
+    		$.tzPOST('createUpdate',{ticket_id:ticketing.data.selectedticket,message:ticketUpdateField.val()},function(r){
+  	   		if(r.error){
+	       		general.displayError(r.error);
+       		}
+       		else
+       		{
+	       		general.displaySaved("Update aangemaakt: " + ticketUpdateField.val());
+  	   	    ticketUpdateField.val("");
+    	      ticketUpdateField.defaultText('Text voor update');
+  	 	      display.showTicketDetail(ticketing.data.selectedticket,ticketing.data.selectedparentticket);
+	     	  }
+     		});
+    	}
+    	else
+    	{
+    		alert("Niet goed ingevuld!");
+    	}
+  	};
+  	
+  	this.saveFeedback = function(ticketFeedbackField){
+  		if(ticketFeedbackField.val()!="" && ticketFeedbackField.val()!="Text voor terugmelding")
+      {
+      	$.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_title').val(),message:ticketFeedbackField.val()},function(r){
+        	if(r.error){
+             general.displayError(r.error);
+          }
+          else
+          {
+          	general.displaySaved("Terugmelding aangemaakt: " + $('#ticket_title').val());
+            ticketFeedbackField.val("");
+            ticketFeedbackField.defaultText('Text voor terugmelding');
+            display.showTicketDetail(ticketing.data.selectedticket,ticketing.data.selectedparentticket);
+          }
+        });
+      }
+      else
+      {
+      	alert("Niet goed ingevuld!");
+      }
+    };
+	
+	
+	this.kill = function(){
+		//alert(TimeOut);
+		clearTimeout(TimeOut);
 	};
 	
 }

@@ -85,49 +85,21 @@ var ticketing = {
       	$('#MeldingenList .retrieve_previous').live('click', function(){
           if(!working)
           	{
-          	working = true;
-          	message.getOldMessages();
-          	working = false;
+          		working = true;
+          		message.getOldMessages();
           	}
-         });
+          	working = false;
+        });
       
       	//function to implement getting previous messages from db
       	$('#WL-ChatList .retrieve_previous').live('click', function(){
           if(!working)
           	{
-          	working = true;
-          	chat.getOldChats();
-          	working = false;
+          		working = true;
+          		chat.getOldChats();
           	}
+          	working = false;
          });
-      
-        //function to implement clicking on ticket to get details
-        $('div.parent_ticket').live('click', function(){
-          if($(this).attr("id")!=ticketing.data.selectedticket)
-            {
-            ticketing.data.selectedticket=$(this).attr("id");
-            ticketing.data.selectedparentticket=0;
-            }
-          display.showTicketDetail(ticketing.data.selectedticket,0);
-        });
-
-        //function to implement clicking on claim
-        $('div.list_item_parent_ticket_claim').live('click', function(){
-          $.tzPOST('setTicketOwner',{id:$(this).attr("id")},function(r){
-          ticketing.reInitTickets("New")
-          ticketing.reInitTickets("Open")
-          });
-        });
-
-        //function to implement clicking on dynamic element ticket
-        $('div.child_ticket').live('click', function(){
-          if($(this).attr("id")!=ticketing.data.selectedticket)
-            {
-            ticketing.data.selectedticket=$(this).attr("id");
-            ticketing.data.selectedparentticket=$(this).attr("title");
-            }
-          display.showTicketDetail(ticketing.data.selectedticket,$(this).attr("title"));
-        });
 
         $('#handlelist_toggle_button').live('click', function(){
           if(!working)
@@ -152,8 +124,8 @@ var ticketing = {
               ticketing.data.HandlelistVisible=1;
               }
               ticketing.reInitJSP();
-              working=false;
           }
+          working=false;
         });
 
         //function to implement clicking on dynamic element groups
@@ -181,41 +153,207 @@ var ticketing = {
                   $(this).fadeOut();
                   }
                 });
-            }
-
-            working=false;
+            }       
           }
+          working=false;
           ticketing.data.jspAPIHandles.reinitialise();
         });
+
 
         $('#search_handles').keyup(function (e) {
 						handle.searchHandles($('#search_handles').val());
         });
-
-				//function to implement clicking on select ticket (in ticketdetail
-				$('#become_Ticket').live('click', function()
-				{
-									if(ticketing.data.selectTicketLoaded == false && ticketing.data.selectedparentticket==0)
-									{			    	
-					    		ticketSelect.fillTicket($('#become_Ticket'),ticketing.data.selectedticket,ticketing.data.selectedparentticket);			
-					    		ticketing.data.selectTicketLoaded = true;
-					    		}
-				});
 
         //function to implement clicking on thickbox link
         $('#openmodalbutton').live('click', function(){
           general.tb_open_new('UpdatesAndFeedbacks.html?&KeepThis=true&height=500&width=800');
         });
 
-        // Logging a person into blam:
-        $('#loginForm').submit(function(){
-            if(working) return false;
-            working = true;
-            // Using our tzPOST wrapper function (defined in the bottom):
-            //$(this).serialize encodes all the name form elements to be used by php
-            $.tzPOST('login',$(this).serialize(),function(r){
-                working = false;
+        // Submitting a new chat entry:
+        $('#submitForm').submit(function(){
+            var text = $('#Chattext').val();
+            if(text.length == 0){
+                return false;
+            }
+            if(!working)
+          	{
+          		working = true;
+	            chat.submitChat(text);
+    				}
+    				working = false;
+        });
 
+				//function to implement clicking on ticket to get details
+        $('div.parent_ticket').live('click', function(){
+          if(!working)
+          	{
+          		working = true;
+          		if($(this).attr("id")!=ticketing.data.selectedticket)
+            	{
+            		ticketing.data.selectedticket=$(this).attr("id");
+            		ticketing.data.selectedparentticket=0;
+            	}
+          		display.showTicketDetail(ticketing.data.selectedticket,0);
+        		}
+        		working = false;
+        });
+
+        //function to implement clicking on child ticket to get details
+        $('div.child_ticket').live('click', function(){
+        	  if(!working)
+          	{
+          		working = true;
+          		if($(this).attr("id")!=ticketing.data.selectedticket)
+            	{
+            		ticketing.data.selectedticket=$(this).attr("id");
+            		ticketing.data.selectedparentticket=$(this).attr("title");
+            	}
+          		display.showTicketDetail(ticketing.data.selectedticket,$(this).attr("title"));
+          	}
+          	working = false;
+        });
+
+				//function to implement clicking on claim
+        $('div.list_item_parent_ticket_claim').live('click', function(){
+        	 if(!working)
+          	{
+          		working = true;
+          		$.tzPOST('setTicketOwner',{id:$(this).attr("id")},function(r){
+          			ticketNew.refreshTickets();
+          			ticketOpen.refreshTickets();
+          		});
+          		display.showTicketDetail(ticketing.data.selectedticket,0);
+          	}
+          	working = false;  	
+        });
+        
+				//function to implement filling the ticket selector (for linking to a parent ticket)
+				$('#become_Ticket').live('click', function()
+				{
+						if(ticketing.data.selectTicketLoaded == false && ticketing.data.selectedparentticket==0)
+						{			    	
+					  	ticketSelect.fillTicket($('#become_Ticket'),ticketing.data.selectedticket,ticketing.data.selectedparentticket);			
+					    ticketing.data.selectTicketLoaded = true;
+					  }		
+				});
+
+      // add listener for this button and change ticket details
+      $('#saveticketbutton').live('click',function(){
+            $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),solution:$('#ticket_oplossing').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
+              if(r==null){}
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+
+            if(!($('#ticket_status').val()=="Nieuw") && !($('#ticket_status').val()=="Subticket")){
+              $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
+                if(r==null){}
+                else
+                {
+                  general.displayError(r.error);
+                }
+              });
+            }
+      	ticketNew.refreshTickets();
+        ticketOpen.refreshTickets();
+        ticketClosed.refreshTickets();
+        general.displaySaved("Saved Ticket: " + $('#ticket_title').val());
+      });
+
+      // add listener for this button and change ticket details
+      $('#closeticketbutton').live('click',function(){
+              $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),solution:$('#ticket_oplossing').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
+              if(r==null){}
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+
+            if(!($('#ticket_status').text()=="Nieuw") && !($('#ticket_status').text()=="Subticket")){
+              $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
+                if(r==null){}
+                else
+                {
+                  general.displayError(r.error);
+                }
+              });
+            }
+
+
+            $.tzPOST('closeTicket',{id:ticketing.data.selectedticket},function(r){
+              if(r==null){}
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+      	ticketOpen.refreshTickets();
+        ticketClosed.refreshTickets();
+        general.displaySaved("Saved Ticket: " + $('#ticket_title').val());
+        display.clearDisplay();
+      });
+
+      // add listener for this button and change to childticket of certain parentticket
+      $('#childticketbutton').live('click',function(){
+            $.tzPOST('becomeChildTicket',{id:ticketing.data.selectedticket,parent_id:$('#become_Ticket').val()},function(r){
+              if(r==null){}
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+        ticketNew.refreshTickets();
+      	ticketOpen.refreshTickets();
+        ticketClosed.refreshTickets();
+        display.clearDisplay();
+      });
+
+      // add listener for this button and change to parentticket
+      $('#becomeparentticketbutton').live('click',function(){
+            $.tzPOST('becomeParentTicket',{id:ticketing.data.selectedticket},function(r){
+              if(r==null){}
+              else
+              {
+                general.displayError(r.error);
+              }
+            });
+            ticketNew.refreshTickets();
+          	ticketOpen.refreshTickets();
+            ticketClosed.refreshTickets();
+            display.clearDisplay();
+      });
+
+      // add listener for this button and add an update
+      $('#saveupdatebutton').live('click',function(){
+        if(!working)
+          	{
+          		working = true;
+        			updatefeedback.saveUpdate($('#ticket_update'));
+        		}
+        working = false;
+      });
+
+
+        $('#savefeedbackbutton').live('click',function(){
+        	if(!working)
+          	{
+          		working = true;
+        			updatefeedback.saveFeedback($('#ticket_feedback'));
+        		}
+        	working = false;
+        });
+
+				// Logging a person into blam:
+        $('#loginForm').submit(function(){
+            if(!working)
+          	{
+          	working = true;
+            	// Using our tzPOST wrapper function (defined in the bottom):
+            	//$(this).serialize encodes all the name form elements to be used by php
+            	$.tzPOST('login',$(this).serialize(),function(r){
                 if(r.error){
                     general.displayError(r.error);
                 }
@@ -223,11 +361,12 @@ var ticketing = {
                 {
                     ticketing.login(r.username,r.avatar,r.role);
                 }
-            });
-            return false;
+            	});
+          	}
+            working = false;
         });
 
-        // Checking whether the user is already logged (browser refresh)
+				// Checking whether the user is already logged (browser refresh)
         $.tzPOST('checkLogged',function(r){
             if(!r.error)
             {
@@ -248,174 +387,6 @@ var ticketing = {
             });
             $.tzPOST('logout');
             return false;
-        });
-
-        // Submitting a new chat entry:
-        $('#submitForm').submit(function(){
-            var text = $('#Chattext').val();
-            if(text.length == 0){
-                return false;
-            }
-            if(working) return false;
-            working = true;
-            chat.submitChat(text);
-            working = false;
-            return false;
-        });
-
-      // add listener for this button and change ticket details
-      $('#saveticketbutton').live('click',function(){
-            $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),solution:$('#ticket_oplossing').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
-              if(r==null){
-
-              }
-              else
-              {
-                general.displayError(r.error);
-              }
-            });
-
-            if(!($('div .list_item_ticketdetail_status').text()=="status: Nieuw") && !($('div .list_item_ticketdetail_status').text()=="status: Subticket")){
-              $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
-                if(r==null){
-
-                }
-                else
-                {
-                  general.displayError(r.error);
-                }
-              });
-            }
-            ticketing.reInitTickets("All");
-            general.displaySaved("Saved Ticket: " + $('#ticket_title').val());
-            setTimeout("ticketing.getTicketDetail(ticketing.data.selectedticket,0);",500);
-      });
-
-      // add listener for this button and change ticket details
-      $('#closeticketbutton').live('click',function(){
-              $.tzPOST('changeTicketDetails',{id:ticketing.data.selectedticket,title:$('#ticket_title').val(),text:$('#ticket_text').val(),location:$('#ticket_location').val(),solution:$('#ticket_oplossing').val(),handle_id:$('#ticket_Handle').val(),reference:$('#ticket_reference').val()},function(r){
-              if(r==null){
-
-              }
-              else
-              {
-                general.displayError(r.error);
-              }
-            });
-
-            if(!($('div .list_item_ticketdetail_status').text()=="status: Nieuw") && !($('div .list_item_ticketdetail_status').text()=="status: Subticket")){
-              $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
-                if(r==null){
-
-                }
-                else
-                {
-                  general.displayError(r.error);
-                }
-              });
-            }
-
-
-            $.tzPOST('closeTicket',{id:ticketing.data.selectedticket},function(r){
-              if(r==null){
-
-              }
-              else
-              {
-                general.displayError(r.error);
-              }
-            });
-            ticketing.reInitTickets("Open");
-            ticketing.reInitTickets("Closed");
-            general.displaySaved("Saved Ticket: " + $('#ticket_title').val());
-            $('#TicketDetailsList').empty();
-            });
-
-      // add listener for this button and change to childticket of certain parentticket
-      $('#childticketbutton').live('click',function(){
-            $.tzPOST('becomeChildTicket',{id:ticketing.data.selectedticket,parent_id:$('#become_Ticket').val()},function(r){
-              if(r==null){
-
-              }
-              else
-              {
-                general.displayError(r.error);
-              }
-            });
-            ticketing.reInitTickets("All");
-            $('#TicketDetailsList').empty();
-      });
-
-      // add listener for this button and change to parentticket
-      $('#becomeparentticketbutton').live('click',function(){
-            $.tzPOST('becomeParentTicket',{id:ticketing.data.selectedticket},function(r){
-              if(r==null){
-
-              }
-              else
-              {
-                general.displayError(r.error);
-              }
-            });
-            ticketing.reInitTickets("All");
-            $('#TicketDetailsList').empty();
-      });
-
-      // add listener for this button and add an update
-      $('#saveupdatebutton').live('click',function(){
-        if(working) return false;
-        working = true;
-        if($('#ticket_update').val()!="" && $('#ticket_update').val()!="Text voor update")
-          {
-            $.tzPOST('createUpdate',{ticket_id:ticketing.data.selectedticket,message:$('#ticket_update').val()},function(r){
-              working = false;
-              if(r.error){
-                    general.displayError(r.error);
-                  }
-                  else
-                  {
-                    general.displaySaved("Update aangemaakt: " + $('#ticket_title').val());
-                    $('#ticket_update').val("");
-                    $('#ticket_update').defaultText('Text voor update');
-                    ticketing.TicketDetailUpdates(ticketing.data.selectedticket);
-                  }
-
-            });
-          }
-          else
-                {
-                alert("Niet goed ingevuld!");
-                working = false;
-                }
-          return false;
-      });
-
-
-        $('#savefeedbackbutton').live('click',function(){
-            if(working) return false;
-            working = true;
-                if($('#ticket_feedback').val()!="" && $('#ticket_feedback').val()!="Text voor terugmelding")
-                {
-                  $.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_title').val(),message:$('#ticket_feedback').val()},function(r){
-                    working = false;
-                    if(r.error){
-                        general.displayError(r.error);
-                    }
-                    else
-                    {
-                        general.displaySaved("Terugmelding aangemaakt: " + $('#ticket_title').val());
-                        $('#ticket_feedback').val("");
-                        $('#ticket_feedback').defaultText('Text voor terugmelding');
-                        ticketing.TicketDetailUpdates(ticketing.data.selectedticket);
-                    }
-                  });
-                }
-                else
-                {
-                alert("Niet goed ingevuld!");
-                working = false;
-                }
-          return false;
         });
 
         //catching window resizes
@@ -452,6 +423,7 @@ var ticketing = {
           ticketNew.getTickets();
           ticketOpen.getTickets();
           ticketClosed.getTickets();
+          ticketing.data.jspAPITicketDetails.reinitialise();
         });
     },
 
@@ -460,40 +432,12 @@ var ticketing = {
     },
 
   killTimeouts : function(){
-            for (key in Timeout)
-            {
-              clearTimeout(Timeout[key]);
-            }
-  },
-
-  reInitTickets : function(type){
-
-      switch(type){
-
-        case 'New':
-          window.clearTimeout(Timeout["NewTickets"]);
-          setTimeout("ticketNew.getTickets();",500);
-        break;
-
-        case 'Open':
-          window.clearTimeout(Timeout["OpenTickets"]);
-          setTimeout("ticketOpen.getTickets();",500);
-        break;
-
-        case 'Closed':
-          window.clearTimeout(Timeout["ClosedTickets"]);
-          setTimeout("ticketClosed.getTickets();",500);
-        break;
-
-        case 'All':
-          window.clearTimeout(Timeout["NewTickets"]);
-          setTimeout("ticketNew.getTickets();",500);
-          window.clearTimeout(Timeout["OpenTickets"]);
-          setTimeout("ticketOpen.getTickets();",500);
-          window.clearTimeout(Timeout["ClosedTickets"]);
-          setTimeout("ticketClosed.getTickets();",500);
-        break;
-      }
+  					message.kill();
+  					chat.kill();
+  					user.kill();
+  					ticketNew.kill();
+          	ticketOpen.kill();
+          	ticketClosed.kill();
   },
 
   reInitJSP : function(){
@@ -503,6 +447,7 @@ var ticketing = {
             ticketing.data.jspAPINewTickets.reinitialise();
             ticketing.data.jspAPIOpenTickets.reinitialise();
             ticketing.data.jspAPIClosedTickets.reinitialise();
+            ticketing.data.jspAPITicketDetails.reinitialise();
   }
 
 };
