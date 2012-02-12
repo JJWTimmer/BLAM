@@ -98,7 +98,7 @@ try {
 		
 		case 'getTicketList':
             BLAM::checkLogged();//date_time string format: '2011-02-23 09:03:01'
-			$response = BLAM::getTicketList($_POST['recursive'], $_POST['last_id'], $_POST['last_modified'], $_POST['status']);//boolean recursive: false for only parents, int $last_id, date-string $last_modified, array of string $status for filtering ($status only for parent!).
+			$response = BLAM::getTicketList($_POST['recursive'], $_POST['first_id'], $_POST['timestamp_last_update'], $_POST['status']);//boolean recursive: false for only parents, int $last_id, date-string $last_modified, array of string $status for filtering ($status only for parent!).
             // returns array(integer Id, string Title, string Text, string Status, string user, datetime created, datetime modified) tickets or exception
             break;
 		//!*

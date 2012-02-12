@@ -43,7 +43,7 @@ function Display (pane) {
                     $('#ticket_update').defaultText('Text voor update');
                     $('#ticket_feedback').defaultText('Text voor terugmelding');
 
-                    user.fillSelect($('#owner'),r[0].wluser);
+                    
                     handle.fillHandle(r[0].handle_id,$('#ticket_Handle'));
                     ticketing.TicketDetailTickets(r[0].status,ticket_id,parent_id);
                     ticketing.data.selectTicketLoaded=false;
@@ -53,6 +53,7 @@ function Display (pane) {
                     	//updatefeedback.fillUpdate(ticket_id,$('p.list_item_ticketdetail_label_last_update'),$('#ticket_last_update'));
                     	//updatefeedback.fillFeedback(ticket_id,$('p.list_item_ticketdetail_label_last_feedback'),$('#ticket_last_feedback'));
                     	updatefeedback.fillUpdateFeedback(ticket_id,pane);
+                    	user.fillSelect($('#owner'),r[0].wluser);
                     }
                     else
                     {

@@ -150,9 +150,10 @@ class BLAM {
         return $handles;
     }
 
-    public static function getTicketList($recursive, $last_id, $modified, $status) {
+    public static function getTicketList($recursive, $first_id, $timestamp_last_update, $status) {
         $ticket = new Ticket(array());
-        $tickets = $ticket->get($recursive, $last_id, $modified, $status);
+        $limit_paging = 5;
+        $tickets = $ticket->get($recursive, $first_id, $timestamp_last_update, $status, $limit_paging);
         return $tickets;
     }
 

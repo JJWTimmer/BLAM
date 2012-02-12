@@ -112,6 +112,16 @@ var logging = {
           	}
          });
 
+				//function to implement getting previous tickets from db
+      	$('#TicketsList .retrieve_previous_ticket').live('click', function(){
+          if(!working)
+          	{
+          		working = true;
+          		ticket.getOldTickets();
+          	}
+          	working = false;
+        });
+
         $('#cancelbutton').bind('click',function(){
           $('#messagetext').val('');
           $('#submitbutton').show();

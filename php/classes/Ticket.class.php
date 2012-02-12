@@ -96,35 +96,63 @@ class Ticket extends BLAMBase {
         return $output; 
     }
     
-    public function get($recursive = 'false', $last_id = null, $last_modified = null, $status = array()) {
-        if (   !($recursive == 'true'|| $recursive == 'false' || is_null($recurive) )
-            || !(is_numeric($last_id) || is_null($last_id))
-            || !(strtotime($last_modified) || is_null($last_modified))
-            || !(is_array($status) || empty($status))) {
-            throw new Exception('invalid parameters for getTicket');
-        }
-        
-        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+    public function get($recursive = 'false', $first_id = null, $timestamp_last_update = null, $status = array(), $limit_paging) {
+        $q = "SELECT * FROM (
+        		SELECT t.id AS id, t.title, s.name AS status, u.username AS wluser, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
-            LEFT OUTER JOIN messages AS m ON t.message_id = m.id
-            LEFT OUTER JOIN users AS u2 ON m.user_id = u2.id
             WHERE t.parent_id IS NULL";
+				
+				if(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && is_numeric($first_id) && (is_array($status) || empty($status)))
+				{
+					if (is_array($status) && !empty($status)) 
+					{
+            $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+        	}
+					$q.= " AND t.id < $first_id";
+          $q.= " ORDER BY t.id DESC LIMIT $limit_paging) t";
+          $q.= " ORDER BY id ASC";
+				}
+		
+				elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && strtotime($timestamp_last_update) && (is_array($status) || empty($status)))
+				{		
+						if (is_array($status) && !empty($status)) 
+						{
+            	$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+        		}
+						$q .= " AND t.modified > '$timestamp_last_update'";
+            $q.= " ORDER BY t.id DESC LIMIT 5) t";
+            $q.= " ORDER BY id ASC";
+				}
+		  	
+		  	elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && ($timestamp_last_update=='all') && (is_array($status) || empty($status)))
+		  	{
+		  			if (is_array($status) && !empty($status)) 
+						{
+            	$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+        		}
+            $q.= " ORDER BY t.id DESC) t";
+            $q.= " ORDER BY id ASC";
+		  	}
+		  	
+		  	elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && empty($timestamp_last_update) && (is_array($status) || empty($status)))
+		  	{
+		  			if (is_array($status) && !empty($status)) 
+						{
+            	$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+        		}
+            $q.= " ORDER BY t.id DESC LIMIT 5) t";
+            $q.= " ORDER BY id ASC";
+		  	}
+		  				
+				else
+				{
+					throw new Exception('invalid parameters for getTicket');
+				}
 
-        if (is_numeric($last_id)) {
-            $q .= "AND t.id > $last_id";
-        }
-        if (strtotime($last_modified)) {
-            $q .= " AND t.modified > '$last_modified'";
-        }
-        if (is_array($status) && !empty($status)) {
-            $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
-        }
-        
-        $q .= " ORDER BY t.id ASC";
-        $q .= " LIMIT 0, 100";
-        
+        $output[] = array('timestamp' => date('Y-m-d G:i:s'),'limit' => 'true');
+   	        
         if ($recursive == 'false') {
             $results = DB::query($q);
             if ($results) while ($output[] = mysqli_fetch_assoc($results));
@@ -144,6 +172,8 @@ class Ticket extends BLAMBase {
                 $output = array();
             }
         }
+        if($limit_paging && count($output) < ($limit_paging+1)) $output[0]['limit']='false';
+				//$output[0]['query']=$q;
         return $output;
 	}
 

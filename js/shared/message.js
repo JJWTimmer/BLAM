@@ -35,7 +35,7 @@ function Message (pane) {
 														
 							//general.highlightHandles(pane.getContentPane(), handle.getgroups());
 																					
-            	//if new messages, update to lastid
+            	//if new messages, update to firstid
             	//message.data.noActivity is reset, so next update in 1 second
             	if(r.length>1){
               	noActivity = 0;

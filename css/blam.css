@@ -171,24 +171,28 @@ p.noMessages, .count{
 
 
 /* Handles */
-.list_item_first{
-    float:left;
-    height:20px;
+.list_item_first, .retrieve_previous_ticket{
+    position:relative;
     width:95%;
     margin:2px 0px 2px 2px;
     text-align:center;
     padding-left:3px;
     background-color:#00B0B0;
     cursor:pointer;
+    overflow: hidden;
 }
 
-.list_item_first:hover{
+.message:last-child{
+    margin-bottom:0;
+}
+
+
+.list_item_first:hover, .retrieve_previous_ticket:hover{
     background-color:#B0B0B0;
 }
 
 .list_item_second{
     position:relative;
-    height:16px;
     overflow:hidden;
     width:95%;
     margin:2px 0px 2px 2px;
@@ -203,7 +207,8 @@ p.noMessages, .count{
 }
 
 .list_item_indent_second{
-    float:left;
+    position:relative;
+    overflow:hidden;
     width:85%;
     margin:2px 0px 2px 10%;
     padding-left:3px;
@@ -242,6 +247,8 @@ p.noMessages, .count{
     width:60%;
     text-align:left;
     cursor:pointer;
+    overflow:hidden;
+    clear: left;
 }
 
 .list_item_parent_ticket_user{

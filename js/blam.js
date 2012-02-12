@@ -56,8 +56,11 @@ var general = {
                 arr = [
                     '<div class="list_item_second rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div></div>'
                 ];
-
             break;
+
+						case 'ticket_container':
+								arr = ['<div class="ticket ticket-',params.id,'" id="',params.id,'">'];
+						break;
 
             case 'parentticket':
                 if(params.wluser==null && (params.role=="WL" || params.role=="Admin")){
@@ -515,7 +518,7 @@ var general = {
             '</div>',
             '<div class=ticketdetail>',
             '<div class=ticketdetailname><p class="white">Status:</p></div>',
-            '<div class=ticketdetaildescription><input type="text" class="rounded" readonly="readonly" value="',params.status,':" id="ticket_status"></div>',
+            '<div class=ticketdetaildescription><input type="text" class="rounded" readonly="readonly" value="',params.status,'" id="ticket_status"></div>',
             '</div>',
             '<div class=ticketdetail>',
             '<div class=ticketdetailname><p class="white">Bericht:</p></div>',

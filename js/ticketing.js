@@ -100,6 +100,36 @@ var ticketing = {
           	}
           	working = false;
          });
+         
+        //function to implement getting previous tickets from db
+      	$('#NewTicketsList .retrieve_previous_ticket').live('click', function(){
+          if(!working)
+          	{
+          		working = true;
+          		ticketNew.getOldTickets();
+          	}
+          	working = false;
+        });
+      
+        //function to implement getting previous tickets from db
+      	$('#OpenTicketsList .retrieve_previous_ticket').live('click', function(){
+          if(!working)
+          	{
+          		working = true;
+          		ticketOpen.getOldTickets();
+          	}
+          	working = false;
+        });
+
+        //function to implement getting previous tickets from db
+      	$('#ClosedTicketsList .retrieve_previous_ticket').live('click', function(){
+          if(!working)
+          	{
+          		working = true;
+          		ticketClosed.getOldTickets();
+          	}
+          	working = false;
+        });
 
         $('#handlelist_toggle_button').live('click', function(){
           if(!working)
