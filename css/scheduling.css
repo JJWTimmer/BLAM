@@ -1,0 +1,58 @@
+body{
+background-color: gray;
+height:100%;
+}
+
+#SchedulingContainer{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width:75%;
+  height:98%;
+  margin:1%;
+}
+
+#DaySchedule{
+position:absolute;
+  left:0%;
+  top: 0%;
+  width:40%;
+  height:98%;
+  margin:1%;
+}
+
+#TaskDetails{
+position:absolute;
+  left:41%;
+  top: 0%;
+  width:55%;
+  height:98%;
+  margin:1%;
+}
+
+#TasksContainer{
+    position: absolute;
+    top: 0%;
+    left: 76%;
+    width:22%;
+    height:98%;
+    margin:1%;
+}
+
+#OpenTasks{
+position:absolute;
+  left:0%;
+  top: 0%;
+  width:98%;
+  height:43%;
+  margin:1%;
+}
+
+#ClosedTasks{
+position:absolute;
+  left:0%;
+  top: 49%;
+  width:98%;
+  height:43%;
+  margin:1%;
+}

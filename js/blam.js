@@ -11,14 +11,21 @@ var general = {
             case 'logging-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td><td rowspan="2">&nbsp;<a href="scheduling.html" target="_self" valign="middle">Scheduling</a><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
             case 'ticketing-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td><td rowspan="2" valign="middle"><input type="button" id="handlelist_toggle_button" value="Roepnamenlijst uit"/></td><th rowspan="2" valign="middle"><div class="Topbar_nr_users"></div></th></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><div class="Topbar_users"></div></td><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td><td rowspan="2">&nbsp;<a href="scheduling.html" target="_self" valign="middle">Scheduling</a><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td><td rowspan="2" valign="middle"><input type="button" id="handlelist_toggle_button" value="Roepnamenlijst uit"/></td><th rowspan="2" valign="middle"><div class="Topbar_nr_users"></div></th></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><div class="Topbar_users"></div></td><a href="" class="logoutButton rounded">Logout</a></span>'];
+
+            break;
+            
+            case 'scheduling-loginTopBar':
+
+                arr = [
+                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td><td rowspan="2">&nbsp;<a href="ticketing.html" target="_self" valign="middle">Ticketing</a><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td><td rowspan="2" valign="middle"><input type="button" id="handlelist_toggle_button" value="Roepnamenlijst uit"/></td><th rowspan="2" valign="middle"><div class="Topbar_nr_users"></div></th></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><div class="Topbar_users"></div></td><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
