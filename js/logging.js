@@ -19,7 +19,28 @@ var logging = {
 
         // add listener for message submitbutton
         $('#submitbutton').bind('click',function(){
-        $('#submitForm').submit();
+        		var text = $('#messagetext').val();
+            if(text.length == 0){
+                return false;
+            }
+            if(working) return false;
+            working = true;
+						message.submitMessage(text,false);
+            working = false;
+            return false;
+        });
+        
+        //add listener for message submitbutton, also generates ticket
+        $('#submit_ticketbutton').bind('click',function(){
+        		var text = $('#messagetext').val();
+            if(text.length == 0){
+                return false;
+            }
+            if(working) return false;
+            working = true;
+						message.submitMessage(text,true);
+            working = false;
+            return false;
         });
         
         // add listener for search button
@@ -95,12 +116,12 @@ var logging = {
 				
 				//function to implement clicking on message
         $('#MeldingenList .message').live('click', function(){
-          $('#messagetext').val($(this).find("span").text());
-          $('#submitbutton').hide();
-          $('p.label_checkbox_pair').hide();
-          $('#updatebutton').show();
-          $('#cancelbutton').show();
-          logging.data.selectedmessage=$(this).attr("id");
+          //$('#messagetext').val($(this).find("span").text());
+          //$('#submitbutton').hide();
+          //$('#submit_ticketbutton').hide();
+          //$('#updatebutton').show();
+          //$('#cancelbutton').show();
+          //logging.data.selectedmessage=$(this).attr("id");
         });
 
 	       $('#MeldingenList .retrieve_previous').live('click', function(){
@@ -125,7 +146,7 @@ var logging = {
         $('#cancelbutton').bind('click',function(){
           $('#messagetext').val('');
           $('#submitbutton').show();
-          $('p.label_checkbox_pair').show();
+          $('#submit_ticketbutton').show();
           $('#updatebutton').hide();
           $('#cancelbutton').hide();
           logging.data.selectedmessage=0;
@@ -139,7 +160,7 @@ var logging = {
                 else    {
                   $('#messagetext').val('');
                   $('#submitbutton').show();
-                  $('p.label_checkbox_pair').show();
+                  $('#submit_ticketbutton').show();
                   $('#updatebutton').hide();
                   $('#cancelbutton').hide();
                   logging.data.selectedmessage=0;
@@ -225,18 +246,6 @@ var logging = {
             return false;
         });
         
-         // Submitting a new message entry:
-        $('#submitForm').submit(function(){
-            var text = $('#messagetext').val();
-            if(text.length == 0){
-                return false;
-            }
-            if(working) return false;
-            working = true;
-						message.submitMessage(text);
-            working = false;
-            return false;
-        });
 
        $('#loginForm').submit(function(){
             if(working) return false;

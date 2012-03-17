@@ -110,6 +110,19 @@ function Display (pane) {
         });	
 	  };
 	  
+	  this.showTask = function(task_id){
+		
+				$.tzPOST('getTaskDetail',{id: task_id},function(r){
+            if(!r.error)
+                {
+                	pane.getContentPane().empty();
+                	markup_extra=general.render('task_detail',r[0]);
+                  pane.getContentPane().append(markup_extra);
+                  pane.reinitialise();
+              	}
+        });	
+	  };
+	  
 	  this.clearDisplay = function(){
 				pane.getContentPane().empty();
 				pane.reinitialise();

@@ -25,12 +25,14 @@
         <!-- general javascript -->
         <script type="text/javascript" src="js/blam.js"></script>
         <script type="text/javascript" src="js/shared/user.js"></script>
+        <script type="text/javascript" src="js/shared/dayplanner.js"></script>
+        <script type="text/javascript" src="js/shared/display.js"></script>
         <!-- 
         <script type="text/javascript" src="js/shared/message.js"></script>
         <script type="text/javascript" src="js/shared/handle.js"></script>
 				<script type="text/javascript" src="js/shared/ticket.js"></script>
 				<script type="text/javascript" src="js/shared/updateandfeedback.js"></script>
-				<script type="text/javascript" src="js/shared/display.js"></script>-->
+				-->
 				
     <!-- page specific javascript -->
     <script type="text/javascript" src="js/scheduling.js"></script>
@@ -42,7 +44,9 @@
         <div id="MainContainer">
             <div id="SchedulingContainer">
               <div id="DaySchedule" class="holder rounded">
-                    <div id="DayScheduleHeader" class="header rounded"><p>Dagplanner</p></div>
+                    <div id="DayScheduleHeader" class="header rounded"><p>Dagplanner</p>
+                    <div id="DaySelect"></div>	
+                    </div>
                     <div id="DayScheduleList" class="list rounded"></div>
               </div>
               <div id="TaskDetails" class="holder rounded">

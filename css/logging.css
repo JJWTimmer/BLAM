@@ -66,9 +66,6 @@ position:absolute;
   margin:1%;
 }
 
-
-
-
 #TextEntry{
 position:absolute;
   left:24%;
@@ -79,7 +76,6 @@ position:absolute;
   margin-left:1%;
   margin-bottom:1%;
 }
-
 
 #LoggingExtraContainer{
     position: absolute;
@@ -206,12 +202,12 @@ p.label_checkbox_pair label{
 }
 #submitbutton{
     position: absolute;
-    top:65%;
+    top:10%;
     left:70%;
     font-size:13px;
     height:29px;
     text-align:center;
-    width:75px;
+    width:150px;
     margin:0;
     cursor:pointer;
 }
@@ -219,6 +215,23 @@ p.label_checkbox_pair label{
 #submitbutton:hover{
     background-position:left bottom;
 }
+
+#submit_ticketbutton{
+    position: absolute;
+    top:50%;
+    left:70%;
+    font-size:13px;
+    height:29px;
+    text-align:center;
+    width:150px;
+    margin:0;
+    cursor:pointer;
+}
+
+#submit_ticketbutton:hover{
+    background-position:left bottom;
+}
+
 
 #autotextbutton:hover{
     background-position:left bottom;

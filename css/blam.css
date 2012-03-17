@@ -461,29 +461,29 @@ textarea#ticket_feedback{
 }
 
 .updatefeedback_header{
-  position:absolute;
-  left:0%;
-  top: 0%;
-  width:100%;
-  height:20px;
-  color: white;
-  z-index: 2;
-  font:14px Calibri,Arial,sans-serif;
-  text-align:left;
-  padding-left:5px;
+	  position:absolute;
+	  left:0%;
+	  top: 0%;
+	  width:100%;
+  	height:20px;
+  	color: white;
+  	z-index: 2;
+  	font:14px Calibri,Arial,sans-serif;
+  	text-align:left;
+  	padding-left:5px;
 }
 
 .updatefeedback_time{
-text-align:right;
+		text-align:right;
 }
 
 .feedback_item{
-  position:relative;
-  left:0%;
-  top: 0%;
-  width:100%;
-  height:100%;
-  background-color:#C2DAFF;
+  	position:relative;
+  	left:0%;
+  	top: 0%;
+  	width:100%;
+  	height:100%;
+  	background-color:#C2DAFF;
 }
 
 .update_item{
@@ -495,187 +495,73 @@ text-align:right;
     background-color:#00B0B0;
 }
 
-/*
-.list_item_ticketdetail_label_title{
- position: absolute;
-    top:1%;
-    left:1%;
-    color: white;
-}
+/* calendar / reminder */
 
-.list_item_ticketdetail_id{
-    position: absolute;
-    top:0%;
-    left:20%;
-    width:10%;
-    margin:2px 1% 2px 0;
-    padding-left:1%;
-
-}
-
-
-.list_item_ticketdetail_title{
-    position: absolute;
-    top:0%;
-    left:31%;
-    width:66%;
-    margin:2px 1% 2px 0;
-    padding-left:1%;
-
-}
-
-.list_item_ticketdetail_status{
+#DaySelect{
     position:absolute;
-    overflow:hidden;
-    top:-25px;
-    right:1%;
+    left:0px;
+    top:25px;
+    width:90%;
+    margin:2px 1% 2px 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+
+.calendar_time {
+    background-color:#E0E0E0;
+    vertical-align: top;
+    
+}
+
+.calendar_empty {
+    position: relative;
+    background-color:#FFFFFF;
+    width:100%;
+}
+
+.list_item_dayselect {
+		position:relative;
+		width:99%;
+    overflow: hidden;
+}
+
+.calendar_selectleft {
+		float:left;
+		width:25%;
+		text-align:center;
+}
+
+.calendar_selectday {
+		float:left;
+		width:50%;
+		text-align:center;
+}
+
+.calendar_selectright {
+		float:left;
+		width:25%;
+		text-align:center;
+}
+
+.calendar_item{
+		width:90%;
+		height:45px;
+		position: absolute;
+		background-color:#C2DAFF;
+		z-index: 10;
+		margin-right:1%;
+}
+
+#task_title{
+    width:95%;
     height:20px;
-    width:30%;
-    margin:2px 1% 2px 0;
-    padding-right:1%;
-    background-color:#00B0B0;
-    text-align:center;
+    background-color:#E0E0E0;
 }
 
-.list_item_ticketdetail_label_ber{
-    position: absolute;
-    top:6%;
-    left:1%;
-    color: white;
-}
-
-
-.list_item_ticketdetail_label_loc
-{
-    position: absolute;
-    top:16%;
-    left:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_location{
-    position: absolute;
-    top:16%;
-    left:20%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    width:76%;
-}
-
-.list_item_ticketdetail_label_opl
-{
-    position: absolute;
-    top:22%;
-    left:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_time{
-    position: absolute;
-    top:31%;
-    left:21%;
-    color: white;
-}
-
-.list_item_ticketdetail_label_handle{
-    position: absolute;
-    top:35%;
-    left:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_handle{
-    position: absolute;
-    top:35%;
-    left:20%;
-    overflow:hidden;
-    width:50%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_label_persoon{
-    position: absolute;
-    top:35%;
-    left:46%;
-    color: white;
-}
-
-.list_item_ticketdetail_persoon{
-    position: absolute;
-    top:35%;
-    left:66%;
-    overflow:hidden;
-    width:30%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-}
-
-.list_item_ticketdetail_label_owner{
-    position: absolute;
-    top:40%;
-    left:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_owner{
-    position: absolute;
-    top:40%;
-    left:20%;
-    overflow:hidden;
-    width:50%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-}
-
-
-.list_item_ticketdetail_label_becomechild{
-    position: absolute;
-    top:45%;
-    left:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_becomechild{
-    position: absolute;
-    top:45%;
-    left:30%;
-    width:30%;
-    margin:2px 1% 2px 1%;
-    padding-left:1%;
-    padding-right:1%;
-}
-
-
-
-.list_item_ticketdetail_label_update
-{
-    position: absolute;
-    top:55%;
-    left:1%;
-    color: white;
-}
-
-.list_item_ticketdetail_label_last_update
-{
-    position: absolute;
-    top:77%;
-    left:1%;
-    color: white;
-    display: none;
-}
-
-textarea#ticket_last_update{
-    position: absolute;
-    width:44%;
-    height: 11%;
-    top:80%;
-    left: 1%;
+textarea#task_text{
+    position: relative;
+    width:95%;
+    height: 60px;
     font:13px/14px Calibri,Arial,sans-serif;
     color:black;
     border:1px solid;
@@ -684,43 +570,8 @@ textarea#ticket_last_update{
     padding:1% 1%;
     resize: none;
     background-color:#E0E0E0;
-    display: none;
 }
 
-.list_item_ticketdetail_label_feedback
-{
-    position: absolute;
-    top:55%;
-    left:51%;
-    color: white;
-}
-
-.list_item_ticketdetail_label_last_feedback
-{
-    position: absolute;
-    top:77%;
-    left:51%;
-    color: white;
-    display: none;
-}
-
-textarea#ticket_last_feedback{
-    position: absolute;
-    width:44%;
-    height: 11%;
-    top:80%;
-    left: 51%;
-    font:13px/14px Calibri,Arial,sans-serif;
-    color:black;
-    border:1px solid;
-    border-color:#c1c1c1 #eee #eee #c1c1c1;
-    text-shadow:1px 1px 0 #E4E4E4;
-    padding:1% 1%;
-    resize: none;
-    background-color:#E0E0E0;
-    display: none;
-}
-*/
 
 /* TopBar */
 #TopContainer .Topbar_info {
@@ -877,6 +728,7 @@ a.logoutButton:hover{
     float right;
     width:20px;
     background:none;
+    z-index:100;
 }
 
 .jspTrack{

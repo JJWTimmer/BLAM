@@ -25,7 +25,7 @@ function Message (pane) {
             	//first record (record 0) is always the timestamp from the server
             	lastTimestamp=r[0].timestamp;
             	for(var i=1;i<r.length;i++){
-                self.addMessageLine(r[i]);
+              	self.addMessageLine(r[i]);
 								//update first ID if necessary
 								if(r[i].id<firstID)
 								{
@@ -226,7 +226,7 @@ function Message (pane) {
         pane.reinitialise();
     };
     
-    this.submitMessage = function(messagetext){
+    this.submitMessage = function(messagetext,TicketBool){
             // Assigning a temporary ID to the chat:
             var tempID = 't'+Math.round(Math.random()*1000000),
 
@@ -234,7 +234,8 @@ function Message (pane) {
                     id : tempID,
                     username: user.getUsername(),
                     avatar  : user.getAvatar(),
-                    text    : messagetext.replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                    text    : messagetext.replace(/</g,'&lt;').replace(/>/g,'&gt;'),
+                    ticket_id  : TicketBool
                 };
 
             // Using our addMessageLine method to add the message
@@ -247,7 +248,7 @@ function Message (pane) {
             // Using our tzPOST wrapper method to send the message
             // via a POST AJAX request:
             
-            if(inputcheckbox!=undefined)
+            if(TicketBool)
                 {
               		var ticket_en='on';
               	}

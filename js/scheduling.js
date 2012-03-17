@@ -32,9 +32,39 @@ var scheduling = {
             verticalDragMaxHeight: 12
         }).data('jsp');
 				
+				scheduling.data.jspAPITaskDetails = $('#TaskDetailsList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+    	}).data('jsp');
+				
 				//setting up message 'class'
 				//message = new Message(logging.data.jspAPIMeldingen);
 				user = new User("TopBar");		    
+				dayplanner = new DayPlanner(scheduling.data.jspAPISchedule);
+				display = new Display (scheduling.data.jspAPITaskDetails);
+				
+				$('#DaySelect .calendar_selectleft').live('click', function(){
+						var selectedDate = dayplanner.getCurrentDate();
+						selectedDate.setDate(selectedDate.getDate() - 1);
+						dayplanner.refreshDate(selectedDate);
+				});
+				
+				$('#DaySelect .calendar_selectright').live('click', function(){
+						var selectedDate = dayplanner.getCurrentDate();
+						selectedDate.setDate(selectedDate.getDate() + 1);
+						dayplanner.refreshDate(selectedDate);
+				});
+				
+				$('.calendar_item').live('click', function(){
+					if(!working)
+          {
+            working = true;
+            var taskid=$(this).attr("id");
+					display.showTask(taskid);
+					}
+					
+          working=false;
+				});
     
        $('#loginForm').submit(function(){
             if(working) return false;
@@ -110,6 +140,9 @@ var scheduling = {
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
           
+          dayplanner.init();
+          dayplanner.addTask();
+          dayplanner.getTasks();
           //message.getMessages();
         });
     },
@@ -119,7 +152,8 @@ var scheduling = {
   	},  
 
   reInitJSP : function(){
-            //logging.data.jspAPIMeldingen.reinitialise();
+            scheduling.data.jspAPISchedule.reinitialise();
+            scheduling.data.jspAPITaskDetails.reinitialise();
   }
 };
 //end of scheduling var

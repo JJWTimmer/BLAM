@@ -188,6 +188,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `FK_users_roles` (`role_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
+
 --
 -- Gegevens worden uitgevoerd voor tabel `users`
 --
@@ -196,6 +197,31 @@ INSERT INTO `users` (`id`, `username`, `password`, `role_id`, `avatar`, `logged_
 (1, 'Jasper', 'a08670ff00ab376dfca8a7542dcce81626b2b469', 3, '', 0, '2011-02-19 18:52:00'),
 (2, 'Anne', '213bf94d31b9b21100e4fb2b86bebb29a2d8bf5c', 3, '', 0, '2011-02-20 18:16:00'),
 (3, 'Martijn', '10ae63b69ae5ab71b07f9e64004a0207f53fea34', 3, '', 0, '2011-12-11 0:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `reminders`
+--
+
+CREATE TABLE IF NOT EXISTS `reminders` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NULL,
+  `backup_user_id` int(10) NULL,
+  `group_id` int(10) NULL,
+  `title` varchar(45) NOT NULL,
+  `text` text,
+  `begin` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `completed` datetime DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_reminders_users` (`user_id`),
+  KEY `FK_reminders_users2` (`backup_user_id`),
+  KEY `FK_reminders_roles` (`group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

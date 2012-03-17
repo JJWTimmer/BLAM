@@ -25,7 +25,7 @@ var general = {
             case 'scheduling-loginTopBar':
 
                 arr = [
-                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td><td rowspan="2">&nbsp;<a href="ticketing.html" target="_self" valign="middle">Ticketing</a><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td><td rowspan="2" valign="middle"><input type="button" id="handlelist_toggle_button" value="Roepnamenlijst uit"/></td><th rowspan="2" valign="middle"><div class="Topbar_nr_users"></div></th></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><div class="Topbar_users"></div></td><a href="" class="logoutButton rounded">Logout</a></span>'];
+                '<div class="Topbar_img"><img src="img/',user.getAvatar(),'" width="30" height="30" /></div><table class="Topbar_table"><tr><th class="Topbar_info">username</th><th class="Topbar_info">Role</th><td rowspan="2"><a href="logging.html" target="_self" valign="middle">Logging</a></td><td rowspan="2">&nbsp;<a href="ticketing.html" target="_self" valign="middle">Ticketing</a><td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td><th rowspan="2" valign="middle"><div class="Topbar_nr_users"></div></th></tr><tr>','<td class="Topbar_info">',user.getUsername(),'</td><td class="Topbar_info">',user.getRole(),'</td></tr></table><div class="Topbar_users"></div></td><a href="" class="logoutButton rounded">Logout</a></span>'];
 
             break;
 
@@ -37,8 +37,14 @@ var general = {
             break;
 
             case 'messageLine':
-                arr = [
-                '<div class="message message_hover message-',params.id,' rounded" id=',params.id,'>','<div class="msg-avatar"><img src="img/',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
+            		if(params.ticket_id)
+            		{
+                arr = ['<div class="message message_hover message_ticket message-',params.id,' rounded" id=',params.id,'>','<div class="msg-avatar"><img src="img/',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
+              	}
+              	else
+              	{
+              	arr = ['<div class="message message_hover message-',params.id,' rounded" id=',params.id,'>','<div class="msg-avatar"><img src="img/',params.avatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>',params.username, ':<BR>',params.time,'</p></div><div class="msg-text"><span class="text-span">',params.text,'</span></div></div>'];
+              	}
             break;
 
             case 'user':
@@ -245,48 +251,6 @@ var general = {
             '<div class=ticketdetail>','<input type="button" id="openmodalbutton" class="blueButton" value="Updates en Terugmeldingen Scherm"/>','</div>',
             ];
             break;
-
-						/*
-            case 'ticket_detail_new':
-            arr = [
-            '<form id="TicketForm" method="post" action="">',
-              '<div id="bla" class="list_item_ticketdetail rounded">',
-                '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
-                '<div class=list_item_ticketdetail_id><input type="text" class="rounded" readonly="readonly" value="',params.id,':" id="ticket_id"></div>',
-                '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
-                '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class=list_item_ticketdetail_time><p>gecre&euml;erd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
-                '<div class=list_item_ticketdetail_label_ber><p>Bericht:</p></div>',
-                '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-                '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
-                '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
-                '<div class=list_item_ticketdetail_label_opl><p>Oplossing:</p></div>',
-                '<textarea rows="1" cols="1" id="ticket_oplossing" name="solution" class="rounded" maxlength="500">',params.solution,'</textarea>',
-                '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
-                '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
-                '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
-                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
-                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
-                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
-                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-                '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
-                '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
-                '<hr id=ticketdetail_line>',
-                '<p class="list_item_ticketdetail_label_update">Update:</p>',
-                '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
-                '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
-                '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
-                '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
-                '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
-                '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
-                '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="openmodalbutton" class="blueButton" value="Alle Updates en Terugmeldingen"/>',
-                '</div>',
-                '</form>'];
-            break;
-						*/
 						
 						case 'ticket_detail_open':
 						arr = [
@@ -358,51 +322,7 @@ var general = {
             '<div class=ticketdetail>','<input type="button" id="openmodalbutton" class="blueButton" value="Updates en Terugmeldingen Scherm"/>','</div>',
             ];
 						break;
-						
-						/*					
-            case 'ticket_detail_open':
-            arr = [
-            '<form id="TicketForm" method="post" action="">',
-              '<div class="list_item_ticketdetail rounded">',
-                '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
-                '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
-                '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
-                '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class=list_item_ticketdetail_time><p>gecre&euml;erd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
-                '<div class=list_item_ticketdetail_label_ber><p>Bericht:</p></div>',
-                '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-                '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
-                '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
-                '<div class=list_item_ticketdetail_label_opl><p>Oplossing:</p></div>',
-                '<textarea rows="1" cols="1" id="ticket_oplossing" name="solution" class="rounded" maxlength="500">',params.solution,'</textarea>',
-                '<div class=list_item_ticketdetail_label_handle><p>Voertuig:</p></div>',
-                '<div class=list_item_ticketdetail_handle><select id="ticket_Handle"><option selected></option></select></div>',
-                '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
-                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
-                '<div class=list_item_ticketdetail_label_owner><p>WLer:</p></div>',
-                '<div class=list_item_ticketdetail_owner><select id="owner"><option selected>',params.wluser,'</option></select></div>',
-                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
-                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
-                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-                '<input type="button" id="closeticketbutton" class="blueButton" value="Ticket sluiten"/>',
-                '<input type="button" id="saveticketbutton" class="blueButton" value="Ticket opslaan"/>',
-                '<hr id=ticketdetail_line>',
-                '<p class="list_item_ticketdetail_label_update">Update:</p>',
-                '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
-                '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
-                '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
-                '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
-                '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
-                '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
-                '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="openmodalbutton" class="blueButton" value="Alle Updates en Terugmeldingen"/>',
-                '</div>',
-                '</form>'];
-            break;
-						*/
-						
+																	
 						case 'ticket_detail_closed':
             arr = [
             '<div class=ticketdetail>',
@@ -472,49 +392,6 @@ var general = {
             '<div class=ticketdetail>','<input type="button" id="openmodalbutton" class="blueButton" value="Updates en Terugmeldingen Scherm"/>','</div>',
             ];
             break;
-						
-						/*
-            case 'ticket_detail_closed':
-            arr = [
-            '<form id="TicketForm" method="post" action="">',
-              '<div class="list_item_ticketdetail rounded">',
-                '<div class=list_item_ticketdetail_label_title><p>Titel:</p></div>',
-                '<div class=list_item_ticketdetail_id><input type="text" class="rounded" value="',params.id,':" id="ticket_id" readonly="readonly"></div>',
-                '<div class=list_item_ticketdetail_title><input type="text" class="rounded" value="',params.title,'" id="ticket_title"></div>',
-                '<div class="list_item_ticketdetail_status rounded"><p>status: ',params.status,'</p></div>',
-                '<div class=list_item_ticketdetail_time><p>gecre&euml;erd op: ',general.stripToTime(params.created),'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gewijzigd om: ',general.stripToTime(params.modified),'</p></div>',
-                '<div class=list_item_ticketdetail_label_ber><p>Bericht:</p></div>',
-                '<textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea>',
-                '<div class=list_item_ticketdetail_label_loc><p>Locatie:</p></div>',
-                '<div class=list_item_ticketdetail_location><input type="text" class="rounded" value="',params.location,'" id="ticket_location"></div>',
-                '<div class=list_item_ticketdetail_label_opl><p>Oplossing:</p></div>',
-                '<textarea rows="1" cols="1" id="ticket_oplossing" name="solution" class="rounded" maxlength="500">',params.solution,'</textarea>',
-                '<p class="list_item_ticketdetail_label_handle">Voertuig:</p>',
-                '<div class=list_item_ticketdetail_handle><p><select id="ticket_Handle"><option selected> </option></select></p></div>',
-                '<p class="list_item_ticketdetail_label_persoon">Referentie:</p>',
-                '<div class=list_item_ticketdetail_persoon><input type="text" class="rounded" value="',params.reference,'" id="ticket_reference"></div>',
-                '<div class="list_item_ticketdetail_label_owner"><p>WLer:</p></div>',
-                '<div class="list_item_ticketdetail_owner"><select id="owner"><option selected>',params.wluser,'</option></select></div>',
-                '<div class="list_item_ticketdetail_label_becomechild"><p>Koppel aan: </p></div>',
-                '<div class=list_item_ticketdetail_becomechild><p><select id="become_Ticket"><option selected> </option></select></p></div>',
-                '<input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/>',
-                '<input type="button" id="saveticketbutton" class="blueButton" value="Heropen Ticket"/>',
-                '<hr id=ticketdetail_line>',
-                '<p class="list_item_ticketdetail_label_update">Update:</p>',
-                '<textarea rows="1" cols="1" id="ticket_update" name="update" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="saveupdatebutton" class="blueButton" value="Update opslaan"/>',
-                '<p class="list_item_ticketdetail_label_last_update">Laatste update:</p>',
-                '<textarea rows="1" cols="1" id="ticket_last_update" name="last_update" class="rounded" maxlength="500">',,'</textarea>',
-                '<p class="list_item_ticketdetail_label_feedback">Terugmelding:</p>',
-                '<textarea rows="1" cols="1" id="ticket_feedback" name="feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="savefeedbackbutton" class="blueButton" value="Terugmelding opslaan"/>',
-                '<p class="list_item_ticketdetail_label_last_feedback">Laatste Terugmelding:</p>',
-                '<textarea rows="1" cols="1" id="ticket_last_feedback" name="last_feedback" class="rounded" maxlength="500">',,'</textarea>',
-                '<input type="button" id="openmodalbutton" class="blueButton" value="Alle Updates en Terugmeldingen"/>',
-                '</div>',
-                '</form>'];
-            break;
-						*/
 						
 						case 'subticket_detail':
             arr = [
@@ -596,8 +473,72 @@ var general = {
                 '</div>',
                 '</form>'];
             break;
+            
+            case 'task_detail':
+            arr = [
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">Titel:</p></div>',
+            '<div class=ticketdetaildescription><input type="text" class="rounded" value="',params.title,'" id="task_title"></div>',
+            '</div>',
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">Taak:</p></div>',
+            '<div class=ticketdetaildescription><textarea rows="1" cols="1" id="task_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea></div>',
+            '</div>',
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">gebruiker:</p></div>',
+            '<div class=ticketdetaildescription><p class="white"><p><select id="user"><option selected></option></select></p></div>',
+            '</div>',            
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">backup gebruiker:</p></div>',
+            '<div class=ticketdetaildescription><p class="white"><p><select id="backup_user"><option selected></option></select></p></div>',
+            '</div>',            
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">groep:</p></div>',
+            '<div class=ticketdetaildescription><p class="white">',params.grp,'</p></div>',
+            '</div>',
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">gecre&euml;erd op:</p></div>',
+            '<div class=ticketdetaildescription><p class="white">',general.stripToTime(params.created),'</p></div>',
+            '</div>',
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">gewijzigd om: </p></div>',
+            '<div class=ticketdetaildescription><p class="white">',general.stripToTime(params.modified),'</p></div>',
+            '</div>',
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">begintijd:</p></div>',
+            '<div class=ticketdetaildescription><p class="white"><p><select id="beginTijdSelect"><option selected></option></select></p></div>',
+            '</div>',
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailname><p class="white">eindtijd:</p></div>',
+            '<div class=ticketdetaildescription><p><select id="eindTijdSelect"><option selected></option></select></p></div>',
+            '</div>',
+            '<div class=ticketdetail>',
+            '<div class=ticketdetailleft><input type="button" id="newtaskbutton" class="blueButton" value="Nieuwe Taak"/></div>',
+            '<div class=ticketdetailright><input type="button" id="savetaskbutton" class="blueButton" value="Taak opslaan"/></div>',
+            '</div>'
+            ];
+            break;
+            
+            case 'CalendarSelect':
+                arr = [
+                    '<div class="calendar_selectleft"><p><--</p></div><div class="calendar_selectday"><p>',params.day,' ',params.date,'</p></div><div class="calendar_selectright"><p>--></p></div>'
+                ];
+            break;
+            
+            case 'CalendarHour':
+                arr = [
+                    '<div class="list_item_hour rounded"><table class=""><tr><td rowspan="2" class="calendar_time"><p>',params.time,'</p></td><td class="calendar_empty cal-',params.index*2-1,'" id="',params.time,'"><p>&nbsp</p></td></tr><tr><td class="calendar_empty cal-',params.index*2,'" id="',params.time_half,'"><p>&nbsp</p></td></tr></table></div>'
+                ];
+            break;
+            
+            case 'CalendarItem':
+                arr = [
+                    '<div class="calendar_item rounded" id=',params.id,'><p>',general.stripToTime(params.begin),'-',general.stripToTime(params.end),': ',params.title,'</p></div>'
+                ];
+            break;
 
         }
+						
 
 
         // A single array join is faster than
@@ -656,9 +597,10 @@ var general = {
             });
         });
 
+				//Changed to 0.5 seconds to reduce annoyance
         setTimeout(function(){
             elem.click();
-        },5000);
+        },500);
 
         elem.hide().appendTo('body').slideDown();
     },
@@ -678,23 +620,49 @@ var general = {
         }
     return strTime;
     },
-
+    
+    convertDateToArray : function(date){
+    	var d  = date.getDate();
+			var day = (d < 10) ? '0' + d : d;
+			var m = date.getMonth() + 1;
+			var month = (m < 10) ? '0' + m : m;
+			var yy = date.getYear();
+			var year = (yy < 1000) ? yy + 1900 : yy;
+			
+			var weekday=new Array(7);
+			weekday[0]="Zondag";
+			weekday[1]="Maandag";
+			weekday[2]="Dinsdag";
+			weekday[3]="Woensdag";
+			weekday[4]="Donderdag";
+			weekday[5]="Vrijdag";
+			weekday[6]="Zaterdag";
+			
+			var date_array = {day : day, month : month, year : year, weekday : weekday[date.getDay()]};
+			return date_array;
+		},
+			
     tb_open_new : function(jThickboxNewLink){
       tb_show(null,jThickboxNewLink,null);
     },
-
-    generateTimestamp : function(subtract_time_minutes){
-        var now=new Date();
-        if (subtract_time_minutes>0)
+		
+		
+    generateTimestamp : function(date){
+        if (date)
           {
             //date value is the time in ms from 1970. subtract the amount of ms needed to get a date in the past
-            var d=new Date(now-60000*subtract_time_minutes);
-            //generate the timestamp format: YYYY-MM-DD hh:mm:ss
-            var strTimestamp= d.getFullYear()+'-'+ ((d.getMonth()+1) < 10 ? '0' : '' )+ (d.getMonth()+1) + '-' + ((d.getDate()) < 10 ? '0' : '' )+ d.getDate() + ' ' + (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':'+(d.getSeconds() < 10 ? '0':'') + d.getSeconds();
+            var d=date;
           }
+          else
+          {
+        	  var d=new Date();
+        	}
+          //generate the timestamp format: YYYY-MM-DD hh:mm:ss
+          var strTimestamp= d.getFullYear()+'-'+ ((d.getMonth()+1) < 10 ? '0' : '' )+ (d.getMonth()+1) + '-' + ((d.getDate()) < 10 ? '0' : '' )+ d.getDate() + ' ' + (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+(d.getMinutes() < 10 ? '0':'') + d.getMinutes() + ':'+(d.getSeconds() < 10 ? '0':'') + d.getSeconds();
     return strTimestamp;
     },
-
+		
+		
 }
 //end of var general
 

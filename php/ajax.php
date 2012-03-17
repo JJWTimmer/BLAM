@@ -17,6 +17,7 @@ require_once "classes/User.class.php";
 require_once "classes/Handle.class.php";
 require_once "classes/Group.class.php";
 require_once "classes/Update.class.php";
+require_once "classes/Reminder.class.php";
 
 session_name('BLAM');
 session_start();
@@ -185,6 +186,18 @@ try {
 			$response = BLAM::becomeParentTicket($_POST['id']);
             // returns null or exception
             break;
+		
+		case 'getReminders':
+            BLAM::checkLogged();
+			$response = BLAM::getReminders($_POST['timestamp_day']);
+            // returns null or exception
+            break;
+    
+    case 'getTaskDetail':
+            BLAM::checkLogged();
+			$response = BLAM::getTaskDetail($_POST['id']);
+            break;
+            
 		
 		default:
 			throw new Exception('Wrong action');

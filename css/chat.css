@@ -111,7 +111,7 @@
 }
 
 .chat .avatar{
-	background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
+	/*background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;*/
 	left:7px;
 	position:absolute;
 	top:7px;
@@ -149,7 +149,7 @@
 }
 
 #chatUsers .user{
-	background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=30') no-repeat 1px 1px #444444;
+	/*background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=30') no-repeat 1px 1px #444444;*/
 	border:1px solid #111111;
 	float:left;
 	height:32px;

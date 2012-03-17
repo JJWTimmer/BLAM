@@ -271,4 +271,17 @@ class BLAM {
         $ticket = new Ticket(array('id' => $id));
         $ticket->becomeParent();
     }
+    
+    // returns MessageId or exception
+	public static function getReminders($day){
+		$rem = new Reminder(array());
+		$reminders = $rem->get($day);
+		return $reminders;
+	}
+	
+	public static function getTaskDetail($id){
+        $task = new Reminder(array('id' => $id));
+        $details = $task->getDetails();
+        return $details;
+  }
 }
