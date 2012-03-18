@@ -63,7 +63,7 @@ try {
 		//*
 		case 'updateMessage':
             BLAM::checkLogged();
-			$response = BLAM::updateMessage($_POST['id'], $_POST['text']);
+			$response = BLAM::updateMessage($_POST['id'], $_POST['text'], $_POST['ticket']);
             // returns MessageId or exception
             break;
 		    

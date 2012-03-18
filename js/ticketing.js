@@ -252,7 +252,7 @@ var ticketing = {
           			ticketNew.refreshTickets();
           			ticketOpen.refreshTickets();
           		});
-          		display.showTicketDetail(ticketing.data.selectedticket,0);
+          		display.showTicketDetail($(this).attr("id"),0);
           	}
           	working = false;  	
         });
@@ -279,7 +279,7 @@ var ticketing = {
 
             if(!($('#ticket_status').val()=="Nieuw") && !($('#ticket_status').val()=="Subticket")){
               $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
-                if(r==null){}
+                if(r==null){ display.clearDisplay();}
                 else
                 {
                   general.displayError(r.error);
@@ -446,10 +446,10 @@ var ticketing = {
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
           
-          message.getMessages();
-          chat.getChats();
-          user.getUsers();
-          handle.getHandles();
+          //message.getMessages();
+          //chat.getChats();
+          //user.getUsers();
+          //handle.getHandles();
           ticketNew.getTickets();
           ticketOpen.getTickets();
           ticketClosed.getTickets();

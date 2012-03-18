@@ -95,13 +95,27 @@ class BLAM {
 	}
     
     // returns MessageId or exception
-	public static function updateMessage($id, $text){
+	public static function updateMessage($id, $text, $ticket = false){
 		$msg = new Message(array(
 			'id'	=> $id,
-			'text'	    => $text
+			'text'	=> $text
 		));
 	
 		$msg->update();
+		
+		$tick_no = null;
+        if ($ticket) {
+            $wlticket = new Ticket(array(
+                'message_id' => $id,
+                'title' => 'NIEUW',
+                'text' => $text,
+                'status_id' => 1              
+            ));
+            
+            $tick_no = $wlticket->create();
+        }
+        
+        if ($tick_no) $msg->setTicket($tick_no);
         
 		return array('id' => $msg->id);
 	}

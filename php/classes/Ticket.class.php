@@ -98,54 +98,57 @@ class Ticket extends BLAMBase {
     
     public function get($recursive = 'false', $first_id = null, $timestamp_last_update = null, $status = array(), $limit_paging) {
         $q = "SELECT * FROM (
-        		SELECT t.id AS id, t.title, s.name AS status, u.username AS wluser, t.modified
+        	SELECT t.id AS id, t.title, s.name AS status, u.username AS wluser, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
             WHERE t.parent_id IS NULL";
 				
+				// retrieve previous tickets
 				if(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && is_numeric($first_id) && (is_array($status) || empty($status)))
 				{
 					if (is_array($status) && !empty($status)) 
 					{
-            $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
-        	}
+						$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+					}
 					$q.= " AND t.id < $first_id";
-          $q.= " ORDER BY t.id DESC LIMIT $limit_paging) t";
-          $q.= " ORDER BY id ASC";
+					$q.= " ORDER BY t.id DESC LIMIT $limit_paging) t";
+					$q.= " ORDER BY id ASC";
 				}
-		
+				
+				//retrieve updates about tickets 
 				elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && strtotime($timestamp_last_update) && (is_array($status) || empty($status)))
-				{		
-						if (is_array($status) && !empty($status)) 
-						{
-            	$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
-        		}
-						$q .= " AND t.modified > '$timestamp_last_update'";
-            $q.= " ORDER BY t.id DESC LIMIT 5) t";
-            $q.= " ORDER BY id ASC";
+				{			
+					if (is_array($status) && !empty($status)) 
+					{
+						//$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+					}
+					$q .= " AND t.modified > '$timestamp_last_update'";
+					$q.= " ORDER BY t.id DESC LIMIT 5) t";
+					$q.= " ORDER BY id ASC";
 				}
-		  	
-		  	elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && ($timestamp_last_update=='all') && (is_array($status) || empty($status)))
-		  	{
+				
+				//retrieve all tickets (for select box)
+				elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && ($timestamp_last_update=='all') && (is_array($status) || empty($status)))
+				{
 		  			if (is_array($status) && !empty($status)) 
-						{
-            	$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
-        		}
-            $q.= " ORDER BY t.id DESC) t";
-            $q.= " ORDER BY id ASC";
-		  	}
-		  	
-		  	elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && empty($timestamp_last_update) && (is_array($status) || empty($status)))
-		  	{
+					{
+						$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+					}
+					$q.= " ORDER BY t.id DESC) t";
+					$q.= " ORDER BY id ASC";
+				}
+				
+				// first retrieval of tickets
+				elseif(($recursive == 'true'|| $recursive == 'false' || is_null($recurive)) && empty($timestamp_last_update) && (is_array($status) || empty($status)))
+				{
 		  			if (is_array($status) && !empty($status)) 
-						{
-            	$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
-        		}
-            $q.= " ORDER BY t.id DESC LIMIT 5) t";
-            $q.= " ORDER BY id ASC";
-		  	}
-		  				
+					{
+						$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
+					}
+				$q.= " ORDER BY t.id DESC LIMIT 5) t";
+				$q.= " ORDER BY id ASC";
+				}		
 				else
 				{
 					throw new Exception('invalid parameters for getTicket');

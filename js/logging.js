@@ -116,12 +116,21 @@ var logging = {
 				
 				//function to implement clicking on message
         $('#MeldingenList .message').live('click', function(){
-          //$('#messagetext').val($(this).find("span").text());
-          //$('#submitbutton').hide();
-          //$('#submit_ticketbutton').hide();
-          //$('#updatebutton').show();
-          //$('#cancelbutton').show();
-          //logging.data.selectedmessage=$(this).attr("id");
+          if($(this).hasClass("message_ticket"))
+		  {
+			$('#update_ticketbutton').hide();
+		  }
+		  else
+		  {
+			$('#update_ticketbutton').show();
+		  }
+		  $('#messagetext').val($(this).find("span").text());
+          $('#submitbutton').hide();
+          $('#submit_ticketbutton').hide();
+          $('#updatebutton').show();
+          $('#cancelbutton').show();
+          logging.data.selectedmessage=$(this).attr("id");
+		  
         });
 
 	       $('#MeldingenList .retrieve_previous').live('click', function(){
@@ -148,6 +157,7 @@ var logging = {
           $('#submitbutton').show();
           $('#submit_ticketbutton').show();
           $('#updatebutton').hide();
+		  $('#update_ticketbutton').hide();
           $('#cancelbutton').hide();
           logging.data.selectedmessage=0;
         });
@@ -162,13 +172,32 @@ var logging = {
                   $('#submitbutton').show();
                   $('#submit_ticketbutton').show();
                   $('#updatebutton').hide();
-                  $('#cancelbutton').hide();
+                  $('#update_ticketbutton').hide();
+				  $('#cancelbutton').hide();
                   logging.data.selectedmessage=0;
                   message.refreshMessages();
                 }
               });
         });
-				
+		
+		$('#update_ticketbutton').bind('click',function(){
+          $.tzPOST('updateMessage',{id:logging.data.selectedmessage,text:$('#messagetext').val(),ticket:'True'},function(r){
+              if(r.error){
+                    general.displayError(r.error);
+                }
+                else    {
+                  $('#messagetext').val('');
+                  $('#submitbutton').show();
+                  $('#submit_ticketbutton').show();
+                  $('#updatebutton').hide();
+                  $('#update_ticketbutton').hide();
+				  $('#cancelbutton').hide();
+                  logging.data.selectedmessage=0;
+                  message.refreshMessages();
+                }
+              });
+        });
+		
 				//function to implement clicking on dynamic element groups
         $('#HandlesList div.list_item_first').live('click', function(){
           if(!working)

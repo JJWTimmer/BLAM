@@ -218,7 +218,7 @@ p.label_checkbox_pair label{
 
 #submit_ticketbutton{
     position: absolute;
-    top:50%;
+    top:40%;
     left:70%;
     font-size:13px;
     height:29px;
@@ -241,7 +241,7 @@ p.label_checkbox_pair label{
     display: none;
     position: absolute;
     top:65%;
-    left:55%;
+    left:70%;
     font-size:13px;
     width:150px;
     height:29px;
@@ -251,8 +251,19 @@ p.label_checkbox_pair label{
 #updatebutton {
     display: none;
     position: absolute;
-    top:65%;
-    left:75%;
+    top:10%;
+    left:70%;
+    width:150px;
+    font-size:13px;
+    height:29px;
+    background-color: #58aa00;
+}
+
+#update_ticketbutton {
+    display: none;
+    position: absolute;
+    top:40%;
+    left:70%;
     width:150px;
     font-size:13px;
     height:29px;
