@@ -237,22 +237,39 @@ class Ticket extends BLAMBase {
     }
     
     public function setOwner() {
-        $q = "
-            UPDATE tickets
+        if(DB::esc($this->user_id)>0)
+        {
+        $q = "UPDATE tickets
             SET user_id = ".DB::esc($this->user_id).", modified = '".date('Y-m-d G:i:s')."', status_id = 2
             WHERE id = ".DB::esc($this->id);
+        }
+        //unclaim
+        elseif(($this->user_id)==-1)
+        {
+      	$q = "UPDATE tickets
+            SET user_id = '', modified = '".date('Y-m-d G:i:s')."', status_id = 1
+            WHERE id = ".DB::esc($this->id);
+      	} 
 
         $res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
     }
     
     public function becomeChild() {
+        
         $q = "
             UPDATE tickets
             SET parent_id = ".DB::esc($this->parent_id).", modified = '".date('Y-m-d G:i:s')."'
             WHERE id = ".DB::esc($this->id);
+        // ugly hack to get child tickets to work: parent ticket also has modified date
+        $q2 = "
+            UPDATE tickets
+            SET modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($this->parent_id);
+            
         $res = DB::query($q);
-        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+        $res2 = DB::query($q2);
+        if (!$res AND !$res2) throw new Exception(DB::getMySQLiObject()->error);
     }
 
     
@@ -261,8 +278,15 @@ class Ticket extends BLAMBase {
             UPDATE tickets
             SET parent_id = NULL, modified = '".date('Y-m-d G:i:s')."'
             WHERE id = ".DB::esc($this->id);
+        $q2 = "
+            UPDATE tickets
+            SET modified = '".date('Y-m-d G:i:s')."'
+            WHERE id = ".DB::esc($this->parent_id);
+            
         $res = DB::query($q);
-        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+        $res2 = DB::query($q2);
+        
+        if (!$res AND !$res2) throw new Exception(DB::getMySQLiObject()->error);
     }
 }
 

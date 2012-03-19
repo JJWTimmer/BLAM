@@ -376,6 +376,9 @@ var ticketing = {
                 general.displayError(r.error);
               }
             });
+        ticketing.data.selectedticket=0;
+        ticketing.data.selectedparentticket=0;
+        
         ticketNew.refreshTickets();
       	ticketOpen.refreshTickets();
         ticketClosed.refreshTickets();
@@ -383,7 +386,7 @@ var ticketing = {
       });
 
       // add listener for this button and change to parentticket
-      $('#becomeparentticketbutton').live('click',function(){
+      $('#becomeparentticketButton').live('click',function(){
             $.tzPOST('becomeParentTicket',{id:ticketing.data.selectedticket},function(r){
               if(r==null){}
               else
@@ -391,6 +394,9 @@ var ticketing = {
                 general.displayError(r.error);
               }
             });
+            ticketing.data.selectedticket=0;
+        		ticketing.data.selectedparentticket=0;
+        		
             ticketNew.refreshTickets();
           	ticketOpen.refreshTickets();
             ticketClosed.refreshTickets();
@@ -487,10 +493,10 @@ var ticketing = {
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
           
-          message.getMessages();
-          chat.getChats();
-          user.getUsers();
-          handle.getHandles();
+          //message.getMessages();
+          //chat.getChats();
+          //user.getUsers();
+          //handle.getHandles();
           ticketNew.getTickets();
           ticketOpen.getTickets();
           ticketClosed.getTickets();

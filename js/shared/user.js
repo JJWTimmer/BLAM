@@ -110,7 +110,7 @@ function User (pane) {
           selectElement.empty()
           var owner_options = selectElement.attr('options');
           var index_owner;
-          /*owner_options[0] = new Option("");*/
+          owner_options[0] = new Option("unclaim",-1);
             for(var i=0; i< r.length;i++){
               if(r[i]){
               {

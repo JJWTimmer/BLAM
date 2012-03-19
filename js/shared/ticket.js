@@ -149,9 +149,24 @@ function Ticket (pane,status) {
             extra_params = {parent_id : params.id};
             for (var j = 0; j < params['children'].length ; j++) {
             	markup_child+=general.render('childticket',$.extend(params['children'][j],extra_params));
+            	
+            	//removes original ticket (before it became child)
+            	clone_exists = $('#' + pane_id + ' .ticket-'+params['children'][j].id);
+            	if(clone_exists.length)
+            	{
+            		clone_exists.remove();
+            	}
             	//!!append various child tickets here!!
             }
-         }
+        }
+        
+        //removes child if it became a parent again
+        child_exists = $('#' + pane_id + ' .child-'+params.id)
+        if(child_exists.length)
+        {
+       		child_exists.remove();
+        }
+        
         markup+=markup_parent;     
         markup+=markup_child;     
         markup+='</div>';     

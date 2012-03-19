@@ -153,7 +153,7 @@ var general = {
 
             case 'childticket':
                 arr = [
-                    '<div class="list_item_indent_second child_ticket rounded" id="',params.id,'" title="',params.parent_id,'"><p>',params.id,': ',params.title,'</p></div>'
+                    '<div class="list_item_indent_second child_ticket child-',params.id,' rounded" id="',params.id,'" title="',params.parent_id,'"><p>',params.id,': ',params.title,'</p></div>'
                 ];
             break;
 
@@ -742,3 +742,32 @@ $.fn.defaultText = function(value){
 
     return element.blur();
 }
+
+// function to insert text at the cursor (instead of behind text)
+$.fn.extend({
+  insertAtCaret: function(myValue){
+  var obj;
+  if( typeof this[0].name !='undefined' ) obj = this[0];
+  else obj = this;
+
+  if ($.browser.msie) {
+    obj.focus();
+    sel = document.selection.createRange();
+    sel.text = myValue;
+    obj.focus();
+    }
+  else if ($.browser.mozilla || $.browser.webkit) {
+    var startPos = obj.selectionStart;
+    var endPos = obj.selectionEnd;
+    var scrollTop = obj.scrollTop;
+    obj.value = obj.value.substring(0, startPos)+myValue+obj.value.substring(endPos,obj.value.length);
+    obj.focus();
+    obj.selectionStart = startPos + myValue.length;
+    obj.selectionEnd = startPos + myValue.length;
+    obj.scrollTop = scrollTop;
+  } else {
+    obj.value += myValue;
+    obj.focus();
+   }
+ }
+})

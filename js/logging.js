@@ -57,7 +57,7 @@ var logging = {
         });
         
         $('#autotextbutton').bind('click',function(){
-          $('#messagetext').val($('#messagetext').val()+$('#autotext_Handle').val()+ ' ');
+          $('#messagetext').insertAtCaret($('#autotext_Handle').val()+ ' ');
         });
         
         // Using the defaultText jQuery plugin, included at the bottom:
@@ -230,7 +230,8 @@ var logging = {
 
 				//function to implement clicking on dynamic element handle
         $('#HandlesList div.list_item_second').live('click', function(){
-          $('#messagetext').val($('#messagetext').val()+$(this).children('.list_item_handle_name').text() + '-' + $(this).children('.list_item_handle_description').text());
+          //$('#messagetext').val($('#messagetext').val()+$(this).children('.list_item_handle_name').text() + '-' + $(this).children('.list_item_handle_description').text());
+          $('#messagetext').insertAtCaret($(this).children('.list_item_handle_name').text() + '-' + $(this).children('.list_item_handle_description').text() + ' ');
         });
         
 				//function to search through handles
