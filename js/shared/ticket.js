@@ -105,6 +105,32 @@ function Ticket (pane,status) {
 			});		
 		};
 	  
+	  this.searchTicket = function(){
+	  	
+	  	$.tzPOST('searchTickets',{keyword:$('#search_tickets').val()},function(r){
+    		pane.getContentPane().empty();
+    		if(r.length>0)
+          {
+            if(!r.error)
+            {
+            	$('#search_tickets').val('');
+          		for(var i=0;i<r.length;i++){
+                self.addTicket(r[i]);
+            	}
+            	
+            	
+          	}
+          	else
+            {
+                general.displayError(r.error);
+            }
+					}
+					else
+					{
+						pane.getContentPane().html('<p class="noMessages">No tickets found</p>');
+					}	
+      });
+	  };
 	  
 	  this.addTicket = function(params){
 		

@@ -132,6 +132,12 @@ try {
 			$response = BLAM::getTicketDetail($_POST['id']);
             // returns integer Id, string Status, string Titel, string UserId, string Text, string Locatie, array time(Hours,Minutes), integer MessageId, string MessageUserId, string MessageText or exception
             break;
+
+		case 'searchTickets':
+            BLAM::checkLogged();
+			$response = BLAM::searchTickets($_POST['keyword']);
+            //returns array () tickets or exception
+            break;
             
 		case 'getUpdates':
             BLAM::checkLogged();

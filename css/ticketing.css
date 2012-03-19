@@ -108,6 +108,17 @@ height:100%;
     margin:1%;
 }
 
+#SearchTickets{
+		padding: 50px 2px 2px 2px;
+    position:absolute;
+    top: 0%;
+    left:0%;
+    width:98%;
+    height:89%;
+    margin:1%;
+    display:none;
+}
+
 #TicketingDetailsContainer{
     position: absolute;
     top: 1%;

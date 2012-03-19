@@ -203,6 +203,29 @@ class Ticket extends BLAMBase {
         return $output;
     }
     
+    public function search($keyword) {
+        if (is_string($keyword)) {
+            $results = DB::query("
+                SELECT t.id AS id, t.title, s.name AS status, u.username AS wluser,t.modified
+                FROM tickets AS t 
+                LEFT OUTER JOIN users AS u ON t.user_id = u.id
+            		LEFT OUTER JOIN messages AS m ON t.message_id = m.id
+            		INNER JOIN statuses AS s ON t.status_id = s.id
+                WHERE title LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
+                OR u.username LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
+                OR m.text LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
+                OR t.id LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
+                ORDER BY t.id ASC
+                LIMIT 0,100");
+        } else {
+            return false;
+        }
+            
+			while ($data[] = mysqli_fetch_assoc($results));
+        if (!is_null($data) && end($data) == null) array_pop($data);
+			return $data;
+		}
+    
     public function close() {
         $q = "
             UPDATE tickets

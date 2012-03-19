@@ -131,7 +131,6 @@ class BLAM {
       	return $messages;
 		}
 		
-		
     public static function searchMessages($keyword) {
         if (empty($keyword)) {
             throw new Exception('No keyword given to searchMessages');
@@ -168,6 +167,17 @@ class BLAM {
         $ticket = new Ticket(array());
         $limit_paging = 5;
         $tickets = $ticket->get($recursive, $first_id, $timestamp_last_update, $status, $limit_paging);
+        return $tickets;
+    }
+
+		public static function searchTickets($keyword) {
+        if (empty($keyword)) {
+            throw new Exception('No keyword given to searchTickets');
+        }
+        
+        $ticket = new Ticket(array());
+        $tickets = $ticket->search($keyword);
+        
         return $tickets;
     }
 

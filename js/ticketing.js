@@ -14,6 +14,7 @@ var ticketing = {
 
   data : {
     HandlelistVisible : 1,
+    SearchTicketsVisible : 0,
     selectTicketLoaded : false,
   },
 
@@ -63,6 +64,11 @@ var ticketing = {
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
       }).data('jsp');
+    
+    ticketing.data.jspAPISearchTickets = $('#SearchTicketsList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+      }).data('jsp');
       
     ticketing.data.jspAPITicketDetails = $('#TicketDetailsList').jScrollPane({
             verticalDragMinHeight: 12,
@@ -76,6 +82,7 @@ var ticketing = {
       ticketNew = new Ticket(ticketing.data.jspAPINewTickets,[{1: 'Nieuw'}]);
       ticketOpen = new Ticket(ticketing.data.jspAPIOpenTickets,[{1: 'Open'}]);
       ticketClosed = new Ticket(ticketing.data.jspAPIClosedTickets,[{1: 'Gesloten'}]);
+      ticketSearch = new Ticket(ticketing.data.jspAPISearchTickets,[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]);
       ticketSelect = new Ticket("",[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]);
       //display = new Display ($('#TicketDetailsList'));
       display = new Display (ticketing.data.jspAPITicketDetails);
@@ -158,6 +165,33 @@ var ticketing = {
           working=false;
         });
 
+				$('#searchtickets_toggle_button').live('click', function(){
+          if(!working)
+          {
+              working = true;
+              if(ticketing.data.SearchTicketsVisible==1)
+              {
+              $('#SearchTickets').css('display','none');
+              $('#NewTickets').css('display','block');
+              $('#OpenTickets').css('display','block');
+              $('#ClosedTickets').css('display','block');
+              $('#searchtickets_toggle_button').attr('value','Tickets zoeken aan');
+              ticketing.data.SearchTicketsVisible=0;
+              }
+              else
+              {
+              $('#SearchTickets').css('display','block');
+              $('#NewTickets').css('display','none');
+              $('#OpenTickets').css('display','none');
+              $('#ClosedTickets').css('display','none');
+              $('#searchtickets_toggle_button').attr('value','Tickets zoeken uit');
+              ticketing.data.SearchTicketsVisible=1;
+              }
+              ticketing.reInitJSP();
+          }
+          working=false;
+        });
+
         //function to implement clicking on dynamic element groups
         $('#Handles .list_item_first').live('click', function(){
           if(!working)
@@ -211,7 +245,14 @@ var ticketing = {
 	            chat.submitChat(text);
     				}
     				working = false;
+    				return false;
         });
+
+				// Search for a certain keyword:
+        $('#Searchsubmit').bind('click',function(){
+        		ticketSearch.searchTicket();
+        });
+
 
 				//function to implement clicking on ticket to get details
         $('div.parent_ticket').live('click', function(){
@@ -446,10 +487,10 @@ var ticketing = {
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
           
-          //message.getMessages();
-          //chat.getChats();
-          //user.getUsers();
-          //handle.getHandles();
+          message.getMessages();
+          chat.getChats();
+          user.getUsers();
+          handle.getHandles();
           ticketNew.getTickets();
           ticketOpen.getTickets();
           ticketClosed.getTickets();
@@ -477,6 +518,7 @@ var ticketing = {
             ticketing.data.jspAPINewTickets.reinitialise();
             ticketing.data.jspAPIOpenTickets.reinitialise();
             ticketing.data.jspAPIClosedTickets.reinitialise();
+            ticketing.data.jspAPISearchTickets.reinitialise();
             ticketing.data.jspAPITicketDetails.reinitialise();
   }
 
