@@ -8,11 +8,12 @@ class Handle extends BLAMBase {
 	public $handle_number = '';
 	public $handle_name = '';
     public $description = '';
+	public $gps_status = '';
 
     public function get($group = null) {
         if (is_null($group)) {
             $results = DB::query("
-                SELECT id, handle_number, handle_name, description
+                SELECT id, handle_number, handle_name, description, gps_status
                 FROM handles
                 order by handle_name ASC
                 ");
@@ -20,7 +21,7 @@ class Handle extends BLAMBase {
             $group_id = DB::esc($group);
             
             $results = DB::query("
-                SELECT id, handle_number, handle_name, description
+                SELECT id, handle_number, handle_name, description, gps_status
                 FROM handles
                 WHERE group_id = $group_id
                 order by handle_name ASC
