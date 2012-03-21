@@ -365,6 +365,7 @@ var logging = {
    killTimeouts : function(){
             message.kill();
   					user.kill();
+  					handle.kill();
   					ticket.kill();
   					feedbackOpen.kill();
   					feedbackClosed.kill();

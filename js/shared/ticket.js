@@ -1,4 +1,4 @@
-function Ticket (pane,status) {
+function Ticket (pane,status,reverse) {
 	//constructor
 	var self = this;
 	var pane = pane;
@@ -8,6 +8,7 @@ function Ticket (pane,status) {
 	var lastTimestamp="";
 	var TimeOut = null;  	
   var pane_id;
+  var reverse = reverse;
   	
  		this.getTickets = function(){		
 		$.tzPOST('getTicketList',{timestamp_last_update:lastTimestamp,recursive : true, status : status},function(r){
@@ -30,11 +31,6 @@ function Ticket (pane,status) {
                     if(r[i]){
                     	//alert('parent');
                       self.addTicket(r[i]);
-                     
-                    	if(r[i].id<firstID)
-											{
-												firstID=r[i].id;
-											}                        
                     }
                   }
                 
@@ -43,21 +39,21 @@ function Ticket (pane,status) {
                 	firstID=r[1].id;  
               	}
 
-				//empty no tickets
-            	if($('#'+pane_id+' .jspContainer .jspPane .ticket').length==0 && $('#'+pane_id+' .jspContainer .jspPane > p').length==0)
-				{
+								//empty no tickets
+            		if($('#'+pane_id+' .jspContainer .jspPane .ticket').length==0 && $('#'+pane_id+' .jspContainer .jspPane > p').length==0)
+								{
                 	pane.getContentPane().append('<p class="count">Geen tickets</p>');
                 	$('#'+pane_id+' .jspContainer .jspPane .retrieve_previous_ticket').hide();
                 	pane.reinitialise();
-            	}
+            		}
 
-				// If this is the first ticket, remove the paragraph saying there aren't any:
-            	if($('#'+pane_id+' .jspContainer .jspPane .ticket').length > 0 && $('#'+pane_id+' .jspContainer .jspPane > p').length > 0)
-				{	 
-						$('#'+pane_id+' .jspContainer .jspPane > p').remove();
-						$('#'+pane_id+' .jspContainer .jspPane .retrieve_previous_ticket').show();
-					pane.reinitialise();
-            	}
+								// If this is the first ticket, remove the paragraph saying there aren't any:
+            		if($('#'+pane_id+' .jspContainer .jspPane .ticket').length > 0 && $('#'+pane_id+' .jspContainer .jspPane > p').length > 0)
+								{	 
+									$('#'+pane_id+' .jspContainer .jspPane > p').remove();
+									$('#'+pane_id+' .jspContainer .jspPane .retrieve_previous_ticket').show();
+									pane.reinitialise();
+            		}
                 
               }
               else
@@ -117,8 +113,6 @@ function Ticket (pane,status) {
           		for(var i=0;i<r.length;i++){
                 self.addTicket(r[i]);
             	}
-            	
-            	
           	}
           	else
             {
@@ -179,69 +173,64 @@ function Ticket (pane,status) {
         //ticket status matches ticket list
         if(match==1)
         {
+        	
 					//check if message already exists --> replace
         	if(exists.length){
-        		exists.after(markup);
+        		//alert("replacing, ticket:"+params.id);
+        		if(reverse){exists.before(markup);}
+        		else{exists.after(markup);}
             exists.remove();
-            //alert("replacing");
         	}
         	else
         	{
-      	 		//is there already a ticket with a id one smaller? --> add after this
-      	 		var previous = $('#'+pane_id+ ' .ticket-'+(+params.id - 1));
-       	 		if(previous.length){
-           		previous.after(markup);
-          		//alert("placing after ticket with id-1");
-          	}
-          	else
-          	{
-           		var next = $('#'+pane_id+ ' .ticket-'+(+params.id + 1));
-       	 			if(next.length){
-           			next.before(markup);
-           	 		//alert("placing after ticket with id-1");
-           		}
-           		else {
-           			//is this the first ticket? --> append it
-           			if(firstID==params.id){
-           				pane.getContentPane().append(markup);
-           				//alert("first ticket");
-            		}
-        	 			else
-        	 			{
-        	 				//has the new ticket an id that is smaller than first id? --> place before lastid
-        	 				if(parseInt(params.id) < parseInt(firstID))
-        	 				{
-		        				var first = $('#'+pane_id+' .ticket-'+(+firstID));
-  	      					first.before(markup);
-    	    					//alert("adding old ticket");
-      	  				}
-        					else
-        					{
-        	 					//go through the entire list and place it somewhere logically
-        	 					var closest;
-        						$('#'+pane_id+' .ticket').each(function(i) {
-        							if(parseInt($(this).attr('id'))<parseInt(params.id))
-        							{
-	        							closest=$(this);
-  	      						}
-        						});
+      	 		//is this the first ticket? --> append it
+           	var tickets=$('#' + pane_id + ' .ticket');
+           	if(firstID==params.id && tickets.length==0){
+           		//alert("first ticket, ticket:"+params.id);
+           		pane.getContentPane().append(markup);
+           	}
+        	 	else
+        	 	{
+        	 		//go through the entire list and place it somewhere logically
+        	 		var closest;
+        	 		var best_distance=99;
+        			$('#' + pane_id + ' .ticket').each(function(i) {
+        				var distance=Math.abs(parseInt($(this).attr('id'))-parseInt(params.id));
+        				if(distance<best_distance)
+        				{
+	        				closest=$(this);	
+	        				best_distance=distance;	
+  	      			}
+        			});
         						
-        						if(closest){
-         	 						closest.after(markup);
-         	 						//alert("adding to closest ticket");
-         	 					}
-         	 					else
-         	 					{
-         	 					pane.getContentPane().append(markup);
-         	 					//alert("adding it to end");
-  	       	 				}
-           				}
-        	 			}
-         			}
-         		}	
-        	}
+        			if(closest){
+         	 			//alert("adding to closest ticket, ticket:" + params.id);
+         	 			if(parseInt(closest.attr('id'))>parseInt(params.id)){
+         	 				if(reverse){closest.after(markup);}
+         	 				else{closest.before(markup);}
+         	 			}
+         	 			else
+         	 			{
+         	 				if(reverse){closest.before(markup);}
+         	 				else{closest.after(markup);}
+         	 			}		
+         	 		}
+         	 		else
+         	 		{
+         	 			//alert("adding it to end, ticket:"+params.id);
+         	 			if(reverse){pane.getContentPane().prepend(markup);}
+         	 			else{pane.getContentPane().append(markup);}
+  	       	 	}
+           	}
+         	}
+        	if(params.id<firstID)
+					{
+							firstID=params.id;
+							//alert("firstID=" + firstID)
+					}                
         }
        	//check to see if status matches fails, but ticket id does exist --> ticket has moved, remove in this list
+       	// this is important, because this 'deletes' the moved ticket!
         else{
         		if(exists.length)
         		{

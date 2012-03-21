@@ -4,6 +4,7 @@ function Handle (pane) {
 	var pane = pane;
   var groups;
   var groupsLoaded;	
+  var TimeOut = null;
   	
   	this.getgroups = function(){
   	return groups;	
@@ -56,12 +57,14 @@ function Handle (pane) {
                 {
                     general.displayError(r.error);
                 }
+            TimeOut=setTimeout(function(){self.getHandles();},30000);
             }
             else
             {
             var message = 'Geen voertuigen';
             pane.getContentPane().append('<p class="count">'+message+'</p>');
             pane.reinitialise();
+            TimeOut=setTimeout(function(){self.getHandles();},30000);
             }
         });
 	  };
@@ -130,5 +133,11 @@ function Handle (pane) {
           }
       });
 	};
+	
+	this.kill = function(){
+		//alert(TimeOut);
+		clearTimeout(TimeOut);
+	}
+
 	
 }

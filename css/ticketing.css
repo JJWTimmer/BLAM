@@ -37,6 +37,9 @@ height:100%;
 {
   padding: 25px 2px 35px 2px;
 }
+#Chattext{
+width:100%;
+}
 
 #Chatsubmit{
     position: absolute;

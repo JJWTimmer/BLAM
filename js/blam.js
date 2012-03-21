@@ -108,9 +108,30 @@ var general = {
             break;
 
             case 'handles':
-                arr = [
-                    '<div class="list_item_second rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div></div>'
-                ];
+                if(params.gps_status==0)
+                {
+                arr = ['<div class="list_item_second rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div><div class=list_item_handle_gps_status title="geen gps">',
+                '<img src="img/gps_no_signal.png" width="15" height="15"></img></div></div>'];
+              	}
+              	if(params.gps_status==1)
+                {
+                arr = ['<div class="list_item_second rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div><div class=list_item_handle_gps_status title="aan lader">',
+                '<img src="img/gps_charging.png" width="15" height="15"></img></div></div>'];
+              	}
+              	if(params.gps_status==2)
+                {
+                arr = ['<div class="list_item_second rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div><div class=list_item_handle_gps_status title="aan accu">',
+                '<img src="img/gps_battery.png" width="15" height="15"></img></div></div>'];
+              	}
+              	if(params.gps_status==3)
+                {
+                arr = ['<div class="list_item_second rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div><div class=list_item_handle_gps_status title="leeg!">',
+                '<img src="img/gps_empty.png" width="15" height="15"></img></div></div>'];
+              	}
+              	if(params.gps_status < 0 || params.gps_status > 3)
+              	{
+              	arr = ['<div class="list_item_second rounded group-',params.groupid,'"><div class=list_item_handle_name><p>',params.handle_name,'</p></div><div class=list_item_handle_description><p>',params.description,'</p></div></div>'];
+              	}
             break;
 
 						case 'ticket_container':

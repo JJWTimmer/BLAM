@@ -79,11 +79,11 @@ var ticketing = {
       message = new Message(ticketing.data.jspAPIMeldingen);
       chat = new Chat(ticketing.data.jspAPIChats);
       handle = new Handle(ticketing.data.jspAPIHandles);
-      ticketNew = new Ticket(ticketing.data.jspAPINewTickets,[{1: 'Nieuw'}]);
-      ticketOpen = new Ticket(ticketing.data.jspAPIOpenTickets,[{1: 'Open'}]);
-      ticketClosed = new Ticket(ticketing.data.jspAPIClosedTickets,[{1: 'Gesloten'}]);
-      ticketSearch = new Ticket(ticketing.data.jspAPISearchTickets,[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]);
-      ticketSelect = new Ticket("",[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}]);
+      ticketNew = new Ticket(ticketing.data.jspAPINewTickets,[{1: 'Nieuw'}],0);
+      ticketOpen = new Ticket(ticketing.data.jspAPIOpenTickets,[{1: 'Open'}],0);
+      ticketClosed = new Ticket(ticketing.data.jspAPIClosedTickets,[{1: 'Gesloten'}],1);
+      ticketSearch = new Ticket(ticketing.data.jspAPISearchTickets,[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}],0);
+      ticketSelect = new Ticket("",[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}],0);
       //display = new Display ($('#TicketDetailsList'));
       display = new Display (ticketing.data.jspAPITicketDetails);
       updatefeedback = new UpdateAndFeedback("","");
@@ -493,10 +493,10 @@ var ticketing = {
           $('#MainContainer').fadeIn();
           $('#TopContainer').fadeIn();
           
-          //message.getMessages();
-          //chat.getChats();
-          //user.getUsers();
-          //handle.getHandles();
+          message.getMessages();
+          chat.getChats();
+          user.getUsers();
+          handle.getHandles();
           ticketNew.getTickets();
           ticketOpen.getTickets();
           ticketClosed.getTickets();
@@ -512,9 +512,11 @@ var ticketing = {
   					message.kill();
   					chat.kill();
   					user.kill();
+  					handle.kill();
   					ticketNew.kill();
           	ticketOpen.kill();
           	ticketClosed.kill();
+          	
   },
 
   reInitJSP : function(){

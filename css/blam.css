@@ -225,10 +225,16 @@ p.noMessages, .count{
     text-align:left;
 }
 .list_item_handle_description{
-    float:right;
-    width:60%;
+    float:left;
+    width:50%;
     text-align:left;
 }
+.list_item_handle_gps_status{
+    float:right;
+    width:10%;
+    margin-top:3px;
+}
+
 
 #search_handles{
     position:absolute;
