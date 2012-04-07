@@ -141,21 +141,27 @@ var general = {
 
             case 'parentticket':
                 if(params.wluser==null && (params.role=="WL" || params.role=="Admin")){
-                arr = [
-                    '<div class="list_item_first parent_ticket rounded" id="',params.id,'">',
-                    '<div class="list_item_parent_ticket_title rounded" id="',params.id,'"><p>',params.id,': ',params.title,'</p></div>',
-                    '<div class="list_item_parent_ticket_claim rounded" id="',params.id,'"><p>claim</p></div>',
-                    '</div>'
-                ];
+                	var addition = '';
+            			if(params.updated==1){addition='<div class="list_item_parent_ticket_updated rounded" id="' + params.id + '"><img src="img/exclamation.png" width="15" height="15"></img></div>';}
+                	arr = [
+                    	'<div class="list_item_first parent_ticket rounded" id="',params.id,'">',
+                    	addition,
+                    	'<div class="list_item_parent_ticket_title rounded" id="',params.id,'"><p>',params.id,': ',params.title,'</p></div>',
+                    	'<div class="list_item_parent_ticket_claim rounded" id="',params.id,'"><p>claim</p></div>',
+                    	'</div>'
+                			];
                 }
                 else
                 {
-                arr = [
-                    '<div class="list_item_first parent_ticket rounded" id="',params.id,'">',
-                    '<div class="list_item_parent_ticket_title rounded" id="',params.id,'"><p>',params.id,': ',params.title,'</p></div>',
-                    '<div class="list_item_parent_ticket_user rounded" id="',params.id,'"><p>',params.wluser,'</p></div>',
-                    '</div>'
-                      ];
+                	var addition = '';
+            			if(params.updated==1){addition='<div class="list_item_parent_ticket_updated rounded" id="' + params.id + '"><img src="img/exclamation.png" width="15" height="15"></img></div>';}
+                	arr = [
+                   		'<div class="list_item_first parent_ticket rounded" id="',params.id,'">',
+                   		addition,
+                   		'<div class="list_item_parent_ticket_title rounded" id="',params.id,'"><p>',params.id,': ',params.title,'</p></div>',
+                   		'<div class="list_item_parent_ticket_user rounded" id="',params.id,'"><p>',params.wluser,'</p></div>',
+                   		'</div>'
+                  		];              	
                 }
                 break;
 
@@ -169,6 +175,7 @@ var general = {
                     '<p><b>WL contactpersoon: </b>',params.wluser,'</p>',
                     '<p><b>tijd melding: </b>',params.created,'</p>',
                     '<p><b>laatste wijziging: </b>',params.modified,'</p>',
+                    '<input type="button" id="addtoticket" class="blueButton" value="Aanvulling op Ticket"/>',
                     '</div>'
                 ];
             break;
@@ -181,7 +188,7 @@ var general = {
 
             case 'feedback':
                 arr = [
-                    '<div class="list_item_first rounded" id="',params.id,'"><p>',params.title,'</p></div>'
+                    '<div class="list_item_first rounded" id="',params.id,'" ticket_id="',params.ticket_id,'"><p>',params.ticket_id,': ',params.title,'</p></div>'
                 ];
             break;
 
@@ -191,7 +198,7 @@ var general = {
                     '<p><b>Terugmelding:</b></p><p>',params.message,'</p>',
                     '<p><b>WL contactpersoon: </b>',params.wl_user,'</p>',
                     '<p><b>Ingevoerd op: </b>',params.created,'</p>',
-                    '<input type="button" id="closefeedback" class="blueButton" value="Terugmelding sluiten"/>',
+                    '<input type="button" id="answerfeedback" class="blueButton" value="Antwoord"/>',
                     '</div>'
                 ];
             break;
@@ -231,7 +238,7 @@ var general = {
                     '</div>',
                       '<div class="feedback_item rounded">',
                         '<p>',params.message,'</p>',
-                        '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),' afgerond op:',general.stripToTime(params.called),' door:',params.calledby,'</p>',
+                        '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),' afgerond op:',general.stripToTime(params.called),' door:',params.called_by,'</p>',
                       '</div>',
                     '</div>'
                 ];
@@ -251,7 +258,44 @@ var general = {
                 ];
             break;
 
+						case 'additionTB':
+            		var addition_notification = '';
+            		if(params.updated==1){addition_notification='<div class="ticketdetailadditionnotification" id="' + params.id + '" ticket_id="' + params.ticket_id + '"><img src="img/exclamation.png" width="15" height="15"></img></div>';}    
+                arr = [
+                '<div class="updatefeedback_holder rounded" id="',params.id,'">',
+                    '<div class="updatefeedback_header">',
+                    addition_notification,
+                      '<p text-align="left">Addition:</p>',
+                    '</div>',
+                    '<div class="addition_item rounded" id="',params.id,'">',
+                    '<p>',params.message,'</p>',
+                    '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
+                    '</div>',
+                '</div>'
+                ];
+            break;
+            
+            case 'answerTB':
+            		var answer_notification = '';
+            		if(params.updated==1){answer_notification='<div class="ticketdetailanswernotification" id="' + params.id + '" ticket_id="' + params.ticket_id + '"><img src="img/exclamation.png" width="15" height="15"></img></div>';}    
+                arr = [
+                '<div class="updatefeedback_holder rounded" id="',params.id,'">',
+                    '<div class="updatefeedback_header">',
+                    answer_notification,
+                      '<p text-align="left">Answer:</p>',
+                    '</div>',
+                    '<div class="answer_item rounded" id="',params.id,'">',
+                    '<p>',params.message,'</p>',
+                    '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
+                    '</div>',
+                '</div>'
+                ];
+            break;
+            
+
 						case 'ticket_detail_new':
+            var messagenotification = '';
+            if(params.messageupdated==1){messagenotification='<div class="ticketdetailmessagenotification" id="' + params.id + '"><img src="img/exclamation.png" width="15" height="15"></img></div>';}
             arr = [
             '<div class=ticketdetail>',
             '<div class=ticketdetailname><p class="white">Titel:</p></div>',
@@ -263,7 +307,8 @@ var general = {
             '<div class=ticketdetaildescription><input type="text" class="rounded" readonly="readonly" value="',params.status,'" id="ticket_status"></div>',
             '</div>',
             '<div class=ticketdetail>',
-            '<div class=ticketdetailname><p class="white">Bericht:</p></div>',
+            '<div class=ticketdetailname>','<p class="white">Bericht:</p></div>',
+            messagenotification,
             '<div class=ticketdetaildescription><textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea></div>',
             '</div>',
             '<div class=ticketdetail>',
@@ -292,7 +337,6 @@ var general = {
             '<div class=ticketdetailname><p class="white">Koppel aan: </p></div>',
             '<div class=ticketdetaildescription>',
             '<div class=ticketdetailleft><p><select id="become_Ticket"><option selected> </option></select></p></div>',
-            '<div class=ticketdetailright><input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/></div>',
             '</div>',
             '</div>',
             '<div class=ticketdetail>',
@@ -317,6 +361,8 @@ var general = {
             break;
 						
 						case 'ticket_detail_open':
+						var messagenotification = '';
+            if(params.messageupdated==1){messagenotification='<div class="ticketdetailmessagenotification" id="' + params.id + '"><img src="img/exclamation.png" width="15" height="15"></img></div>';}
 						arr = [
             '<div class=ticketdetail>',
             '<div class=ticketdetailname><p class="white">Titel:</p></div>',
@@ -329,6 +375,7 @@ var general = {
             '</div>',
             '<div class=ticketdetail>',
             '<div class=ticketdetailname><p class="white">Bericht:</p></div>',
+            messagenotification,
             '<div class=ticketdetaildescription><textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea></div>',
             '</div>',
             '<div class=ticketdetail>',
@@ -363,7 +410,6 @@ var general = {
             '<div class=ticketdetailname><p class="white">Koppel aan: </p></div>',
             '<div class=ticketdetaildescription>',
             '<div class=ticketdetailleft><p><select id="become_Ticket"><option selected> </option></select></p></div>',
-            '<div class=ticketdetailright><input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/></div>',
             '</div>',
             '</div>',
             '<div class=ticketdetail>',
@@ -388,6 +434,8 @@ var general = {
 						break;
 																	
 						case 'ticket_detail_closed':
+            var messagenotification = '';
+            if(params.messageupdated==1){messagenotification='<div class="ticketdetailmessagenotification" id="' + params.id + '"><img src="img/exclamation.png" width="15" height="15"></img></div>';}
             arr = [
             '<div class=ticketdetail>',
             '<div class=ticketdetailname><p class="white">Titel:</p></div>',
@@ -400,6 +448,7 @@ var general = {
             '</div>',
             '<div class=ticketdetail>',
             '<div class=ticketdetailname><p class="white">Bericht:</p></div>',
+            messagenotification,
             '<div class=ticketdetaildescription><textarea rows="1" cols="1" id="ticket_text" name="text" class="rounded" maxlength="700">',params.text,'</textarea></div>',
             '</div>',
             '<div class=ticketdetail>',
@@ -434,7 +483,6 @@ var general = {
             '<div class=ticketdetailname><p class="white">Koppel aan: </p></div>',
             '<div class=ticketdetaildescription>',
             '<div class=ticketdetailleft><p><select id="become_Ticket"><option selected> </option></select></p></div>',
-            '<div class=ticketdetailright><input type="button" id="childticketbutton" class="blueButton" value="Koppel!"/></div>',
             '</div>',
             '</div>',
             '<div class=ticketdetail>',

@@ -247,14 +247,20 @@ p.noMessages, .count{
 }
 
 /* tickets */
+.list_item_parent_ticket_updated{
+    float:left;
+    width:8%;
+    margin-top:1px;
+    text-align:left;
+    overflow:hidden;
+}
 
 .list_item_parent_ticket_title{
     float:left;
-    width:60%;
+    width:52%;
     text-align:left;
     cursor:pointer;
     overflow:hidden;
-    clear: left;
 }
 
 .list_item_parent_ticket_user{
@@ -309,9 +315,30 @@ p.noMessages, .count{
 
 .ticketdetailname{
     float:left;
-    width:18%;
+    width:14%;
     text-align:left;
     margin:4px 0px 4px 2px;
+}
+
+.ticketdetailmessagenotification{
+    float:left;
+    width:4%;
+    text-align:left;
+    margin:4px 0px 4px 2px;
+}
+
+.ticketdetailadditionnotification{
+		float:left;
+    width:4%;
+    text-align:left;
+    margin-top:2px;
+}
+
+.ticketdetailanswernotification{
+		float:left;
+    width:4%;
+    text-align:left;
+    margin-top:2px;
 }
 
 .ticketdetaildescription{
@@ -500,6 +527,25 @@ textarea#ticket_feedback{
     height:100%;
     background-color:#00B0B0;
 }
+
+.addition_item{
+    position:relative;
+    left:0%;
+    top: 0%;
+    width:100%;
+    height:100%;
+    background-color:#FFA126;
+}
+
+.answer_item{
+    position:relative;
+    left:0%;
+    top: 0%;
+    width:100%;
+    height:100%;
+    background-color:#BAFF1C;
+}
+
 
 /* calendar / reminder */
 

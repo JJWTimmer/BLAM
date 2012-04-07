@@ -62,7 +62,8 @@ class Ticket extends BLAMBase {
 		$res = DB::query("
 			UPDATE tickets
 			SET	text = '" . DB::esc($this->text) . "',
-            modified = '" . date('Y-m-d G:i:s') . "' 
+            modified = '" . date('Y-m-d G:i:s') . "',
+            updated = 1 
             WHERE message_id = " . DB::esc($this->message_id)
             );
             
@@ -74,7 +75,7 @@ class Ticket extends BLAMBase {
 	}
     
     public function getDetails() {
-        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, s.name AS status, u.username AS wluser, u2.username AS rvduser, t.created, t.modified
+        $q = "SELECT t.id AS id, t.title, t.handle_id, t.location, t.reference, t.text, t.solution, s.name AS status, m.updated AS messageupdated,u.username AS wluser, u2.username AS rvduser, t.created, t.modified
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             LEFT OUTER JOIN statuses AS s ON t.status_id = s.id
@@ -98,7 +99,7 @@ class Ticket extends BLAMBase {
     
     public function get($recursive = 'false', $first_id = null, $timestamp_last_update = null, $status = array(), $limit_paging) {
         $q = "SELECT * FROM (
-        	SELECT t.id AS id, t.title, s.name AS status, u.username AS wluser, t.modified
+        	SELECT t.id AS id, t.title, s.name AS status, u.username AS wluser, t.modified, t.updated
             FROM tickets AS t
             LEFT OUTER JOIN users AS u ON t.user_id = u.id
             INNER JOIN statuses AS s ON t.status_id = s.id
@@ -288,6 +289,19 @@ class Ticket extends BLAMBase {
         
         if (!$res AND !$res2) throw new Exception(DB::getMySQLiObject()->error);
     }
+    
+    public function setNotification() {
+        $q = "UPDATE tickets SET updated = 1, modified = '".date('Y-m-d G:i:s')."' WHERE id = ".DB::esc($this->id)."";
+        $res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+    }
+    
+    public function clearNotification() {
+        $q = "UPDATE tickets SET updated = 0, modified = '".date('Y-m-d G:i:s')."' WHERE id = ".DB::esc($this->id)."";
+        $res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+    }
+    
 }
 
 ?>

@@ -10,7 +10,10 @@ var logging = {
   // data holds variables for use in the class:
 
     data : {
-        groupsLoaded : false
+        groupsLoaded : false,
+        MessageEditMode : 0,
+    		TicketUpdateMode : 0,
+    		FeedbackUpdateMode : 0
     },
 
     // Init binds event listeners and sets up timers:
@@ -39,6 +42,7 @@ var logging = {
             if(working) return false;
             working = true;
 						message.submitMessage(text,true);
+            ticket.refreshTickets();
             working = false;
             return false;
         });
@@ -116,21 +120,25 @@ var logging = {
 				
 				//function to implement clicking on message
         $('#MeldingenList .message').live('click', function(){
-          if($(this).hasClass("message_ticket"))
-		  {
-			$('#update_ticketbutton').hide();
-		  }
-		  else
-		  {
-			$('#update_ticketbutton').show();
-		  }
-		  $('#messagetext').val($(this).find("span").text());
-          $('#submitbutton').hide();
-          $('#submit_ticketbutton').hide();
-          $('#updatebutton').show();
-          $('#cancelbutton').show();
-          logging.data.selectedmessage=$(this).attr("id");
-		  
+          if(logging.data.TicketUpdateMode==0 && logging.data.FeedbackUpdateMode==0)
+          {
+          	logging.data.MessageEditMode=1;
+          	if($(this).hasClass("message_ticket"))
+		  				{
+								$('#update_ticketbutton').hide();
+		  				}
+		  			else
+		  			{
+							$('#update_ticketbutton').show();
+		  			}
+		  		
+		  			$('#messagetext').val($(this).find("span").text());
+          	$('#submitbutton').hide();
+          	$('#submit_ticketbutton').hide();
+          	$('#updatebutton').show();
+          	$('#cancelbutton').show();
+          	logging.data.selectedmessage=$(this).attr("id");
+		  		}
         });
 
 	       $('#MeldingenList .retrieve_previous').live('click', function(){
@@ -153,13 +161,19 @@ var logging = {
         });
 
         $('#cancelbutton').bind('click',function(){
-          $('#messagetext').val('');
+          if(logging.data.MessageEditMode==1){$('#messagetext').val('');}
           $('#submitbutton').show();
           $('#submit_ticketbutton').show();
           $('#updatebutton').hide();
-		  $('#update_ticketbutton').hide();
+		  		$('#update_ticketbutton').hide();
+		  		$('#add_ticket_additionbutton').hide();
+		  		$('#answer_feedbackbutton').hide();
           $('#cancelbutton').hide();
+          
           logging.data.selectedmessage=0;
+          logging.data.MessageEditMode=0;
+          logging.data.TicketUpdateMode=0;
+          logging.data.FeedbackUpdateMode=0;
         });
 
         $('#updatebutton').bind('click',function(){
@@ -173,14 +187,16 @@ var logging = {
                   $('#submit_ticketbutton').show();
                   $('#updatebutton').hide();
                   $('#update_ticketbutton').hide();
-				  $('#cancelbutton').hide();
+				 					$('#cancelbutton').hide();
                   logging.data.selectedmessage=0;
+                  logging.data.MessageEditMode=0;
                   message.refreshMessages();
+                  ticket.refreshTickets();
                 }
               });
         });
 		
-		$('#update_ticketbutton').bind('click',function(){
+				$('#update_ticketbutton').bind('click',function(){
           $.tzPOST('updateMessage',{id:logging.data.selectedmessage,text:$('#messagetext').val(),ticket:'True'},function(r){
               if(r.error){
                     general.displayError(r.error);
@@ -193,10 +209,76 @@ var logging = {
                   $('#update_ticketbutton').hide();
 				  $('#cancelbutton').hide();
                   logging.data.selectedmessage=0;
+                  logging.data.MessageEditMode=0;
                   message.refreshMessages();
+                  ticket.refreshTickets();
                 }
               });
         });
+		
+				//function to implement clicking on addtoticket
+        $('#addtoticket').live('click', function(){
+        	if(logging.data.MessageEditMode==0 && logging.data.FeedbackUpdateMode==0)
+        		{
+          		logging.data.TicketUpdateMode=1;
+          		$('#submitbutton').hide();
+          		$('#submit_ticketbutton').hide();
+          		$('#add_ticket_additionbutton').show();
+          		$('#cancelbutton').show();
+          	}
+        });
+		
+				$('#add_ticket_additionbutton').bind('click',function(){
+						$.tzPOST('createAddition',{ticket_id:logging.data.selectedticket,message:$('#messagetext').val()},function(r){
+              if(r.error){
+                    general.displayError(r.error);
+                }
+                else    {
+                  $('#messagetext').val('');
+                  $('#submitbutton').show();
+                  $('#submit_ticketbutton').show();
+                  $('#add_ticket_additionbutton').hide();
+                  $('#cancelbutton').hide();
+                  logging.data.selectedticket=0;
+                  logging.data.TicketUpdateMode=0;
+                  ticket.refreshTickets();
+                }
+            });  					
+  			});			
+		
+				//function to implement clicking on close feedback
+        $('#answerfeedback').live('click', function(){
+        	if(logging.data.MessageEditMode==0 && logging.data.TicketUpdateMode==0)
+        		{
+          		logging.data.FeedbackUpdateMode=1;
+          		$('#submitbutton').hide();
+          		$('#submit_ticketbutton').hide();
+          		$('#answer_feedbackbutton').show();
+          		$('#cancelbutton').show();
+          	}
+        });
+		
+				$('#answer_feedbackbutton').bind('click',function(){
+						$.tzPOST('createAnswer',{ticket_id:logging.data.selectedticket,message:$('#messagetext').val()},function(r){
+              if(r.error){
+                    general.displayError(r.error);
+                }
+                else    {
+                  $('#messagetext').val('');
+                  $('#submitbutton').show();
+                  $('#submit_ticketbutton').show();
+                  $('#answer_feedbackbutton').hide();
+                  $('#cancelbutton').hide();
+             			//feedbackOpen.closeFeedback($(this).closest("div").attr("id"));
+             			feedbackOpen.closeFeedback(logging.data.selectedfeedback);     
+             			feedbackClosed.closeFeedback(logging.data.selectedfeedback);     
+             			logging.data.selectedticket=0;
+             			logging.data.selectedfeedback=0;
+                  logging.data.FeedbackUpdateMode=0;
+                }
+            });  					
+  			});
+
 		
 				//function to implement clicking on dynamic element groups
         $('#HandlesList div.list_item_first').live('click', function(){
@@ -241,24 +323,25 @@ var logging = {
         
         //function to implement clicking on dynamic element ticket
         $('#TicketsList .list_item_first').live('click', function(){
-				display.showTicket($(this).attr("id"));				
+				display.showTicket($(this).attr("id"));
+				logging.data.selectedticket=$(this).attr("id");	
+				logging.data.selectedfeedback=0;							
 				});
 
 				//function to implement clicking on dynamic element openfeedback
         $('#OpenFeedbackList .list_item_first').live('click', function(){
-				display.showOpenFeedback($(this).attr("id"));				
+				display.showOpenFeedback($(this).attr("id"));
+				logging.data.selectedticket=$(this).attr("ticket_id");								
+				logging.data.selectedfeedback=$(this).attr("id");
 				});
 				
 				//function to implement clicking on dynamic element closedfeedback
         $('#ClosedFeedbackList .list_item_first').live('click', function(){
 				display.showClosedFeedback($(this).attr("id"));				
+				logging.data.selectedticket=0;
+				logging.data.selectedfeedback=0;
 				});
 				
-				//function to implement clicking on close feedback
-        $('#closefeedback').live('click', function(){
-          feedbackOpen.closeFeedback($(this).closest("div").attr("id"));
-        });
-
 				// Searching for messages:
         $('#searchForm').submit(function(){
             var keyword = $('#keyword').val();

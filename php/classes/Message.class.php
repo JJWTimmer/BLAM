@@ -79,13 +79,19 @@ class Message extends BLAMBase {
 	
 	
 	public function update() {
-        $q = "UPDATE messages SET text = '" .DB::esc($this->text). "', modified = '".date('Y-m-d G:i:s')."'
+        $q = "UPDATE messages SET text = '" .DB::esc($this->text). "', modified = '".date('Y-m-d G:i:s')."', updated = 1
               WHERE id = " . DB::esc($this->id);
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
         $ticket = new Ticket(array('message_id' => DB::esc($this->id), 'text' => DB::esc($this->text)));
         $ticket->updateText();
         
+	}
+	
+	public function clearNotification() {
+        $q = "UPDATE messages SET updated = 0 WHERE ticket_id = " . DB::esc($this->ticket_id);
+				$res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
 	}
 	
 	public function setTicket($tick_no) {

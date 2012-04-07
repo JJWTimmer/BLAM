@@ -43,11 +43,8 @@ function UpdateAndFeedback(pane,called) {
 	this.closeFeedback = function(feedback_id){
 					$.tzPOST('closeFeedback',{id: feedback_id},function(r){
       			display.clearDisplay();
-      			window.clearTimeout(Timeout["FeedbackOpen"]);
-      			window.clearTimeout(Timeout["FeedbackClosed"]);
-      			feedbackOpen.getFeedback();
-          	feedbackClosed.getFeedback();
-      		
+      			window.clearTimeout(TimeOut);
+      			self.getFeedback();      		
       });
 	};
 	/*
@@ -122,11 +119,21 @@ function UpdateAndFeedback(pane,called) {
                           }
                         pane.getContentPane().append(markup);
                         }
-                        else
-                        {
-                        markup=general.render('updateTB',r[i]);
-                        pane.getContentPane().append(markup);
-                        }
+                        else if(r[i].type=='update')
+                        	{
+                        		markup=general.render('updateTB',r[i]);
+                        		pane.getContentPane().append(markup);
+                        	}
+                        	else if(r[i].type=='addition')
+                        		{
+                        			markup=general.render('additionTB',r[i]);
+                        			pane.getContentPane().append(markup);
+                        		}
+                        		else if(r[i].type=='answer')
+                        			{
+                        				markup=general.render('answerTB',r[i]);
+                        				pane.getContentPane().append(markup);
+                        			}
                     }
                   }
                 pane.reinitialise();

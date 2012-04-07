@@ -15,11 +15,12 @@ class Update extends BLAMBase {
 	public function create() {
 
         $q = "
-			INSERT INTO updates (ticket_id, type, message, created)
+			INSERT INTO updates (ticket_id, type, message, updated, created)
 			VALUES (
 				" . DB::esc($this->ticket_id) . ",
 				'" .DB::esc($this->type) . "',
                 '" . DB::esc($this->message) . "',
+                '1',
                 '" . date('Y-m-d G:i:s') . "'
             )
             ";
@@ -34,8 +35,9 @@ class Update extends BLAMBase {
     public function get($for, $type = 'all') {
         if (is_string($type) && $type == 'all') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, u.created
+                SELECT u.id, u.ticket_id, u.type, u.message, u.called, user.username AS called_by, u.created, u.updated
                 FROM updates AS u
+                LEFT OUTER JOIN users user ON user.id = u.called_by
                 WHERE u.ticket_id = " . DB::esc($for)
                 . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'update') {
@@ -102,6 +104,14 @@ class Update extends BLAMBase {
 		$res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
 	}
+    
+  public function clearNotification() {
+        $q = "UPDATE updates SET updated = 0 WHERE id = ".DB::esc($this->id)."";
+        $res = DB::query($q);
+        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+  }
+
+
 }
 
 ?>

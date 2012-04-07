@@ -49,7 +49,7 @@ function Display (pane) {
                     ticketing.data.selectTicketLoaded=false;
                     
                     if(r[0].status!='Subticket'){
-                    	$('#become_Ticket').attr('options')[0] = new Option("selecteer ticket");
+                    	$('#become_Ticket').attr('options')[0] = new Option("selecteer ticket",0);
                     	//updatefeedback.fillUpdate(ticket_id,$('p.list_item_ticketdetail_label_last_update'),$('#ticket_last_update'));
                     	//updatefeedback.fillFeedback(ticket_id,$('p.list_item_ticketdetail_label_last_feedback'),$('#ticket_last_feedback'));
                     	updatefeedback.fillUpdateFeedback(ticket_id,pane);

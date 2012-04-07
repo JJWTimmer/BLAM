@@ -270,6 +270,28 @@ p.label_checkbox_pair label{
     background-color: #58aa00;
 }
 
+#add_ticket_additionbutton {
+    display: none;
+    position: absolute;
+    top:40%;
+    left:70%;
+    width:150px;
+    font-size:13px;
+    height:29px;
+    background-color: #58aa00;
+}
+
+#answer_feedbackbutton {
+    display: none;
+    position: absolute;
+    top:40%;
+    left:70%;
+    width:150px;
+    font-size:13px;
+    height:29px;
+    background-color: #58aa00;
+}
+
 /* adding hover for messages */
 .message_hover:hover{
  background:url('') repeat-x #d5d5d5;

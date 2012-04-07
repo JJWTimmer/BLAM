@@ -253,7 +253,6 @@ var ticketing = {
         		ticketSearch.searchTicket();
         });
 
-
 				//function to implement clicking on ticket to get details
         $('div.parent_ticket').live('click', function(){
           if(!working)
@@ -318,9 +317,26 @@ var ticketing = {
               }
             });
 
+						if($('#become_Ticket').val()>0)
+						{
+							$.tzPOST('becomeChildTicket',{id:ticketing.data.selectedticket,parent_id:$('#become_Ticket').val()},function(r){
+              	if(r==null)
+              	{
+              			ticketing.data.selectedticket=0;
+						        ticketing.data.selectedparentticket=0;
+              			display.clearDisplay();
+              	}
+              	else
+              	{
+                	general.displayError(r.error);
+              	}
+            	});
+            }
+
             if(!($('#ticket_status').val()=="Nieuw") && !($('#ticket_status').val()=="Subticket")){
               $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
-                if(r==null){ display.clearDisplay();}
+                if(r==null){ //display.clearDisplay();
+                }
                 else
                 {
                   general.displayError(r.error);
@@ -369,20 +385,13 @@ var ticketing = {
 
       // add listener for this button and change to childticket of certain parentticket
       $('#childticketbutton').live('click',function(){
-            $.tzPOST('becomeChildTicket',{id:ticketing.data.selectedticket,parent_id:$('#become_Ticket').val()},function(r){
-              if(r==null){}
-              else
-              {
-                general.displayError(r.error);
-              }
-            });
-        ticketing.data.selectedticket=0;
-        ticketing.data.selectedparentticket=0;
+      	    
+        alert("decrapitated");
         
-        ticketNew.refreshTickets();
-      	ticketOpen.refreshTickets();
-        ticketClosed.refreshTickets();
-        display.clearDisplay();
+        //ticketNew.refreshTickets();
+      	//ticketOpen.refreshTickets();
+        //ticketClosed.refreshTickets();
+       	// display.clearDisplay();
       });
 
       // add listener for this button and change to parentticket
@@ -423,14 +432,55 @@ var ticketing = {
         	working = false;
         });
 
+				$('.ticketdetailmessagenotification').live('click',function(){
+					if(!working)
+          	{
+          		working = true;
+        			$.tzPOST('confirmNotification',{ticket_id:$(this).attr("id"), type : 'message'},function(r){});
+        			ticketNew.refreshTickets();
+          		ticketOpen.refreshTickets();
+            	ticketClosed.refreshTickets();
+            	display.showTicketDetail($(this).attr("id"),0);
+        		}
+        	working = false;
+        });
+
+				$('.ticketdetailadditionnotification').live('click',function(){
+					if(!working)
+          	{
+          		working = true;
+        			$.tzPOST('confirmNotification',{update_id:$(this).attr("id"),ticket_id: $(this).attr("ticket_id"), type : 'addition'},function(r){});
+        			ticketNew.refreshTickets();
+          		ticketOpen.refreshTickets();
+            	ticketClosed.refreshTickets();
+            	display.showTicketDetail($(this).attr("ticket_id"),0);
+        		}
+        	working = false;
+        });
+
+				$('.ticketdetailanswernotification').live('click',function(){
+					if(!working)
+          	{
+          		working = true;
+        			$.tzPOST('confirmNotification',{update_id:$(this).attr("id"),ticket_id: $(this).attr("ticket_id"), type : 'answer'},function(r){});
+        			ticketNew.refreshTickets();
+          		ticketOpen.refreshTickets();
+            	ticketClosed.refreshTickets();
+            	display.showTicketDetail($(this).attr("ticket_id"),0);
+        		}
+        	working = false;
+        });
+
 				// Logging a person into blam:
         $('#loginForm').submit(function(){
-            if(!working)
-          	{
-          	working = true;
+            if(working) return false;
+            working = true;
+            
             	// Using our tzPOST wrapper function (defined in the bottom):
             	//$(this).serialize encodes all the name form elements to be used by php
             	$.tzPOST('login',$(this).serialize(),function(r){
+            		working = false;
+            		
                 if(r.error){
                     general.displayError(r.error);
                 }
@@ -439,8 +489,8 @@ var ticketing = {
                     ticketing.login(r.username,r.avatar,r.role);
                 }
             	});
-          	}
-            working = false;
+        
+        	 	return false;
         });
 
 				// Checking whether the user is already logged (browser refresh)

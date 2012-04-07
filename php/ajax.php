@@ -181,6 +181,19 @@ try {
             // returns integer FeedbackId or exception
             break;
 		
+		case 'createAddition':
+            BLAM::checkLogged();
+			$response = BLAM::createAddition($_POST['ticket_id'], $_POST['message']);
+            // returns integer UpdateId or exception
+            break;
+		
+		case 'createAnswer':
+            BLAM::checkLogged();
+			$response = BLAM::createAnswer($_POST['ticket_id'], $_POST['message']);
+            // returns integer UpdateId or exception
+            break;
+		
+		
 		case 'becomeChildTicket':
             BLAM::checkLogged();
 			$response = BLAM::becomeChildTicket($_POST['id'], $_POST['parent_id']);
@@ -202,8 +215,12 @@ try {
     case 'getTaskDetail':
             BLAM::checkLogged();
 			$response = BLAM::getTaskDetail($_POST['id']);
-            break;
-            
+    break;
+    
+    case 'confirmNotification':
+            BLAM::checkLogged();
+			$response = BLAM::confirmNotification($_POST['ticket_id'], $_POST['update_id'], $_POST['type']);
+    break;  
 		
 		default:
 			throw new Exception('Wrong action');

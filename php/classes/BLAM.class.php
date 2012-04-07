@@ -283,6 +283,32 @@ class BLAM {
         return $id;
     }
 
+		public static function createAddition($ticket_id, $message){
+        $update = new Update(array(
+            'ticket_id' => $ticket_id,
+						'type' => 'addition',
+            'message' => $message
+        ));
+        $id = $update->create();
+        
+        $ticket = new Ticket(array('id' => $ticket_id));
+        $ticket->setNotification();					
+        return $id;
+    }
+
+		public static function createAnswer($ticket_id, $message){
+        $update = new Update(array(
+            'ticket_id' => $ticket_id,
+						'type' => 'answer',
+            'message' => $message
+        ));
+        $id = $update->create();
+        
+        $ticket = new Ticket(array('id' => $ticket_id));
+        $ticket->setNotification();					
+        return $id;
+    }
+
     public static function becomeChildTicket($id, $parent_id){
         $ticket = new Ticket(array(
             'id'        => $id,
@@ -294,6 +320,38 @@ class BLAM {
     public static function becomeParentTicket($id){
         $ticket = new Ticket(array('id' => $id));
         $ticket->becomeParent();
+    }
+ 
+ 		public static function confirmNotification($ticket_id,$update_id,$type){
+        switch($type){
+        case 'message':	
+        	//get id for message from somewhere, not from client
+        	$msg = new Message(array('ticket_id'	=> $ticket_id));
+					$ticket = new Ticket(array('id' => $ticket_id));
+					
+					$msg->clearNotification();	
+					$ticket->clearNotification();					
+        break;
+        
+        case 'addition':	
+        	$update = new Update(array('id' => $update_id));
+        	$ticket = new Ticket(array('id' => $ticket_id));
+        	
+        	$update->clearNotification();
+        	$ticket->clearNotification();
+        break;
+        
+        case 'answer':	
+        	$update = new Update(array('id' => $update_id));
+        	$ticket = new Ticket(array('id' => $ticket_id));
+        	
+        	$update->clearNotification();
+        	$ticket->clearNotification();
+        break;			
+        			
+        default:
+						throw new Exception('Wrong type for notification');
+        }       
     }
     
     // returns MessageId or exception

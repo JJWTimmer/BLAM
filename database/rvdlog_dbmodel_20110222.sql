@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `ticket_id` int(10) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `updated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_messages_users` (`user_id`),
   KEY `FK_messages_tickets` (`ticket_id`)
@@ -165,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `reference` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
+  `updated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_tickets_users` (`user_id`),
   KEY `FK_tickets_tickets` (`parent_id`),
@@ -182,11 +184,12 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 CREATE TABLE IF NOT EXISTS `updates` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(10) NOT NULL,
-  `type` enum('update','feedback') NOT NULL,
+  `type` enum('update','feedback','answer','addition') NOT NULL,
   `message` text NOT NULL,
   `called` datetime DEFAULT NULL,
   `called_by` int(10) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
+  `updated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_updates_ticket` (`ticket_id`),
   KEY `FK_updates_operator` (`called_by`)
