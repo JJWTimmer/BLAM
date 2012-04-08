@@ -110,7 +110,7 @@ var logging = {
         }).data('jsp');
 				
 				//setting up message 'class'
-				message = new Message(logging.data.jspAPIMeldingen);
+				message = new Message(logging.data.jspAPIMeldingen,1);
 				user = new User(logging.data.jspAPIUsers);
 				handle = new Handle(logging.data.jspAPIHandles);
 				ticket = new Ticket(logging.data.jspAPITickets,[{1: 'Open', 2: 'Nieuw'}],1);

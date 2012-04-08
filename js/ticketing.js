@@ -76,8 +76,8 @@ var ticketing = {
     	}).data('jsp');
                
       user = new User("TopBar");
-      message = new Message(ticketing.data.jspAPIMeldingen);
-      chat = new Chat(ticketing.data.jspAPIChats);
+      message = new Message(ticketing.data.jspAPIMeldingen,1);
+      chat = new Chat(ticketing.data.jspAPIChats,1);
       handle = new Handle(ticketing.data.jspAPIHandles);
       ticketNew = new Ticket(ticketing.data.jspAPINewTickets,[{1: 'Nieuw'}],1);
       ticketOpen = new Ticket(ticketing.data.jspAPIOpenTickets,[{1: 'Open'}],1);

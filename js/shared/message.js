@@ -1,4 +1,4 @@
-function Message (pane) {
+function Message (pane,reverse) {
 	//constructor
 	var self = this;
 	var pane = pane;
@@ -6,6 +6,8 @@ function Message (pane) {
 	var firstID = 0;
 	var lastTimestamp="";
 	var TimeOut = null;
+  var pane_id;
+  var reverse = reverse;
   
 	// function to retrieve new messages from database
 	// uses pane to determine where to put messages
@@ -18,6 +20,8 @@ function Message (pane) {
             {
             	if(lastTimestamp=="" && r.length>1)
             	{	
+            		//pane_id cannot be set in the constructor, so is set here
+            		pane_id=pane.getContentPane().parent().parent().attr('id');
             		pane.getContentPane().html('<div class="retrieve_previous rounded"><p align="center">Haal oudere berichten op...</p></div>');
             		pane.reinitialise();
             	}
@@ -39,7 +43,7 @@ function Message (pane) {
             	//message.data.noActivity is reset, so next update in 1 second
             	if(r.length>1){
               	noActivity = 0;
-                pane.scrollToBottom(true);
+                //pane.scrollToBottom(true);
                 // bata-123 and arts-1 formats.
                 if(firstID==0)
                 {
@@ -52,14 +56,16 @@ function Message (pane) {
             	}
 							
             	//if no messages exist yet
-            	if($("#MeldingenList .jspContainer .jspPane > div").length==0 && $("#MeldingenList .jspContainer .jspPane > p").length==0){
+            	if($('#'+pane_id+' .jspContainer .jspPane > div').length==0 && $('#'+pane_id+' .jspContainer .jspPane > p').length==0){
                 pane.getContentPane().html('<p class="noMessages">Nog geen meldingen</p>');
+                $('#'+pane_id+' .jspContainer .jspPane .retrieve_previous').hide();
                 pane.reinitialise();
             	}
 
 							// If this is the first melding, remove the paragraph saying there aren't any:
-            	if($("#MeldingenList .jspContainer .jspPane > div").length > 0 && $("#MeldingenList .jspContainer .jspPane > p").length > 0){	 
-              	$('#MeldingenList .jspContainer .jspPane > p').remove();
+            	if($('#'+pane_id+' .jspContainer .jspPane > div').length > 0 && $('#'+pane_id+' .jspContainer .jspPane > p').length > 0){	 
+              	$('#'+pane_id+' .jspContainer .jspPane > p').remove();
+              	$('#'+pane_id+' .jspContainer .jspPane .retrieve_previous_ticket').show();
               	pane.reinitialise();
             	}
 
@@ -136,7 +142,7 @@ function Message (pane) {
             	}
           		if(r[0].limit=='false')
           		{
-          			$('#MeldingenList .retrieve_previous').remove();
+          			$('#'+pane_id+' .retrieve_previous').remove();
           		}
           	}
           	else
@@ -146,8 +152,8 @@ function Message (pane) {
 					}
 			});		
 		};
-
-		// The addMessageLine function adds a message entry to the page
+    
+    // The addMessageLine function adds a message entry to the page
 		// uses pane to determine where to put messages
     this.addMessageLine = function(params){
 
@@ -167,64 +173,64 @@ function Message (pane) {
         }
 
         var markup = general.render('messageLine',params),
-            exists = $('#MeldingenList .message-'+params.id);
-				
-				//check if message already exists --> replace
+        exists = $('#'+pane_id+' .message-'+params.id);
+        
         if(exists.length){
-        		exists.after(markup);
-            exists.remove();
-        }
-        else{
-        	 //check for temporary message --> add at end
-        	 if(params.id.toString().charAt(0) == 't'){
-        	 		pane.getContentPane().append(markup);
-        	 }
-        	 else
-        	 {
-        	 		//is there already a message with a id one smaller? --> add after this
-        	 		var previous = $('#MeldingenList .message-'+(+params.id - 1));
-            	if(previous.length){
-            	  	previous.after(markup);
-            	} else {
-            		//is this the first message? --> append it
-            		if(firstID==params.id){
-            			pane.getContentPane().append(markup);
-            		}
-        	 			else
-        	 			{
-        	 				//has the new message an id that is smaller than first id? --> place before lastid
-        	 				if(parseInt(params.id) < parseInt(firstID))
-        	 				{
-	        					var first = $('#MeldingenList .message-'+(+firstID));
-        						first.before(markup);
-        	 				}
-        	 				else
-        	 				{
-        	 					//go through the entire list and place it somewhere logically
-        	 					var closest;
-        						$("#MeldingenList .message").each(function(i) {
-        							if(parseInt($(this).attr('id'))<parseInt(params.id))
-        								{
-        									closest=$(this);
-        								}
-        						});
-        						if(closest){
-         	 					closest.after(markup);
-         	 					}
-         	 					else
-         	 					{
-         	 						pane.getContentPane().append(markup);
-         	 					}
-           				}
-        	 			}
-        	 		}
-        	 }	 
-        }
-        				
-        // As we added new content, we need to
-        // reinitialise the jScrollPane plugin:
-        pane.reinitialise();
-    };
+      		if(reverse){exists.before(markup);}
+       		else{exists.after(markup);}
+        	exists.remove();
+      	}
+      	else
+      	{
+      		//is this the first message? --> append it
+        	var messages=$('#' + pane_id + ' .message');
+        	if(firstID==params.id && messages.length==0){
+        		pane.getContentPane().append(markup);
+        	}
+        	else
+        	{
+        		//go through the entire list and place it somewhere logically
+        		var closest;
+        		var best_distance=99;
+        		$('#' + pane_id + ' .message').each(function(i) {
+        		var distance=Math.abs(parseInt($(this).attr('id'))-parseInt(params.id));
+        			if(distance<best_distance)
+        			{
+	        			closest=$(this);	
+	        			best_distance=distance;	
+  	      		}
+        		});
+        						
+        		if(closest){
+         			//alert("adding to closest ticket, ticket:" + params.id);
+         	 		if(parseInt(closest.attr('id'))>parseInt(params.id)){
+         	 			if(reverse){closest.after(markup);}
+         	 			else{closest.before(markup);}
+         	 		}
+         	 		else
+         	 		{
+         	 			if(reverse){closest.before(markup);}
+         	 			else{closest.after(markup);}
+         	 		}		
+         		}
+         		else
+         		{
+         			//alert("adding it to end, feedback:"+params.id);
+         			if(reverse){pane.getContentPane().prepend(markup);}
+         			else{pane.getContentPane().append(markup);}
+  	      	}
+        	}
+     		}
+    		if(params.id<firstID)
+				{
+					firstID=params.id;
+					//alert("firstID=" + firstID)
+				}
+				pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));
+				pane.reinitialise();                	 
+   	};    
+            
+            
     
     this.submitMessage = function(messagetext,TicketBool){
             // Assigning a temporary ID to the chat:
@@ -281,9 +287,8 @@ function Message (pane) {
                 	general.displayError(r.error);
                 }
             });
-  	
-  	
   	};
+  	
   	this.clearMessages = function(){
         firstID = 0;
         pane.getContentPane().empty();

@@ -1,11 +1,13 @@
-function Chat (pane) {
+function Chat (pane,reverse) {
 	//constructor
 	var self = this;
 	var pane = pane;
 	var noActivity = 0;
 	var firstID = 0;
 	var lastTimestamp="";
+	var pane_id;
 	var TimeOut = null;
+	var reverse = reverse;
 		
 	
 	// This method requests the latest chats
@@ -20,6 +22,7 @@ function Chat (pane) {
             	//alert(r[0].query);
             	if(lastTimestamp=="" && r.length>1)
             	{	
+            		pane_id=pane.getContentPane().parent().parent().attr('id');
             		pane.getContentPane().html('<div class="retrieve_previous rounded"><p align="center">Haal oudere berichten op...</p></div>');
             		pane.reinitialise();
             	}
@@ -27,6 +30,9 @@ function Chat (pane) {
             	lastTimestamp=r[0].timestamp;
             	for(var i=1;i<r.length;i++){
                self.addChatLine(r[i]);
+               
+               //pane.reinitialise();
+               
                if(r[i].id<firstID)
 								{
 									firstID=r[i].id;
@@ -35,7 +41,6 @@ function Chat (pane) {
             	//if new chat, update to lastid
             	if(r.length>1){
                 noActivity = 0;
-                pane.scrollToBottom(true);
                 lastID = r[i-1].id;
                 if(firstID==0)
                 {
@@ -49,15 +54,17 @@ function Chat (pane) {
             	}
 
             	//if no chats exist yet
-            	if($("#WL-ChatList .jspContainer .jspPane > div").length==0 && $("#WL-ChatList .jspContainer .jspPane > p").length==0){
+            	if($('#'+pane_id+' .jspContainer .jspPane > div').length==0 && $('#'+pane_id+' .jspContainer .jspPane > p').length==0){
                 pane.getContentPane().html('<p class="noMessages">Nog geen chats</p>');
+                $('#'+pane_id+' .jspContainer .jspPane .retrieve_previous').hide();
                 pane.reinitialise();
             	}
-
-            	if($("#WL-ChatList .jspContainer .jspPane > div").length > 0 && $("#WL-ChatList .jspContainer .jspPane > p").length > 0){
+							
+							if($('#'+pane_id+' .jspContainer .jspPane > div').length > 0 && $('#'+pane_id+' .jspContainer .jspPane > p').length > 0){
               	// If this is the first chat, remove the
               	// paragraph saying there aren't any:
-              	$('#WL-ChatList .jspContainer .jspPane > p').remove();
+              	$('#'+pane_id+' .jspContainer .jspPane .retrieve_previous_ticket').show();
+              	$('#'+pane_id+' .jspContainer .jspPane > p').remove();
               	pane.reinitialise();
             	}
 
@@ -107,7 +114,7 @@ function Chat (pane) {
             	}
           		if(r[0].limit=='false')
           		{
-          			$('#WL-ChatList .retrieve_previous').remove();
+          			$('#'+pane_id+' .retrieve_previous').remove();
           			pane.reinitialise();
           		}
           	}
@@ -119,7 +126,6 @@ function Chat (pane) {
 			});		
 		};
 
-	
 		// The addChatLine method adds a chat entry to the page
     this.addChatLine = function(params){
     	  if((params.avatar=="") || (params.avatar=="NULL") || (params.avatar==null))
@@ -138,63 +144,65 @@ function Chat (pane) {
 
 
         var markup = general.render('messageLine',params),
-        exists = $('#WL-ChatList .message-'+params.id);
-
-        //check if message already exists --> replace
-        if(exists.length){
-        		exists.after(markup);
-            exists.remove();
-        }
-        else{
-        	 //check for temporary message --> add at end
-        	 if(params.id.toString().charAt(0) == 't'){
-        	 		pane.getContentPane().append(markup);
-        	 }
-        	 else
-        	 {
-        	 		//is there already a message with a id one smaller? --> add after this
-        	 		var previous = $('#WL-ChatList .message-'+(+params.id - 1));
-            	if(previous.length){
-            	  	previous.after(markup);
-            	} else {
-            		//is this the first message? --> append it
-            		if(firstID==params.id){
-            			pane.getContentPane().append(markup);
-            		}
-        	 			else
-        	 			{
-        	 				//has the new message an id that is smaller than first id? --> place before lastid
-        	 				if(parseInt(params.id) < parseInt(firstID))
-        	 				{
-	        					var first = $('#WL-ChatList .message-'+(+firstID));
-        						first.before(markup);
-        	 				}
-        	 				else
-        	 				{
-        	 					//go through the entire list and place it somewhere logically
-        	 					var closest;
-        						$("#WL-ChatList .message").each(function(i) {
-        							if(parseInt($(this).attr('id'))<parseInt(params.id))
-        								{
-        									closest=$(this);
-        								}
-        						});
-        						if(closest){
-         	 					closest.after(markup);
-         	 					}
-         	 					else
-         	 					{
-         	 						pane.getContentPane().append(markup);
-         	 					}
-           				}
-        	 			}
-        	 		}
-        	 }	 
-        }
-        // As we added new content, we need to
-        // reinitialise the jScrollPane plugin:
-        pane.reinitialise();
-    };
+        exists = $('#' + pane_id + ' .message-'+params.id)
+				
+				if(exists.length){
+      		if(reverse){exists.before(markup);}
+       		else{exists.after(markup);}
+        	exists.remove();
+      	}
+      	else
+      	{
+      		//is this the first message? --> append it
+        	var messages=$('#' + pane_id + ' .message');
+        	if(firstID==params.id && messages.length==0){
+        		pane.getContentPane().append(markup);
+        	}
+        	else
+        	{
+        		//go through the entire list and place it somewhere logically
+        		var closest;
+        		var best_distance=99;
+        		$('#' + pane_id + ' .message').each(function(i) {
+        		var distance=Math.abs(parseInt($(this).attr('id'))-parseInt(params.id));
+        			if(distance<best_distance)
+        			{
+	        			closest=$(this);	
+	        			best_distance=distance;	
+  	      		}
+        		});
+        						
+        		if(closest){
+         			//alert("adding to closest message, message:" + params.id);
+         	 		if(parseInt(closest.attr('id'))>parseInt(params.id)){
+         	 			if(reverse){closest.after(markup);}
+         	 			else{closest.before(markup);}
+         	 		}
+         	 		else
+         	 		{
+         	 			if(reverse){closest.before(markup);}
+         	 			else{closest.after(markup);}
+         	 		}		
+         		}
+         		else
+         		{
+         			//alert("adding it to end, feedback:"+params.id);
+         			if(reverse){pane.getContentPane().prepend(markup);}
+         			else{pane.getContentPane().append(markup);}
+  	      	}
+        	}
+     		}
+    		if(params.id<firstID)
+				{
+					firstID=params.id;
+					//alert("firstID=" + firstID)
+				}
+				//if(reverse){}
+        //else{pane.scrollToPercentY(100);}
+        pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));	
+				pane.reinitialise();                	 
+   	};
+    
     
     this.submitChat = function(chatText){
     	// Assigning a temporary ID to the chat:
