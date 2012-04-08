@@ -113,9 +113,9 @@ var logging = {
 				message = new Message(logging.data.jspAPIMeldingen);
 				user = new User(logging.data.jspAPIUsers);
 				handle = new Handle(logging.data.jspAPIHandles);
-				ticket = new Ticket(logging.data.jspAPITickets,[{1: 'Open', 2: 'Nieuw'}]);
-				feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback,'false');
-				feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback,'true');
+				ticket = new Ticket(logging.data.jspAPITickets,[{1: 'Open', 2: 'Nieuw'}],1);
+				feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback,'false',1);
+				feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback,'true',1);
 				display = new Display(logging.data.jspAPIDisplay);
 				
 				//function to implement clicking on message
@@ -159,6 +159,27 @@ var logging = {
           	}
           	working = false;
         });
+        
+        //function to implement getting previous feedbacks from db
+      	$('#OpenFeedbackList .retrieve_previous_feedback').live('click', function(){
+          if(!working)
+          	{
+          		working = true;
+          		feedbackOpen.getOldFeedbacks();
+          	}
+          	working = false;
+        });
+
+				//function to implement getting previous feedbacks from db
+      	$('#ClosedFeedbackList .retrieve_previous_feedback').live('click', function(){
+          if(!working)
+          	{
+          		working = true;
+          		feedbackClosed.getOldFeedbacks();
+          	}
+          	working = false;
+        });
+
 
         $('#cancelbutton').bind('click',function(){
           if(logging.data.MessageEditMode==1){$('#messagetext').val('');}
@@ -271,7 +292,9 @@ var logging = {
                   $('#cancelbutton').hide();
              			//feedbackOpen.closeFeedback($(this).closest("div").attr("id"));
              			feedbackOpen.closeFeedback(logging.data.selectedfeedback);     
-             			feedbackClosed.closeFeedback(logging.data.selectedfeedback);     
+             			feedbackClosed.closeFeedback(logging.data.selectedfeedback);
+             			feedbackOpen.refreshFeedback();  
+             			feedbackClosed.refreshFeedback();
              			logging.data.selectedticket=0;
              			logging.data.selectedfeedback=0;
                   logging.data.FeedbackUpdateMode=0;
@@ -279,7 +302,6 @@ var logging = {
             });  					
   			});
 
-		
 				//function to implement clicking on dynamic element groups
         $('#HandlesList div.list_item_first').live('click', function(){
           if(!working)

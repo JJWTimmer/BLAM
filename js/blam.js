@@ -188,7 +188,7 @@ var general = {
 
             case 'feedback':
                 arr = [
-                    '<div class="list_item_first rounded" id="',params.id,'" ticket_id="',params.ticket_id,'"><p>',params.ticket_id,': ',params.title,'</p></div>'
+                    '<div class="list_item_first feedback feedback-',params.id,' rounded" id="',params.id,'" ticket_id="',params.ticket_id,'"><p>',params.ticket_id,': ',params.title,'</p></div>'
                 ];
             break;
 

@@ -1,104 +1,196 @@
-function UpdateAndFeedback(pane,called) {
+function UpdateAndFeedback(pane,called,reverse) {
 	//constructor
 	var self = this;
 	var pane = pane;
-	//status is used to identify which type of feedbacks should be displayed (open, closed)
+	var firstID = 0;
+	var lastTimestamp="";
 	var called = called;
 	var TimeOut = null;	
+	var pane_id;
+  var reverse = reverse;
+  	
   	
  	this.getFeedback = function(){
-        $.tzPOST('getFeedback',{called: called},function(r){
+        $.tzPOST('getUpdateList',{type:'feedback',timestamp_last_update:lastTimestamp,called: called},function(r){
           if(r){
             if(!r.error)
-                {
-                	pane.getContentPane().empty();
-                		var markup;
-                		var markup_extra;
-                  	for(var i=0; i< r.length;i++){
-                    	if(r[i]){
-                          markup=general.render('feedback',r[i]);
-                          pane.getContentPane().append(markup);
-                    	}
-                  	}
-               	}
-                //empty no feedback
-
-                if(r.length<1){
-                    var message = 'Geen terugmeldingen';
-                    pane.getContentPane().append('<p class="count">'+message+'</p>');
-                    }
-                pane.reinitialise();
+              {
+              	if(lastTimestamp=="")
+            		{	  	
+                	//pane_id cannot be set in the constructor, so is set here
+            			pane_id=pane.getContentPane().parent().parent().attr('id');
+            			pane.getContentPane().html('<div class="retrieve_previous_feedback rounded"><p align="center">Haal oudere terugmeldingen op...</p></div>');
+            			pane.reinitialise();
+                }
                 
-                //logging.data.jspAPIDisplay.reinitialise();
-          }
-          else
-          {
+                lastTimestamp=r[0].timestamp;
+                
+                for(var i=1; i< r.length;i++){
+                    if(r[i]){
+                      self.addFeedback(r[i]);
+                    }
+                }
+                	
+                //if new feedbacks, update firstid
+            		if(r.length>1 && firstID==0){
+                	firstID=r[1].id;  
+              	}
+
+								//empty no feedbacks
+            		if($('#'+pane_id+' .jspContainer .jspPane .feedback').length==0 && $('#'+pane_id+' .jspContainer .jspPane > p').length==0)
+								{
+                	pane.getContentPane().append('<p class="count">Geen terugmeldingen</p>');
+                	$('#'+pane_id+' .jspContainer .jspPane .retrieve_previous_feedback').hide();
+                	pane.reinitialise();
+            		}
+
+								// If this is the first feedback, remove the paragraph saying there aren't any:
+            		if($('#'+pane_id+' .jspContainer .jspPane .feedback').length > 0 && $('#'+pane_id+' .jspContainer .jspPane > p').length > 0)
+								{	 
+									$('#'+pane_id+' .jspContainer .jspPane > p').remove();
+									$('#'+pane_id+' .jspContainer .jspPane .retrieve_previous_feedback').show();
+									pane.reinitialise();
+            		}
+              
+              }
+          		else
+          		{
                     general.displayError(r.error);
-          }
-        	
-          TimeOut=setTimeout(function(){self.getFeedback();},15000);
-  		});
+          		}
+          		TimeOut=setTimeout(function(){self.getFeedback();},10000);    	
+        	}
+        	else
+					{
+						//No feedbacks available, so empty it
+						pane.getContentPane().empty();
+						TimeOut=setTimeout(function(){self.getFeedback();},10000);
+						pane.reinitialise();
+					}
+        
+	  		});
 	};
+	
+	
+	this.getOldFeedbacks = function(){
+	  	$.tzPOST('getUpdateList',{first_id:firstID,type:'feedback',called:called},function(r){
+				if(r)
+          {
+            if(!r.error)
+            {
+            	//alert(r[0].query);
+          		for(var i=1;i<r.length;i++){
+                self.addFeedback(r[i]);
+                if(parseInt(r[i].id)<parseInt(firstID))
+								{
+									firstID=r[i].id;
+								}
+            	}
+          		if(r[0].limit=='false')
+          		{
+          			$('#'+pane_id+' .retrieve_previous_feedback').remove();
+          		}
+          	}
+          	else
+            {
+                general.displayError(r.error);
+            }
+					}
+			});		
+		};
+	
+	
+	this.addFeedback = function(params){
+		
+		var markup='';
+	  markup=general.render('feedback',params);
+         
+    exists = $('#' + pane_id + ' .feedback-'+params.id)
+      
+    var match = 0;
+    //alert('called:'+called);
+    //alert('params.called:'+params.called);
+    
+    if((params.called==null && called=='false') || (params.called!=null && called=='true')){match=1;}  
+    //feedback status matches feedback list
+    if(match==1)
+    {
+    	
+    	//check if feedback already exists --> replace
+      if(exists.length){
+      	if(reverse){exists.before(markup);}
+        else{exists.after(markup);}
+        	exists.remove();
+      }
+      else
+      {
+      	//is this the first feedback? --> append it
+        var feedbacks=$('#' + pane_id + ' .feedback');
+        if(firstID==params.id && feedbacks.length==0){
+        	pane.getContentPane().append(markup);
+        }
+        else
+        {
+        	//go through the entire list and place it somewhere logically
+        	var closest;
+        	var best_distance=99;
+        	$('#' + pane_id + ' .feedback').each(function(i) {
+        		var distance=Math.abs(parseInt($(this).attr('id'))-parseInt(params.id));
+        		if(distance<best_distance)
+        			{
+	        			closest=$(this);	
+	        			best_distance=distance;	
+  	      		}
+        	});
+        						
+        	if(closest){
+         		//alert("adding to closest ticket, ticket:" + params.id);
+         	 		if(parseInt(closest.attr('id'))>parseInt(params.id)){
+         	 			if(reverse){closest.after(markup);}
+         	 			else{closest.before(markup);}
+         	 		}
+         	 		else
+         	 		{
+         	 			if(reverse){closest.before(markup);}
+         	 			else{closest.after(markup);}
+         	 		}		
+         	}
+         	else
+         		{
+         			//alert("adding it to end, feedback:"+params.id);
+         			if(reverse){pane.getContentPane().prepend(markup);}
+         			else{pane.getContentPane().append(markup);}
+  	       	}
+        }
+     	}
+    	if(params.id<firstID)
+			{
+				firstID=params.id;
+				//alert("firstID=" + firstID)
+			}                
+    }
+    //check to see if status matches fails, but ticket id does exist --> ticket has moved, remove in this list
+    // this is important, because this 'deletes' the moved ticket!
+    else{
+    	if(exists.length)
+    	{
+    		exists.remove();
+      	//alert("removing existing");
+      }	 
+   	}
+        				
+        // As we added new content, we need to
+        // reinitialise the jScrollPane plugin:
+        pane.reinitialise();
+  };
+	
+	
 	
 	this.closeFeedback = function(feedback_id){
 					$.tzPOST('closeFeedback',{id: feedback_id},function(r){
       			display.clearDisplay();
-      			window.clearTimeout(TimeOut);
-      			self.getFeedback();      		
       });
 	};
-	/*
-	this.fillUpdate = function(ticket_id,label_id,last_update_id){
-	//update the last update box in ticketdetails
-      $.tzPOST('getUpdates',{ticket_id:ticket_id,type:'update'},function(r){
-      	if(!r.error)
-      	{
-          if(r && r.length>0){
-              label_id.show();
-              last_update_id.show();
-              $('#openmodalbutton').show();
-              var length_updates=r.length-1;
-              var markup=r[length_updates].message;
-              //update time
-              label_id.text('Laatste update('+general.stripToTime(r[length_updates].created)+'):');
-              //update text field
-              last_update_id.val(markup);
-          }
-      	}
-      	else
-        {
-          general.displayError(r.error);
-        }
-      });
 		
-	};
-	
-	this.fillFeedback = function(ticket_id,label_id,last_feedback_id){
-	//update the last feedback box in ticketdetails
-      $.tzPOST('getUpdates',{ticket_id:ticket_id,type:'feedback'},function(r){
-      if(!r.error)
-      {
-          if(r && r.length>0){
-            label_id.show();
-            last_feedback_id.show();
-            $('#openmodalbutton').show();
-            var length_feedback=r.length-1;
-            var markup=r[length_feedback].message;
-            //update time
-            label_id.text('Laatste terugmelding('+general.stripToTime(r[length_feedback].created)+'):');
-            //update text field
-            last_feedback_id.val(markup);
-          }
-      }
-      else
-        {
-          general.displayError(r.error);
-        }
-      });
-		
-	};
-	*/
-	
 	this.fillUpdateFeedback = function(ticket_id,pane){
 	$.tzPOST('getUpdates',{ticket_id:ticket_id, type :'all'},function(r){
             if(r)
@@ -147,7 +239,7 @@ function UpdateAndFeedback(pane,called) {
         });
 	};
 	
-		this.saveUpdate = function(ticketUpdateField){
+	this.saveUpdate = function(ticketUpdateField){
 			if(ticketUpdateField.val()!="" && ticketUpdateField.val()!="Text voor update")
     	{
     		$.tzPOST('createUpdate',{ticket_id:ticketing.data.selectedticket,message:ticketUpdateField.val()},function(r){
@@ -167,9 +259,9 @@ function UpdateAndFeedback(pane,called) {
     	{
     		alert("Niet goed ingevuld!");
     	}
-  	};
+  };
   	
-  	this.saveFeedback = function(ticketFeedbackField){
+  this.saveFeedback = function(ticketFeedbackField){
   		if(ticketFeedbackField.val()!="" && ticketFeedbackField.val()!="Text voor terugmelding")
       {
       	$.tzPOST('createFeedback',{ticket_id:ticketing.data.selectedticket,title:$('#ticket_title').val(),message:ticketFeedbackField.val()},function(r){
@@ -189,7 +281,12 @@ function UpdateAndFeedback(pane,called) {
       {
       	alert("Niet goed ingevuld!");
       }
-    };
+  };
+	
+	this.refreshFeedback = function(){
+        clearTimeout(TimeOut);
+        setTimeout(function(){self.getFeedback();},500);
+  };
 	
 	
 	this.kill = function(){

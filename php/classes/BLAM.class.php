@@ -181,17 +181,18 @@ class BLAM {
         return $tickets;
     }
 
-    // returns array (integer Id, string Title, string HandleName, string Message, string userWL, Datetime called, Datetime created)feedback or exception
-    public static function getFeedback($id, $called) {
-        $feedback = new Update(array());
-        $feedbacks = $feedback->getFeedback($id, $called);
-        return $feedbacks;
+    // returns array (integer id,	integer ticket_id, string Title, Datetime called, Datetime created, Datetime modified) updates or exception
+    public static function getUpdateList($type, $called, $first_id, $timestamp_last_update) {
+        $update = new Update(array());
+        $limit_paging = 5;
+        $updates = $update->getUpdateList($type, $called, $first_id, $timestamp_last_update, $limit_paging);
+        return $updates;
     }
     
     // returns array (id, ticket_id, type, title, message, handlename, called, called_by, created)
-    public static function getUpdates($for, $type) {
+    public static function getUpdates($id, $ticket_id, $type) {
         $updates = new Update(array());
-        $updates = $updates->get($for, $type);
+        $updates = $updates->get($id, $ticket_id, $type);
         return $updates;
     }
     

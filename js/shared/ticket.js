@@ -25,8 +25,6 @@ function Ticket (pane,status,reverse) {
             		}
             		lastTimestamp=r[0].timestamp;
             		var params = {role : user.getRole()};                
-                var markup;
-                var markup_child;
                   for(var i=1; i< r.length;i++){
                     if(r[i]){
                     	//alert('parent');
@@ -128,8 +126,8 @@ function Ticket (pane,status,reverse) {
 	  
 	  this.addTicket = function(params){
 		
-		var markup='';
-		var markup_parent='';
+				var markup='';
+				var markup_parent='';
         var markup_child='';
         var role = {role : user.getRole()};
         

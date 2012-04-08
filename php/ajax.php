@@ -103,10 +103,10 @@ try {
             // returns array(integer Id, string Title, string Text, string Status, string user, datetime created, datetime modified) tickets or exception
             break;
 		//!*
-		case 'getFeedback':
+		case 'getUpdateList':
             BLAM::checkLogged();
-			$response = BLAM::getFeedback($_POST['id'], $_POST['called']);
-            // returns array (integer Id, string Title, string HandleName, string Message, string userWL, Datetime called, Datetime created)feedback or exception
+			$response = BLAM::getUpdateList($_POST['type'],$_POST['called'], $_POST['first_id'],$_POST['timestamp_last_update']);
+            // returns array (integer id,	integer ticket_id, string Title, Datetime called, Datetime created, Datetime modified) updates or exception
             break;
 		
 		case 'closeFeedback':
@@ -141,7 +141,7 @@ try {
             
 		case 'getUpdates':
             BLAM::checkLogged();
-			$response = BLAM::getUpdates($_POST['ticket_id'], $_POST['type']);
+			$response = BLAM::getUpdates($_POST['id'], $_POST['ticket_id'], $_POST['type']);
             // returns returns array (id, type, ticket_id, title, message, handlename, called, called_by, created)
             break;
             

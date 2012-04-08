@@ -122,6 +122,7 @@ class Ticket extends BLAMBase {
 				{			
 					if (is_array($status) && !empty($status)) 
 					{
+						//just return all type of tickets which are modified, otherwise moving issue
 						//$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
 					}
 					$q .= " AND t.modified > '$timestamp_last_update'";

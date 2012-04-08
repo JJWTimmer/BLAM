@@ -87,7 +87,7 @@ function Display (pane) {
 	  };
 	  
 	  this.showOpenFeedback = function(feedback_id){
-				$.tzPOST('getFeedback',{id:feedback_id,called: 'false'},function(r){
+				$.tzPOST('getUpdates',{id:feedback_id},function(r){
             if(!r.error)
                 {
                 	pane.getContentPane().empty();
@@ -99,7 +99,7 @@ function Display (pane) {
 	  };
 	  
 	  this.showClosedFeedback = function(feedback_id){
-				$.tzPOST('getFeedback',{id:feedback_id,called: 'true'},function(r){
+				$.tzPOST('getUpdates',{id:feedback_id},function(r){
             if(!r.error)
                 {
                 	pane.getContentPane().empty();
