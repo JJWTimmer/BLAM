@@ -255,6 +255,7 @@ var logging = {
                     general.displayError(r.error);
                 }
                 else    {
+                	message.submitMessage($('#messagetext').val(),false);
                   $('#messagetext').val('');
                   $('#submitbutton').show();
                   $('#submit_ticketbutton').show();
@@ -285,6 +286,7 @@ var logging = {
                     general.displayError(r.error);
                 }
                 else    {
+                  message.submitMessage($('#messagetext').val(),false);
                   $('#messagetext').val('');
                   $('#submitbutton').show();
                   $('#submit_ticketbutton').show();

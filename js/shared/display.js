@@ -11,6 +11,7 @@ function Display (pane) {
                 {
                     //$('#TicketDetailsList').empty();
                     pane.getContentPane().empty();
+                                        
                     if(parent_id==0){
 
                       switch(r[0].status){
@@ -52,7 +53,7 @@ function Display (pane) {
                     	$('#become_Ticket').attr('options')[0] = new Option("selecteer ticket",0);
                     	//updatefeedback.fillUpdate(ticket_id,$('p.list_item_ticketdetail_label_last_update'),$('#ticket_last_update'));
                     	//updatefeedback.fillFeedback(ticket_id,$('p.list_item_ticketdetail_label_last_feedback'),$('#ticket_last_feedback'));
-                    	updatefeedback.fillUpdateFeedback(ticket_id,pane);
+                    	updatefeedback.fillUpdateFeedback(ticket_id);
                     	user.fillSelect($('#owner'),r[0].wluser);
                     }
                     else

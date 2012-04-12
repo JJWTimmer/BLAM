@@ -191,39 +191,48 @@ function UpdateAndFeedback(pane,called,reverse) {
       });
 	};
 		
-	this.fillUpdateFeedback = function(ticket_id,pane){
+	this.fillUpdateFeedback = function(ticket_id){
 	$.tzPOST('getUpdates',{ticket_id:ticket_id, type :'all'},function(r){
             if(r)
               {
               if(!r.error)
                 {
+                  if(ticketing.data.UpdatesVisible==1)
+                  {
+                  	pane.getContentPane().empty();
+                  }
+                  	
                   //$('#openmodalbutton').show();
                   var markup;
                   for(var i=0; i< r.length;i++){
-                    if(r[i]){
-                        if(r[i].type=='feedback'){
-                          if(r[i].called==null){
-                            markup=general.render('feedbackTBOpen',r[i]);
+                    
+                    if(reverse){j=(r.length-1)-i;}
+                   	else{j=i;}
+                    
+                    if(r[j]){
+                        if(r[j].type=='feedback'){
+                          if(r[j].called==null){
+                            markup=general.render('feedbackTBOpen',r[j]);
                           }
                           else
                           {
-                            markup=general.render('feedbackTBClosed',r[i]);
+                            markup=general.render('feedbackTBClosed',r[j]);
                           }
-                        pane.getContentPane().append(markup);
+                        	pane.getContentPane().append(markup);
                         }
-                        else if(r[i].type=='update')
+                        else if(r[j].type=='update')
                         	{
-                        		markup=general.render('updateTB',r[i]);
+                        		markup=general.render('updateTB',r[j]);
                         		pane.getContentPane().append(markup);
                         	}
-                        	else if(r[i].type=='addition')
+                        	else if(r[j].type=='addition')
                         		{
-                        			markup=general.render('additionTB',r[i]);
+                        			markup=general.render('additionTB',r[j]);
                         			pane.getContentPane().append(markup);
                         		}
-                        		else if(r[i].type=='answer')
+                        		else if(r[j].type=='answer')
                         			{
-                        				markup=general.render('answerTB',r[i]);
+                        				markup=general.render('answerTB',r[j]);
                         				pane.getContentPane().append(markup);
                         			}
                     }
@@ -234,7 +243,6 @@ function UpdateAndFeedback(pane,called,reverse) {
                 {
                     general.displayError(r.error);
                 }
-
               }
         });
 	};
@@ -288,6 +296,9 @@ function UpdateAndFeedback(pane,called,reverse) {
         setTimeout(function(){self.getFeedback();},500);
   };
 	
+	this.setPane = function(newpane){
+				pane = newpane;	
+	};
 	
 	this.kill = function(){
 		//alert(TimeOut);

@@ -66,6 +66,17 @@ width:100%;
     margin:1%;
 }
 
+#Updates{
+    position:absolute;
+    top: 0%;
+    left:0%;
+    width:98%;
+    height:44%;
+    margin:1%;
+    display:none;
+}
+
+
 #WL-Chat{
     position:absolute;
     top: 51%;
@@ -78,7 +89,8 @@ width:100%;
 #TicketingOverviewContainer{
     position: absolute;
     top: 1%;
-    left:40%;
+    left:78%;
+    /*left: 40%;*/
     width:22%;
     height:98%;
     margin:0%;
@@ -125,7 +137,8 @@ width:100%;
 #TicketingDetailsContainer{
     position: absolute;
     top: 1%;
-    left: 63%;
+    /*left: 63%;*/
+    left: 41%;
     width:36%;
     height:98%;
     /*margin-top:1%;*/

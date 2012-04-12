@@ -244,31 +244,34 @@ function Ticket (pane,status,reverse) {
 	  
 	  this.fillTicket = function(selectElement,ticket_id,parent_id){
 	    //update become child ticket in TicketDetail
-      $.tzPOST('getTicketList',{timestamp_last_update:'all', recursive : false, status : status},function(r){
+     pane=selectElement;
+     pane.empty();
+     var become_Ticket_options = pane.attr('options');
+     if(parent_id==0){become_Ticket_options[become_Ticket_options.length] = new Option('-----Open-----',0);}
+      $.tzPOST('getTicketList',{timestamp_last_update:'all', recursive : false, status : [{1: 'Open'}]},function(r){
         if(r)
           {
         		if(!r.error)
           	{      		
-            		pane=selectElement;
-            		pane.empty()
-            		
-              	var become_Ticket_options = pane.attr('options');
                 for(var i=1; i< r.length;i++){
-                  var maxlength=15;
-                    if(r[i]){
+                	if(reverse){j=(r.length)-i;}
+                  else{j=i;}
+                	var maxlength=15;
+                    if(r[j]){
                       //don't want to make it a child of its own, that would be weird;-)
-                      if(r[i].title.length<maxlength)
+                      if(r[j].title.length<maxlength)
                       {
-                        maxlength=r[i].title.length;
+                        maxlength=r[j].title.length;
                       }
-                      if(r[i].id!=ticket_id && r[i].id!=parent_id && parent_id==0)
+                      if(r[j].id!=ticket_id && r[j].id!=parent_id && parent_id==0)
                       {
-                        strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
-                        become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[i].id);
+                        strOption = [r[j].id + ' : ' + r[j].title.substring(0,maxlength)];
+                        become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[j].id);
                       }
-                      if(r[i].id==parent_id && parent_id!=0)
+                      
+                      if(r[j].id==parent_id && parent_id!=0)
                       {
-                        strOption = [r[i].id + ' : ' + r[i].title.substring(0,maxlength)];
+                        strOption = [r[j].id + ' : ' + r[j].title.substring(0,maxlength)];
                         pane.val(strOption);
                       }
                     }
@@ -279,8 +282,89 @@ function Ticket (pane,status,reverse) {
            	general.displayError(r.error);
           	}
           }
+          
+          if(parent_id==0){become_Ticket_options[become_Ticket_options.length] = new Option('-----Nieuw-----',0);}
+      
+      		$.tzPOST('getTicketList',{timestamp_last_update:'all', recursive : false, status : [{1: 'Nieuw'}]},function(r){
+        	if(r)
+          	{
+        			if(!r.error)
+          		{      		
+                for(var i=1; i< r.length;i++){
+                  if(reverse){j=(r.length)-i;}
+                  else{j=i;}                 
+                  var maxlength=15;
+                    if(r[j]){
+                      //don't want to make it a child of its own, that would be weird;-)
+                      if(r[j].title.length<maxlength)
+                      {
+                        maxlength=r[j].title.length;
+                      }
+                      if(r[j].id!=ticket_id && r[j].id!=parent_id && parent_id==0)
+                      {
+                        strOption = [r[j].id + ' : ' + r[j].title.substring(0,maxlength)];
+                        become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[j].id);
+                      }
+                      
+                      if(r[j].id==parent_id && parent_id!=0)
+                      {
+                        strOption = [r[j].id + ' : ' + r[j].title.substring(0,maxlength)];
+                        pane.val(strOption);
+                      }
+                    }
+                }
+          		}
+          		else
+          		{
+           		general.displayError(r.error);
+          		}
+          	}
+          
+          if(parent_id==0){become_Ticket_options[become_Ticket_options.length] = new Option('---Gesloten----',0);}
+          
+          
+          
+          	$.tzPOST('getTicketList',{timestamp_last_update:'all', recursive : false, status : [{1: 'Gesloten'}]},function(r){
+        			if(r)
+          		{
+        				if(!r.error)
+          			{      		
+                	for(var i=1; i< r.length;i++){
+                		if(reverse){j=(r.length)-i;}
+                   	else{j=i;}
+                   		
+                  	var maxlength=15;
+                    	if(r[j]){
+                      	//don't want to make it a child of its own, that would be weird;-)
+                      	if(r[j].title.length<maxlength)
+                      		{
+                        		maxlength=r[j].title.length;
+                      		}
+                      	if(r[j].id!=ticket_id && r[j].id!=parent_id && parent_id==0)
+                      		{
+                        		strOption = [r[j].id + ' : ' + r[j].title.substring(0,maxlength)];
+                        		become_Ticket_options[become_Ticket_options.length] = new Option(strOption,r[j].id);
+                      		}
+                      
+                      	if(r[j].id==parent_id && parent_id!=0)
+                      		{
+                        		strOption = [r[j].id + ' : ' + r[j].title.substring(0,maxlength)];
+                        		pane.val(strOption);
+                      		}
+                    	}
+                	}
+          			}
+          			else
+          			{
+           			general.displayError(r.error);
+          			}
+          		}
+      			});
+      	});
       });
+	  
 	  }; 
+	  
 	  
 	  this.refreshTickets = function(){
         clearTimeout(TimeOut);

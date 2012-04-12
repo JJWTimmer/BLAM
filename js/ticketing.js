@@ -15,6 +15,7 @@ var ticketing = {
   data : {
     HandlelistVisible : 1,
     SearchTicketsVisible : 0,
+    UpdatesVisible : 0,
     selectTicketLoaded : false,
   },
 
@@ -74,6 +75,11 @@ var ticketing = {
             verticalDragMinHeight: 12,
             verticalDragMaxHeight: 12
     	}).data('jsp');
+    	
+    ticketing.data.jspAPIUpdates = $('#UpdatesList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
+    	}).data('jsp');
                
       user = new User("TopBar");
       message = new Message(ticketing.data.jspAPIMeldingen,1);
@@ -86,7 +92,9 @@ var ticketing = {
       ticketSelect = new Ticket("",[{1: 'Open', 2: 'Nieuw', 3: 'Gesloten'}],0);
       //display = new Display ($('#TicketDetailsList'));
       display = new Display (ticketing.data.jspAPITicketDetails);
-      updatefeedback = new UpdateAndFeedback("","");
+      //updatefeedback = new UpdateAndFeedback(ticketing.data.jspAPIUpdates,"",0);
+      updatefeedback = new UpdateAndFeedback(ticketing.data.jspAPITicketDetails,"",1);
+      
            	
       	//function to implement getting previous messages from db
       	$('#MeldingenList .retrieve_previous').live('click', function(){
@@ -192,6 +200,59 @@ var ticketing = {
           working=false;
         });
 
+				$('#updates_toggle_button').live('click', function(){
+          if(!working)
+          {
+              working = true;
+              if(ticketing.data.UpdatesVisible==1)
+              {
+              $('#Updates').css('display','none');
+              $('#Meldingen').css('display','block');
+              $('#updates_toggle_button').attr('value','Updatelijst aan');
+              ticketing.data.UpdatesVisible=0;
+              updatefeedback.setPane(ticketing.data.jspAPITicketDetails);
+              
+              if(ticketing.data.selectedticket)
+              {
+              	if(ticketing.data.selectedparentticket)	
+              	{
+             			ticketing.data.jspAPIUpdates.getContentPane().empty();
+              	}
+              	else
+              	{
+              		display.showTicketDetail(ticketing.data.selectedticket,0);
+              	}
+              }
+              
+              ticketing.reInitJSP();
+              }
+              else
+              {
+              $('#Updates').css('display','block');
+              $('#Meldingen').css('display','none');
+              $('#updates_toggle_button').attr('value','Updatelijst uit');
+              ticketing.data.UpdatesVisible=1;
+              updatefeedback.setPane(ticketing.data.jspAPIUpdates);
+              
+              if(ticketing.data.selectedticket)
+              {
+              	if(ticketing.data.selectedparentticket)	
+              	{
+             			ticketing.data.jspAPIUpdates.getContentPane().empty();	
+              	}
+              	else
+              	{
+              		display.showTicketDetail(ticketing.data.selectedticket,0);
+              	}
+              }
+              
+              ticketing.reInitJSP();
+              }
+              //ticketing.reInitJSP();
+          }
+          working=false;
+        });
+
         //function to implement clicking on dynamic element groups
         $('#Handles .list_item_first').live('click', function(){
           if(!working)
@@ -279,6 +340,9 @@ var ticketing = {
             		ticketing.data.selectedparentticket=$(this).attr("title");
             	}
           		display.showTicketDetail(ticketing.data.selectedticket,$(this).attr("title"));
+          		//to clear the UpdatesList when clicking on a subticket
+          		ticketing.data.jspAPIUpdates.getContentPane().empty();
+          		ticketing.data.jspAPIUpdates.reinitialise();
           	}
           	working = false;
         });
@@ -551,6 +615,7 @@ var ticketing = {
           ticketOpen.getTickets();
           ticketClosed.getTickets();
           ticketing.data.jspAPITicketDetails.reinitialise();
+          ticketing.data.jspAPIUpdates.reinitialise();
         });
     },
 
@@ -578,6 +643,7 @@ var ticketing = {
             ticketing.data.jspAPIClosedTickets.reinitialise();
             ticketing.data.jspAPISearchTickets.reinitialise();
             ticketing.data.jspAPITicketDetails.reinitialise();
+            ticketing.data.jspAPIUpdates.reinitialise();
   }
 
 };
