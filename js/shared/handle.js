@@ -5,9 +5,32 @@ function Handle (pane) {
   var groups;
   var groupsLoaded;	
   var TimeOut = null;
+  var groupsVisible = [];
   	
   	this.getgroups = function(){
   	return groups;	
+  	};
+ 		
+ 		this.toggleVisibleGroups= function(groupid){
+  			if(groupsVisible[groupid]==false){
+        	groupsVisible[groupid]=true;
+          $(".list_item_second").each(function(i) {
+          	if($(this).hasClass(groupid))
+            {
+            	$(this).fadeIn();
+            }
+          });
+        }
+        else
+        {
+        	groupsVisible[groupid]=false;
+          	$(".list_item_second").each(function(i) {
+            	if($(this).hasClass(groupid))
+              {
+              	$(this).fadeOut();
+              }
+            });
+        }	
   	};
  		
  		this.getHandles = function(){
@@ -33,19 +56,36 @@ function Handle (pane) {
 
                 for(var i=0; i< r.length;i++){
                     if(r[i]){
+                    		var groupid='group-'+r[i].id;
+                    		if(groupsVisible[groupid]==undefined){
+                    			groupsVisible[groupid]=true;
+                    		}
+                    		
                         markup_group=general.render('groups',r[i]);
                         pane.getContentPane().append(markup_group);
+                        
+                        
                         if (!(typeof r[i]['handles'] === 'undefined')) {
                           for (var j = 0; j < r[i]['handles'].length; j++) {
                             r[i]['handles'][j].groupid=r[i].id;
                             markup_handle=general.render('handles',r[i]['handles'][j]);
                             pane.getContentPane().append(markup_handle);
+                            
                             if($('#autotext_Handle').length != 0)
                 						{
                             	autotext_options[autotext_options.length] = new Option(r[i]['handles'][j].handle_name + ' - ' + r[i]['handles'][j].description);
 														}
                           }
                         }
+                        
+                        if(groupsVisible['group-'+r[i].id]==false){
+		                    			$(".list_item_second").each(function(i) {
+                							if($(this).hasClass(groupid))
+                  							{
+                  								$(this).hide();
+                  							}
+                							});
+                    		}
                     }
                 }
 
@@ -70,16 +110,17 @@ function Handle (pane) {
 	  };
 
 	this.searchHandles = function(keyword){
-		$(".list_item_first").each(function(i) {
-              //make every group visible again
-              $(this).attr('visible','1');
-            });
+						//makes all groups visible;
+						for (key in groupsVisible)
+           		{
+              		groupsVisible[key]=true;
+            	}
 						//if field is empty show every handle
             if(keyword=="")
             {
               $(".list_item_second").each(function(i) {
                 $(this).fadeIn();
-              });
+              });	
             }
             else
             {

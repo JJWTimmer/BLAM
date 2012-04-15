@@ -310,25 +310,7 @@ var logging = {
           {
             working = true;
             var groupid=$(this).attr("id");
-            if($(this).attr('visible')==0){
-                $(this).attr('visible','1');
-                $(".list_item_second").each(function(i) {
-                if($(this).hasClass(groupid))
-                  {
-                  $(this).fadeIn();
-                  }
-                });
-            }
-            else
-            {
-                $(this).attr('visible','0');
-                $(".list_item_second").each(function(i) {
-                if($(this).hasClass(groupid))
-                  {
-                  $(this).fadeOut();
-                  }
-                });
-            }
+            handle.toggleVisibleGroups(groupid);
             working=false;
           }
           logging.data.jspAPIHandles.reinitialise();
