@@ -13,8 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `blam`
 --
-CREATE DATABASE `blam2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `blam2`;
+CREATE DATABASE `blam` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `blam`;
 
 -- --------------------------------------------------------
 
