@@ -226,8 +226,13 @@ function Message (pane,reverse) {
 					firstID=params.id;
 					//alert("firstID=" + firstID)
 				}
-				pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));
-				pane.reinitialise();                	 
+				scrollto=$('#'+pane_id+' .message-'+params.id);
+				pane.reinitialise(); 
+				if(scrollto.length)
+				{	
+					pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));
+				}
+				               	 
    	};    
             
             

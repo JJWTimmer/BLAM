@@ -323,6 +323,13 @@ class BLAM {
         $ticket->becomeParent();
     }
  
+ 		public static function getAutotext(){
+        $autotext = new Autotext(array());
+       $autotexts = $autotext->get();
+        return $autotexts;
+    }
+ 
+ 
  		public static function confirmNotification($ticket_id,$update_id,$type){
         switch($type){
         case 'message':	

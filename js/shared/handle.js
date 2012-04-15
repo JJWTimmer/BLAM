@@ -46,13 +46,13 @@ function Handle (pane) {
                 
                 var markup_group;
                 var markup_handle;
-                $('option', $('#autotext_Handle')).remove();
+                //$('option', $('#autotext_Handle')).remove();
                 //check to see if this select actually exists (only exists in logging)
                 //Maybe make new function for this? (load handles (from memory?) for select?)
-                if($('#autotext_Handle').length != 0)
-                {
-                	var autotext_options = $('#autotext_Handle').attr('options');
-                }
+                //if($('#autotext_Handle').length != 0)
+                //{
+                //	var autotext_options = $('#autotext_Handle').attr('options');
+                //}
 
                 for(var i=0; i< r.length;i++){
                     if(r[i]){
@@ -71,10 +71,10 @@ function Handle (pane) {
                             markup_handle=general.render('handles',r[i]['handles'][j]);
                             pane.getContentPane().append(markup_handle);
                             
-                            if($('#autotext_Handle').length != 0)
-                						{
-                            	autotext_options[autotext_options.length] = new Option(r[i]['handles'][j].handle_name + ' - ' + r[i]['handles'][j].description);
-														}
+                            //if($('#autotext_Handle').length != 0)
+                						//{
+                            // 	autotext_options[autotext_options.length] = new Option(r[i]['handles'][j].handle_name + ' - ' + r[i]['handles'][j].description);
+														//}
                           }
                         }
                         

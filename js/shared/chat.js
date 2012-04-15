@@ -199,9 +199,13 @@ function Chat (pane,reverse) {
 				}
 				//if(reverse){}
         //else{pane.scrollToPercentY(100);}
-        pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));	
-				pane.reinitialise();                	 
-   	};
+				scrollto=$('#'+pane_id+' .message-'+params.id);
+				pane.reinitialise(); 
+				if(scrollto.length)
+				{	
+					pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));
+				}
+		};
     
     
     this.submitChat = function(chatText){

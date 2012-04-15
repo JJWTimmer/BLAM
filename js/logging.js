@@ -61,7 +61,7 @@ var logging = {
         });
         
         $('#autotextbutton').bind('click',function(){
-          $('#messagetext').insertAtCaret($('#autotext_Handle').val()+ ' ');
+          $('#messagetext').insertAtCaret($('#autotext').val()+ ' ');
         });
         
         // Using the defaultText jQuery plugin, included at the bottom:
@@ -117,6 +117,7 @@ var logging = {
 				feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback,'false',1);
 				feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback,'true',1);
 				display = new Display(logging.data.jspAPIDisplay);
+				autotext = new Autotext($('#autotext'));
 				
 				//function to implement clicking on message
         $('#MeldingenList .message').live('click', function(){
@@ -446,6 +447,7 @@ var logging = {
           ticket.getTickets();
           feedbackOpen.getFeedback();
           feedbackClosed.getFeedback();
+          autotext.fillAutotext();
           //get rid of ugly startdisplay
           logging.data.jspAPIDisplay.reinitialise();
         });

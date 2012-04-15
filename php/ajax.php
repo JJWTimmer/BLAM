@@ -17,6 +17,7 @@ require_once "classes/User.class.php";
 require_once "classes/Handle.class.php";
 require_once "classes/Group.class.php";
 require_once "classes/Update.class.php";
+require_once "classes/Autotext.class.php";
 require_once "classes/Reminder.class.php";
 
 session_name('BLAM');
@@ -203,6 +204,12 @@ try {
 		case 'becomeParentTicket':
             BLAM::checkLogged();
 			$response = BLAM::becomeParentTicket($_POST['id']);
+            // returns null or exception
+            break;
+		
+		case 'getAutotext':
+            BLAM::checkLogged();
+			$response = BLAM::getAutotext();
             // returns null or exception
             break;
 		

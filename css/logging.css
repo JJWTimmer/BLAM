@@ -181,18 +181,18 @@ p.label_checkbox_pair label{
     width:85%;
 }
 
-#autotext_Handle{
+#autotext{
     position: absolute;
     top:65%;
     left:5%;
-    width:20%;
+    width:40%;
     }
 
 
 #autotextbutton{
     position: absolute;
     top:65%;
-    left:30%;
+    left:60%;
     font-size:13px;
     height:29px;
     text-align:center;

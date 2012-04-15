@@ -13,8 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `blam`
 --
-CREATE DATABASE `blam` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `blam`;
+CREATE DATABASE `blam2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `blam2`;
 
 -- --------------------------------------------------------
 
@@ -158,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `parent_id` int(10) DEFAULT NULL,
   `message_id` int(10) NOT NULL,
   `status_id` int(10) DEFAULT NULL,
+  `assign` enum('--','UK','MK') NOT NULL,
   `title` varchar(45) NOT NULL,
   `text` text,
   `location` varchar(255) DEFAULT NULL,
@@ -222,3 +223,28 @@ INSERT INTO `users` (`id`, `username`, `password`, `role_id`, `avatar`, `logged_
 (1, 'Jasper', 'a08670ff00ab376dfca8a7542dcce81626b2b469', 3, '', 1, '2012-03-20 22:24:46'),
 (2, 'Anne', '213bf94d31b9b21100e4fb2b86bebb29a2d8bf5c', 3, '', 0, '2011-02-20 18:16:00'),
 (3, 'Martijn', '10ae63b69ae5ab71b07f9e64004a0207f53fea34', 3, '', 0, '2011-12-11 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `autotext`
+--
+
+CREATE TABLE IF NOT EXISTS `autotext` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `text` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `autotext`
+--
+
+INSERT INTO `autotext` (`id`, `text`) VALUES
+(1, 'meldt aankomst bij WP X'),
+(2, 'meldt WP X klaar voor eerste loper'),
+(3, 'Eerste loper heeft WP X gepasseerd om xx:yy'),
+(4, 'Laatste loper heeft WP X gepasseerd'),
+(5, 'Is WP X gepasseerd met X lopers voor zich'),
+(6, 'Stapt uit het voertuig en is tijdelijk niet bereikbaar'),
+(7, 'Is terug in het voertuig en is weer bereikbaar');
