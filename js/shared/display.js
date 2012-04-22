@@ -54,7 +54,10 @@ function Display (pane) {
                     	//updatefeedback.fillUpdate(ticket_id,$('p.list_item_ticketdetail_label_last_update'),$('#ticket_last_update'));
                     	//updatefeedback.fillFeedback(ticket_id,$('p.list_item_ticketdetail_label_last_feedback'),$('#ticket_last_feedback'));
                     	updatefeedback.fillUpdateFeedback(ticket_id);
-                    	user.fillSelect($('#owner'),r[0].wluser);
+                    	if(r[0].status!='Nieuw')
+                    	{
+                    		user.fillSelect($('#owner'),r[0].wluser);
+                    	}
                     }
                     else
                     {

@@ -125,7 +125,7 @@ class BLAM {
         $options = array(
         				'first_id'   => $msg_id,
                 'since'     => $timestamp_last_update,
-                'limit_paging' => 5
+                'limit_paging' => 20
                 );
         $messages = $msg->get($options);
       	return $messages;
@@ -165,7 +165,7 @@ class BLAM {
 
     public static function getTicketList($recursive, $first_id, $timestamp_last_update, $status) {
         $ticket = new Ticket(array());
-        $limit_paging = 5;
+        $limit_paging = 20;
         $tickets = $ticket->get($recursive, $first_id, $timestamp_last_update, $status, $limit_paging);
         return $tickets;
     }
@@ -184,7 +184,7 @@ class BLAM {
     // returns array (integer id,	integer ticket_id, string Title, Datetime called, Datetime created, Datetime modified) updates or exception
     public static function getUpdateList($type, $called, $first_id, $timestamp_last_update) {
         $update = new Update(array());
-        $limit_paging = 5;
+        $limit_paging = 20;
         $updates = $update->getUpdateList($type, $called, $first_id, $timestamp_last_update, $limit_paging);
         return $updates;
     }
@@ -218,7 +218,7 @@ class BLAM {
         $options = array(
         				'first_id'   => $chat_id,
                 'since'     => $timestamp_last_update,
-                'limit_paging' => 5
+                'limit_paging' => 20
                 );
         $chats = $chatline->get($options);
         return $chats;
@@ -267,7 +267,8 @@ class BLAM {
     public static function createUpdate($ticket_id, $message){
         $update = new Update(array(
             'ticket_id' => $ticket_id,
-			'type' => 'update',
+            'user_id' => $_SESSION['user']['id'],
+						'type' => 'update',
             'message' => $message
         ));
         $id = $update->create();
@@ -277,7 +278,8 @@ class BLAM {
     public static function createFeedback($ticket_id, $message){
         $update = new Update(array(
             'ticket_id' => $ticket_id,
-			'type' => 'feedback',
+            'user_id' => $_SESSION['user']['id'],
+						'type' => 'feedback',
             'message' => $message
         ));
         $id = $update->create();
@@ -287,6 +289,7 @@ class BLAM {
 		public static function createAddition($ticket_id, $message){
         $update = new Update(array(
             'ticket_id' => $ticket_id,
+            'user_id' => $_SESSION['user']['id'],
 						'type' => 'addition',
             'message' => $message
         ));
@@ -300,6 +303,7 @@ class BLAM {
 		public static function createAnswer($ticket_id, $message){
         $update = new Update(array(
             'ticket_id' => $ticket_id,
+            'user_id' => $_SESSION['user']['id'],
 						'type' => 'answer',
             'message' => $message
         ));
@@ -331,35 +335,38 @@ class BLAM {
  
  
  		public static function confirmNotification($ticket_id,$update_id,$type){
-        switch($type){
-        case 'message':	
-        	//get id for message from somewhere, not from client
-        	$msg = new Message(array('ticket_id'	=> $ticket_id));
-					$ticket = new Ticket(array('id' => $ticket_id));
-					
-					$msg->clearNotification();	
-					$ticket->clearNotification();					
-        break;
+        $ticket = new Ticket(array('id' => $ticket_id));
+        $output = $ticket->getOwner();					
+        $owner = $output[0]['wluser'];
         
-        case 'addition':	
-        	$update = new Update(array('id' => $update_id));
-        	$ticket = new Ticket(array('id' => $ticket_id));
-        	
-        	$update->clearNotification();
-        	$ticket->clearNotification();
-        break;
+        if($owner==$_SESSION['user']['username']){
+        	switch($type){
+        		case 'message':	
+        			//get id for message from somewhere, not from client
+        			$msg = new Message(array('ticket_id'	=> $ticket_id));				
+						
+							$ticket->clearNotification();
+							$msg->clearNotification();
+        		break;
         
-        case 'answer':	
-        	$update = new Update(array('id' => $update_id));
-        	$ticket = new Ticket(array('id' => $ticket_id));
-        	
-        	$update->clearNotification();
-        	$ticket->clearNotification();
-        break;			
+        		case 'addition':	
+        			$update = new Update(array('id' => $update_id));
+        	        	
+        			$ticket->clearNotification();
+        			$update->clearNotification();
+        		break;
+        
+        		case 'answer':	
+        			$update = new Update(array('id' => $update_id));
+        	        	
+        			$ticket->clearNotification();
+        			$update->clearNotification();
+         		break;			
         			
-        default:
-						throw new Exception('Wrong type for notification');
-        }       
+        		default:
+							throw new Exception('Wrong type for notification');
+        	}
+        }
     }
     
     // returns MessageId or exception

@@ -4,36 +4,35 @@
 	position:relative;
 }
 
+#logo{
+	height:400px;
+	position:absolute;
+	left:-200px;
+	top: -100px;
+	width:600px;
+}
+
 #leftLink{
 	height:50px;
 	position:absolute;
 	left:-200px;
-	top:0 px;
+	top:400px;
 	width:250px;
 }
 #middleLink{
 	height:50px;
 	position:absolute;
     left:0px;
-	top:0 px;
+	top:400px;
 	width:250px;
 }
 #rightLink{
 	height:50px;
 	position:absolute;
 	left:200px;
-	top:0 px;
+	top:400px;
 	width:250px;
 }
-
-#reallyrightLink{
-	height:50px;
-	position:absolute;
-	left:400px;
-	top:0 px;
-	width:250px;
-}
-
 
 /* Main chat container */
 

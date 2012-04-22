@@ -35,10 +35,13 @@ height:100%;
 
 #WL-Chat
 {
-  padding: 25px 2px 35px 2px;
+  padding: 25px 2px 40px 2px;
 }
+
 #Chattext{
 width:100%;
+resize: none;
+height: 30px;
 }
 
 #Chatsubmit{

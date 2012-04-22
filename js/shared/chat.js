@@ -201,7 +201,8 @@ function Chat (pane,reverse) {
         //else{pane.scrollToPercentY(100);}
 				scrollto=$('#'+pane_id+' .message-'+params.id);
 				pane.reinitialise(); 
-				if(scrollto.length)
+				//check if element exists and whether scrollbar is at top/bottom;
+				if(scrollto.length && ((reverse==1 && pane.getPercentScrolledY()==0)||(reverse==0 && pane.getPercentScrolledY()>=0.9)))
 				{	
 					pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));
 				}

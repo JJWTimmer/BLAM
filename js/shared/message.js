@@ -164,8 +164,8 @@ function Message (pane,reverse) {
 
         var d = new Date();
 
-        if(params.created) {
-          params.time = general.stripToTime(params.created);
+        if(params.modified) {
+          params.time = general.stripToTime(params.modified);
         }
         else
         {
@@ -228,7 +228,7 @@ function Message (pane,reverse) {
 				}
 				scrollto=$('#'+pane_id+' .message-'+params.id);
 				pane.reinitialise(); 
-				if(scrollto.length)
+				if(scrollto.length && ((reverse==1 && pane.getPercentScrolledY()==0)||(reverse==0 && pane.getPercentScrolledY()>=0.9)))
 				{	
 					pane.scrollToElement($('#' + pane_id + ' .message-'+params.id));
 				}
@@ -248,7 +248,7 @@ function Message (pane,reverse) {
                     text    : messagetext.replace(/</g,'&lt;').replace(/>/g,'&gt;'),
                     ticket_id  : TicketBool
                 };
-
+						//alert(params.avatar);
             // Using our addMessageLine method to add the message
             // to the screen immediately, without waiting for
             // the AJAX request to complete:

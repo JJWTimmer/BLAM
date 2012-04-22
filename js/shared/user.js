@@ -7,22 +7,22 @@ function User (pane) {
 	var role;
 	var TimeOut = null;	
   	
-  	this.setUser = function(username,avatar,role){
-  		self.username=username;
-  		self.avatar=avatar;
-  		self.role=role;
+  	this.setUser = function(username_var,avatar_var,role_var){
+  		username=username_var;
+  		avatar=avatar_var;
+  		role=role_var;		
   	};
   	
   	this.getUsername = function(){
-  		return self.username;
+  		return username;
   	};
   	
   	this.getAvatar = function(){
-  		return self.avatar;
+  		return avatar;
   	};
   	
   	this.getRole = function(){
-  		return self.role;
+  		return role;
   	};
   
 		this.getUsers = function(){
@@ -107,23 +107,30 @@ function User (pane) {
       if(!r.error)
       {
         if(selectOption){
-          selectElement.empty()
+          selectElement.empty();
           var owner_options = selectElement.attr('options');
           var index_owner;
           owner_options[0] = new Option("unclaim",-1);
             for(var i=0; i< r.length;i++){
               if(r[i]){
-              {
+              	//only add WL users TODO:may be neater to use php to filter for this
+              	if(r[i].role=="WL" || r[i].role=="Admin")
+              		{
                     if(r[i].username==selectOption){
                       index_owner=owner_options.length;
                     }
-                  owner_options[owner_options.length] = new Option(r[i].username,r[i].id);
+                  	owner_options[owner_options.length] = new Option(r[i].username,r[i].id);
                   }
               }
             }
             if(index_owner)selectElement[0].selectedIndex=index_owner;
-            
         }
+        else
+        {
+      		selectElement.empty();
+          var owner_options = selectElement.attr('options');
+          owner_options[0] = new Option("",-1);
+      	}
       }
       else
         {

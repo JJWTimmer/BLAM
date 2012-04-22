@@ -41,7 +41,7 @@ class ChatLine extends BLAMBase {
         			else{
             		$since = DB::esc($options['since']);
             			$q .= ($since ? " WHERE t.created >= '".$since."'" : "");	
-                	$q.=" ORDER BY t.id DESC LIMIT 5) t";
+                	$q.=" ORDER BY t.id DESC LIMIT 20) t";
                 	$q.=" ORDER BY id ASC";
           		}
       				$results = DB::query($q);

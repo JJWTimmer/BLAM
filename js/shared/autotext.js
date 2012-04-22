@@ -13,7 +13,7 @@ function Autotext (pane) {
           {         
             pane.empty()
             var autotext_options = pane.attr('options');
-            autotext_options[0] = new Option("selecteer text");
+            autotext_options[0] = new Option("selecteer tekst","");
               for(var i=0; i< r.length;i++){
                 if(r[i]){
                     

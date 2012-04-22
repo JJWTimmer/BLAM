@@ -61,7 +61,7 @@ var logging = {
         });
         
         $('#autotextbutton').bind('click',function(){
-          $('#messagetext').insertAtCaret($('#autotext').val()+ ' ');
+          $('#messagetext').insertAtCaret($('#autotext').val());
         });
         
         // Using the defaultText jQuery plugin, included at the bottom:
@@ -251,11 +251,14 @@ var logging = {
         });
 		
 				$('#add_ticket_additionbutton').bind('click',function(){
-						$.tzPOST('createAddition',{ticket_id:logging.data.selectedticket,message:$('#messagetext').val()},function(r){
-              if(r.error){
-                    general.displayError(r.error);
-                }
-                else    {
+						if($('#messagetext').val().length>0)
+						{
+							$.tzPOST('createAddition',{ticket_id:logging.data.selectedticket,message:$('#messagetext').val()},function(r){
+              	if(r.error){
+                	    general.displayError(r.error);
+                	}
+                	else
+                	{
                 	message.submitMessage($('#messagetext').val(),false);
                   $('#messagetext').val('');
                   $('#submitbutton').show();
@@ -265,8 +268,13 @@ var logging = {
                   logging.data.selectedticket=0;
                   logging.data.TicketUpdateMode=0;
                   ticket.refreshTickets();
-                }
-            });  					
+                	}
+            	});  					
+  					}
+  					else
+  					{
+  						alert("geen tekst ingevuld");
+  					}
   			});			
 		
 				//function to implement clicking on close feedback
@@ -282,6 +290,8 @@ var logging = {
         });
 		
 				$('#answer_feedbackbutton').bind('click',function(){
+						if($('#messagetext').val().length>0)
+						{
 						$.tzPOST('createAnswer',{ticket_id:logging.data.selectedticket,message:$('#messagetext').val()},function(r){
               if(r.error){
                     general.displayError(r.error);
@@ -302,7 +312,12 @@ var logging = {
              			logging.data.selectedfeedback=0;
                   logging.data.FeedbackUpdateMode=0;
                 }
-            });  					
+            	});
+          	}
+          	else
+          	{
+          	alert("geen tekst ingevuld");
+          	}  					
   			});
 
 				//function to implement clicking on dynamic element groups

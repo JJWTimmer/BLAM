@@ -5,6 +5,7 @@
 class Update extends BLAMBase {
 	
 	public $id = '';
+	public $user_id = '';
 	public $ticket_id = '';
 	public $type = '';
 	public $message = '';
@@ -13,17 +14,16 @@ class Update extends BLAMBase {
     public $created = '';
 
 	public function create() {
-
+		if ($this->type == 'update' || $this->type == 'feedback') {
         $q = "
-			INSERT INTO updates (ticket_id, type, message, updated, created)
-			VALUES (
-				" . DB::esc($this->ticket_id) . ",
-				'" .DB::esc($this->type) . "',
-                '" . DB::esc($this->message) . "',
-                '1',
-                '" . date('Y-m-d G:i:s') . "'
-            )
-            ";
+			INSERT INTO updates (ticket_id, type, message, updated, created, user_id)
+			VALUES (" . DB::esc($this->ticket_id) . ",'" .DB::esc($this->type) . "','" . DB::esc($this->message) . "','0','" . date('Y-m-d G:i:s') . "'," . DB::esc($this->user_id) . ")";
+		}
+		elseif ($this->type == 'addition' || $this->type == 'answer') {
+        $q = "
+			INSERT INTO updates (ticket_id, type, message, updated, created, user_id)
+			VALUES (" . DB::esc($this->ticket_id) . ",'" .DB::esc($this->type) . "','" . DB::esc($this->message) . "','1','" . date('Y-m-d G:i:s') . "'," . DB::esc($this->user_id) . ")";
+		}
 
 		DB::query($q);
         
@@ -35,21 +35,25 @@ class Update extends BLAMBase {
   public function get($id, $ticket_id, $type = 'all') {
         if (is_string($type) && $type == 'all') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.message, u.called, user.username AS called_by, u.created, u.updated
+                SELECT u.id, u.ticket_id, u.type, u.message, u.called, user.username AS called_by, user2.username AS creator, u.created, u.updated
                 FROM updates AS u
                 LEFT OUTER JOIN users user ON user.id = u.called_by
+                LEFT OUTER JOIN users user2 ON user2.id = u.user_id
                 WHERE u.ticket_id = " . DB::esc($ticket_id)
                 . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'update') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, u.created
+                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, user.username AS creator, u.created
                 FROM updates AS u
+                LEFT OUTER JOIN users user ON user.id = u.user_id
                 WHERE type = 'update' AND u.ticket_id = " . DB::esc($ticket_id)
                 . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'feedback') {
             $results = DB::query("
-                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, u.created
+                SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, user2.username AS creator, u.created
                 FROM updates AS u
+                LEFT OUTER JOIN users user ON user.id = u.called_by
+                LEFT OUTER JOIN users user2 ON user2.id = u.user_id
                 WHERE u.type = 'feedback' AND u.ticket_id = " . DB::esc($ticket_id)
                 . " LIMIT 0,100");
         /* Retrieve single update/feedback*/

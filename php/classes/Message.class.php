@@ -43,7 +43,7 @@ class Message extends BLAMBase {
         	else{
             		$since = DB::esc($options['since']);
             		$q .= ($since ? " WHERE msg.modified >= '".$since."'" : "");	
-                $q.=" ORDER BY msg.id DESC LIMIT 5) t";
+                $q.=" ORDER BY msg.id DESC LIMIT 20) t";
                 $q.=" ORDER BY id ASC";
           }
       		$results = DB::query($q);

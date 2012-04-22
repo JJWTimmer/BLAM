@@ -24,6 +24,8 @@
         <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
         <script type="text/javascript" src="js/mwheelIntent.js"></script>
         <script type="text/javascript" src="js/thickbox.js"></script>
+				<script type="text/javascript" src="js/jquery.elastic.js"></script>
+
 
         <!-- general javascript -->
         <script type="text/javascript" src="js/blam.js"></script>
@@ -66,7 +68,8 @@
                         <div id="WL-ChatHeader" class="header"><p>WL-Chat</p></div>
                         <div id="WL-ChatList" class="list rounded"></div>
                         <form id="submitForm" method="post" action="">
-                            <div class="chat_input"><input type="text" id="Chattext" name="text" class="rounded" maxlength="255" /></div>
+                            <div class="chat_input"><textarea id="Chattext" name="text" rows="1" cols="40"></textarea></div>
+                            
                             <input type="submit" class="blueButton" id="Chatsubmit"value="Submit" />
                         </form>
                   </div>

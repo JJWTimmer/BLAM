@@ -32,7 +32,8 @@ var ticketing = {
 
     var working = false;
     
-
+	$('#Chattext').elastic();
+	
     // Converting the #MeldingenList, #HandlesList divs into a jScrollPane,
     // and saving the plugin's API in logging.data:
 
@@ -230,7 +231,7 @@ var ticketing = {
               {
               $('#Updates').css('display','block');
               $('#Meldingen').css('display','none');
-              $('#updates_toggle_button').attr('value','Updatelijst uit');
+              $('#updates_toggle_button').attr('value','Meldingen aan');
               ticketing.data.UpdatesVisible=1;
               updatefeedback.setPane(ticketing.data.jspAPIUpdates);
               
@@ -285,7 +286,9 @@ var ticketing = {
           	{
           		working = true;
 	            chat.submitChat(text);
+	            $('#Chattext').css('height', 'auto');
     				}
+    				    				
     				working = false;
     				return false;
         });
@@ -377,8 +380,9 @@ var ticketing = {
               	}
             	});
             }
-
-            if(!($('#ticket_status').val()=="Nieuw") && !($('#ticket_status').val()=="Subticket")){
+						
+            if(!($('#ticket_status').val()=="Nieuw") && !($('#ticket_status').val()=="Subticket"))
+            {
               $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
                 if(r==null){ //display.clearDisplay();
                 }
@@ -403,8 +407,8 @@ var ticketing = {
                 general.displayError(r.error);
               }
             });
-
-            if(!($('#ticket_status').text()=="Nieuw") && !($('#ticket_status').text()=="Subticket")){
+						
+						if(!($('#ticket_status').val()=="Nieuw") && !($('#ticket_status').val()=="Subticket")){
               $.tzPOST('changeTicketOwner',{id:ticketing.data.selectedticket,user_id:$('#owner').val()},function(r){
                 if(r==null){}
                 else

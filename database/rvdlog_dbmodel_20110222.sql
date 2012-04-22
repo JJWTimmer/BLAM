@@ -191,10 +191,12 @@ CREATE TABLE IF NOT EXISTS `updates` (
   `called_by` int(10) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
+  `user_id` int(10) NOT NULL,
   `updated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_updates_ticket` (`ticket_id`),
-  KEY `FK_updates_operator` (`called_by`)
+  KEY `FK_updates_operator` (`called_by`),
+  KEY `FK_updates_user` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------

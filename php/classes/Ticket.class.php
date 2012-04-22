@@ -148,7 +148,7 @@ class Ticket extends BLAMBase {
 					{
 						$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped    
 					}
-				$q.= " ORDER BY t.id DESC LIMIT 5) t";
+				$q.= " ORDER BY t.id DESC LIMIT 20) t";
 				$q.= " ORDER BY id ASC";
 				}		
 				else
@@ -291,6 +291,24 @@ class Ticket extends BLAMBase {
         if (!$res AND !$res2) throw new Exception(DB::getMySQLiObject()->error);
     }
     
+    
+    public function getOwner() {
+    	
+      $q = "SELECT u.username AS wluser FROM tickets AS t LEFT OUTER JOIN users AS u ON t.user_id = u.id WHERE t.id = " . DB::esc($this->id);
+      $results = DB::query($q);
+      
+      
+      if (!$results)
+           throw new Exception(DB::getMySQLiObject()->error);
+        
+        $output = null;
+        if ($results) while ($output[] = mysqli_fetch_assoc($results));
+        if (!is_null($output) && end($output) == null) array_pop($output);
+    
+        return $output;
+		}
+  	
+    
     public function setNotification() {
         $q = "UPDATE tickets SET updated = 1, modified = '".date('Y-m-d G:i:s')."' WHERE id = ".DB::esc($this->id)."";
         $res = DB::query($q);
@@ -298,9 +316,27 @@ class Ticket extends BLAMBase {
     }
     
     public function clearNotification() {
-        $q = "UPDATE tickets SET updated = 0, modified = '".date('Y-m-d G:i:s')."' WHERE id = ".DB::esc($this->id)."";
-        $res = DB::query($q);
-        if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+        $count_upd=0;
+        $q_upd = "select count(updated) from updates where ticket_id = ".DB::esc($this->id)." AND updated=1";
+        $res_upd = DB::query($q_upd);
+        if ($res_upd){ 
+        	$count_row_upd = mysqli_fetch_assoc($res_upd);
+        	$count_upd= $count_row_upd['count(updated)'];
+      	}
+        
+        $count_mes=0;
+        $q_mes = "select count(updated) from messages where ticket_id = ".DB::esc($this->id)." AND updated=1";
+        $res_mes = DB::query($q_mes);
+        if ($res_mes){ 
+        	$count_row_mes = mysqli_fetch_assoc($res_mes);
+        	$count_mes= $count_row_mes['count(updated)'];
+      	}
+
+        if(($count_upd+$count_mes)==1){
+        	$q_clear = "UPDATE tickets SET updated = 0, modified = '".date('Y-m-d G:i:s')."' WHERE id = ".DB::esc($this->id)."";
+        	$res = DB::query($q_clear);
+        	if (!$res) throw new Exception(DB::getMySQLiObject()->error);
+      	}
     }
     
 }

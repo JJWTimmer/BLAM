@@ -225,7 +225,7 @@ var general = {
                     '</div>',
                       '<div class="feedback_item rounded">',
                         '<p>',params.message,'</p>',
-                        '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
+                        '<p class="updatefeedback_time"> door:',params.creator,' gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
                       '</div>',
                     '</div>'
                 ];
@@ -239,7 +239,7 @@ var general = {
                     '</div>',
                       '<div class="feedback_item rounded">',
                         '<p>',params.message,'</p>',
-                        '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),' afgerond op:',general.stripToTime(params.called),' door:',params.called_by,'</p>',
+                        '<p class="updatefeedback_time">  door:',params.called_by,' gecre&euml;erd op: ',general.stripToTime(params.created),' afgerond op:',general.stripToTime(params.called),'</p>',
                       '</div>',
                     '</div>'
                 ];
@@ -253,7 +253,7 @@ var general = {
                     '</div>',
                     '<div class="update_item rounded" id="',params.id,'">',
                     '<p>',params.message,'</p>',
-                    '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
+                    '<p class="updatefeedback_time"> door:',params.creator,' gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
                     '</div>',
                 '</div>'
                 ];
@@ -270,7 +270,7 @@ var general = {
                     '</div>',
                     '<div class="addition_item rounded" id="',params.id,'">',
                     '<p>',params.message,'</p>',
-                    '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
+                    '<p class="updatefeedback_time"> door:',params.creator,' gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
                     '</div>',
                 '</div>'
                 ];
@@ -287,7 +287,7 @@ var general = {
                     '</div>',
                     '<div class="answer_item rounded" id="',params.id,'">',
                     '<p>',params.message,'</p>',
-                    '<p class="updatefeedback_time"> gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
+                    '<p class="updatefeedback_time"> door:',params.creator,' gecre&euml;erd op: ',general.stripToTime(params.created),'</p>',
                     '</div>',
                 '</div>'
                 ];
