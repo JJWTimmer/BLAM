@@ -1,36 +1,35 @@
 #linkContainer{
 	width:510px;
-	height:50px;
+	height:450px;
 	position:relative;
 }
 
 #logo{
 	height:400px;
 	position:absolute;
-	left:-200px;
+	left:-100px;
 	top: -100px;
-	width:600px;
 }
 
 #leftLink{
 	height:50px;
 	position:absolute;
 	left:-200px;
-	top:400px;
+	top:300px;
 	width:250px;
 }
 #middleLink{
 	height:50px;
 	position:absolute;
     left:0px;
-	top:400px;
+	top:300px;
 	width:250px;
 }
 #rightLink{
 	height:50px;
 	position:absolute;
 	left:200px;
-	top:400px;
+	top:300px;
 	width:250px;
 }
 
