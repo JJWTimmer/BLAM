@@ -101,7 +101,7 @@ try {
                 $text="There is no spoon";
                 break;
 
-                case 5:
+                case 6:
                 $text="Do you hear that, Mr. Anderson? That is the sound of inevitability.";
                 break;
 

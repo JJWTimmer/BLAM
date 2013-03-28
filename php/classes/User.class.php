@@ -7,6 +7,7 @@ class User extends BLAMBase {
     public $password = '';
     public $newpw = '';
     public $role = '';
+    public $role_id = '';
     public $avatar = '';
 	
 	public function create() {
@@ -16,7 +17,7 @@ class User extends BLAMBase {
 			VALUES (
 				'" . DB::esc($this->username) . "',
 				'" . hash('sha1', DB::esc($this->password)) . "',
-                '" . DB::esc($this->role) . "'
+                '" . DB::esc($this->role_id) . "'
             )
             ");
             
@@ -29,11 +30,14 @@ class User extends BLAMBase {
 	
 		DB::query("
                 UPDATE users
-                SET username='".DB::esc($this->username)."', " .
+                INNER JOIN roles
+                ON roles.id = users.role_id
+                SET users.username='".DB::esc($this->username)."', " .
                 (!empty($this->password) ? "password='".DB::esc($this->password)."', " : "") .
-                "avatar='".DB::esc($this->avatar)."', 
-                role_id='".DB::esc($this->role_id)."' 
-                WHERE id=".DB::esc($this->id)
+                "users.avatar='".DB::esc($this->avatar)."', 
+                users.role_id=roles.id".
+                "WHERE users.id=".DB::esc($this->id).
+                (empty($this->role) ? "AND roles.id=".DS::esc($this.role_id) : "AND roles.name='".DS::esc($this.role_id)."'")
                 );	
 	}	
     
@@ -47,8 +51,8 @@ class User extends BLAMBase {
 	}	
     
 	public function delete() {
-	
-		DB::query("DELETE FROM users WHERE id=".DB::esc($this-id));	
+        print_r($this->id);
+		DB::query("DELETE FROM users WHERE id=".DB::esc($this->id));	
 	}
     
     public function login() {

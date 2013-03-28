@@ -5,7 +5,7 @@
 
 body{
   height:100%;
-  width:100%
+  width:100%;
   color:#111;
   background:url('../img/page_bg_grey.jpg') repeat-x #323232;
   font:15px Calibri,Arial,sans-serif;
@@ -20,7 +20,7 @@ body{
 
 /* standard format */
 .blueButton {
-    padding: 2px 10px;
+    padding: 2px 5px;
     display: inline;
     /*background: #777 url(img/button.png) repeat-x bottom;*/
     border: none;
@@ -34,9 +34,8 @@ body{
     background-color: #2c6da0;
     }
 .blueButton:hover {
-    background-position: 0 center;
-    background-color: #1c5d90;
-    }
+    background: #1c5d90 0 center;
+}
 
 
 .holder{
@@ -125,7 +124,7 @@ overflow over text, could also use min-width (either way screwed;-))*/
 .message .text-span{
     color:#444444;
     font-size:15px;
-    align:left;
+    text-align:left;
 }
 
 .message img{
@@ -707,7 +706,7 @@ position:relative;
 #LoginWindow input{
     background:url('../img/input_bg.jpg') repeat-x #dcdcdc;
     height:26px;
-    text_align:center;
+    text-align:center;
     font:13px/26px Calibri,Arial,sans-serif;
     color:#777;
     border:1px solid;
@@ -777,7 +776,7 @@ a.logoutButton:hover{
 
 
 .jspVerticalBar{
-    float right;
+    float: right;
     width:20px;
     background:none;
     z-index:100;

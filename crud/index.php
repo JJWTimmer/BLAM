@@ -14,7 +14,7 @@
     </title><!-- jQuery css first, so we can override later -->
     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="../css/jquery.jscrollpane.css" /><!-- second the general css -->
-    <link rel="stylesheet" type="text/css" href="../css/rvdlog.css" /><!-- last the page specific css -->
+    <link rel="stylesheet" type="text/css" href="../css/blam.css" /><!-- last the page specific css -->
     <link rel="stylesheet" type="text/css" href="../css/crud.css" /><!-- first all the libraries, jquery first is needed for the rest -->
 
     <script type="text/javascript" src="../js/jquery.js">
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../js/mwheelIntent.js">
 </script><!-- general javascript -->
 
-    <script type="text/javascript" src="../js/rvdlog.js">
+    <script type="text/javascript" src="../js/blam.js">
 </script><!-- page specific javascript -->
 
     <script type="text/javascript" src="../js/crud.js">

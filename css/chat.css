@@ -81,9 +81,8 @@
 .chat{
 	background:url('../img/chat_line_bg.jpg') repeat-x #d5d5d5;
 	min-height:24px;
-	padding:6px;
 	border:1px solid #FFFFFF;
-	
+
 	padding:8px 6px 4px 37px;
 	position:relative;
 	margin:0 10px 10px 0;

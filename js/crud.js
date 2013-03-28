@@ -23,7 +23,7 @@ var crud = {
     // We use the working variable to prevent multiple form submissions:
     var working = false;
     
-    // crud a person into rvdlog:
+    // crud a person into blam:
     $('#loginForm').submit(function(){
         if (working) return false;
         working = true;

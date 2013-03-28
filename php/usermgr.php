@@ -36,12 +36,12 @@ try {
     BLAM::checkLogged();
 
     if ($_GET['action'] == 'new') {
-        if (!$_SESSION['user']['role_id'] == 3) die ("niet genoeg rechten");
+        if (!$_SESSION['user']['role'] == 'Admin') die ("niet genoeg rechten");
         if (!empty($_POST['username']) && $_POST['password1'] == $_POST['password2'] ) {
             $usr = new User(array(
                     'username' => $_POST['username'],
                     'password' => $_POST['password1'],
-                    'role' => $_POST['role']
+                    'role_id' => $_POST['role_id']
                 ));
             $id = $usr->create();
 
@@ -50,7 +50,8 @@ try {
             $msg = "geen naam of passwords matchen niet";
         }
     } elseif ($_GET['action'] == 'delete') {
-        if (!$_SESSION['user']['role_id'] == 3) die ("niet genoeg rechten");
+        if (!$_SESSION['user']['role'] == 'Admin') die ("niet genoeg rechten");
+        print_r($_GET['id']);
         if (is_numeric($_GET['id'])) {
             $usr = new User(array(
                     'id' => $_GET['id']
@@ -88,20 +89,20 @@ try {
                 $currwidth = imagesx($simg);   // Current Image Width 
                 $currheight = imagesy($simg);   // Current Image Height 
                 if ($currheight > $currwidth) {   // If Height Is Greater Than Width 
-                 $zoom = $twidth / $currheight;   // Length Ratio For Width 
-                 $newheight = $theight;   // Height Is Equal To Max Height 
-                 $newwidth = $currwidth * $zoom;   // Creates The New Width 
+                    $zoom = $twidth / $currheight;   // Length Ratio For Width 
+                    $newheight = $theight;   // Height Is Equal To Max Height 
+                    $newwidth = $currwidth * $zoom;   // Creates The New Width 
                 } else {    // Otherwise, Assume Width Is Greater Than Height (Will Produce Same Result If Width Is Equal To Height) 
-                $zoom = $twidth / $currwidth;   // Length Ratio For Height 
-                $newwidth = $twidth;   // Width Is Equal To Max Width 
-                $newheight = $currheight * $zoom;   // Creates The New Height 
+                    $zoom = $twidth / $currwidth;   // Length Ratio For Height 
+                    $newwidth = $twidth;   // Width Is Equal To Max Width 
+                    $newheight = $currheight * $zoom;   // Creates The New Height 
                 } 
                 $dimg = imagecreate($newwidth, $newheight);   // Make New Image For Thumbnail 
                 imagetruecolortopalette($simg, false, 256);   // Create New Color Pallete 
                 $palsize = ImageColorsTotal($simg); 
                 for ($i = 0; $i < $palsize; $i++) {   // Counting Colors In The Image 
-                $colors = ImageColorsForIndex($simg, $i);   // Number Of Colors Used 
-                ImageColorAllocate($dimg, $colors['red'], $colors['green'], $colors['blue']);   // Tell The Server What Colors This Image Will Use 
+                    $colors = ImageColorsForIndex($simg, $i);   // Number Of Colors Used 
+                    ImageColorAllocate($dimg, $colors['red'], $colors['green'], $colors['blue']);   // Tell The Server What Colors This Image Will Use 
                 } 
                 imagecopyresized($dimg, $simg, 0, 0, 0, 0, $newwidth, $newheight, $currwidth, $currheight);   // Copy Resized Image To The New Image (So We Can Save It) 
                 imagejpeg($dimg, "$tdir" . $_SESSION['user']['username'] . '.jpg');   // Saving The Image 
@@ -122,8 +123,8 @@ try {
                     <label for="username">Username: </label><input type="text" id="username" name="username" />
                     <label for="password2">Pw2: </label><input type="password" id="password1" name="password1" />
                     <label for="password1">pw1: </label><input type="password" id="password2" name="password2" />
-                    <label for="role">rol: </label>
-                    <select name="role">
+                    <label for="role_id">rol: </label>
+                    <select name="role_id">
                         <option value="1">RVD</option>
                         <option value="2">WL</option>
                         <option value="3">Admin</option>
