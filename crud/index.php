@@ -10,7 +10,7 @@
     <meta name="generator" content="HTML Tidy for Windows (vers 14 February 2006), see www.w3.org" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>
-      RVD log - Ajax test
+      BLAM - Ajax test
     </title><!-- jQuery css first, so we can override later -->
     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="../css/jquery.jscrollpane.css" /><!-- second the general css -->

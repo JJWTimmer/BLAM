@@ -39,9 +39,9 @@ var scheduling = {
 
         //setting up message 'class'
         //message = new Message(logging.data.jspAPIMeldingen);
-        var user = new User("TopBar");
-        var dayplanner = new DayPlanner(scheduling.data.jspAPISchedule);
-        var display = new Display(scheduling.data.jspAPITaskDetails);
+        user = new User("TopBar");
+        dayplanner = new DayPlanner(scheduling.data.jspAPISchedule);
+        display = new Display(scheduling.data.jspAPITaskDetails);
 
         $('#DaySelect .calendar_selectleft').live('click', function () {
             var selectedDate = dayplanner.getCurrentDate();

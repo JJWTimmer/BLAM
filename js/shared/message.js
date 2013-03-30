@@ -141,23 +141,23 @@ function Message(pane, reverse) {
 
     // The addMessageLine function adds a message entry to the page
     // uses pane to determine where to put messages
-    this.addMessageLine = function (params) {
+    this.addMessageLine = function (msg) {
 
-        if ((params.avatar == "") || (params.avatar == "NULL") || (params.avatar == null)) {
-            params.avatar = "unknown24x24.png"
+        if ((msg.avatar == "") || (msg.avatar == "NULL") || (msg.avatar == null)) {
+            msg.avatar = "unknown24x24.png"
         }
 
         var d = new Date();
 
-        if (params.modified) {
-            params.time = general.stripToTime(params.modified);
+        if (msg.modified) {
+            msg.time = general.stripToTime(msg.modified);
         }
         else {
-            params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+            msg.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
         }
 
-        var markup = general.render('messageLine', params),
-            exists = $('#' + pane_id + ' .message-' + params.id);
+        var markup = general.render('messageLine', msg);
+        var exists = $('#' + pane_id + ' .message-' + msg.id);
 
         if (exists.length) {
             if (reverse) {
@@ -171,7 +171,7 @@ function Message(pane, reverse) {
         else {
             //is this the first message? --> append it
             var messages = $('#' + pane_id + ' .message');
-            if (firstID == params.id && messages.length == 0) {
+            if (firstID == msg.id && messages.length == 0) {
                 pane.getContentPane().append(markup);
             }
             else {
@@ -179,7 +179,7 @@ function Message(pane, reverse) {
                 var closest;
                 var best_distance = 99;
                 $('#' + pane_id + ' .message').each(function (i) {
-                    var distance = Math.abs(parseInt($(this).attr('id')) - parseInt(params.id));
+                    var distance = Math.abs(parseInt($(this).attr('id')) - parseInt(msg.id));
                     if (distance < best_distance) {
                         closest = $(this);
                         best_distance = distance;
@@ -188,7 +188,7 @@ function Message(pane, reverse) {
 
                 if (closest) {
                     //alert("adding to closest ticket, ticket:" + params.id);
-                    if (parseInt(closest.attr('id')) > parseInt(params.id)) {
+                    if (parseInt(closest.attr('id')) > parseInt(msg.id)) {
                         if (reverse) {
                             closest.after(markup);
                         }
@@ -216,30 +216,32 @@ function Message(pane, reverse) {
                 }
             }
         }
-        if (params.id < firstID) {
-            firstID = params.id;
+        if (msg.id < firstID) {
+            firstID = msg.id;
             //alert("firstID=" + firstID)
         }
-        scrollto = $('#' + pane_id + ' .message-' + params.id);
+        scrollto = $('#' + pane_id + ' .message-' + msg.id);
         pane.reinitialise();
         if (scrollto.length && ((reverse == 1 && pane.getPercentScrolledY() == 0) || (reverse == 0 && pane.getPercentScrolledY() >= 0.9))) {
-            pane.scrollToElement($('#' + pane_id + ' .message-' + params.id));
+            pane.scrollToElement($('#' + pane_id + ' .message-' + msg.id));
         }
 
     };
 
 
-    this.submitMessage = function (messagetext, TicketBool) {
+    this.submitMessage = function (messagetext, TicketBool, belongsTo) {
         // Assigning a temporary ID to the chat:
-        var tempID = 't' + Math.round(Math.random() * 1000000),
+        var tempID = 't' + Math.round(Math.random() * 1000000);
 
-            params = {
-                id:tempID,
-                username:user.getUsername(),
-                avatar:user.getAvatar(),
-                text:messagetext.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
-                ticket_id:TicketBool
-            };
+        var msg = messagetext.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        var params = {
+            id:tempID,
+            username:user.getUsername(),
+            avatar:user.getAvatar(),
+            text:msg,
+            ticket_id:belongsTo
+        };
         //alert(params.avatar);
         // Using our addMessageLine method to add the message
         // to the screen immediately, without waiting for
@@ -258,21 +260,22 @@ function Message(pane, reverse) {
             var ticket_en = '';
         }
 
-        $.tzPOST('addMessage', {text:messagetext, ticket:ticket_en}, function (r) {
+        $.tzPOST('addMessage', {text:messagetext, ticket:ticket_en, ticket_id:belongsTo}, function (r) {
             if (!r.error) {
-                //empty input form textbox
-                $('#messagetext').val('');
-                if (inputcheckbox != undefined) {
-                    $('#ticket').attr('checked', false);
-                    ticket.refreshTickets();
-                    //temporarily not available
-                    ticket.getTickets();
-                }
+                    //empty input form textbox
+                    $('#messagetext').val('');
+                    if (inputcheckbox != undefined) {
+                        $('#ticket').attr('checked', false);
+                        ticket.refreshTickets();
+                        //temporarily not available
+                        ticket.getTickets();
+                    }
 
                 //remove old temporary message
                 $('div.message-' + tempID).remove();
                 //insert newly received ID
                 params['id'] = r.id;
+
                 self.addMessageLine($.extend({}, params));
             }
 

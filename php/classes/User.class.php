@@ -1,18 +1,20 @@
 <?php
 
-class User extends BLAMBase {
-	
+class User extends BLAMBase
+{
+
     public $id = '';
-	public $username = '';
+    public $username = '';
     public $password = '';
     public $newpw = '';
     public $role = '';
     public $role_id = '';
     public $avatar = '';
-	
-	public function create() {
-		
-		DB::query("
+
+    public function create()
+    {
+
+        DB::query("
 			INSERT INTO users (username, password, role_id)
 			VALUES (
 				'" . DB::esc($this->username) . "',
@@ -20,42 +22,46 @@ class User extends BLAMBase {
                 '" . DB::esc($this->role_id) . "'
             )
             ");
-            
+
         $this->id = DB::getMySQLiObject()->insert_id;
-		
-		return $this->id;
-	}
-	
-	public function update() {
-	
-		DB::query("
+
+        return $this->id;
+    }
+
+    public function update()
+    {
+
+        DB::query("
                 UPDATE users
                 INNER JOIN roles
                 ON roles.id = users.role_id
-                SET users.username='".DB::esc($this->username)."', " .
-                (!empty($this->password) ? "password='".DB::esc($this->password)."', " : "") .
-                "users.avatar='".DB::esc($this->avatar)."', 
-                users.role_id=roles.id".
-                "WHERE users.id=".DB::esc($this->id).
-                (empty($this->role) ? "AND roles.id=".DS::esc($this.role_id) : "AND roles.name='".DS::esc($this.role_id)."'")
-                );	
-	}	
-    
-    	
-	public function setAvatar() {
+                SET users.username='" . DB::esc($this->username) . "', " .
+                (!empty($this->password) ? "password='" . DB::esc($this->password) . "', " : "") .
+                "users.avatar='" . DB::esc($this->avatar) . "',
+                users.role_id=roles.id" .
+                "WHERE users.id=" . DB::esc($this->id) .
+                (empty($this->role) ? "AND roles.id=" . DS::esc($this . role_id) : "AND roles.name='" . DS::esc($this . role_id) . "'")
+        );
+    }
+
+
+    public function setAvatar()
+    {
         $q = "
                 UPDATE users
-                SET avatar='".DB::esc($this->avatar)."'
-                WHERE id=".DB::esc($this->id);
-		DB::query($q);	
-	}	
-    
-	public function delete() {
+                SET avatar='" . DB::esc($this->avatar) . "'
+                WHERE id=" . DB::esc($this->id);
+        DB::query($q);
+    }
+
+    public function delete()
+    {
         print_r($this->id);
-		DB::query("DELETE FROM users WHERE id=".DB::esc($this->id));	
-	}
-    
-    public function login() {
+        DB::query("DELETE FROM users WHERE id=" . DB::esc($this->id));
+    }
+
+    public function login()
+    {
         $user = false;
         try {
             $dbresult = DB::query("
@@ -64,47 +70,48 @@ class User extends BLAMBase {
                 WHERE username = '" . DB::esc($this->username) . "'
                 AND password = '" . hash('sha1', DB::esc($this->password)) . "'
                 ");
-            
+
             // remove unencrypted password
             unset($this->password);
-            
-            if ( $dbresult->num_rows == 1 ) {
+
+            if ($dbresult->num_rows == 1) {
 
                 $user = $dbresult->fetch_array();
-                $this->id       = $user['id'];
+                $this->id = $user['id'];
                 $this->username = $user['username'];
-                $this->role     = $user['role'];
-                $this->avatar   = $user['avatar'];
+                $this->role = $user['role'];
+                $this->avatar = $user['avatar'];
 
                 DB::query("
                     UPDATE users
                     SET logged_in = 1
                     WHERE id = " . DB::esc($this->id)
-                    );
+                );
             } else {
                 $user = false;
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $user = false;
         }
-		return $user;
+        return $user;
     }
-    
-    public function logout() {
+
+    public function logout()
+    {
         DB::query("
             UPDATE users
             SET logged_in = 0
             WHERE id = " . DB::esc($this->id)
-            );
+        );
     }
-    
-    public function changepw() {
-        $res = DB::query("SELECT * FROM users WHERE id = ".DB::esc($this->id)." AND password = '".sha1($this->password)."'");
+
+    public function changepw()
+    {
+        $res = DB::query("SELECT * FROM users WHERE id = " . DB::esc($this->id) . " AND password = '" . sha1($this->password) . "'");
         if (DB::rows() > 0) {
-            $q = "UPDATE users SET password = '" . sha1($this->newpw) . "' WHERE id = ".DB::esc($this->id);
+            $q = "UPDATE users SET password = '" . sha1($this->newpw) . "' WHERE id = " . DB::esc($this->id);
             $res2 = DB::query($q);
-            if (DB::rows() > 0 )
+            if (DB::rows() > 0)
                 return true;
             else
                 return false;
@@ -112,21 +119,23 @@ class User extends BLAMBase {
             return false;
         }
     }
-    
-    public function activity() {
+
+    public function activity()
+    {
         DB::query("
             UPDATE users
             SET last_activity = NOW(), logged_in = 1
             WHERE id = " . DB::esc($this->id)
-            );
+        );
         DB::query("
             UPDATE users
             SET logged_in = 0
             WHERE last_activity < DATE_SUB(NOW(), INTERVAL 30 MINUTE)
         ");
     }
-    
-    public function get($options = 'all') {
+
+    public function get($options = 'all')
+    {
         if (is_string($options) && $options == 'all') {
             $results = DB::query("
                 SELECT users.id AS id, roles.name AS role, username, avatar
@@ -141,12 +150,12 @@ class User extends BLAMBase {
         } else {
             throw new Exception('unknown option');
         }
-        
-		while ($data[] = mysqli_fetch_assoc($results));
+
+        while ($data[] = mysqli_fetch_assoc($results)) ;
         if (!is_null($data) && end($data) == null) array_pop($data);
-		return $data;
-	}
-    
+        return $data;
+    }
+
 }
 
 ?>

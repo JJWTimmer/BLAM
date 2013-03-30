@@ -1,127 +1,136 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>BLAM - Ticketing</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>BLAM - Ticketing</title>
 
-        <!-- Load stylesheets before javascript -->
+    <!-- Load stylesheets before javascript -->
 
-        <!-- jQuery css first, so we can override later -->
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" />
-        <link rel="stylesheet" type="text/css" href="css/thickbox.css" media="screen" />
+    <!-- jQuery css first, so we can override later -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css"/>
 
-        <!-- second the general css -->
-        <link rel="stylesheet" type="text/css" href="css/blam.css" />
+    <!-- second the general css -->
+    <link rel="stylesheet" type="text/css" href="css/blam.css"/>
 
-        <!-- last the page specific css -->
-        <link rel="stylesheet" type="text/css" href="css/ticketing.css" />
+    <!-- last the page specific css -->
+    <link rel="stylesheet" type="text/css" href="css/ticketing.css"/>
 
-        <!-- first all the libraries, jquery first is needed for the rest -->
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
-        <script type="text/javascript" src="js/mwheelIntent.js"></script>
-        <script type="text/javascript" src="js/thickbox.js"></script>
-				<script type="text/javascript" src="js/jquery.elastic.js"></script>
+    <!-- first all the libraries, jquery first is needed for the rest -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/mwheelIntent.js"></script>
+    <script type="text/javascript" src="js/jquery.elastic.js"></script>
 
 
-        <!-- general javascript -->
-        <script type="text/javascript" src="js/blam.js"></script>
-        <script type="text/javascript" src="js/shared/message.js"></script>
-        <script type="text/javascript" src="js/shared/chat.js"></script>
-        <script type="text/javascript" src="js/shared/user.js"></script>
-				<script type="text/javascript" src="js/shared/handle.js"></script>
-				<script type="text/javascript" src="js/shared/ticket.js"></script>
-				<script type="text/javascript" src="js/shared/updateandfeedback.js"></script>
-				<script type="text/javascript" src="js/shared/display.js"></script>
-				
-        <!-- page specific javascript -->
-        <script type="text/javascript" src="js/ticketing.js"></script>
+    <!-- general javascript -->
+    <script type="text/javascript" src="js/blam.js"></script>
+    <script type="text/javascript" src="js/shared/message.js"></script>
+    <script type="text/javascript" src="js/shared/chat.js"></script>
+    <script type="text/javascript" src="js/shared/user.js"></script>
+    <script type="text/javascript" src="js/shared/handle.js"></script>
+    <script type="text/javascript" src="js/shared/ticket.js"></script>
+    <script type="text/javascript" src="js/shared/updateandfeedback.js"></script>
+    <script type="text/javascript" src="js/shared/display.js"></script>
 
-    </head>
+    <!-- page specific javascript -->
+    <script type="text/javascript" src="js/ticketing.js"></script>
 
-    <body>
-      <div id="TopContainer" class="rounded"></div>
-        <div id="MainContainer">
-            <div id="TicketingCommunicationContainer">
-                <div id="Handles" class="holder rounded">
-                    <div id="HandlesHeader" class="header"><p>Roepnamen</p></div>
-                    <input type="text" class="rounded" value="" id="search_handles">
-                    <div id="HandlesList" class="list rounded"></div>
-                </div>
+</head>
 
+<body>
+<div id="TopContainer" class="rounded"></div>
+<div id="MainContainer">
+    <div id="TicketingCommunicationContainer">
+        <div id="Handles" class="holder rounded">
+            <div id="HandlesHeader" class="header"><p>Roepnamen</p></div>
+            <input type="text" class="rounded" value="" id="search_handles">
 
-                <div id="ChatContainer">
-                  <div id="Meldingen" class="holder rounded">
-                    <div id="MeldingenHeader" class="header"><p>Meldingen</p></div>
-                    <div id="MeldingenList" class="list rounded"></div>
-                  </div>
-
-									<div id="Updates" class="holder rounded">
-                    <div id="UpdatesHeader" class="header"><p>Updates</p></div>
-                    <div id="UpdatesList" class="list rounded"></div>
-                  </div>
-
-                  <div id="WL-Chat" class="holder rounded">
-                        <div id="WL-ChatHeader" class="header"><p>WL-Chat</p></div>
-                        <div id="WL-ChatList" class="list rounded"></div>
-                        <form id="submitForm" method="post" action="">
-                            <div class="chat_input"><textarea id="Chattext" name="text" rows="1" cols="40"></textarea></div>
-                            
-                            <input type="submit" class="blueButton" id="Chatsubmit"value="Submit" />
-                        </form>
-                  </div>
-                </div>
-            </div>
-            <div id="TicketingOverviewContainer">
-                <div id="NewTickets" class="holder rounded rounded">
-                    <div id="NewTicketsHeader" class="header"><p>Nieuwe Tickets</p></div>
-                    <div id="NewTicketsList" class="list rounded"></div>
-                </div>
-                <div id="OpenTickets" class="holder rounded">
-                    <div id="OpenTicketsHeader" class="header"><p>Open Tickets</p></div>
-                    <div id="OpenTicketsList" class="list rounded"></div>
-                </div>
-                <div id="ClosedTickets" class="holder rounded">
-                    <div id="ClosedTicketsHeader" class="header"><p>Gesloten Tickets</p></div>
-                    <div id="ClosedTicketsList" class="list rounded"></div>
-                </div>
-            		<div id="SearchTickets" class="holder rounded">
-                    <div id="SearchTicketsHeader" class="header"><p>Tickets Zoeken</p>
-                    <input type="text" class="rounded" value="" id="search_tickets">	
-                    <input type="submit" class="blueButton" id="Searchsubmit"value="Submit" />
-                    </div>
-                    <div id="SearchTicketsList" class="list rounded"></div>
-            		</div>
-            </div>
-            
-            
-            <div id="TicketingDetailsContainer">
-                <div id="TicketDetails" class="holder rounded">
-                    <div id="TicketDetailsHeader" class="header"><p>Details Ticket</p></div>
-                    <div id="TicketDetailsList" class="list rounded"></div>
-                </div>
-            </div>
+            <div id="HandlesList" class="list rounded"></div>
         </div>
-        <div id="Login" align="center">
-            <div id="LoginWindow" class=rounded>
-                <h1 align="center">Login BLAM</h1>
-                <BR>
-                <form id="loginForm" method="post" action="">
-                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr><td align="center">
-                <input id="name" name="username" class="rounded" type="text" maxlength="16" />
-                </td></tr><tr><td align="center">
-                <input id="password" name="password" class="rounded" type="password" maxlength="16" />
-                </td></tr><tr><td align="center">
-                <input type="submit" class="blueButton" value="Login" />
-                </td></tr>
-                </table>
+
+
+        <div id="ChatContainer">
+            <div id="Meldingen" class="holder rounded">
+                <div id="MeldingenHeader" class="header"><p>Meldingen</p></div>
+                <div id="MeldingenList" class="list rounded"></div>
+            </div>
+
+            <div id="Updates" class="holder rounded">
+                <div id="UpdatesHeader" class="header"><p>Updates</p></div>
+                <div id="UpdatesList" class="list rounded"></div>
+            </div>
+
+            <div id="WL-Chat" class="holder rounded">
+                <div id="WL-ChatHeader" class="header"><p>WL-Chat</p></div>
+                <div id="WL-ChatList" class="list rounded"></div>
+                <form id="submitForm" method="post" action="">
+                    <div class="chat_input"><textarea id="Chattext" name="text" rows="1" cols="40"></textarea></div>
+
+                    <input type="submit" class="blueButton" id="Chatsubmit" value="Submit"/>
                 </form>
             </div>
         </div>
+    </div>
+    <div id="TicketingOverviewContainer">
+        <div id="NewTickets" class="holder rounded rounded">
+            <div id="NewTicketsHeader" class="header"><p>Nieuwe Tickets</p></div>
+            <div id="NewTicketsList" class="list rounded"></div>
+        </div>
+        <div id="OpenTickets" class="holder rounded">
+            <div id="OpenTicketsHeader" class="header"><p>Open Tickets</p></div>
+            <div id="OpenTicketsList" class="list rounded"></div>
+        </div>
+        <div id="ClosedTickets" class="holder rounded">
+            <div id="ClosedTicketsHeader" class="header"><p>Gesloten Tickets</p></div>
+            <div id="ClosedTicketsList" class="list rounded"></div>
+        </div>
+        <div id="SearchTickets" class="holder rounded">
+            <div id="SearchTicketsHeader" class="header"><p>Tickets Zoeken</p>
+                <input type="text" class="rounded" value="" id="search_tickets">
+                <input type="submit" class="blueButton" id="Searchsubmit" value="Submit"/>
+            </div>
+            <div id="SearchTicketsList" class="list rounded"></div>
+        </div>
+    </div>
 
-    </body>
+
+    <div id="TicketingDetailsContainer">
+        <div id="TicketDetails" class="holder rounded">
+            <div id="TicketDetailsHeader" class="header"><p>Details Ticket</p></div>
+            <div id="TicketDetailsList" class="list rounded"></div>
+        </div>
+    </div>
+</div>
+<div id="Login" align="center">
+    <div id="LoginWindow" class=rounded>
+        <h1 align="center">Login BLAM</h1>
+        <BR>
+
+        <form id="loginForm" method="post" action="">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td align="center">
+                        <input id="name" name="username" class="rounded" type="text" maxlength="16"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input id="password" name="password" class="rounded" type="password" maxlength="16"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input type="submit" class="blueButton" value="Login"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
 </html>

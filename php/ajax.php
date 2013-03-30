@@ -23,218 +23,217 @@ require_once "classes/Reminder.class.php";
 session_name('BLAM');
 session_start();
 
-if ( get_magic_quotes_gpc() ) {
-	
-	// If magic quotes is enabled, strip the extra slashes
-	array_walk_recursive($_GET,create_function('&$v,$k','$v = stripslashes($v);'));
-	array_walk_recursive($_POST,create_function('&$v,$k','$v = stripslashes($v);'));
+if (get_magic_quotes_gpc()) {
+
+    // If magic quotes is enabled, strip the extra slashes
+    array_walk_recursive($_GET, create_function('&$v,$k', '$v = stripslashes($v);'));
+    array_walk_recursive($_POST, create_function('&$v,$k', '$v = stripslashes($v);'));
 }
 
 try {
-	
-	// Connecting to the database
-	DB::init($dbOptions);
-	//response is an empty array
-	$response = array();
-	
-	// Handling the supported actions:
-	
-	switch($_GET['action']){
-		
-		case 'login':
-			$response = BLAM::login($_POST['username'], $_POST['password']);
+
+    // Connecting to the database
+    DB::init($dbOptions);
+    //response is an empty array
+    $response = array();
+
+    // Handling the supported actions:
+
+    switch ($_GET['action']) {
+
+        case 'login':
+            $response = BLAM::login($_POST['username'], $_POST['password']);
             // returns int Id, string Username, string Avatar, String Role or exception
             break;
-		
-		case 'checkLogged':
-			$response = BLAM::checkLogged();
+
+        case 'checkLogged':
+            $response = BLAM::checkLogged();
             // returns int Id, string Username, string Avatar, String Role or exception
             break;
-		
-		case 'logout':
-			$response = BLAM::logout();
+
+        case 'logout':
+            $response = BLAM::logout();
             // return null or exception
             break;
-		
-		case 'addMessage':
+
+        case 'addMessage':
             BLAM::checkLogged();
-			$response = BLAM::addMessage($_POST['text'], $_POST['ticket']);
+            $response = BLAM::addMessage($_POST['text'], $_POST['ticket'], $_POST['ticket_id']);
             // returns MessageId or exception
             break;
-		//*
-		case 'updateMessage':
+        //*
+        case 'updateMessage':
             BLAM::checkLogged();
-			$response = BLAM::updateMessage($_POST['id'], $_POST['text'], $_POST['ticket']);
+            $response = BLAM::updateMessage($_POST['id'], $_POST['text'], $_POST['ticket']);
             // returns MessageId or exception
             break;
-		    
-		case 'getMessages':
-            BLAM::checkLogged();//date_time string format: '2011-02-23 09:03:01'
-				$response = BLAM::getMessages($_POST['first_id'],$_POST['timestamp_last_update']); 
+
+        case 'getMessages':
+            BLAM::checkLogged(); //date_time string format: '2011-02-23 09:03:01'
+            $response = BLAM::getMessages($_POST['first_id'], $_POST['timestamp_last_update']);
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
-            
-		case 'searchMessages':
+
+        case 'searchMessages':
             BLAM::checkLogged();
-			$response = BLAM::searchMessages($_POST['keyword']);
+            $response = BLAM::searchMessages($_POST['keyword']);
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
-		
-		case 'getUsers':
+
+        case 'getUsers':
             BLAM::checkLogged();
-			$response = BLAM::getUsers($_POST['options']); // accepts 'all' or 'logged'
+            $response = BLAM::getUsers($_POST['options']); // accepts 'all' or 'logged'
             // returns array users(integer Id, string Role, string Username, string Avatar) or exception
             break;
-		
-		case 'getGroups':
+
+        case 'getGroups':
             BLAM::checkLogged();
-			$response = BLAM::getGroups($_POST['recursive']);//true or false: true gives all handles also
+            $response = BLAM::getGroups($_POST['recursive']); //true or false: true gives all handles also
             // returns array(int groupid, string groupname, array(integer Id, integer HandleNumber, string HandleName, string Description) handles) groups or exception
             break;
-		
-		case 'getHandles':
+
+        case 'getHandles':
             BLAM::checkLogged();
-			$response = BLAM::getHandles($_POST['group_id']); // null for all or int group_id
+            $response = BLAM::getHandles($_POST['group_id']); // null for all or int group_id
             // returns array(integer Id, integer HandleNumber, string HandleName, string Description) handles or exception
             break;
-		
-		case 'getTicketList':
-            BLAM::checkLogged();//date_time string format: '2011-02-23 09:03:01'
-			$response = BLAM::getTicketList($_POST['recursive'], $_POST['first_id'], $_POST['timestamp_last_update'], $_POST['status']);//boolean recursive: false for only parents, int $last_id, date-string $last_modified, array of string $status for filtering ($status only for parent!).
+
+        case 'getTicketList':
+            BLAM::checkLogged(); //date_time string format: '2011-02-23 09:03:01'
+            $response = BLAM::getTicketList($_POST['recursive'], $_POST['first_id'], $_POST['timestamp_last_update'], $_POST['status']); //boolean recursive: false for only parents, int $last_id, date-string $last_modified, array of string $status for filtering ($status only for parent!).
             // returns array(integer Id, string Title, string Text, string Status, string user, datetime created, datetime modified) tickets or exception
             break;
-		//!*
-		case 'getUpdateList':
+        //!*
+        case 'getUpdateList':
             BLAM::checkLogged();
-			$response = BLAM::getUpdateList($_POST['type'],$_POST['called'], $_POST['first_id'],$_POST['timestamp_last_update']);
+            $response = BLAM::getUpdateList($_POST['type'], $_POST['called'], $_POST['first_id'], $_POST['timestamp_last_update']);
             // returns array (integer id,	integer ticket_id, string Title, Datetime called, Datetime created, Datetime modified) updates or exception
             break;
-		
-		case 'closeFeedback':
+
+        case 'closeFeedback':
             BLAM::checkLogged();
-			$response = BLAM::closeFeedback($_POST['id'], $_SESSION['user']['id']);
+            $response = BLAM::closeFeedback($_POST['id'], $_SESSION['user']['id']);
             // returns null or exception
             break;
-		
-		case 'addChat':
+
+        case 'addChat':
             BLAM::checkLogged();
-			$response = BLAM::addChat($_POST['text'], $_SESSION['user']['id']);
+            $response = BLAM::addChat($_POST['text'], $_SESSION['user']['id']);
             // returns ChatId or exception
             break;
-		
-		case 'getChats':
+
+        case 'getChats':
             BLAM::checkLogged();
-			$response = BLAM::getChats($_POST['first_id'], $_POST['timestamp_last_update']);//last_id is mandatory, id or 'all'
+            $response = BLAM::getChats($_POST['first_id'], $_POST['timestamp_last_update']); //last_id is mandatory, id or 'all'
             // returns array(int MessageID, string Text, string Username, string Avatar, Datetime created) chats or exception
             break;
-		
-		case 'getTicketDetail':
+
+        case 'getTicketDetail':
             BLAM::checkLogged();
-			$response = BLAM::getTicketDetail($_POST['id']);
+            $response = BLAM::getTicketDetail($_POST['id']);
             // returns integer Id, string Status, string Titel, string UserId, string Text, string Locatie, array time(Hours,Minutes), integer MessageId, string MessageUserId, string MessageText or exception
             break;
 
-		case 'searchTickets':
+        case 'searchTickets':
             BLAM::checkLogged();
-			$response = BLAM::searchTickets($_POST['keyword']);
+            $response = BLAM::searchTickets($_POST['keyword']);
             //returns array () tickets or exception
             break;
-            
-		case 'getUpdates':
+
+        case 'getUpdates':
             BLAM::checkLogged();
-			$response = BLAM::getUpdates($_POST['id'], $_POST['ticket_id'], $_POST['type']);
+            $response = BLAM::getUpdates($_POST['id'], $_POST['ticket_id'], $_POST['type']);
             // returns returns array (id, type, ticket_id, title, message, handlename, called, called_by, created)
             break;
-            
-		case 'closeTicket':
+
+        case 'closeTicket':
             BLAM::checkLogged();
-			$response = BLAM::closeTicket($_POST['id']);
+            $response = BLAM::closeTicket($_POST['id']);
             // returns null or exception
             break;
-		
-		case 'setTicketOwner':
+
+        case 'setTicketOwner':
             BLAM::checkLogged();
-			$response = BLAM::setTicketOwner($_POST['id']);
+            $response = BLAM::setTicketOwner($_POST['id']);
             // returns null or exception
             break;
-		
-		case 'changeTicketOwner':
+
+        case 'changeTicketOwner':
             BLAM::checkLogged();
-			$response = BLAM::changeTicketOwner($_POST['id'], $_POST['user_id']);
+            $response = BLAM::changeTicketOwner($_POST['id'], $_POST['user_id']);
             // returns null or exception
             break;
-		//*
-		case 'changeTicketDetails':
+        //*
+        case 'changeTicketDetails':
             BLAM::checkLogged();
-			$response = BLAM::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['solution'], $_POST['reference'], $_POST['handle_id']);
+            $response = BLAM::changeTicketDetails($_POST['id'], $_POST['title'], $_POST['text'], $_POST['location'], $_POST['solution'], $_POST['reference'], $_POST['handle_id']);
             // returns null or exception
             break;
-		//*
-		case 'createUpdate':
+        //*
+        case 'createUpdate':
             BLAM::checkLogged();
-			$response = BLAM::createUpdate($_POST['ticket_id'], $_POST['message']);
+            $response = BLAM::createUpdate($_POST['ticket_id'], $_POST['message']);
             // returns integer UpdateId or exception
             break;
-		//*
-		case 'createFeedback':
+        //*
+        case 'createFeedback':
             BLAM::checkLogged();
-			$response = BLAM::createFeedback($_POST['ticket_id'], $_POST['message']);
+            $response = BLAM::createFeedback($_POST['ticket_id'], $_POST['message']);
             // returns integer FeedbackId or exception
             break;
-		
-		case 'createAddition':
+
+        case 'createAddition':
             BLAM::checkLogged();
-			$response = BLAM::createAddition($_POST['ticket_id'], $_POST['message']);
+            $response = BLAM::createAddition($_POST['ticket_id'], $_POST['message']);
             // returns integer UpdateId or exception
             break;
-		
-		case 'createAnswer':
+
+        case 'createAnswer':
             BLAM::checkLogged();
-			$response = BLAM::createAnswer($_POST['ticket_id'], $_POST['message']);
+            $response = BLAM::createAnswer($_POST['ticket_id'], $_POST['message']);
             // returns integer UpdateId or exception
             break;
-		
-		
-		case 'becomeChildTicket':
+
+
+        case 'becomeChildTicket':
             BLAM::checkLogged();
-			$response = BLAM::becomeChildTicket($_POST['id'], $_POST['parent_id']);
+            $response = BLAM::becomeChildTicket($_POST['id'], $_POST['parent_id']);
             // returns null or exception
             break;
-		
-		case 'becomeParentTicket':
+
+        case 'becomeParentTicket':
             BLAM::checkLogged();
-			$response = BLAM::becomeParentTicket($_POST['id']);
+            $response = BLAM::becomeParentTicket($_POST['id']);
             // returns null or exception
             break;
-		
-		case 'getAutotext':
+
+        case 'getAutotext':
             BLAM::checkLogged();
-			$response = BLAM::getAutotext();
+            $response = BLAM::getAutotext();
             // returns null or exception
             break;
-		
-		case 'getReminders':
+
+        case 'getReminders':
             BLAM::checkLogged();
-			$response = BLAM::getReminders($_POST['timestamp_day']);
+            $response = BLAM::getReminders($_POST['timestamp_day']);
             // returns null or exception
             break;
-    
-    case 'getTaskDetail':
+
+        case 'getTaskDetail':
             BLAM::checkLogged();
-			$response = BLAM::getTaskDetail($_POST['id']);
-    break;
-    
-    case 'confirmNotification':
+            $response = BLAM::getTaskDetail($_POST['id']);
+            break;
+
+        case 'confirmNotification':
             BLAM::checkLogged();
-			$response = BLAM::confirmNotification($_POST['ticket_id'], $_POST['update_id'], $_POST['type']);
-    break;  
-		
-		default:
-			throw new Exception('Wrong action');
-	}
-	
-	echo json_encode($response);
-}
-catch(Exception $e){
-	die(json_encode(array('error' => $e->getMessage())));
+            $response = BLAM::confirmNotification($_POST['ticket_id'], $_POST['update_id'], $_POST['type']);
+            break;
+
+        default:
+            throw new Exception('Wrong action');
+    }
+
+    echo json_encode($response);
+} catch (Exception $e) {
+    die(json_encode(array('error' => $e->getMessage())));
 }

@@ -1,119 +1,129 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>BLAM - Logging</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>BLAM - Logging</title>
 
-        <!-- jQuery css first, so we can override later -->
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css" />
+    <!-- jQuery css first, so we can override later -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css"/>
 
-        <!-- second the general css -->
-        <link rel="stylesheet" type="text/css" href="css/blam.css" />
+    <!-- second the general css -->
+    <link rel="stylesheet" type="text/css" href="css/blam.css"/>
 
-        <!-- last the page specific css -->
-        <link rel="stylesheet" type="text/css" href="css/logging.css" />
+    <!-- last the page specific css -->
+    <link rel="stylesheet" type="text/css" href="css/logging.css"/>
 
-        <!-- first all the libraries, jquery first is needed for the rest -->
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
-        <script type="text/javascript" src="js/mwheelIntent.js"></script>
-        <script type="text/javascript" src="js/jquery.highlight-3.js"></script>
+    <!-- first all the libraries, jquery first is needed for the rest -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/mwheelIntent.js"></script>
+    <script type="text/javascript" src="js/jquery.highlight-3.js"></script>
 
-        <!-- general javascript -->
-        <script type="text/javascript" src="js/blam.js"></script>
-        <script type="text/javascript" src="js/shared/message.js"></script>
-        <script type="text/javascript" src="js/shared/user.js"></script>
-				<script type="text/javascript" src="js/shared/handle.js"></script>
-				<script type="text/javascript" src="js/shared/ticket.js"></script>
-				<script type="text/javascript" src="js/shared/updateandfeedback.js"></script>
-				<script type="text/javascript" src="js/shared/display.js"></script>
-				<script type="text/javascript" src="js/shared/autotext.js"></script>
+    <!-- general javascript -->
+    <script type="text/javascript" src="js/blam.js"></script>
+    <script type="text/javascript" src="js/shared/message.js"></script>
+    <script type="text/javascript" src="js/shared/user.js"></script>
+    <script type="text/javascript" src="js/shared/handle.js"></script>
+    <script type="text/javascript" src="js/shared/ticket.js"></script>
+    <script type="text/javascript" src="js/shared/updateandfeedback.js"></script>
+    <script type="text/javascript" src="js/shared/display.js"></script>
+    <script type="text/javascript" src="js/shared/autotext.js"></script>
     <!-- page specific javascript -->
     <script type="text/javascript" src="js/logging.js"></script>
 
-    </head>
+</head>
 
-    <body>
-        <div id="TopContainer" class="rounded"></div>
-        <div id="MainContainer">
-            <div id="LoggingMeldingenContainer">
-              <div id="SearchMeldingen" class="rounded">
-                  <form id="searchForm" method="post" action="">
-                    <input type="text" id="keyword" name="keyword"/>
-                    <input type="button" id="searchbutton" class="blueButton" value="Zoek"/>
-                  </form>
-                  <input type="button" id="messageButton" class="blueButton" value="Hervat meldingen"/>
-              </div>
-              <div id="Handles" class="holder rounded">
-                    <div id="HandlesHeader" class="header rounded"><p>Roepnamen</p>
-                    <input type="text" class="rounded" value="" id="search_handles">
-                    </div>
-                    <div id="HandlesList" class="list rounded"></div>
-              </div>
-              <div id="Meldingen" class="holder rounded">
-                    <div id="MeldingenHeader" class="header rounded"><p>Meldingen</p></div>
-                    <div id="MeldingenList" class="list rounded"></div>
-              </div>
-              <div id="Users" class="holder rounded">
-                  <div id="UsersHeader" class="header rounded"><p>Gebruikers</p></div>
-                  <div id="UsersList" class="list rounded"></div>
-              </div>
-
-              <div id="Display" class="holder rounded">
-                  <div id="DisplayHeader" class="header rounded"><p>Weergave</p></div>
-                  <div id="DisplayList" class="list rounded"></div>
-              </div>
-
-              <div id="TextEntry" class="rounded">
-                  <form id="submitForm" method="post" action="">
-                     <textarea rows="1" cols="1" id="messagetext" name="text" class="rounded" maxlength="700"></textarea>
-                     <select id="autotext"></select>
-                     <input type="button" id="autotextbutton" class="blueButton" value="Voeg text toe"/>
-                     <input type="button" id="cancelbutton" class="blueButton" value="cancel"/>
-                     <input type="button" id="updatebutton" class="blueButton" value="opslaan"/>
-					 					 <input type="button" id="update_ticketbutton" class="blueButton" value="opslaan met ticket"/>
-					 					 <input type="button" id="add_ticket_additionbutton" class="blueButton" value="aanvulling opslaan"/>
-					 					 <input type="button" id="answer_feedbackbutton" class="blueButton" value="antwoord opslaan"/>			 					 
-                     <input type="button" id="submitbutton" class="blueButton" value="submit zonder ticket"/>
-										 <input type="button" id="submit_ticketbutton" class="blueButton" value="submit met ticket"/>
-                  </form>
-              </div>
-            </div>
-            <div id="LoggingExtraContainer">
-                <div id="Tickets" class="holder rounded">
-                    <div id="TicketsHeader" class="header rounded"><p>Tickets</p></div>
-                    <div id="TicketsList" class="list rounded"></div>
-                </div>
-                <div id="OpenFeedback" class="holder rounded">
-                    <div id="OpenFeedbackHeader" class="header rounded"><p>Open Terugmeldingen</p></div>
-                    <div id="OpenFeedbackList" class="list rounded"></div>
-                </div>
-                <div id="ClosedFeedback" class="holder rounded">
-                    <div id="ClosedFeedbackHeader" class="header rounded"><p>Gesloten Terugmeldingen</p></div>
-                    <div id="ClosedFeedbackList" class="list rounded"></div>
-                </div>
-            </div>
+<body>
+<div id="TopContainer" class="rounded"></div>
+<div id="MainContainer">
+    <div id="LoggingMeldingenContainer">
+        <div id="SearchMeldingen" class="rounded">
+            <form id="searchForm" method="post" action="">
+                <input type="text" id="keyword" name="keyword"/>
+                <input type="button" id="searchbutton" class="blueButton" value="Zoek"/>
+            </form>
+            <input type="button" id="messageButton" class="blueButton" value="Hervat meldingen"/>
         </div>
-        <div id="Login" align="center">
-            <div id="LoginWindow" class="rounded">
-                <h1 align="center">Login BLAM</h1>
-                <br/>
-                <form id="loginForm" method="post" action="">
-                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr><td align="center">
-                <input id="name" name="username" class="rounded" type="text" maxlength="16" />
-                </td></tr><tr><td align="center">
-                <input id="password" name="password" class="rounded" type="password" maxlength="16" />
-                </td></tr><tr><td align="center">
-                <input type="submit" class="blueButton" value="Login" />
-                </td></tr>
-                </table>
-                </form>
-            <div>
+        <div id="Handles" class="holder rounded">
+            <div id="HandlesHeader" class="header rounded"><p>Roepnamen</p>
+                <input type="text" class="rounded" value="" id="search_handles">
+            </div>
+            <div id="HandlesList" class="list rounded"></div>
+        </div>
+        <div id="Meldingen" class="holder rounded">
+            <div id="MeldingenHeader" class="header rounded"><p>Meldingen</p></div>
+            <div id="MeldingenList" class="list rounded"></div>
+        </div>
+        <div id="Users" class="holder rounded">
+            <div id="UsersHeader" class="header rounded"><p>Gebruikers</p></div>
+            <div id="UsersList" class="list rounded"></div>
         </div>
 
-    </body>
+        <div id="Display" class="holder rounded">
+            <div id="DisplayHeader" class="header rounded"><p>Weergave</p></div>
+            <div id="DisplayList" class="list rounded"></div>
+        </div>
+
+        <div id="TextEntry" class="rounded">
+            <form id="submitForm" method="post" action="">
+                <textarea rows="1" cols="1" id="messagetext" name="text" class="rounded" maxlength="700"></textarea>
+                <select id="autotext"></select>
+                <input type="button" id="autotextbutton" class="blueButton" value="Voeg text toe"/>
+                <input type="button" id="cancelbutton" class="blueButton" value="cancel"/>
+                <input type="button" id="updatebutton" class="blueButton" value="opslaan"/>
+                <input type="button" id="update_ticketbutton" class="blueButton" value="opslaan met ticket"/>
+                <input type="button" id="add_ticket_additionbutton" class="blueButton" value="aanvulling opslaan"/>
+                <input type="button" id="answer_feedbackbutton" class="blueButton" value="antwoord opslaan"/>
+                <input type="button" id="submitbutton" class="blueButton" value="submit zonder ticket"/>
+                <input type="button" id="submit_ticketbutton" class="blueButton" value="submit met ticket"/>
+            </form>
+        </div>
+    </div>
+    <div id="LoggingExtraContainer">
+        <div id="Tickets" class="holder rounded">
+            <div id="TicketsHeader" class="header rounded"><p>Tickets</p></div>
+            <div id="TicketsList" class="list rounded"></div>
+        </div>
+        <div id="OpenFeedback" class="holder rounded">
+            <div id="OpenFeedbackHeader" class="header rounded"><p>Open Terugmeldingen</p></div>
+            <div id="OpenFeedbackList" class="list rounded"></div>
+        </div>
+        <div id="ClosedFeedback" class="holder rounded">
+            <div id="ClosedFeedbackHeader" class="header rounded"><p>Gesloten Terugmeldingen</p></div>
+            <div id="ClosedFeedbackList" class="list rounded"></div>
+        </div>
+    </div>
+</div>
+<div id="Login" align="center">
+    <div id="LoginWindow" class="rounded">
+        <h1 align="center">Login BLAM</h1>
+        <br/>
+
+        <form id="loginForm" method="post" action="">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td align="center">
+                        <input id="name" name="username" class="rounded" type="text" maxlength="16"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input id="password" name="password" class="rounded" type="password" maxlength="16"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input type="submit" class="blueButton" value="Login"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div>
+        </div>
+
+</body>
 </html>

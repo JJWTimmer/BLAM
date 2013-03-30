@@ -6,14 +6,16 @@ function UpdateAndFeedback(pane, called, reverse) {
     var lastTimestamp = "";
     var called = called;
     var TimeOut = null;
-    var pane_id;
+    var pane_id = '';
     var reverse = reverse;
 
 
     this.getFeedback = function () {
         $.tzPOST('getUpdateList', {type:'feedback', timestamp_last_update:lastTimestamp, called:called}, function (r) {
             if (r) {
-                if (!r.error) {
+                if (r.error) {
+                    general.displayError(r.error);
+                } else {
                     if (lastTimestamp == "") {
                         //pane_id cannot be set in the constructor, so is set here
                         pane_id = pane.getContentPane().parent().parent().attr('id');
@@ -49,9 +51,6 @@ function UpdateAndFeedback(pane, called, reverse) {
                     }
 
                 }
-                else {
-                    general.displayError(r.error);
-                }
                 TimeOut = setTimeout(function () {
                     self.getFeedback();
                 }, 10000);
@@ -61,7 +60,7 @@ function UpdateAndFeedback(pane, called, reverse) {
                 pane.getContentPane().empty();
                 TimeOut = setTimeout(function () {
                     self.getFeedback();
-                }, 10000);
+                }, 1000);
                 pane.reinitialise();
             }
 
@@ -92,18 +91,18 @@ function UpdateAndFeedback(pane, called, reverse) {
     };
 
 
-    this.addFeedback = function (params) {
+    this.addFeedback = function (my_feedback) {
 
         var markup = '';
-        markup = general.render('feedback', params);
+        markup = general.render('feedback', my_feedback);
 
-        exists = $('#' + pane_id + ' .feedback-' + params.id)
+        var exists = $('#' + pane_id + ' .feedback-' + my_feedback.id);
 
         var match = 0;
         //alert('called:'+called);
         //alert('params.called:'+params.called);
 
-        if ((params.called == null && called == 'false') || (params.called != null && called == 'true')) {
+        if ((my_feedback.called == null && called == 'false') || (my_feedback.called != null && called == 'true')) {
             match = 1;
         }
         //feedback status matches feedback list
@@ -122,7 +121,7 @@ function UpdateAndFeedback(pane, called, reverse) {
             else {
                 //is this the first feedback? --> append it
                 var feedbacks = $('#' + pane_id + ' .feedback');
-                if (firstID == params.id && feedbacks.length == 0) {
+                if (firstID == my_feedback.id && feedbacks.length == 0) {
                     pane.getContentPane().append(markup);
                 }
                 else {
@@ -130,7 +129,7 @@ function UpdateAndFeedback(pane, called, reverse) {
                     var closest;
                     var best_distance = 99;
                     $('#' + pane_id + ' .feedback').each(function (i) {
-                        var distance = Math.abs(parseInt($(this).attr('id')) - parseInt(params.id));
+                        var distance = Math.abs(parseInt($(this).attr('id')) - parseInt(my_feedback.id));
                         if (distance < best_distance) {
                             closest = $(this);
                             best_distance = distance;
@@ -139,7 +138,7 @@ function UpdateAndFeedback(pane, called, reverse) {
 
                     if (closest) {
                         //alert("adding to closest ticket, ticket:" + params.id);
-                        if (parseInt(closest.attr('id')) > parseInt(params.id)) {
+                        if (parseInt(closest.attr('id')) > parseInt(my_feedback.id)) {
                             if (reverse) {
                                 closest.after(markup);
                             }
@@ -157,7 +156,6 @@ function UpdateAndFeedback(pane, called, reverse) {
                         }
                     }
                     else {
-                        //alert("adding it to end, feedback:"+params.id);
                         if (reverse) {
                             pane.getContentPane().prepend(markup);
                         }
@@ -167,8 +165,8 @@ function UpdateAndFeedback(pane, called, reverse) {
                     }
                 }
             }
-            if (params.id < firstID) {
-                firstID = params.id;
+            if (my_feedback.id < firstID) {
+                firstID = my_feedback.id;
                 //alert("firstID=" + firstID)
             }
         }
@@ -190,6 +188,7 @@ function UpdateAndFeedback(pane, called, reverse) {
     this.closeFeedback = function (feedback_id) {
         $.tzPOST('closeFeedback', {id:feedback_id}, function (r) {
             display.clearDisplay();
+            $('.feedback-'+feedback_id).remove();
         });
     };
 
@@ -284,8 +283,9 @@ function UpdateAndFeedback(pane, called, reverse) {
     };
 
     this.refreshFeedback = function () {
+
         clearTimeout(TimeOut);
-        setTimeout(function () {
+        TimeOut = setTimeout(function () {
             self.getFeedback();
         }, 500);
     };

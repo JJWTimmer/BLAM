@@ -132,6 +132,10 @@ overflow over text, could also use min-width (either way screwed;-))*/
     visibility:hidden;
 }
 
+.message_ticket {
+    color: #58AA00;
+}
+
 p.noMessages, .count{
     clear:both;
     font-size:12px;

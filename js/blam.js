@@ -80,7 +80,7 @@ var general = {
 
             case 'messageLine':
                 if (params.ticket_id) {
-                    arr = ['<div class="message message_hover message_ticket message-', params.id, ' rounded" id=', params.id, '>', '<div class="msg-avatar"><img src="img/', params.avatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>', params.username, ':<BR>', params.time, '</p></div><div class="msg-text"><span class="text-span">', params.text, '</span></div></div>'];
+                    arr = ['<div class="message message_hover message_ticket message-', params.id, ' rounded" id=', params.id, '>', '<div class="msg-avatar"><img src="img/', params.avatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>', params.username, ':<BR>', params.time, '</p></div><div class="msg-text"><span class="text-span">', "[#" + params.ticket_id + "] " +  params.text, '</span></div></div>'];
                 }
                 else {
                     arr = ['<div class="message message_hover message-', params.id, ' rounded" id=', params.id, '>', '<div class="msg-avatar"><img src="img/', params.avatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>', params.username, ':<BR>', params.time, '</p></div><div class="msg-text"><span class="text-span">', params.text, '</span></div></div>'];
@@ -726,10 +726,6 @@ var general = {
         weekday[6] = "Zaterdag";
 
         return {day:day, month:month, year:year, weekday:weekday[date.getDay()]};
-    },
-
-    tb_open_new:function (jThickboxNewLink) {
-        tb_show(null, jThickboxNewLink, null);
     },
 
 

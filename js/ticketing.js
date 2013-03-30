@@ -82,29 +82,29 @@ var ticketing = {
             verticalDragMaxHeight:12
         }).data('jsp');
 
-        var user = new User("TopBar");
-        var message = new Message(ticketing.data.jspAPIMeldingen, 1);
-        var chat = new Chat(ticketing.data.jspAPIChats, 1);
-        var handle = new Handle(ticketing.data.jspAPIHandles);
-        var ticketNew = new Ticket(ticketing.data.jspAPINewTickets, [
+        user = new User("TopBar");
+        message = new Message(ticketing.data.jspAPIMeldingen, 1);
+        chat = new Chat(ticketing.data.jspAPIChats, 1);
+        handle = new Handle(ticketing.data.jspAPIHandles);
+        ticketNew = new Ticket(ticketing.data.jspAPINewTickets, [
             {1:'Nieuw'}
         ], 1);
-        var ticketOpen = new Ticket(ticketing.data.jspAPIOpenTickets, [
+        ticketOpen = new Ticket(ticketing.data.jspAPIOpenTickets, [
             {1:'Open'}
         ], 1);
-        var ticketClosed = new Ticket(ticketing.data.jspAPIClosedTickets, [
+        ticketClosed = new Ticket(ticketing.data.jspAPIClosedTickets, [
             {1:'Gesloten'}
         ], 1);
-        var ticketSearch = new Ticket(ticketing.data.jspAPISearchTickets, [
+        ticketSearch = new Ticket(ticketing.data.jspAPISearchTickets, [
             {1:'Open', 2:'Nieuw', 3:'Gesloten'}
         ], 0);
-        var ticketSelect = new Ticket("", [
+        ticketSelect = new Ticket("", [
             {1:'Open', 2:'Nieuw', 3:'Gesloten'}
         ], 0);
         //display = new Display ($('#TicketDetailsList'));
-        var display = new Display(ticketing.data.jspAPITicketDetails);
+        display = new Display(ticketing.data.jspAPITicketDetails);
         //updatefeedback = new UpdateAndFeedback(ticketing.data.jspAPIUpdates,"",0);
-        var updatefeedback = new UpdateAndFeedback(ticketing.data.jspAPITicketDetails, "", 1);
+        updatefeedback = new UpdateAndFeedback(ticketing.data.jspAPITicketDetails, "", 1);
 
 
         //function to implement getting previous messages from db
@@ -258,11 +258,6 @@ var ticketing = {
 
         $('#search_handles').keyup(function (e) {
             handle.searchHandles($('#search_handles').val());
-        });
-
-        //function to implement clicking on thickbox link
-        $('#openmodalbutton').live('click', function () {
-            general.tb_open_new('UpdatesAndFeedbacks.html?&KeepThis=true&height=500&width=800');
         });
 
         // Submitting a new chat entry:

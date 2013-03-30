@@ -110,16 +110,16 @@ var logging = {
         }).data('jsp');
 
         //setting up message 'class'
-        var message = new Message(logging.data.jspAPIMeldingen, 1);
-        var user = new User(logging.data.jspAPIUsers);
-        var handle = new Handle(logging.data.jspAPIHandles);
-        var ticket = new Ticket(logging.data.jspAPITickets, [
+        message = new Message(logging.data.jspAPIMeldingen, 1);
+        user = new User(logging.data.jspAPIUsers);
+        handle = new Handle(logging.data.jspAPIHandles);
+        ticket = new Ticket(logging.data.jspAPITickets, [
             {1:'Open', 2:'Nieuw'}
         ], 1);
-        var feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback, 'false', 1);
-        var feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback, 'true', 1);
-        var display = new Display(logging.data.jspAPIDisplay);
-        var autotext = new Autotext($('#autotext'));
+        feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback, 'false', 1);
+        feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback, 'true', 1);
+        display = new Display(logging.data.jspAPIDisplay);
+        autotext = new Autotext($('#autotext'));
 
         //function to implement clicking on message
         $('#MeldingenList .message').live('click', function () {
@@ -253,7 +253,7 @@ var logging = {
                         general.displayError(r.error);
                     }
                     else {
-                        message.submitMessage($('#messagetext').val(), false);
+                        message.submitMessage($('#messagetext').val(), false, logging.data.selectedticket);
                         $('#messagetext').val('');
                         $('#submitbutton').show();
                         $('#submit_ticketbutton').show();
@@ -288,7 +288,7 @@ var logging = {
                         general.displayError(r.error);
                     }
                     else {
-                        message.submitMessage($('#messagetext').val(), false);
+                        message.submitMessage($('#messagetext').val(), false, logging.data.selectedticket);
                         $('#messagetext').val('');
                         $('#submitbutton').show();
                         $('#submit_ticketbutton').show();
@@ -296,7 +296,6 @@ var logging = {
                         $('#cancelbutton').hide();
                         //feedbackOpen.closeFeedback($(this).closest("div").attr("id"));
                         feedbackOpen.closeFeedback(logging.data.selectedfeedback);
-                        feedbackClosed.closeFeedback(logging.data.selectedfeedback);
                         feedbackOpen.refreshFeedback();
                         feedbackClosed.refreshFeedback();
                         logging.data.selectedticket = 0;
