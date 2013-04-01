@@ -133,7 +133,8 @@ overflow over text, could also use min-width (either way screwed;-))*/
 }
 
 .message_ticket {
-    color: #58AA00;
+/*   color: #58AA00;*/
+background:url('../img/ticket_line_bg.jpg') repeat-x #FFEF68;
 }
 
 p.noMessages, .count{

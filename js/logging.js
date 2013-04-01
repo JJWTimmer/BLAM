@@ -13,7 +13,9 @@ var logging = {
         groupsLoaded:false,
         MessageEditMode:0,
         TicketUpdateMode:0,
-        FeedbackUpdateMode:0
+        FeedbackUpdateMode:0,
+	OpenFeedbackVisible:1,
+	OpenAutomatedVisible:1
     },
 
     // Init binds event listeners and sets up timers:
@@ -79,11 +81,6 @@ var logging = {
             verticalDragMaxHeight:12
         }).data('jsp');
 
-        logging.data.jspAPIUsers = $('#UsersList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
-        }).data('jsp');
-
         logging.data.jspAPIHandles = $('#HandlesList').jScrollPane({
             verticalDragMinHeight:12,
             verticalDragMaxHeight:12
@@ -111,7 +108,8 @@ var logging = {
 
         //setting up message 'class'
         message = new Message(logging.data.jspAPIMeldingen, 1);
-        user = new User(logging.data.jspAPIUsers);
+        user = new User("TopBar");
+        //user = new User(logging.data.jspAPIUsers);
         handle = new Handle(logging.data.jspAPIHandles);
         ticket = new Ticket(logging.data.jspAPITickets, [
             {1:'Open', 2:'Nieuw'}
@@ -120,6 +118,50 @@ var logging = {
         feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback, 'true', 1);
         display = new Display(logging.data.jspAPIDisplay);
         autotext = new Autotext($('#autotext'));
+
+
+        $('#automated_toggle_button').live('click', function () {
+            if (!working) {
+                working = true;
+                if (logging.data.OpenAutomatedVisible == 1) {
+                    $('#OpenAutomated').css('display', 'none');
+                    $('#ClosedAutomated').css('display', 'block');
+		    						$('#automated_toggle_button').attr('value', ' Open automatische meldingen tonen ');
+                    logging.data.OpenAutomatedVisible = 0;
+                }
+                else {
+                    $('#OpenAutomated').css('display', 'block');
+		    $('#ClosedAutomated').css('display', 'none');
+                    $('#automated_toggle_button').attr('value', ' Gesloten automatische meldingen tonen ');
+                    logging.data.OpenAutomatedVisible = 1;
+                }
+                logging.reInitJSP();
+            }
+            working = false;
+        });
+
+
+        $('#feedback_toggle_button').live('click', function () {
+            if (!working) {
+                working = true;
+                if (logging.data.OpenFeedbackVisible == 1) {
+                    $('#OpenFeedback').css('display', 'none');
+                    $('#ClosedFeedback').css('display', 'block');
+		    						$('#feedback_toggle_button').attr('value', ' Open terugmeldingen tonen ');
+                    logging.data.OpenFeedbackVisible = 0;
+                }
+                else {
+                    $('#OpenFeedback').css('display', 'block');
+		    						$('#ClosedFeedback').css('display', 'none');
+                    $('#feedback_toggle_button').attr('value', ' Gesloten terugmeldingen tonen ');
+                    logging.data.OpenFeedbackVisible = 1;
+                }
+                logging.reInitJSP();
+            }
+            working = false;
+        });
+
+
 
         //function to implement clicking on message
         $('#MeldingenList .message').live('click', function () {
@@ -463,7 +505,7 @@ var logging = {
 
     reInitJSP:function () {
         logging.data.jspAPIMeldingen.reinitialise();
-        logging.data.jspAPIUsers.reinitialise();
+        //logging.data.jspAPIUsers.reinitialise();
         logging.data.jspAPIHandles.reinitialise();
         logging.data.jspAPITickets.reinitialise();
         logging.data.jspAPIOpenFeedback.reinitialise();

@@ -41,7 +41,7 @@ position:absolute;
   height:55%;
   margin:1%;
 }
-
+/*
 #Users{
 position:absolute;
   right:0%;
@@ -53,16 +53,17 @@ position:absolute;
 
 #UsersList{
   width:98%;
-    /*padding is to solve JSPbar problem in combo with user margin*/
+    padding is to solve JSPbar problem in combo with user margin
     padding: 1% 0% 1% 4%;
 }
+*/
 
 #Display{
 position:absolute;
   right:0%;
-  top: 42%;
+  top: 12%;
   width:22%;
-  height:25%;
+  height:55%;
   margin:1%;
 }
 
@@ -95,7 +96,7 @@ position:absolute;
     margin:1%;
 }
 
-#OpenFeedback{
+#OpenAutomated{
     position:absolute;
     top: 33%;
     left:0%;
@@ -104,7 +105,27 @@ position:absolute;
     margin:1%;
 }
 
+#ClosedAutomated{
+    display: none;
+    position:absolute;
+    top: 33%;
+    left:0%;
+    width:98%;
+    height:28%;
+    margin:1%;
+}
+
+#OpenFeedback{
+    position:absolute;
+    top: 66%;
+    left:0%;
+    width:98%;
+    height:28%;
+    margin:1%;
+}
+
 #ClosedFeedback{
+    display: none;
     position:absolute;
     top: 66%;
     left:0%;
