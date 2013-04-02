@@ -97,6 +97,7 @@ function Handle(pane) {
             }
             else {
                 var message = 'Geen voertuigen';
+                pane.getContentPane().empty();
                 pane.getContentPane().append('<p class="count">' + message + '</p>');
                 pane.reinitialise();
                 TimeOut = setTimeout(function () {
