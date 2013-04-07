@@ -1,0 +1,8 @@
+log.txt
+*.pyc
+.svn
+*.log
+*.pid
+data*.txt
+config.json
+.idea/

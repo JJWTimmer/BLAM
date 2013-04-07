@@ -1,0 +1,13 @@
+{
+    "queue_server": "foo.com",
+    "queue_port": 1234,
+    "queue_username": "user",
+    "queue_password": "$ecret",
+    "queue_name": "sms",
+
+    "blam_host": "localhost",
+    "blam_port": 3306,
+    "blam_user": "user",
+    "blam_password": false,
+    "blam_database": "blam"
+}

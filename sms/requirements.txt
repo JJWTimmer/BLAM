@@ -1,0 +1,2 @@
+pika
+pycharm-debug.egg
