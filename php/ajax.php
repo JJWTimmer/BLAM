@@ -229,6 +229,13 @@ try {
             $response = BLAM::confirmNotification($_POST['ticket_id'], $_POST['update_id'], $_POST['type']);
             break;
 
+        case 'getOpenSMS':
+            break;
+        case 'getClosedSMS':
+            break;
+        case 'handleSMS':
+            break;
+
         default:
             throw new Exception('Wrong action');
     }
