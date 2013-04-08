@@ -1,2 +1,2 @@
 #!/bin/sh
-easy_install $(cat requirements.txt)
+easy_install pika
