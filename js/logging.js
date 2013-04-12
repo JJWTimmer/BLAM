@@ -101,6 +101,17 @@ var logging = {
             verticalDragMaxHeight:12
         }).data('jsp');
 
+				logging.data.jspAPIOpenSMS = $('#OpenAutomatedList').jScrollPane({
+            verticalDragMinHeight:12,
+            verticalDragMaxHeight:12
+        }).data('jsp');
+
+        logging.data.jspAPIClosedSMS = $('#ClosedAutomatedList').jScrollPane({
+            verticalDragMinHeight:12,
+            verticalDragMaxHeight:12
+        }).data('jsp');
+
+
         logging.data.jspAPIDisplay = $('#DisplayList').jScrollPane({
             verticalDragMinHeight:12,
             verticalDragMaxHeight:12
@@ -116,6 +127,8 @@ var logging = {
         ], 1);
         feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback, 'false', 1);
         feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback, 'true', 1);
+        smsOpen = new SMS(logging.data.jspAPIOpenSMS, 'false', 1);
+        smsClosed = new SMS(logging.data.jspAPIClosedSMS, 'true', 1);
         display = new Display(logging.data.jspAPIDisplay);
         autotext = new Autotext($('#autotext'));
 
@@ -214,6 +227,24 @@ var logging = {
             if (!working) {
                 working = true;
                 feedbackClosed.getOldFeedbacks();
+            }
+            working = false;
+        });
+
+				//function to implement getting previous feedbacks from db
+        $('#OpenAutomatedList .retrieve_previous_sms').live('click', function () {
+            if (!working) {
+                working = true;
+                smsOpen.getOldSMS();
+            }
+            working = false;
+        });
+
+        //function to implement getting previous feedbacks from db
+        $('#ClosedAutomatedList .retrieve_previous_sms').live('click', function () {
+            if (!working) {
+                working = true;
+                smsClosed.getOldSMS();
             }
             working = false;
         });
@@ -351,6 +382,22 @@ var logging = {
             }
         });
 
+				$('#answersms').live('click', function () {
+                $.tzPOST('handleSMS', {id:logging.data.selectedsms}, function (r) {
+                    if (r.error) {
+                        general.displayError(r.error);
+                    }
+                    else {
+                        smsOpen.refreshSMS();
+                        smsClosed.refreshSMS();
+                        display.clearDisplay();
+                        logging.data.selectedticket = 0;
+                        logging.data.selectedfeedback = 0;
+                        logging.data.selectedsms = 0;
+                    }
+                });
+        });
+
         //function to implement clicking on dynamic element groups
         $('#HandlesList div.list_item_first').live('click', function () {
             if (!working) {
@@ -378,6 +425,7 @@ var logging = {
             display.showTicket($(this).attr("id"));
             logging.data.selectedticket = $(this).attr("id");
             logging.data.selectedfeedback = 0;
+            logging.data.selectedsms = 0;
         });
 
         //function to implement clicking on dynamic element openfeedback
@@ -385,6 +433,7 @@ var logging = {
             display.showOpenFeedback($(this).attr("id"));
             logging.data.selectedticket = $(this).attr("ticket_id");
             logging.data.selectedfeedback = $(this).attr("id");
+            logging.data.selectedsms = 0;
         });
 
         //function to implement clicking on dynamic element closedfeedback
@@ -392,6 +441,23 @@ var logging = {
             display.showClosedFeedback($(this).attr("id"));
             logging.data.selectedticket = 0;
             logging.data.selectedfeedback = 0;
+            logging.data.selectedsms = 0;
+        });
+
+ 				//function to implement clicking on dynamic element opensms
+        $('#OpenAutomatedList .list_item_first').live('click', function () {
+            display.showOpenSMS($(this).attr("id"));
+            logging.data.selectedticket = 0;
+            logging.data.selectedfeedback = 0;
+            logging.data.selectedsms = $(this).attr("id");
+        });
+
+        //function to implement clicking on dynamic element closedsms
+        $('#ClosedAutomatedList .list_item_first').live('click', function () {
+            display.showClosedSMS($(this).attr("id"));
+            logging.data.selectedticket = 0;
+            logging.data.selectedfeedback = 0;
+            logging.data.selectedsms = 0;
         });
 
         // Searching for messages:
@@ -488,6 +554,8 @@ var logging = {
             ticket.getTickets();
             feedbackOpen.getFeedback();
             feedbackClosed.getFeedback();
+            smsOpen.getSMS();
+            smsClosed.getSMS();
             autotext.fillAutotext();
             //get rid of ugly startdisplay
             logging.data.jspAPIDisplay.reinitialise();
@@ -501,6 +569,8 @@ var logging = {
         ticket.kill();
         feedbackOpen.kill();
         feedbackClosed.kill();
+        smsOpen.kill();
+        smsClosed.kill();
     },
 
     reInitJSP:function () {
@@ -510,6 +580,8 @@ var logging = {
         logging.data.jspAPITickets.reinitialise();
         logging.data.jspAPIOpenFeedback.reinitialise();
         logging.data.jspAPIClosedFeedback.reinitialise();
+        logging.data.jspAPIOpenSMS.reinitialise();
+        logging.data.jspAPIClosedSMS.reinitialise();
         logging.data.jspAPIDisplay.reinitialise();
     }
 };

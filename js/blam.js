@@ -214,6 +214,40 @@ var general = {
                 ];
                 break;
 
+					case 'sms':
+                arr = [
+                    '<div class="list_item_first sms sms-', params.id, ' rounded" id="', params.id, '"><p>', params.id, ': ', params.sender_name, '</p></div>'
+                ];
+                break;
+
+					//TODO check variable names
+					case 'opensms_expanded':
+                arr = [
+                    '<div class="list_item_sms_expanded rounded" id="', params.id, '">',
+                    '<p><b>Melding:</b></p><p>', params.message, '</p>',
+                    '<p><b>naam zender: </b>', params.sender_name, '</p>',
+                    '<p><b>telefoonnr zender: </b>', params.sender_nr, '</p>',
+                    '<p><b>Ontvangen op: </b>', params.received_at, '</p>',
+                    '<input type="button" id="answersms" class="blueButton" value="Sluiten"/>',
+                    '</div>'
+                ];
+                break;
+						
+						//TODO check variable names
+            case 'closedsms_expanded':
+                arr = [
+                    '<div class="list_item_sms_expanded rounded" id="', params.id, '">',
+                    '<p><b>Melding:</b></p><p>', params.message, '</p>',
+                    '<p><b>naam zender: </b>', params.sender_name, '</p>',
+                    '<p><b>telefoonnr zender: </b>', params.sender_nr, '</p>',
+                    '<p><b>Ontvangen op: </b>', params.received_at, '</p>',
+                    '<p><b>Afgehandeld door: </b>', params.handled_by, '</p>',
+                    '<p><b>Afgehandeld op: </b>', params.handled_at, '</p>',
+                    '</div>'
+                ];
+                break;
+
+
 
             case 'feedbackTBOpen':
                 arr = [

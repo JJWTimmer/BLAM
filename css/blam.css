@@ -175,7 +175,7 @@ p.noMessages, .count{
 
 
 /* Handles */
-.list_item_first, .retrieve_previous_ticket, .retrieve_previous_feedback{
+.list_item_first, .retrieve_previous_ticket, .retrieve_previous_feedback, .retrieve_previous_sms{
     position:relative;
     width:95%;
     margin:2px 0px 2px 2px;
@@ -298,6 +298,19 @@ p.noMessages, .count{
 /* feedback */
 
 .list_item_feedback_expanded{
+    float:left;
+    width:95%;
+    margin:2px 0px 2px 2px;
+    padding-left:3px;
+    padding-bottom:1px;
+    text-align:left;
+    cursor:pointer;
+    background-color:#C2DAFF;
+}
+
+/* sms */
+
+.list_item_sms_expanded{
     float:left;
     width:95%;
     margin:2px 0px 2px 2px;
