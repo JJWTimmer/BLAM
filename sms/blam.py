@@ -1,5 +1,5 @@
 import MySQLdb
-
+from datetime import datetime
 
 class Blam(object):
     def __init__(self, host, port, user, pw, dbname):
@@ -26,7 +26,11 @@ class Blam(object):
             else:
                 self.conn = MySQLdb.connect(host=self.host, port=self.port, user=self.user, db=self.dbname)
             cur = self.conn.cursor()
-            vals = (sms.data['sender'], sms.data['sender_name'], sms.data['received'], sms.normalized)
+
+            strp_time = datetime.strptime(sms.data['received'], '%d-%m-%Y %H:%M:%S')
+            received = strp_time.strftime('%Y-%m-%d %H:%M:%S')
+
+            vals = (sms.data['sender'], sms.data['sender_name'], received, sms.normalized)
             cur.execute("""INSERT INTO sms (sender_nr, sender_name, received_at, message) VALUES (%s, %s, %s, %s)""",
                         vals)
             self.conn.commit()

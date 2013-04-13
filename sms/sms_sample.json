@@ -1,10 +1,10 @@
 {
-    "message_id": "23f324v2v23asdf99fdas",
-    "shortcode": "1008",
-    "keyword": "bata",
+    "message_id": "1234",
+    "shortcode": "9999",
+    "keyword": "test",
     "subkeyword": "mk",
-    "sender": "+31612345678",
-    "sender_name": "Jan Batavier indien bekend, anders null",
-    "message_raw": "bata mk raw message",
-    "received": "2013-04-16 18:45:23"
+    "sender": "0612345678",
+    "sender_name": null,
+    "message_raw": "test mk frop",
+    "received": "13-04-2013 16:46:54"
 }

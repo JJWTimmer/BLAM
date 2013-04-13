@@ -15,12 +15,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `blam`
---
-CREATE DATABASE `blam` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `blam`;
-
 -- --------------------------------------------------------
 
 --
@@ -190,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `sms` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `sender_nr` varchar(13) NOT NULL,
   `sender_name` varchar(50) DEFAULT NULL,
-  `received_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `received_at` timestamp NOT NULL,
   `message` varchar(500) NOT NULL,
   `handled_by` int(10) DEFAULT NULL,
   `handled_at` timestamp NULL DEFAULT NULL,

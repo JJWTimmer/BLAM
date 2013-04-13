@@ -1,2 +1,2 @@
 pika
-pycharm-debug.egg
+MySQL-python
