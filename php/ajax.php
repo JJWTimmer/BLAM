@@ -229,10 +229,31 @@ try {
             $response = BLAM::confirmNotification($_POST['ticket_id'], $_POST['update_id'], $_POST['type']);
             break;
 
-        case 'getOpenSMS':
-            break;
-        case 'getClosedSMS':
-            break;
+        case 'getSMSList':
+        		BLAM::checkLogged();		
+        		if($_POST['handled'] == 'true')
+        			{
+        			$response = array(array('timestamp' => '2013-04-13 00:09:30', 'limit' => 'false'),array('id' => 1, 'sender_name' => 'Anne S', 'handled' => 'true'),array('id' => 2, 'sender_name' => 'Jasper T', 'handled' => 'true'));
+        			}
+        		
+        		if($_POST['handled'] == 'false') 
+        			{
+        			$response = array(array('timestamp' => '2013-04-13 00:09:30', 'limit' => 'false'),array('id' => 3, 'sender_name' => 'Michel S'),array('id' => 4, 'sender_name' => 'Rolf M'));
+        			}	
+        		break;
+        
+        case 'getSMS':
+        		BLAM::checkLogged();		
+        		if($_POST['id']==1)
+        		{$response = array(array('id' => 1, 'sender_name' => 'Anne S', 'sender_nr' => '06-36402377', 'message' => 'meldt sms werkt!', 'received_at' => '2013-13-04-12:41:00'));}
+        		elseif($_POST['id']==2)
+        		{$response = array(array('id' => 2, 'sender_name' => 'Jasper T', 'sender_nr' => '06-12345678', 'message' => 'jazeker!', 'received_at' => '2013-13-04-12:43:00'));}
+        		if($_POST['id']==3)
+        		{$response = array(array('id' => 3, 'sender_name' => 'Michel S', 'sender_nr' => '06-11111111', 'message' => 'erg gaaf!', 'received_at' => '2013-13-04-12:45:00'));}
+        		elseif($_POST['id']==4)
+        		{$response = array(array('id' => 4, 'sender_name' => 'Rolf M', 'sender_nr' => '06-12121212', 'message' => 'Keigaaf!', 'received_at' => '2013-13-04-12:49:00'));}
+        break;
+        
         case 'handleSMS':
             break;
 

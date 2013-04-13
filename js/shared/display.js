@@ -104,6 +104,31 @@ function Display(pane) {
             }
         });
     };
+		
+		//TODO: update ajax reference
+		this.showOpenSMS = function (sms_id) {
+        $.tzPOST('getSMS', {id:sms_id}, function (r) {
+            if (!r.error) {
+                pane.getContentPane().empty();
+                markup_extra = general.render('opensms_expanded', r[0]);
+                pane.getContentPane().append(markup_extra);
+                pane.reinitialise();
+            }
+        });
+    };
+
+		//TODO: update ajax reference
+    this.showClosedSMS = function (sms_id) {
+        $.tzPOST('getSMS', {id:sms_id}, function (r) {
+            if (!r.error) {
+                pane.getContentPane().empty();
+                markup_extra = general.render('closedsms_expanded', r[0]);
+                pane.getContentPane().append(markup_extra);
+                pane.reinitialise();
+            }
+        });
+    };
+
 
     this.showTask = function (task_id) {
 
