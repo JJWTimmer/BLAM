@@ -118,13 +118,13 @@ try {
 
         case 'addChat':
             BLAM::checkLogged();
-            $response = BLAM::addChat($_POST['text'], $_SESSION['user']['id']);
+            $response = BLAM::addChat($_POST['text'], $_POST['role'], $_SESSION['user']['id']);
             // returns ChatId or exception
             break;
 
         case 'getChats':
             BLAM::checkLogged();
-            $response = BLAM::getChats($_POST['first_id'], $_POST['timestamp_last_update']); //last_id is mandatory, id or 'all'
+            $response = BLAM::getChats($_POST['first_id'],$_POST['role'], $_POST['timestamp_last_update']); //last_id is mandatory, id or 'all'
             // returns array(int MessageID, string Text, string Username, string Avatar, Datetime created) chats or exception
             break;
 

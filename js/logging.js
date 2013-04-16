@@ -14,13 +14,16 @@ var logging = {
         MessageEditMode:0,
         TicketUpdateMode:0,
         FeedbackUpdateMode:0,
-	OpenFeedbackVisible:1,
-	OpenAutomatedVisible:1
+				OpenFeedbackVisible:1,
+				OpenAutomatedVisible:1,
+				ChatVisible:0,				
     },
 
     // Init binds event listeners and sets up timers:
 
     init:function () {
+
+				$('#Chattext').elastic();
 
         // add listener for message submitbutton
         $('#submitbutton').bind('click', function () {
@@ -81,6 +84,11 @@ var logging = {
             verticalDragMaxHeight:12
         }).data('jsp');
 
+				logging.data.jspAPIChats = $('#RVD-ChatList').jScrollPane({
+            verticalDragMinHeight:12,
+            verticalDragMaxHeight:12
+        }).data('jsp');
+
         logging.data.jspAPIHandles = $('#HandlesList').jScrollPane({
             verticalDragMinHeight:12,
             verticalDragMaxHeight:12
@@ -119,6 +127,7 @@ var logging = {
 
         //setting up message 'class'
         message = new Message(logging.data.jspAPIMeldingen, 1);
+        chat = new Chat(logging.data.jspAPIChats,'RVD',1);
         user = new User("TopBar");
         //user = new User(logging.data.jspAPIUsers);
         handle = new Handle(logging.data.jspAPIHandles);
@@ -144,7 +153,7 @@ var logging = {
                 }
                 else {
                     $('#OpenAutomated').css('display', 'block');
-		    $('#ClosedAutomated').css('display', 'none');
+		    						$('#ClosedAutomated').css('display', 'none');
                     $('#automated_toggle_button').attr('value', ' Gesloten automatische meldingen tonen ');
                     logging.data.OpenAutomatedVisible = 1;
                 }
@@ -168,6 +177,26 @@ var logging = {
 		    						$('#ClosedFeedback').css('display', 'none');
                     $('#feedback_toggle_button').attr('value', ' Gesloten terugmeldingen tonen ');
                     logging.data.OpenFeedbackVisible = 1;
+                }
+                logging.reInitJSP();
+            }
+            working = false;
+        });
+
+				$('#rvdchat_toggle_button').live('click', function () {
+            if (!working) {
+                working = true;
+                if (logging.data.ChatVisible == 1) {
+                    $('#RVD-Chat').css('display', 'none');
+                    $('#Display').css('display', 'block');
+		    						$('#rvdchat_toggle_button').attr('value', ' RVD-chat tonen ');
+                    logging.data.ChatVisible = 0;
+                }
+                else {
+                    $('#RVD-Chat').css('display', 'block');
+		    						$('#Display').css('display', 'none');
+                    $('#rvdchat_toggle_button').attr('value', ' Display tonen ');
+                    logging.data.ChatVisible = 1;
                 }
                 logging.reInitJSP();
             }
@@ -202,6 +231,15 @@ var logging = {
                 message.getOldMessages();
                 working = false;
             }
+        });
+
+				//function to implement getting previous messages from db
+        $('#RVD-ChatList .retrieve_previous').live('click', function () {
+            if (!working) {
+                working = true;
+                chat.getOldChats();
+            }
+            working = false;
         });
 
         //function to implement getting previous tickets from db
@@ -420,6 +458,21 @@ var logging = {
             handle.searchHandles($('#search_handles').val());
         });
 
+				// Submitting a new chat entry:
+        $('#submitForm').submit(function () {
+            var text = $('#Chattext').val();
+            if (text.length == 0) {
+                return false;
+            }
+            if (!working) {
+                working = true;
+                chat.submitChat(text);
+                $('#Chattext').css('height', 'auto');
+            }
+            working = false;
+            return false;
+        });
+
         //function to implement clicking on dynamic element ticket
         $('#TicketsList .list_item_first').live('click', function () {
             display.showTicket($(this).attr("id"));
@@ -549,6 +602,7 @@ var logging = {
             $('#TopContainer').fadeIn();
 
             message.getMessages();
+            chat.getChats();
             user.getUsers();
             handle.getHandles();
             ticket.getTickets();
@@ -564,6 +618,7 @@ var logging = {
 
     killTimeouts:function () {
         message.kill();
+        chat.kill();
         user.kill();
         handle.kill();
         ticket.kill();
@@ -575,6 +630,7 @@ var logging = {
 
     reInitJSP:function () {
         logging.data.jspAPIMeldingen.reinitialise();
+        logging.data.jspAPIChats.reinitialise();
         //logging.data.jspAPIUsers.reinitialise();
         logging.data.jspAPIHandles.reinitialise();
         logging.data.jspAPITickets.reinitialise();

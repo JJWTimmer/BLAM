@@ -222,21 +222,23 @@ class BLAM
         $feedback->closeFeedback();
     }
 
-    public static function addChat($text, $user_id)
+    public static function addChat($text, $role, $user_id)
     {
         $chatline = new ChatLine(array(
             'text' => $text,
+            'role' => $role,
             'user_id' => $user_id
         ));
         $id = $chatline->create();
         return array('id' => $id);
     }
 
-    public static function getChats($chat_id, $timestamp_last_update = null)
+    public static function getChats($chat_id, $role, $timestamp_last_update = null)
     {
         $chatline = new ChatLine(array());
         $options = array(
             'first_id' => $chat_id,
+            'role' => $role,
             'since' => $timestamp_last_update,
             'limit_paging' => 20
         );

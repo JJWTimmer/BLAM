@@ -84,7 +84,7 @@ var ticketing = {
 
         user = new User("TopBar");
         message = new Message(ticketing.data.jspAPIMeldingen, 1);
-        chat = new Chat(ticketing.data.jspAPIChats, 1);
+        chat = new Chat(ticketing.data.jspAPIChats,'WL', 1);
         handle = new Handle(ticketing.data.jspAPIHandles);
         ticketNew = new Ticket(ticketing.data.jspAPINewTickets, [
             {1:'Nieuw'}

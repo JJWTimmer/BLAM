@@ -37,7 +37,7 @@ position:absolute;
 position:absolute;
   left:24%;
   top: 12%;
-  width:50%;
+  width:45%;
   height:55%;
   margin:1%;
 }
@@ -58,11 +58,22 @@ position:absolute;
 }
 */
 
+#RVD-Chat{
+    display: none;
+    position:absolute;
+    padding: 25px 2px 40px 2px;
+    right:0%;
+    top: 12%;
+    width:27%;
+    height:50%;
+    margin:1%;
+}
+
 #Display{
 position:absolute;
   right:0%;
   top: 12%;
-  width:22%;
+  width:27%;
   height:55%;
   margin:1%;
 }

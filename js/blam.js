@@ -18,6 +18,7 @@ var general = {
                     '<td rowspan="2">&nbsp;<a href="ticketing.html" target="_self" valign="middle">Ticketing</a></td>',
                     '<td rowspan="2">&nbsp;<a href="scheduling.html" target="_self" valign="middle">Scheduling</a></td>',
                     '<td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td>',
+                    '<td rowspan="2" valign="middle"><input type="button" id="rvdchat_toggle_button" value=" RVD-chat tonen "/></td>',
 		    						'<td rowspan="2" valign="middle"><input type="button" id="automated_toggle_button" value=" Gesloten Automatische meldingen tonen "/></td>',
                     '<td rowspan="2" valign="middle"><input type="button" id="feedback_toggle_button" value=" Gesloten terugmeldingen tonen "/></td>',
                     '<th rowspan="2" valign="middle"><span class="Topbar_nr_users"></span></th>',

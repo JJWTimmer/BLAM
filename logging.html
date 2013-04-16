@@ -22,10 +22,12 @@
     <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
     <script type="text/javascript" src="js/mwheelIntent.js"></script>
     <script type="text/javascript" src="js/jquery.highlight-3.js"></script>
+    <script type="text/javascript" src="js/jquery.elastic.js"></script>
 
     <!-- general javascript -->
     <script type="text/javascript" src="js/blam.js"></script>
     <script type="text/javascript" src="js/shared/message.js"></script>
+    <script type="text/javascript" src="js/shared/chat.js"></script>
     <script type="text/javascript" src="js/shared/user.js"></script>
     <script type="text/javascript" src="js/shared/handle.js"></script>
     <script type="text/javascript" src="js/shared/ticket.js"></script>
@@ -58,6 +60,15 @@
         <div id="Meldingen" class="holder rounded">
             <div id="MeldingenHeader" class="header rounded"><p>Meldingen</p></div>
             <div id="MeldingenList" class="list rounded"></div>
+        </div>
+        
+        <div id="RVD-Chat" class="holder rounded">
+        	<div id="RVD-ChatHeader" class="header"><p>RVD-Chat</p></div>
+          <div id="RVD-ChatList" class="list rounded"></div>
+          <form id="submitForm" method="post" action="">
+          	<div class="chat_input"><textarea id="Chattext" name="text" rows="1" cols="40"></textarea></div>
+           	<input type="submit" class="blueButton" id="Chatsubmit" value="Submit"/>
+          </form>
         </div>
         
         <div id="Display" class="holder rounded">

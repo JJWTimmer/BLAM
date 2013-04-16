@@ -51,8 +51,10 @@ CREATE TABLE IF NOT EXISTS `chatlines` (
   `user_id` int(10) NOT NULL,
   `text` text NOT NULL,
   `created` datetime NOT NULL,
+  `role_id` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_chatlines_users` (`user_id`),
+  KEY `FK_chatlines_roles` (`role_id`),
   FULLTEXT KEY `IXText` (`text`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -288,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `updates` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `username` varchar(8) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `password` char(40) DEFAULT NULL,
   `role_id` int(10) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,

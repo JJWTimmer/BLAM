@@ -1,7 +1,8 @@
-function Chat(pane, reverse) {
+function Chat(pane,role,reverse) {
     //constructor
     var self = this;
     var pane = pane;
+    var role = role;
     var noActivity = 0;
     var firstID = 0;
     var lastTimestamp = "";
@@ -14,7 +15,7 @@ function Chat(pane, reverse) {
     // (since last_id,timestamp), and adds them to the page. currently 2 hours past chats
 
     this.getChats = function () {
-        $.tzPOST('getChats', {timestamp_last_update:lastTimestamp}, function (r) {
+        $.tzPOST('getChats', {timestamp_last_update:lastTimestamp,role:role}, function (r) {
 
             //update chats from mysql db
             if (!r.error) {
@@ -96,7 +97,7 @@ function Chat(pane, reverse) {
     };
 
     this.getOldChats = function () {
-        $.tzPOST('getChats', {first_id:firstID}, function (r) {
+        $.tzPOST('getChats', {first_id:firstID,role:role}, function (r) {
             if (r) {
                 if (!r.error) {
                     //alert(r[0].query);
@@ -226,7 +227,7 @@ function Chat(pane, reverse) {
 
         // Using our tzPOST wrapper method to send the message
         // via a POST AJAX request:
-        $.tzPOST('addChat', {text:chatText}, function (r) {
+        $.tzPOST('addChat', {text:chatText,role:role}, function (r) {
             if (!r.error) {
                 //empty input form textbox
                 $('#Chattext').val('');
