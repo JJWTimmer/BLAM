@@ -2,7 +2,7 @@ var general = {
 
     // The render method generates the HTML markup
     // that is needed by the other methods:
-    render:function (template, params) {
+    render: function (template, params) {
 
         var arr = [];
 
@@ -19,7 +19,7 @@ var general = {
                     '<td rowspan="2">&nbsp;<a href="scheduling.html" target="_self" valign="middle">Scheduling</a></td>',
                     '<td rowspan="2">&nbsp;<a href="php/archief.php" target="_self" valign="middle"> Archief</a></td>',
                     '<td rowspan="2" valign="middle"><input type="button" id="rvdchat_toggle_button" value=" RVD-chat tonen "/></td>',
-		    						'<td rowspan="2" valign="middle"><input type="button" id="automated_toggle_button" value=" Gesloten Automatische meldingen tonen "/></td>',
+                    '<td rowspan="2" valign="middle"><input type="button" id="automated_toggle_button" value=" Gesloten Automatische meldingen tonen "/></td>',
                     '<td rowspan="2" valign="middle"><input type="button" id="feedback_toggle_button" value=" Gesloten terugmeldingen tonen "/></td>',
                     '<th rowspan="2" valign="middle"><span class="Topbar_nr_users"></span></th>',
                     '</tr>',
@@ -27,7 +27,7 @@ var general = {
                     '<td class="Topbar_info">', user.getUsername(), '</td>',
                     '<td class="Topbar_info">', user.getRole(), '</td>',
                     '</tr></table>',
-		    '<div class="Topbar_users"></div></td>',
+                    '<div class="Topbar_users"></div></td>',
                     '<a href="" class="logoutButton rounded">Logout</a></span>'];
 
                 break;
@@ -85,7 +85,7 @@ var general = {
 
             case 'messageLine':
                 if (params.ticket_id) {
-                    arr = ['<div class="message message_hover message_ticket message-', params.id, ' rounded" id=', params.id, '>', '<div class="msg-avatar"><img src="img/', params.avatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>', params.username, ':<BR>', params.time, '</p></div><div class="msg-text"><span class="text-span">', "[#" + params.ticket_id + "] " +  params.text, '</span></div></div>'];
+                    arr = ['<div class="message message_hover message_ticket message-', params.id, ' rounded" id=', params.id, '>', '<div class="msg-avatar"><img src="img/', params.avatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>', params.username, ':<BR>', params.time, '</p></div><div class="msg-text"><span class="text-span">', "[#" + params.ticket_id + "] " + params.text, '</span></div></div>'];
                 }
                 else {
                     arr = ['<div class="message message_hover message-', params.id, ' rounded" id=', params.id, '>', '<div class="msg-avatar"><img src="img/', params.avatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div><div class="msg-info"><p>', params.username, ':<BR>', params.time, '</p></div><div class="msg-text"><span class="text-span">', params.text, '</span></div></div>'];
@@ -215,14 +215,14 @@ var general = {
                 ];
                 break;
 
-					case 'sms':
+            case 'sms':
                 arr = [
                     '<div class="list_item_first sms sms-', params.id, ' rounded" id="', params.id, '"><p>', params.id, ': ', params.sender_name, '</p></div>'
                 ];
                 break;
 
-					//TODO check variable names
-					case 'opensms_expanded':
+            //TODO check variable names
+            case 'opensms_expanded':
                 arr = [
                     '<div class="list_item_sms_expanded rounded" id="', params.id, '">',
                     '<p><b>Melding:</b></p><p>', params.message, '</p>',
@@ -233,8 +233,8 @@ var general = {
                     '</div>'
                 ];
                 break;
-						
-						//TODO check variable names
+
+            //TODO check variable names
             case 'closedsms_expanded':
                 arr = [
                     '<div class="list_item_sms_expanded rounded" id="', params.id, '">',
@@ -247,7 +247,6 @@ var general = {
                     '</div>'
                 ];
                 break;
-
 
 
             case 'feedbackTBOpen':
@@ -675,7 +674,7 @@ var general = {
     },
 
     //highlight (add blam.css .highlight)
-    highlightHandles:function (elem, groups) {
+    highlightHandles: function (elem, groups) {
         elem.removeHighlight();
         //if (logging.data.groupsLoaded) {
         for (i = 0; i < groups.length; i++) {
@@ -689,11 +688,11 @@ var general = {
     },
 
 // This method displays an error message on the top of the page:
-    displayError:function (msg) {
+    displayError: function (msg) {
 
         var elem = $('<div>', {
-            id:'ErrorMessage',
-            html:msg
+            id: 'ErrorMessage',
+            html: msg
         });
 
         elem.click(function () {
@@ -710,11 +709,11 @@ var general = {
     },
 
 // This method displays saved message on the top of the page:
-    displaySaved:function (msg) {
+    displaySaved: function (msg) {
 
         var elem = $('<div>', {
-            id:'SavedMessage',
-            html:msg
+            id: 'SavedMessage',
+            html: msg
         });
 
         elem.click(function () {
@@ -732,7 +731,7 @@ var general = {
     },
 
 
-    stripToTime:function (date_and_time) {
+    stripToTime: function (date_and_time) {
         var strTime = "";
         if (date_and_time) {
 
@@ -747,7 +746,7 @@ var general = {
         return strTime;
     },
 
-    convertDateToArray:function (date) {
+    convertDateToArray: function (date) {
         var d = date.getDate();
         var day = (d < 10) ? '0' + d : d;
         var m = date.getMonth() + 1;
@@ -764,11 +763,11 @@ var general = {
         weekday[5] = "Vrijdag";
         weekday[6] = "Zaterdag";
 
-        return {day:day, month:month, year:year, weekday:weekday[date.getDay()]};
+        return {day: day, month: month, year: year, weekday: weekday[date.getDay()]};
     },
 
 
-    generateTimestamp:function (date) {
+    generateTimestamp: function (date) {
         if (date) {
             //date value is the time in ms from 1970. subtract the amount of ms needed to get a date in the past
             var d = date;
@@ -821,7 +820,7 @@ $.fn.defaultText = function (value) {
 
 // function to insert text at the cursor (instead of behind text)
 $.fn.extend({
-    insertAtCaret:function (myValue) {
+    insertAtCaret: function (myValue) {
         var obj;
         if (typeof this[0].name != 'undefined') obj = this[0];
         else obj = this;

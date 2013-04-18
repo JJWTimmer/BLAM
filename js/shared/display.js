@@ -5,7 +5,7 @@ function Display(pane) {
 
     this.showTicketDetail = function (ticket_id, parent_id) {
         //main function that displays the ticketdetails
-        $.tzPOST('getTicketDetail', {id:ticket_id}, function (r) {
+        $.tzPOST('getTicketDetail', {id: ticket_id}, function (r) {
             if (r) {
                 if (!r.error) {
                     //$('#TicketDetailsList').empty();
@@ -73,7 +73,7 @@ function Display(pane) {
 
     this.showTicket = function (ticket_id) {
 
-        $.tzPOST('getTicketDetail', {id:ticket_id}, function (r) {
+        $.tzPOST('getTicketDetail', {id: ticket_id}, function (r) {
             if (!r.error) {
                 pane.getContentPane().empty();
                 markup_extra = general.render('parentticket_expanded', r[0]);
@@ -84,7 +84,7 @@ function Display(pane) {
     };
 
     this.showOpenFeedback = function (feedback_id) {
-        $.tzPOST('getUpdates', {id:feedback_id}, function (r) {
+        $.tzPOST('getUpdates', {id: feedback_id}, function (r) {
             if (!r.error) {
                 pane.getContentPane().empty();
                 markup_extra = general.render('openfeedback_expanded', r[0]);
@@ -95,7 +95,7 @@ function Display(pane) {
     };
 
     this.showClosedFeedback = function (feedback_id) {
-        $.tzPOST('getUpdates', {id:feedback_id}, function (r) {
+        $.tzPOST('getUpdates', {id: feedback_id}, function (r) {
             if (!r.error) {
                 pane.getContentPane().empty();
                 markup_extra = general.render('closedfeedback_expanded', r[0]);
@@ -104,25 +104,29 @@ function Display(pane) {
             }
         });
     };
-		
-		//TODO: update ajax reference
-		this.showOpenSMS = function (sms_id) {
-        $.tzPOST('getSMS', {id:sms_id}, function (r) {
+
+    //TODO: update ajax reference
+    this.showOpenSMS = function (sms_id) {
+        z = 3;
+        $.tzPOST('getSMS', {id: sms_id}, function (r) {
             if (!r.error) {
                 pane.getContentPane().empty();
-                markup_extra = general.render('opensms_expanded', r[0]);
+                markup_extra = general.render('opensms_expanded', r[1]);
                 pane.getContentPane().append(markup_extra);
                 pane.reinitialise();
+            } else {
+                x = 1;
             }
         });
+        y = 2;
     };
 
-		//TODO: update ajax reference
+    //TODO: update ajax reference
     this.showClosedSMS = function (sms_id) {
-        $.tzPOST('getSMS', {id:sms_id}, function (r) {
+        $.tzPOST('getSMS', {id: sms_id}, function (r) {
             if (!r.error) {
                 pane.getContentPane().empty();
-                markup_extra = general.render('closedsms_expanded', r[0]);
+                markup_extra = general.render('closedsms_expanded', r[1]);
                 pane.getContentPane().append(markup_extra);
                 pane.reinitialise();
             }
@@ -132,7 +136,7 @@ function Display(pane) {
 
     this.showTask = function (task_id) {
 
-        $.tzPOST('getTaskDetail', {id:task_id}, function (r) {
+        $.tzPOST('getTaskDetail', {id: task_id}, function (r) {
             if (!r.error) {
                 pane.getContentPane().empty();
                 markup_extra = general.render('task_detail', r[0]);

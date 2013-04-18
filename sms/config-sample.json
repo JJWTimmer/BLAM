@@ -9,5 +9,7 @@
     "blam_port": 3306,
     "blam_user": "user",
     "blam_password": false,
-    "blam_database": "blam"
+    "blam_database": "blam",
+
+    "debug": false
 }

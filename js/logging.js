@@ -9,21 +9,21 @@ var logging = {
 
     // data holds variables for use in the class:
 
-    data:{
-        groupsLoaded:false,
-        MessageEditMode:0,
-        TicketUpdateMode:0,
-        FeedbackUpdateMode:0,
-				OpenFeedbackVisible:1,
-				OpenAutomatedVisible:1,
-				ChatVisible:0,				
+    data: {
+        groupsLoaded: false,
+        MessageEditMode: 0,
+        TicketUpdateMode: 0,
+        FeedbackUpdateMode: 0,
+        OpenFeedbackVisible: 1,
+        OpenAutomatedVisible: 1,
+        ChatVisible: 0
     },
 
     // Init binds event listeners and sets up timers:
 
-    init:function () {
+    init: function () {
 
-				$('#Chattext').elastic();
+        $('#Chattext').elastic();
 
         // add listener for message submitbutton
         $('#submitbutton').bind('click', function () {
@@ -80,59 +80,59 @@ var logging = {
         // and saving the plugin's API in logging.data:
 
         logging.data.jspAPIMeldingen = $('#MeldingenList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
-				logging.data.jspAPIChats = $('#RVD-ChatList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+        logging.data.jspAPIChats = $('#RVD-ChatList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
         logging.data.jspAPIHandles = $('#HandlesList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
         logging.data.jspAPITickets = $('#TicketsList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
         logging.data.jspAPIOpenFeedback = $('#OpenFeedbackList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
         logging.data.jspAPIClosedFeedback = $('#ClosedFeedbackList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
-				logging.data.jspAPIOpenSMS = $('#OpenAutomatedList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+        logging.data.jspAPIOpenSMS = $('#OpenAutomatedList').jScrollPane({
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
         logging.data.jspAPIClosedSMS = $('#ClosedAutomatedList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
 
         logging.data.jspAPIDisplay = $('#DisplayList').jScrollPane({
-            verticalDragMinHeight:12,
-            verticalDragMaxHeight:12
+            verticalDragMinHeight: 12,
+            verticalDragMaxHeight: 12
         }).data('jsp');
 
         //setting up message 'class'
         message = new Message(logging.data.jspAPIMeldingen, 1);
-        chat = new Chat(logging.data.jspAPIChats,'RVD',1);
+        chat = new Chat(logging.data.jspAPIChats, 'RVD', 1);
         user = new User("TopBar");
         //user = new User(logging.data.jspAPIUsers);
         handle = new Handle(logging.data.jspAPIHandles);
         ticket = new Ticket(logging.data.jspAPITickets, [
-            {1:'Open', 2:'Nieuw'}
+            {1: 'Open', 2: 'Nieuw'}
         ], 1);
         feedbackOpen = new UpdateAndFeedback(logging.data.jspAPIOpenFeedback, 'false', 1);
         feedbackClosed = new UpdateAndFeedback(logging.data.jspAPIClosedFeedback, 'true', 1);
@@ -148,12 +148,12 @@ var logging = {
                 if (logging.data.OpenAutomatedVisible == 1) {
                     $('#OpenAutomated').css('display', 'none');
                     $('#ClosedAutomated').css('display', 'block');
-		    						$('#automated_toggle_button').attr('value', ' Open automatische meldingen tonen ');
+                    $('#automated_toggle_button').attr('value', ' Open automatische meldingen tonen ');
                     logging.data.OpenAutomatedVisible = 0;
                 }
                 else {
                     $('#OpenAutomated').css('display', 'block');
-		    						$('#ClosedAutomated').css('display', 'none');
+                    $('#ClosedAutomated').css('display', 'none');
                     $('#automated_toggle_button').attr('value', ' Gesloten automatische meldingen tonen ');
                     logging.data.OpenAutomatedVisible = 1;
                 }
@@ -169,12 +169,12 @@ var logging = {
                 if (logging.data.OpenFeedbackVisible == 1) {
                     $('#OpenFeedback').css('display', 'none');
                     $('#ClosedFeedback').css('display', 'block');
-		    						$('#feedback_toggle_button').attr('value', ' Open terugmeldingen tonen ');
+                    $('#feedback_toggle_button').attr('value', ' Open terugmeldingen tonen ');
                     logging.data.OpenFeedbackVisible = 0;
                 }
                 else {
                     $('#OpenFeedback').css('display', 'block');
-		    						$('#ClosedFeedback').css('display', 'none');
+                    $('#ClosedFeedback').css('display', 'none');
                     $('#feedback_toggle_button').attr('value', ' Gesloten terugmeldingen tonen ');
                     logging.data.OpenFeedbackVisible = 1;
                 }
@@ -183,18 +183,18 @@ var logging = {
             working = false;
         });
 
-				$('#rvdchat_toggle_button').live('click', function () {
+        $('#rvdchat_toggle_button').live('click', function () {
             if (!working) {
                 working = true;
                 if (logging.data.ChatVisible == 1) {
                     $('#RVD-Chat').css('display', 'none');
                     $('#Display').css('display', 'block');
-		    						$('#rvdchat_toggle_button').attr('value', ' RVD-chat tonen ');
+                    $('#rvdchat_toggle_button').attr('value', ' RVD-chat tonen ');
                     logging.data.ChatVisible = 0;
                 }
                 else {
                     $('#RVD-Chat').css('display', 'block');
-		    						$('#Display').css('display', 'none');
+                    $('#Display').css('display', 'none');
                     $('#rvdchat_toggle_button').attr('value', ' Display tonen ');
                     logging.data.ChatVisible = 1;
                 }
@@ -202,7 +202,6 @@ var logging = {
             }
             working = false;
         });
-
 
 
         //function to implement clicking on message
@@ -233,7 +232,7 @@ var logging = {
             }
         });
 
-				//function to implement getting previous messages from db
+        //function to implement getting previous messages from db
         $('#RVD-ChatList .retrieve_previous').live('click', function () {
             if (!working) {
                 working = true;
@@ -269,7 +268,7 @@ var logging = {
             working = false;
         });
 
-				//function to implement getting previous feedbacks from db
+        //function to implement getting previous feedbacks from db
         $('#OpenAutomatedList .retrieve_previous_sms').live('click', function () {
             if (!working) {
                 working = true;
@@ -307,7 +306,7 @@ var logging = {
         });
 
         $('#updatebutton').bind('click', function () {
-            $.tzPOST('updateMessage', {id:logging.data.selectedmessage, text:$('#messagetext').val()}, function (r) {
+            $.tzPOST('updateMessage', {id: logging.data.selectedmessage, text: $('#messagetext').val()}, function (r) {
                 if (r.error) {
                     general.displayError(r.error);
                 }
@@ -327,7 +326,7 @@ var logging = {
         });
 
         $('#update_ticketbutton').bind('click', function () {
-            $.tzPOST('updateMessage', {id:logging.data.selectedmessage, text:$('#messagetext').val(), ticket:'True'}, function (r) {
+            $.tzPOST('updateMessage', {id: logging.data.selectedmessage, text: $('#messagetext').val(), ticket: 'True'}, function (r) {
                 if (r.error) {
                     general.displayError(r.error);
                 }
@@ -359,7 +358,7 @@ var logging = {
 
         $('#add_ticket_additionbutton').bind('click', function () {
             if ($('#messagetext').val().length > 0) {
-                $.tzPOST('createAddition', {ticket_id:logging.data.selectedticket, message:$('#messagetext').val()}, function (r) {
+                $.tzPOST('createAddition', {ticket_id: logging.data.selectedticket, message: $('#messagetext').val()}, function (r) {
                     if (r.error) {
                         general.displayError(r.error);
                     }
@@ -394,7 +393,7 @@ var logging = {
 
         $('#answer_feedbackbutton').bind('click', function () {
             if ($('#messagetext').val().length > 0) {
-                $.tzPOST('createAnswer', {ticket_id:logging.data.selectedticket, message:$('#messagetext').val()}, function (r) {
+                $.tzPOST('createAnswer', {ticket_id: logging.data.selectedticket, message: $('#messagetext').val()}, function (r) {
                     if (r.error) {
                         general.displayError(r.error);
                     }
@@ -420,20 +419,20 @@ var logging = {
             }
         });
 
-				$('#answersms').live('click', function () {
-                $.tzPOST('handleSMS', {id:logging.data.selectedsms}, function (r) {
-                    if (r.error) {
-                        general.displayError(r.error);
-                    }
-                    else {
-                        smsOpen.refreshSMS();
-                        smsClosed.refreshSMS();
-                        display.clearDisplay();
-                        logging.data.selectedticket = 0;
-                        logging.data.selectedfeedback = 0;
-                        logging.data.selectedsms = 0;
-                    }
-                });
+        $('#answersms').live('click', function () {
+            $.tzPOST('handleSMS', {id: logging.data.selectedsms}, function (r) {
+                if (r.error) {
+                    general.displayError(r.error);
+                }
+                else {
+                    smsOpen.refreshSMS();
+                    smsClosed.refreshSMS();
+                    display.clearDisplay();
+                    logging.data.selectedticket = 0;
+                    logging.data.selectedfeedback = 0;
+                    logging.data.selectedsms = 0;
+                }
+            });
         });
 
         //function to implement clicking on dynamic element groups
@@ -458,7 +457,7 @@ var logging = {
             handle.searchHandles($('#search_handles').val());
         });
 
-				// Submitting a new chat entry:
+        // Submitting a new chat entry:
         $('#submitForm').submit(function () {
             var text = $('#Chattext').val();
             if (text.length == 0) {
@@ -497,9 +496,10 @@ var logging = {
             logging.data.selectedsms = 0;
         });
 
- 				//function to implement clicking on dynamic element opensms
+        //function to implement clicking on dynamic element opensms
         $('#OpenAutomatedList .list_item_first').live('click', function () {
-            display.showOpenSMS($(this).attr("id"));
+            var smsid = $(this).attr("id");
+            display.showOpenSMS(smsid);
             logging.data.selectedticket = 0;
             logging.data.selectedfeedback = 0;
             logging.data.selectedsms = $(this).attr("id");
@@ -587,7 +587,7 @@ var logging = {
     /*-------------------------------------*/
 
     // The login function is called when the user succesfully logs in
-    login:function (username, avatar, role) {
+    login: function (username, avatar, role) {
         //replace empty avatar field
         var new_avatar = avatar;
         if ((avatar == "") || (avatar == "NULL")) {
@@ -616,7 +616,7 @@ var logging = {
         });
     },
 
-    killTimeouts:function () {
+    killTimeouts: function () {
         message.kill();
         chat.kill();
         user.kill();
@@ -628,7 +628,7 @@ var logging = {
         smsClosed.kill();
     },
 
-    reInitJSP:function () {
+    reInitJSP: function () {
         logging.data.jspAPIMeldingen.reinitialise();
         logging.data.jspAPIChats.reinitialise();
         //logging.data.jspAPIUsers.reinitialise();

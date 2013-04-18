@@ -1,6 +1,6 @@
 <?php
 
-/* The Chat class exploses public static methods, used by ajax.php */
+/* The Chat class exposes public static methods, used by ajax.php */
 
 class BLAM
 {
@@ -217,7 +217,7 @@ class BLAM
     {
         $feedback = new Update(array(
             'id' => $id,
-            'called_by' => $_SESSION['user']['id']
+            'called_by' => $user_id
         ));
         $feedback->closeFeedback();
     }
@@ -420,10 +420,27 @@ class BLAM
     }
 
     // returns MessageId or exception
-    public static function getSMSList($handled)
+    public static function getSMSList($handled, $first_id, $timestamp_last_update)
     {
         $sms = new SMS(array());
-        $messages = $sms->getList($handled);
+        $limit_paging = 20;
+        $messages = $sms->getList($handled, $first_id, $timestamp_last_update, $limit_paging);
         return $messages;
+    }
+
+    public static function getSMSDetail($id)
+    {
+        $sms = new SMS(array('id' => $id));
+        $details = $sms->get();
+        return $details;
+    }
+
+    public static function handleSMS($id, $user_id)
+    {
+        $sms = new SMS(array(
+            'id' => $id,
+            'handled_by' => $user_id
+        ));
+        $sms->handle();
     }
 }

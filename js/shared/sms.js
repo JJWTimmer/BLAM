@@ -11,7 +11,7 @@ function SMS(pane, handled, reverse) {
 
 //TODO: update ajax reference
     this.getSMS = function () {
-        $.tzPOST('getSMSList', {type:'sms', timestamp_last_update:lastTimestamp, handled:handled}, function (r) {
+        $.tzPOST('getSMSList', {timestamp_last_update:lastTimestamp, handled:handled}, function (r) {
             if (r) {
                 if (r.error) {
                     general.displayError(r.error);
@@ -92,7 +92,6 @@ function SMS(pane, handled, reverse) {
 
 
     this.addSMS = function (my_sms) {
-
         var markup = '';
         markup = general.render('sms', my_sms);
 
@@ -102,7 +101,7 @@ function SMS(pane, handled, reverse) {
         //alert('called:'+called);
         //alert('params.called:'+params.called);
 
-        if ((my_sms.handled == null && handled == 'false') || (my_sms.handled != null && handled == 'true')) {
+        if ((my_sms.handled_at == null && handled == 'false') || (my_sms.handled_at != null && handled == 'true')) {
             match = 1;
         }
         //sms status matches sms list
@@ -185,7 +184,7 @@ function SMS(pane, handled, reverse) {
 
 		//TODO change ajax reference to actual reference
     this.closeSMS = function (sms_id) {
-        $.tzPOST('closeSMS', {id:sms_id}, function (r) {
+        $.tzPOST('handleSMS', {id:sms_id}, function (r) {
             //TODO: what does this line below do?
             display.clearDisplay();
             $('.sms-'+sms_id).remove();

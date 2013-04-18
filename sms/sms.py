@@ -1,11 +1,16 @@
 import json
 
 
-class BataSMS(object):
+class SMS(object):
+    def __init__(self, msg):
+        self.msg = msg
+
+
+class BataSMS(SMS):
     def __init__(self, msg):
         self.json = msg
         self.data = json.loads(msg)
-        self.normalized = self.normalize()
+        super(BataSMS, self).__init__(self.normalize())
 
     def normalize(self):
         msg = self.data['message_raw']

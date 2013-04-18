@@ -33,7 +33,7 @@ channel.basic_publish(exchange='',
     "sender"        : "+31612345678",
     "sender_name"   : "Jan Batavier indien bekend, anders null",
     "message_raw"   : "bata mk raw message",
-    "received"      : "2013-04-16 18:45:23"
+    "received"      : "13-04-2013 16:46:54"
 }""")
 print " [x] Sent sms"
 connection.close()

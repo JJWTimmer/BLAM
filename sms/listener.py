@@ -23,10 +23,13 @@ class SMSDaemon(Daemon):
 
         def callback(ch, method, properties, body):
             logging.info('SMSDaemon callback')
-            sms = BataSMS(body)
-            blam = Blam(self.config['blam_host'], self.config['blam_port'], self.config['blam_user'],
-                        self.config['blam_password'], self.config['blam_database'])
-            blam.add_sms(sms)
+            try:
+                sms = BataSMS(body)
+                blam = Blam(self.config['blam_host'], self.config['blam_port'], self.config['blam_user'],
+                            self.config['blam_password'], self.config['blam_database'])
+                blam.add_sms(sms)
+            except Exception, ex:
+                logging.error(ex)
 
         channel.basic_consume(callback, queue=self.config['queue_name'], no_ack=True)
         logging.info('SMSDaemon start consuming')
