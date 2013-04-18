@@ -112,7 +112,7 @@ class Ticket extends BLAMBase
             WHERE t.parent_id IS NULL";
 
         // retrieve previous tickets
-        if (($recursive == 'true' || $recursive == 'false' || is_null($recurive)) && is_numeric($first_id) && (is_array($status) || empty($status))) {
+        if (($recursive == 'true' || $recursive == 'false' || is_null($recursive)) && is_numeric($first_id) && (is_array($status) || empty($status))) {
             if (is_array($status) && !empty($status)) {
                 $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
             }
@@ -120,7 +120,7 @@ class Ticket extends BLAMBase
             $q .= " ORDER BY t.id DESC LIMIT $limit_paging) t";
             $q .= " ORDER BY id ASC";
         } //retrieve updates about tickets
-        elseif (($recursive == 'true' || $recursive == 'false' || is_null($recurive)) && strtotime($timestamp_last_update) && (is_array($status) || empty($status))) {
+        elseif (($recursive == 'true' || $recursive == 'false' || is_null($recursive)) && strtotime($timestamp_last_update) && (is_array($status) || empty($status))) {
             if (is_array($status) && !empty($status)) {
                 //just return all type of tickets which are modified, otherwise moving issue
                 //$q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
@@ -129,14 +129,14 @@ class Ticket extends BLAMBase
             $q .= " ORDER BY t.id DESC LIMIT 5) t";
             $q .= " ORDER BY id ASC";
         } //retrieve all tickets (for select box)
-        elseif (($recursive == 'true' || $recursive == 'false' || is_null($recurive)) && ($timestamp_last_update == 'all') && (is_array($status) || empty($status))) {
+        elseif (($recursive == 'true' || $recursive == 'false' || is_null($recursive)) && ($timestamp_last_update == 'all') && (is_array($status) || empty($status))) {
             if (is_array($status) && !empty($status)) {
                 $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
             }
             $q .= " ORDER BY t.id DESC) t";
             $q .= " ORDER BY id ASC";
         } // first retrieval of tickets
-        elseif (($recursive == 'true' || $recursive == 'false' || is_null($recurive)) && empty($timestamp_last_update) && (is_array($status) || empty($status))) {
+        elseif (($recursive == 'true' || $recursive == 'false' || is_null($recursive)) && empty($timestamp_last_update) && (is_array($status) || empty($status))) {
             if (is_array($status) && !empty($status)) {
                 $q .= " AND s.name IN ('" . implode("','", $status[0]) . "') "; // security risk, implode not escaped
             }

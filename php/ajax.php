@@ -230,17 +230,18 @@ try {
             break;
 
         case 'getSMSList':
-        		BLAM::checkLogged();		
-        		if($_POST['handled'] == 'true')
-        			{
-        			$response = array(array('timestamp' => '2013-04-13 00:09:30', 'limit' => 'false'),array('id' => 1, 'sender_name' => 'Anne S', 'handled' => 'true'),array('id' => 2, 'sender_name' => 'Jasper T', 'handled' => 'true'));
-        			}
-        		
-        		if($_POST['handled'] == 'false') 
-        			{
-        			$response = array(array('timestamp' => '2013-04-13 00:09:30', 'limit' => 'false'),array('id' => 3, 'sender_name' => 'Michel S'),array('id' => 4, 'sender_name' => 'Rolf M'));
-        			}	
-        		break;
+            BLAM::checkLogged();
+//        		if($_POST['handled'] == 'true')
+//        			{
+//        			$response = array(array('timestamp' => '2013-04-13 00:09:30', 'limit' => 'false'),array('id' => 1, 'sender_name' => 'Anne S', 'handled' => 'true'),array('id' => 2, 'sender_name' => 'Jasper T', 'handled' => 'true'));
+//        			}
+//
+//        		if($_POST['handled'] == 'false')
+//        			{
+//        			$response = array(array('timestamp' => '2013-04-13 00:09:30', 'limit' => 'false'),array('id' => 3, 'sender_name' => 'Michel S'),array('id' => 4, 'sender_name' => 'Rolf M'));
+//        			}
+            $response = BLAM::getSMSList($_POST['handled']);
+        	break;
         
         case 'getSMS':
         		BLAM::checkLogged();		

@@ -418,4 +418,12 @@ class BLAM
         $details = $task->getDetails();
         return $details;
     }
+
+    // returns MessageId or exception
+    public static function getSMSList($handled)
+    {
+        $sms = new SMS(array());
+        $messages = $sms->getList($handled);
+        return $messages;
+    }
 }
