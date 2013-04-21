@@ -585,7 +585,7 @@ var logging = {
     login: function (username, avatar, role) {
         //replace empty avatar field
         var new_avatar = avatar;
-        if ((avatar == "") || (avatar == "NULL")) {
+        if ((avatar == "") || (avatar == "NULL") || (avatar == null)) {
             new_avatar = "unknown30x30.png";
         }
 
