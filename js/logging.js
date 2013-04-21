@@ -421,17 +421,12 @@ var logging = {
 
         $('#answersms').live('click', function () {
             $.tzPOST('handleSMS', {id: logging.data.selectedsms}, function (r) {
-                if (r.error) {
-                    general.displayError(r.error);
-                }
-                else {
-                    smsOpen.refreshSMS();
-                    smsClosed.refreshSMS();
-                    display.clearDisplay();
-                    logging.data.selectedticket = 0;
-                    logging.data.selectedfeedback = 0;
-                    logging.data.selectedsms = 0;
-                }
+            	smsOpen.refreshSMS();
+              smsClosed.refreshSMS();
+              display.clearDisplay();
+              logging.data.selectedticket = 0;
+              logging.data.selectedfeedback = 0;
+              logging.data.selectedsms = 0;
             });
         });
 

@@ -16,7 +16,7 @@ class SMS extends BLAMBase
     //getOpen/getHandled
     public function getList($handled = null, $first_id = null, $timestamp_last_update = null, $limit_paging = null)
     {
-        $q = "SELECT sms.id, sender_nr, sender_name, received_at, handled_at FROM sms";
+        $q = "SELECT * FROM (SELECT sms.id, sender_nr, sender_name, received_at, handled_at FROM sms";
 
         // retrieve previous updates
         if (is_numeric($first_id)) {
@@ -39,9 +39,13 @@ class SMS extends BLAMBase
 
             //limit and re-order the search results for paging functionality
             if (is_null($limit_paging)) {
-                $q .= " ORDER BY id ASC";
+                //$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id DESC) t";
+            		$q .= " ORDER BY id ASC";
             } elseif (!is_null($limit_paging) && is_numeric($limit_paging)) {
-                $q .= " ORDER BY id ASC LIMIT $limit_paging";
+                //$q .= " ORDER BY id ASC LIMIT $limit_paging";
+                $q .= " ORDER BY id DESC LIMIT $limit_paging) t";
+            		$q .= " ORDER BY id ASC";
             } else {
                 throw new Exception("limit_paging must be numeric");
             }
@@ -58,9 +62,13 @@ class SMS extends BLAMBase
 
             //limit and re-order the search results for paging functionality
             if (is_null($limit_paging)) {
-                $q .= " ORDER BY id ASC";
+                //$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id DESC) t";
+            		$q .= " ORDER BY id ASC";
             } elseif (!is_null($limit_paging) && is_numeric($limit_paging)) {
-                $q .= " ORDER BY id ASC LIMIT $limit_paging";
+                //$q .= " ORDER BY id ASC LIMIT $limit_paging";
+                $q .= " ORDER BY id DESC LIMIT $limit_paging) t";
+            		$q .= " ORDER BY id ASC";
             } else {
                 throw new Exception("limit_paging must be numeric");
             }
@@ -87,9 +95,13 @@ class SMS extends BLAMBase
             }
             //limit and re-order the search results for paging functionality
             if (is_null($limit_paging)) {
-                $q .= " ORDER BY id ASC";
+                //$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id DESC) t";
+            		$q .= " ORDER BY id ASC";
             } elseif (!is_null($limit_paging) && is_numeric($limit_paging)) {
-                $q .= " ORDER BY id ASC LIMIT $limit_paging";
+                //$q .= " ORDER BY id ASC LIMIT $limit_paging";
+                $q .= " ORDER BY id DESC LIMIT $limit_paging) t";
+            		$q .= " ORDER BY id ASC";
             } else {
                 throw new Exception("limit_paging must be numeric");
             }
