@@ -75,6 +75,12 @@ try {
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
 
+				case 'getMessageDetail':
+            BLAM::checkLogged(); //date_time string format: '2011-02-23 09:03:01'
+            $response = BLAM::getMessageDetail($_POST['id']);
+            //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
+            break;
+
         case 'searchMessages':
             BLAM::checkLogged();
             $response = BLAM::searchMessages($_POST['keyword']);

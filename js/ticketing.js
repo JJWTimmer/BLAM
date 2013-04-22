@@ -275,6 +275,26 @@ var ticketing = {
             working = false;
             return false;
         });
+        
+        // submit chat entry with enter
+        $(document).keypress(function(e) {
+    			if(e.which == 13) {
+        		if($("#Chattext").is(':focus')) {
+		        	var text = $('#Chattext').val();
+            if (text.length == 0) {
+                return false;
+            }
+            if (!working) {
+                working = true;
+                chat.submitChat(text);
+                $('#Chattext').css('height', 'auto');
+            }
+
+            working = false;
+        		}
+    			}
+				});
+        
 
         // Search for a certain keyword:
         $('#Searchsubmit').bind('click', function () {
@@ -373,6 +393,14 @@ var ticketing = {
         $('#closeticketbutton').live('click', function () {
             $.tzPOST('changeTicketDetails', {id:ticketing.data.selectedticket, title:$('#ticket_title').val(), text:$('#ticket_text').val(), location:$('#ticket_location').val(), solution:$('#ticket_oplossing').val(), handle_id:$('#ticket_Handle').val(), reference:$('#ticket_reference').val()}, function (r) {
                 if (r == null) {
+                
+                	$.tzPOST('closeTicket', {id:ticketing.data.selectedticket}, function (r) {
+                		if (r == null) {
+                		}
+                		else {
+                    general.displayError(r.error);
+                		}
+            			});
                 }
                 else {
                     general.displayError(r.error);
@@ -389,14 +417,7 @@ var ticketing = {
                 });
             }
 
-
-            $.tzPOST('closeTicket', {id:ticketing.data.selectedticket}, function (r) {
-                if (r == null) {
-                }
-                else {
-                    general.displayError(r.error);
-                }
-            });
+            ticketNew.refreshTickets();
             ticketOpen.refreshTickets();
             ticketClosed.refreshTickets();
             general.displaySaved("Saved Ticket: " + $('#ticket_title').val());

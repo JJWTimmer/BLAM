@@ -140,6 +140,13 @@ class BLAM
         return $messages;
     }
 
+		public static function getMessageDetail($msg_id)
+    {
+        $msg = new Message(array());
+        $message = $msg->getDetail($msg_id);
+        return $message;
+    }
+
     public static function searchMessages($keyword)
     {
         if (empty($keyword)) {
@@ -379,23 +386,21 @@ class BLAM
                 case 'message':
                     //get id for message from somewhere, not from client
                     $msg = new Message(array('ticket_id' => $ticket_id));
-
-                    $ticket->clearNotification();
                     $msg->clearNotification();
+                    $ticket->clearNotification();
                     break;
 
                 case 'addition':
                     $update = new Update(array('id' => $update_id));
-
-                    $ticket->clearNotification();
+                    
                     $update->clearNotification();
+                    $ticket->clearNotification();
                     break;
 
                 case 'answer':
                     $update = new Update(array('id' => $update_id));
-
-                    $ticket->clearNotification();
                     $update->clearNotification();
+                    $ticket->clearNotification();
                     break;
 
                 default:

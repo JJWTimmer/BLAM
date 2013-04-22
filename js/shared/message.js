@@ -117,6 +117,7 @@ function Message(pane, reverse) {
         });
     };
 
+		
     this.getOldMessages = function () {
         $.tzPOST('getMessages', {first_id:firstID}, function (r) {
             if (r) {

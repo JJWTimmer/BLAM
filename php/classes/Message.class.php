@@ -81,6 +81,17 @@ class Message extends BLAMBase
         return $data;
     }
 
+		public function getDetail($msg_id)
+    {
+            $results = DB::query("
+                SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
+                FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
+                WHERE msg.id = '" . DB::esc($msg_id) . "'");
+        
+        while ($data[] = mysqli_fetch_assoc($results)) ;
+        if (!is_null($data) && end($data) == null) array_pop($data);
+        return $data;
+    }
 
     public function update()
     {

@@ -328,7 +328,7 @@ class Ticket extends BLAMBase
             $count_mes = $count_row_mes['count(updated)'];
         }
 
-        if (($count_upd + $count_mes) == 1) {
+        if (($count_upd + $count_mes) == 0) {
             $q_clear = "UPDATE tickets SET updated = 0, modified = '" . date('Y-m-d G:i:s') . "' WHERE id = " . DB::esc($this->id) . "";
             $res = DB::query($q_clear);
             if (!$res) throw new Exception(DB::getMySQLiObject()->error);

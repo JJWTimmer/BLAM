@@ -215,12 +215,23 @@ var logging = {
                     $('#update_ticketbutton').show();
                 }
 
-                $('#messagetext').val($(this).find("span").text());
+								$.tzPOST('getMessageDetail', {id:$(this).attr("id")}, function (r) {
+            			if (r) {
+                		if (!r.error) {
+                     		$('#messagetext').val(r[0].text);
+                     		logging.data.selectedmessage = r[0].id;
+		                }
+    		            else {
+        	            general.displayError(r.error);
+          		      }
+            			}
+    						});
+                
                 $('#submitbutton').hide();
                 $('#submit_ticketbutton').hide();
                 $('#updatebutton').show();
                 $('#cancelbutton').show();
-                logging.data.selectedmessage = $(this).attr("id");
+                
             }
         });
 
@@ -466,6 +477,25 @@ var logging = {
             working = false;
             return false;
         });
+        
+        // submit chat entry with enter
+        $(document).keypress(function(e) {
+    			if(e.which == 13) {
+        		if($("#Chattext").is(':focus')) {
+        		var text = $('#Chattext').val();
+            if (text.length == 0) {
+                return false;
+            }
+            if (!working) {
+                working = true;
+                chat.submitChat(text);
+                $('#Chattext').css('height', 'auto');
+            }
+            working = false;
+        		}
+    			}
+				});
+        
 
         //function to implement clicking on dynamic element ticket
         $('#TicketsList .list_item_first').live('click', function () {
