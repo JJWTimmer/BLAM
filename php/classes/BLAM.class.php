@@ -40,7 +40,7 @@ class BLAM
     // returns string Username, string Avatar, String Role or exception
     public static function checkLogged()
     {
-        // check if user is already logged in earlier?	
+        // check if user is already logged in earlier?
         if (isset($_SESSION['user'])) {
             $user = new user($_SESSION['user']);
             $user->activity();
@@ -140,7 +140,7 @@ class BLAM
         return $messages;
     }
 
-		public static function getMessageDetail($msg_id)
+    public static function getMessageDetail($msg_id)
     {
         $msg = new Message(array());
         $message = $msg->getDetail($msg_id);
@@ -392,7 +392,7 @@ class BLAM
 
                 case 'addition':
                     $update = new Update(array('id' => $update_id));
-                    
+
                     $update->clearNotification();
                     $ticket->clearNotification();
                     break;

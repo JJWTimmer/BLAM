@@ -41,15 +41,14 @@ class SMS extends BLAMBase
             if (is_null($limit_paging)) {
                 //$q .= " ORDER BY id ASC";
                 $q .= " ORDER BY id DESC) t";
-            		$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id ASC";
             } elseif (!is_null($limit_paging) && is_numeric($limit_paging)) {
                 //$q .= " ORDER BY id ASC LIMIT $limit_paging";
                 $q .= " ORDER BY id DESC LIMIT $limit_paging) t";
-            		$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id ASC";
             } else {
                 throw new Exception("limit_paging must be numeric");
             }
-
 
 
         } //retrieve updates about updates
@@ -64,11 +63,11 @@ class SMS extends BLAMBase
             if (is_null($limit_paging)) {
                 //$q .= " ORDER BY id ASC";
                 $q .= " ORDER BY id DESC) t";
-            		$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id ASC";
             } elseif (!is_null($limit_paging) && is_numeric($limit_paging)) {
                 //$q .= " ORDER BY id ASC LIMIT $limit_paging";
                 $q .= " ORDER BY id DESC LIMIT $limit_paging) t";
-            		$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id ASC";
             } else {
                 throw new Exception("limit_paging must be numeric");
             }
@@ -97,11 +96,11 @@ class SMS extends BLAMBase
             if (is_null($limit_paging)) {
                 //$q .= " ORDER BY id ASC";
                 $q .= " ORDER BY id DESC) t";
-            		$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id ASC";
             } elseif (!is_null($limit_paging) && is_numeric($limit_paging)) {
                 //$q .= " ORDER BY id ASC LIMIT $limit_paging";
                 $q .= " ORDER BY id DESC LIMIT $limit_paging) t";
-            		$q .= " ORDER BY id ASC";
+                $q .= " ORDER BY id ASC";
             } else {
                 throw new Exception("limit_paging must be numeric");
             }
@@ -139,7 +138,7 @@ class SMS extends BLAMBase
     //handleSMS
     public function handle()
     {
-        $q = "UPDATE sms SET handled_at = NOW(), handled_by = ".DB::esc($this->handled_by)." WHERE id = " . DB::esc($this->id);
+        $q = "UPDATE sms SET handled_at = NOW(), handled_by = " . DB::esc($this->handled_by) . " WHERE id = " . DB::esc($this->id);
         $res = DB::query($q);
         if (!$res) throw new Exception(DB::getMySQLiObject()->error);
     }

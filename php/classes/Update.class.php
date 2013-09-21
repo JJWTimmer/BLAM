@@ -42,14 +42,14 @@ class Update extends BLAMBase
                 LEFT OUTER JOIN users user ON user.id = u.called_by
                 LEFT OUTER JOIN users user2 ON user2.id = u.user_id
                 WHERE u.ticket_id = " . DB::esc($ticket_id)
-                . " LIMIT 0,100");
+            . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'update') {
             $results = DB::query("
                 SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, user.username AS creator, u.created
                 FROM updates AS u
                 LEFT OUTER JOIN users user ON user.id = u.user_id
                 WHERE type = 'update' AND u.ticket_id = " . DB::esc($ticket_id)
-                . " LIMIT 0,100");
+            . " LIMIT 0,100");
         } elseif (is_string($type) && $type == 'feedback') {
             $results = DB::query("
                 SELECT u.id, u.ticket_id, u.type, u.message, u.called, u.called_by, user2.username AS creator, u.created
@@ -57,7 +57,7 @@ class Update extends BLAMBase
                 LEFT OUTER JOIN users user ON user.id = u.called_by
                 LEFT OUTER JOIN users user2 ON user2.id = u.user_id
                 WHERE u.type = 'feedback' AND u.ticket_id = " . DB::esc($ticket_id)
-                . " LIMIT 0,100");
+            . " LIMIT 0,100");
             /* Retrieve single update/feedback*/
         } elseif (!empty($id) && is_numeric($id)) {
             $results = DB::query("
@@ -67,7 +67,7 @@ class Update extends BLAMBase
             		LEFT OUTER JOIN users AS v ON u.called_by = v.id
             		LEFT OUTER JOIN users AS w ON t.user_id = w.id
                 WHERE u.id = " . DB::esc($id)
-                . " LIMIT 0,100");
+            . " LIMIT 0,100");
         } else {
             throw new Exception('Invalid arguments for get update');
         }
@@ -120,11 +120,9 @@ class Update extends BLAMBase
         elseif (strtotime($timestamp_last_update)) {
             if (isset($called) && $called == 'true') {
                 $q .= " WHERE u.modified > '$timestamp_last_update'";
-            }
-            elseif (isset($called) && $called == 'false') {
+            } elseif (isset($called) && $called == 'false') {
                 $q .= " WHERE u.created > '$timestamp_last_update'";
-            }
-            else {
+            } else {
                 $q .= " WHERE ((u.modified IS NULL AND u.created > '$timestamp_last_update') OR (u.modified > '$timestamp_last_update'))";
             }
             // if specific type is wanted, add this to query

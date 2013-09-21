@@ -14,60 +14,56 @@ class ChatLine extends BLAMBase
 
     public function create()
     {
-    	
-    	
-			$q = "SELECT id,name FROM roles WHERE name = '".DB::esc($this->role)."'";
-      $dbresult = DB::query($q);
-      if ($dbresult->num_rows == 1) {
-      	$role_result = $dbresult->fetch_array();
-        $this->role_id = $role_result['id'];
-      } 
-      else
-      {
-    		throw new Exception('unknown chat');
-    	}
-     
-      DB::query("
-      INSERT INTO chatlines (user_id, text, role_id, created)
+
+
+        $q = "SELECT id,name FROM roles WHERE name = '" . DB::esc($this->role) . "'";
+        $dbresult = DB::query($q);
+        if ($dbresult->num_rows == 1) {
+            $role_result = $dbresult->fetch_array();
+            $this->role_id = $role_result['id'];
+        } else {
+            throw new Exception('unknown chat');
+        }
+
+        DB::query("
+            INSERT INTO chatlines (user_id, text, role_id, created)
 			VALUES (
-			" . DB::esc($this->user_id) . ",
-			'" . DB::esc($this->text) . "',
-			" . DB::esc($this->role_id) . ",
-			NOW()
+			  " . DB::esc($this->user_id) . ",
+			  '" . DB::esc($this->text) . "',
+			  " . DB::esc($this->role_id) . ",
+			  NOW()
 			)");
-			// Returns the MySQLi object of the DB class
-      $this->id = DB::getMySQLiObject()->insert_id;
-      
-      return $this->id;         	
+        // Returns the MySQLi object of the DB class
+        $this->id = DB::getMySQLiObject()->insert_id;
+
+        return $this->id;
     }
 
     public function get($options = 'empty')
     {
         if (is_array($options)) {
-            $dbresult = DB::query("SELECT id,name FROM roles WHERE name = '".DB::esc($options['role'])."'");
-      			if ($dbresult->num_rows == 1) {
-      				$role_result = $dbresult->fetch_array();
-        			$this->role_id = $role_result['id'];
-      			}
-      			else
-      			{
-    				throw new Exception('unknown chat');
-    				}
-            
+            $dbresult = DB::query("SELECT id,name FROM roles WHERE name = '" . DB::esc($options['role']) . "'");
+            if ($dbresult->num_rows == 1) {
+                $role_result = $dbresult->fetch_array();
+                $this->role_id = $role_result['id'];
+            } else {
+                throw new Exception('unknown chat');
+            }
+
             $q = "SELECT * FROM (
             			SELECT t.id, t.text, t.created, users.username, users.avatar
                 	FROM chatlines AS t INNER JOIN users ON t.user_id = users.id";
-            if ($options['first_id'] && is_numeric($options['first_id'])){
+            if ($options['first_id'] && is_numeric($options['first_id'])) {
                 $first_id = DB::esc($options['first_id']);
                 $limit_paging = DB::esc($options['limit_paging']);
                 $q .= " WHERE t.id < $first_id";
-                $q .= " AND t.role_id = ".$this->role_id;
+                $q .= " AND t.role_id = " . $this->role_id;
                 $q .= " ORDER BY t.id DESC LIMIT $limit_paging) t";
                 $q .= " ORDER BY id ASC";
             } else {
                 $since = DB::esc($options['since']);
                 $q .= ($since ? " WHERE t.created >= '" . $since . "'" : "");
-                $q .= " AND t.role_id = ".$this->role_id;
+                $q .= " AND t.role_id = " . $this->role_id;
                 $q .= " ORDER BY t.id DESC LIMIT 20) t";
                 $q .= " ORDER BY id ASC";
             }

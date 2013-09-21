@@ -67,7 +67,7 @@ class Ticket extends BLAMBase
 			UPDATE tickets
 			SET	text = '" . DB::esc($this->text) . "',
             modified = '" . date('Y-m-d G:i:s') . "',
-            updated = 1 
+            updated = 1
             WHERE message_id = " . DB::esc($this->message_id)
         );
 
@@ -200,15 +200,22 @@ class Ticket extends BLAMBase
     {
         if (is_string($keyword)) {
             $results = DB::query("
-                SELECT t.id AS id, t.title, s.name AS status, u.username AS wluser,t.modified
-                FROM tickets AS t 
-                LEFT OUTER JOIN users AS u ON t.user_id = u.id
-            		LEFT OUTER JOIN messages AS m ON t.message_id = m.id
+                SELECT t.id AS id, t.title, s.name AS status, us.username AS wluser, t.modified
+                FROM tickets AS t
+                    LEFT OUTER JOIN users AS us ON t.user_id = us.id
+            	    LEFT OUTER JOIN messages AS m ON t.message_id = m.id
+            	    LEFT OUTER JOIN updates AS ud ON t.id = ud.ticket_id
             		INNER JOIN statuses AS s ON t.status_id = s.id
-                WHERE title LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
-                OR u.username LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
-                OR m.text LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
-                OR t.id LIKE '%" . DB::esc($keyword) . "%' AND  t.parent_id IS NULL 
+                WHERE   t.title LIKE '%" . DB::esc($keyword) . "%'
+                    OR  t.id LIKE '%" . DB::esc($keyword) . "%'
+                    OR  t.text LIKE '%" . DB::esc($keyword) . "%'
+                    OR  t.location LIKE '%" . DB::esc($keyword) . "%'
+                    OR  t.solution LIKE '%" . DB::esc($keyword) . "%'
+                    OR  t.reference LIKE '%" . DB::esc($keyword) . "%'
+                    OR  ud.message LIKE '%" . DB::esc($keyword) . "%'
+                    OR  us.username LIKE '%" . DB::esc($keyword) . "%'
+                    OR  m.text LIKE '%" . DB::esc($keyword) . "%'
+                    OR  s.name LIKE '%" . DB::esc($keyword) . "%'
                 ORDER BY t.id ASC
                 LIMIT 0,100");
         } else {

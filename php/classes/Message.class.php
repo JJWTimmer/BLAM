@@ -15,13 +15,13 @@ class Message extends BLAMBase
     public function create()
     {
         $q = "
-			INSERT INTO messages (user_id, text, created, modified".(!empty($this->ticket_id) ? ", ticket_id" : "").")
+			INSERT INTO messages (user_id, text, created, modified" . (!empty($this->ticket_id) ? ", ticket_id" : "") . ")
 			VALUES (
 				" . DB::esc($this->user_id) . ",
 				'" . DB::esc($this->text) . "',
                 '" . DB::esc($this->created) . "',
-                '" . DB::esc($this->created) . "'".
-            (!empty($this->ticket_id) ? ", " . $this->ticket_id : "")."
+                '" . DB::esc($this->created) . "'" .
+            (!empty($this->ticket_id) ? ", " . $this->ticket_id : "") . "
             )
             ";
 
@@ -70,7 +70,8 @@ class Message extends BLAMBase
             $results = DB::query("
                 SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
-                WHERE text LIKE '%" . DB::esc($keyword) . "%'
+                WHERE   text LIKE '%" . DB::esc($keyword) . "%'
+                    OR  users.username LIKE '%" . DB::esc($keyword) . "%'
                 LIMIT 0,100");
         } else {
             return false;
@@ -81,13 +82,13 @@ class Message extends BLAMBase
         return $data;
     }
 
-		public function getDetail($msg_id)
+    public function getDetail($msg_id)
     {
-            $results = DB::query("
+        $results = DB::query("
                 SELECT msg.id, msg.text, msg.ticket_id, msg.created, msg.modified, users.username, users.avatar
                 FROM messages AS msg INNER JOIN users ON msg.user_id = users.id
                 WHERE msg.id = '" . DB::esc($msg_id) . "'");
-        
+
         while ($data[] = mysqli_fetch_assoc($results)) ;
         if (!is_null($data) && end($data) == null) array_pop($data);
         return $data;

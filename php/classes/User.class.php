@@ -36,11 +36,11 @@ class User extends BLAMBase
                 INNER JOIN roles
                 ON roles.id = users.role_id
                 SET users.username='" . DB::esc($this->username) . "', " .
-                (!empty($this->password) ? "password='" . DB::esc($this->password) . "', " : "") .
-                "users.avatar='" . DB::esc($this->avatar) . "',
+            (!empty($this->password) ? "password='" . DB::esc($this->password) . "', " : "") .
+            "users.avatar='" . DB::esc($this->avatar) . "',
                 users.role_id=roles.id" .
-                "WHERE users.id=" . DB::esc($this->id) .
-                (empty($this->role) ? "AND roles.id=" . DS::esc($this . role_id) : "AND roles.name='" . DS::esc($this . role_id) . "'")
+            "WHERE users.id=" . DB::esc($this->id) .
+            (empty($this->role) ? "AND roles.id=" . DS::esc($this . role_id) : "AND roles.name='" . DS::esc($this . role_id) . "'")
         );
     }
 

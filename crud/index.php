@@ -34,12 +34,12 @@
     <script type="text/javascript" src="../js/crud.js">
 </script>
 
-<?php 
+<?php
+        $autotext = new ajaxCRUD("autotext", "autotext", "id");
+        $autotext->setLimit(10);
+
         $chatlines = new ajaxCRUD("chatlines", "chatlines", "id");
         $chatlines->setLimit(10);
-
-        $updates = new ajaxCRUD("updates", "updates", "id");
-        $updates->setLimit(10);
 
         $groups = new ajaxCRUD("groups", "groups", "id");
         $groups->setLimit(10);
@@ -53,14 +53,14 @@
         $roles = new ajaxCRUD("roles", "roles", "id");
         $roles->setLimit(10);
 
-        $statuses = new ajaxCRUD("statuses", "statuses", "id");
-        $statuses->setLimit(10);
-
         $tickets = new ajaxCRUD("tickets", "tickets", "id");
         $tickets->setLimit(10);
 
+        $updates = new ajaxCRUD("updates", "updates", "id");
+        $updates->setLimit(10);
+
         $users = new ajaxCRUD("users", "users", "id");
-        $users->setLimit(10);        
+        $users->setLimit(10);
 ?>
 
   </head>
@@ -69,17 +69,22 @@
     <div id="MainContainer">
       <span id="select-table">
           <select id="table-selector">
+            <option value="#autotext-div">autotext</option>
             <option value="#chatlines-div">chatlines</option>
-            <option value="#updates-div">updates</option>
-            <option value="#groups-div">groups</option>
-            <option value="#handles-div">handles</option>
-            <option value="#messages-div">messages</option>
-            <option value="#roles-div">roles</option>
-            <option value="#statuses-div">statuses</option>
-            <option value="#tickets-div">tickets</option>
+              <option value="#groups-div">groups</option>
+              <option value="#handles-div">handles</option>
+              <option value="#messages-div">messages</option>
+              <option value="#roles-div">roles</option>
+              <option value="#tickets-div">tickets</option>
+              <option value="#updates-div">updates</option>
             <option value="#users-div">users</option>
           </select>
       </span>
+      <div id="autotext-div" class="table-div">
+          <?php
+            $autotext->showTable();
+          ?>
+      </div>
       <div id="chatlines-div" class="table-div">
           <?php
             $chatlines->showTable();
@@ -110,11 +115,6 @@
         $roles->showTable();
       ?>
       </div>
-      <div id="statuses-div" class="table-div">
-          <?php
-            $statuses->showTable();
-          ?>
-      </div>
       <div id="tickets-div" class="table-div">
       <?php
         $tickets->showTable();
@@ -129,7 +129,7 @@
     <div id="Login" align="center">
       <div id="LoginWindow" class="rounded">
         <h1 align="center">
-          Login RVDLog
+          Login BLAM
         </h1><br />
         <form id="loginForm" method="post" action="" name="loginForm">
           <table cellpadding="0" cellspacing="0" border="0" width="100%">

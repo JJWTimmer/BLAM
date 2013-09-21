@@ -100,7 +100,7 @@ try {
             break;
 
         default:
-            echo ('<p>Selecteer Meldingen of Tickets</p>');
+            echo('<p>Selecteer Meldingen of Tickets</p>');
     }
 } catch (Exception $e) {
     die('<p>' . $e . '</p>');

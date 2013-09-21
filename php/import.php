@@ -32,8 +32,7 @@ if ($_FILES["file"]["error"] > 0) {
                     $q = "INSERT INTO handles (handle_name, description, group_id) VALUES ('$data[2]', '$data[1]', $row[id])";
                     debug($q);
                     DB::query($q);
-                }
-                ;
+                };
             }
         }
         fclose($handle);

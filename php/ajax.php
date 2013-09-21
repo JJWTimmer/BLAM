@@ -75,7 +75,7 @@ try {
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
             break;
 
-				case 'getMessageDetail':
+        case 'getMessageDetail':
             BLAM::checkLogged(); //date_time string format: '2011-02-23 09:03:01'
             $response = BLAM::getMessageDetail($_POST['id']);
             //returns array (int MessageID, string Text, string Username, string Avatar, string created)  messages or exception
@@ -131,7 +131,7 @@ try {
 
         case 'getChats':
             BLAM::checkLogged();
-            $response = BLAM::getChats($_POST['first_id'],$_POST['role'], $_POST['timestamp_last_update']); //last_id is mandatory, id or 'all'
+            $response = BLAM::getChats($_POST['first_id'], $_POST['role'], $_POST['timestamp_last_update']); //last_id is mandatory, id or 'all'
             // returns array(int MessageID, string Text, string Username, string Avatar, Datetime created) chats or exception
             break;
 
@@ -239,13 +239,13 @@ try {
         case 'getSMSList':
             BLAM::checkLogged();
             $response = BLAM::getSMSList($_POST['handled'], $_POST['first_id'], $_POST['timestamp_last_update']);
-        	break;
-        
+            break;
+
         case 'getSMS':
             BLAM::checkLogged();
             $response = BLAM::getSMSDetail($_POST['id']);
             break;
-        
+
         case 'handleSMS':
             BLAM::checkLogged();
             $response = BLAM::handleSMS($_POST['id'], $_SESSION['user']['id']);

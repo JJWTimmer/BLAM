@@ -226,12 +226,12 @@ var logging = {
           		      }
             			}
     						});
-                
+
                 $('#submitbutton').hide();
                 $('#submit_ticketbutton').hide();
                 $('#updatebutton').show();
                 $('#cancelbutton').show();
-                
+
             }
         });
 
@@ -477,7 +477,7 @@ var logging = {
             working = false;
             return false;
         });
-        
+
         // submit chat entry with enter
         $(document).keypress(function(e) {
     			if(e.which == 13) {
@@ -495,7 +495,7 @@ var logging = {
         		}
     			}
 				});
-        
+
 
         //function to implement clicking on dynamic element ticket
         $('#TicketsList .list_item_first').live('click', function () {
@@ -615,7 +615,7 @@ var logging = {
     login: function (username, avatar, role) {
         //replace empty avatar field
         var new_avatar = avatar;
-        if ((avatar == "") || (avatar == "NULL") || (avatar == null)) {
+        if ((avatar == "") || (avatar == "NULL") || (avatar === null)) {
             new_avatar = "unknown30x30.png";
         }
 

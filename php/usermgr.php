@@ -26,8 +26,8 @@ DB::init($dbOptions);
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>BLAM Index</title>
 
-    <link rel="stylesheet" type="text/css" href="css/blam.css"/>
-    <link rel="stylesheet" type="text/css" href="css/chat.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/blam.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/chat.css"/>
 </head>
 
 <body>
