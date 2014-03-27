@@ -205,7 +205,7 @@ var logging = {
 
 
         //function to implement clicking on message
-        $('#MeldingenList .message').live('click', function () {
+        $('#MeldingenList').find('.message').live('click', function () {
             if (logging.data.TicketUpdateMode == 0 && logging.data.FeedbackUpdateMode == 0) {
                 logging.data.MessageEditMode = 1;
                 if ($(this).hasClass("message_ticket")) {
@@ -215,17 +215,17 @@ var logging = {
                     $('#update_ticketbutton').show();
                 }
 
-								$.tzPOST('getMessageDetail', {id:$(this).attr("id")}, function (r) {
-            			if (r) {
-                		if (!r.error) {
-                     		$('#messagetext').val(r[0].text);
-                     		logging.data.selectedmessage = r[0].id;
-		                }
-    		            else {
-        	            general.displayError(r.error);
-          		      }
-            			}
-    						});
+                $.tzPOST('getMessageDetail', {id: $(this).attr("id")}, function (r) {
+                    if (r) {
+                        if (!r.error) {
+                            $('#messagetext').val(r[0].text);
+                            logging.data.selectedmessage = r[0].id;
+                        }
+                        else {
+                            general.displayError(r.error);
+                        }
+                    }
+                });
 
                 $('#submitbutton').hide();
                 $('#submit_ticketbutton').hide();
@@ -235,7 +235,7 @@ var logging = {
             }
         });
 
-        $('#MeldingenList .retrieve_previous').live('click', function () {
+        $('#MeldingenList').find('.retrieve_previous').live('click', function () {
             if (!working) {
                 working = true;
                 message.getOldMessages();
@@ -244,7 +244,7 @@ var logging = {
         });
 
         //function to implement getting previous messages from db
-        $('#RVD-ChatList .retrieve_previous').live('click', function () {
+        $('#RVD-ChatList').find('.retrieve_previous').live('click', function () {
             if (!working) {
                 working = true;
                 chat.getOldChats();
@@ -253,7 +253,7 @@ var logging = {
         });
 
         //function to implement getting previous tickets from db
-        $('#TicketsList .retrieve_previous_ticket').live('click', function () {
+        $('#TicketsList').find('.retrieve_previous_ticket').live('click', function () {
             if (!working) {
                 working = true;
                 ticket.getOldTickets();
@@ -262,7 +262,7 @@ var logging = {
         });
 
         //function to implement getting previous feedbacks from db
-        $('#OpenFeedbackList .retrieve_previous_feedback').live('click', function () {
+        $('#OpenFeedbackList').find('.retrieve_previous_feedback').live('click', function () {
             if (!working) {
                 working = true;
                 feedbackOpen.getOldFeedbacks();
@@ -271,7 +271,7 @@ var logging = {
         });
 
         //function to implement getting previous feedbacks from db
-        $('#ClosedFeedbackList .retrieve_previous_feedback').live('click', function () {
+        $('#ClosedFeedbackList').find('.retrieve_previous_feedback').live('click', function () {
             if (!working) {
                 working = true;
                 feedbackClosed.getOldFeedbacks();
@@ -280,7 +280,7 @@ var logging = {
         });
 
         //function to implement getting previous feedbacks from db
-        $('#OpenAutomatedList .retrieve_previous_sms').live('click', function () {
+        $('#OpenAutomatedList').find('.retrieve_previous_sms').live('click', function () {
             if (!working) {
                 working = true;
                 smsOpen.getOldSMS();
@@ -289,7 +289,7 @@ var logging = {
         });
 
         //function to implement getting previous feedbacks from db
-        $('#ClosedAutomatedList .retrieve_previous_sms').live('click', function () {
+        $('#ClosedAutomatedList').find('.retrieve_previous_sms').live('click', function () {
             if (!working) {
                 working = true;
                 smsClosed.getOldSMS();
@@ -432,17 +432,17 @@ var logging = {
 
         $('#answersms').live('click', function () {
             $.tzPOST('handleSMS', {id: logging.data.selectedsms}, function (r) {
-            	smsOpen.refreshSMS();
-              smsClosed.refreshSMS();
-              display.clearDisplay();
-              logging.data.selectedticket = 0;
-              logging.data.selectedfeedback = 0;
-              logging.data.selectedsms = 0;
+                smsOpen.refreshSMS();
+                smsClosed.refreshSMS();
+                display.clearDisplay();
+                logging.data.selectedticket = 0;
+                logging.data.selectedfeedback = 0;
+                logging.data.selectedsms = 0;
             });
         });
 
         //function to implement clicking on dynamic element groups
-        $('#HandlesList div.list_item_first').live('click', function () {
+        $('#HandlesList').find('div.list_item_first').live('click', function () {
             if (!working) {
                 working = true;
                 var groupid = $(this).attr("id");
@@ -453,7 +453,7 @@ var logging = {
         });
 
         //function to implement clicking on dynamic element handle
-        $('#HandlesList div.list_item_second').live('click', function () {
+        $('#HandlesList').find('div.list_item_second').live('click', function () {
             //$('#messagetext').val($('#messagetext').val()+$(this).children('.list_item_handle_name').text() + '-' + $(this).children('.list_item_handle_description').text());
             $('#messagetext').insertAtCaret($(this).children('.list_item_handle_name').text() + '-' + $(this).children('.list_item_handle_description').text() + ' ');
         });
@@ -479,26 +479,26 @@ var logging = {
         });
 
         // submit chat entry with enter
-        $(document).keypress(function(e) {
-    			if(e.which == 13) {
-        		if($("#Chattext").is(':focus')) {
-        		var text = $('#Chattext').val();
-            if (text.length == 0) {
-                return false;
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                if ($("#Chattext").is(':focus')) {
+                    var text = $('#Chattext').val();
+                    if (text.length == 0) {
+                        return false;
+                    }
+                    if (!working) {
+                        working = true;
+                        chat.submitChat(text);
+                        $('#Chattext').css('height', 'auto');
+                    }
+                    working = false;
+                }
             }
-            if (!working) {
-                working = true;
-                chat.submitChat(text);
-                $('#Chattext').css('height', 'auto');
-            }
-            working = false;
-        		}
-    			}
-				});
+        });
 
 
         //function to implement clicking on dynamic element ticket
-        $('#TicketsList .list_item_first').live('click', function () {
+        $('#TicketsList').find('.list_item_first').live('click', function () {
             display.showTicket($(this).attr("id"));
             logging.data.selectedticket = $(this).attr("id");
             logging.data.selectedfeedback = 0;
@@ -506,7 +506,7 @@ var logging = {
         });
 
         //function to implement clicking on dynamic element openfeedback
-        $('#OpenFeedbackList .list_item_first').live('click', function () {
+        $('#OpenFeedbackList').find('.list_item_first').live('click', function () {
             display.showOpenFeedback($(this).attr("id"));
             logging.data.selectedticket = $(this).attr("ticket_id");
             logging.data.selectedfeedback = $(this).attr("id");
@@ -514,7 +514,7 @@ var logging = {
         });
 
         //function to implement clicking on dynamic element closedfeedback
-        $('#ClosedFeedbackList .list_item_first').live('click', function () {
+        $('#ClosedFeedbackList').find('.list_item_first').live('click', function () {
             display.showClosedFeedback($(this).attr("id"));
             logging.data.selectedticket = 0;
             logging.data.selectedfeedback = 0;
@@ -522,7 +522,7 @@ var logging = {
         });
 
         //function to implement clicking on dynamic element opensms
-        $('#OpenAutomatedList .list_item_first').live('click', function () {
+        $('#OpenAutomatedList').find('.list_item_first').live('click', function () {
             var smsid = $(this).attr("id");
             display.showOpenSMS(smsid);
             logging.data.selectedticket = 0;
@@ -531,7 +531,7 @@ var logging = {
         });
 
         //function to implement clicking on dynamic element closedsms
-        $('#ClosedAutomatedList .list_item_first').live('click', function () {
+        $('#ClosedAutomatedList').find('.list_item_first').live('click', function () {
             display.showClosedSMS($(this).attr("id"));
             logging.data.selectedticket = 0;
             logging.data.selectedfeedback = 0;

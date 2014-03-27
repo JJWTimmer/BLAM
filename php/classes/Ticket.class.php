@@ -200,14 +200,14 @@ class Ticket extends BLAMBase
     {
         if (is_string($keyword)) {
             $results = DB::query("
-                SELECT t.id AS id, t.title, s.name AS status, us.username AS wluser, t.modified
+                SELECT DISTINCT t.id AS id, t.title, s.name AS status, us.username AS wluser, t.modified
                 FROM tickets AS t
                     LEFT OUTER JOIN users AS us ON t.user_id = us.id
             	    LEFT OUTER JOIN messages AS m ON t.message_id = m.id
             	    LEFT OUTER JOIN updates AS ud ON t.id = ud.ticket_id
             		INNER JOIN statuses AS s ON t.status_id = s.id
                 WHERE   t.title LIKE '%" . DB::esc($keyword) . "%'
-                    OR  t.id LIKE '%" . DB::esc($keyword) . "%'
+                    OR  CAST(t.id as CHAR) LIKE '%" . DB::esc($keyword) . "%'
                     OR  t.text LIKE '%" . DB::esc($keyword) . "%'
                     OR  t.location LIKE '%" . DB::esc($keyword) . "%'
                     OR  t.solution LIKE '%" . DB::esc($keyword) . "%'

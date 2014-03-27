@@ -1,5 +1,4 @@
-
 /php/config.include.php
 /php/log.txt
 /crud/examples
-/.idea
+.idea/
