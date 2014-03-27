@@ -32,7 +32,7 @@ require_once 'ajaxCRUD.class.php';
     </script>
     <!-- general javascript -->
 
-    <script type="text/javascript" src="../js/blam.js">
+    <script type="text/javascript" src="../js/shared/htmltemplates.js">
     </script>
     <!-- page specific javascript -->
 
